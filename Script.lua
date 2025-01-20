@@ -6436,8 +6436,9 @@ Tabs.Misc:AddButton({
     end
 })
 Tabs.Misc:AddButton({
-    Name = "No Magma",
-   Callback = function()
+    Title = "No Magma",
+    Description = "",    
+    Callback = function()
        for i,v in pairs(game.Workspace:GetDescendants()) do
            if v.Name == "Lava" then   
                v:Destroy()
