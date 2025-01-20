@@ -5527,19 +5527,18 @@ end)
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 --RaceV4
+
 Tabs.Race:AddButton({
-    Title = "Tele to Great Tree(Top)",
+    Title = "Tele To Great Tree(Top) ",
     Description = "",
     Callback = function()
-       TP1(CFrame.new(2947.556884765625, 2281.630615234375, -7213.54931640625))
-   end,
+        Tween2(CFrame.new(2947.556884765625, 2281.630615234375, -7213.54931640625))
 })
-
 Tabs.Race:AddButton({
     Title = "Timple Of Time",
     Description = "",
     Callback = function()
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.(CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875))
     end
 })
 
@@ -6436,4 +6435,170 @@ Tabs.Misc:AddButton({
         end
     end
 })
+Tabs.Misc:AddButton({
+    Name = "No Magma",
+   Callback = function()
+       for i,v in pairs(game.Workspace:GetDescendants()) do
+           if v.Name == "Lava" then   
+               v:Destroy()
+           end
+       end
+       for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
+           if v.Name == "Lava" then   
+               v:Destroy()
+           end
+       end
+   end,
+})
 
+
+Tabs.Misc.CreateLable({
+    Name = "Codes"
+})
+   
+   local x2Code = {
+       "KITTGAMING",
+       "ENYU_IS_PRO",
+       "FUDD10",
+       "BIGNEWS",
+       "THEGREATACE",
+       "SUB2GAMERROBOT_EXP1",
+       "STRAWHATMAIME",
+       "SUB2OFFICIALNOOBIE",
+       "SUB2NOOBMASTER123",
+       "SUB2DAIGROCK",
+       "AXIORE",
+       "TANTAIGAMIMG",
+       "STRAWHATMAINE",
+       "JCWK",
+       "FUDD10_V2",
+       "SUB2FER999",
+       "MAGICBIS",
+       "TY_FOR_WATCHING",
+       "STARCODEHEO"
+    }
+
+
+
+Tabs.Misc:AddButton({
+    Name = "Redeem All Codes",
+   Callback = function()
+       function RedeemCode(value)
+           game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(value)
+       end
+       for i,v in pairs(x2Code) do
+           RedeemCode(v)
+       end
+   end,
+})
+
+local Mastery = Tabs.Misc:AddSection("Ability")
+Tabs.Misc:AddToggle({
+    Name = "Auto Race V3",
+    Dis = "",
+    Value = false,
+    Callback = function(v)
+    _G.AutoAgility = v
+        print(v)
+    end,
+ })
+ 
+ Tabs.Misc:AddToggle({
+    Name = "Auto Race V4",
+    Dis = "",
+    Value = false,
+    Callback = function(v)
+    _G.AutoActiveRaceV4 = v
+        print(v)
+    end,
+ })
+ 
+ 
+    spawn(function()
+        pcall(function()
+            while wait() do
+                if _G.AutoActiveRaceV4 then
+                    if game.Players.LocalPlayer.Character.RaceTransformed.Value == false then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "Y", false, game)
+                        wait(0.1)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "Y", false, game)
+                    end
+                end
+            end
+        end)
+    end)
+    
+    spawn(function()
+        pcall(function()
+            while wait() do
+                if _G.AutoAgility then
+                    game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("ActivateAbility")
+                end
+            end
+        end)
+    end)
+
+
+Tabs.Misc:AddToggle({
+        Name = "Infi Geppo",
+        Dis = "",
+        Value = false,
+        Callback = function(v)
+        getgenv().InfGeppo = v
+            print(v)
+        end,
+     })    
+     spawn(function()
+        while wait() do
+            pcall(function()
+                if getgenv().InfGeppo then
+                    for i,v in next, getgc() do
+                        if game:GetService("Players").LocalPlayer.Character.Geppo then
+                            if typeof(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.Character.Geppo then
+                                for i2,v2 in next, getupvalues(v) do
+                                    if tostring(i2) == "9" then
+                                        repeat wait(.1)
+                                            setupvalue(v,i2,0)
+                                        until not getgenv().InfGeppo or game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0 
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+ 
+Tabs.Misc:AddToggle({
+    Name = "Infi Soru",
+    Dis = "",
+    Value = false,
+    Callback = function(v)
+    getgenv().InfSoru = v
+        print(v)
+    end,
+ })
+    
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if getgenv().InfSoru and game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") ~= nil  then
+                    for i,v in next, getgc() do
+                        if game:GetService("Players").LocalPlayer.Character.Soru then
+                            if typeof(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.Character.Soru then
+                                for i2,v2 in next, getupvalues(v) do
+                                    if typeof(v2) == "table" then
+                                        repeat wait(0.1)
+                                            v2.LastUse = 0
+                                        until not getgenv().InfSoru or game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+ 
