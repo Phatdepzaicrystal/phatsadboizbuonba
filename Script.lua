@@ -6435,61 +6435,6 @@ Tabs.Misc:AddButton({
         end
     end
 })
-Tabs.Misc:AddButton({
-    Name = "No Magma",
-   Callback = function()
-       for i,v in pairs(game.Workspace:GetDescendants()) do
-           if v.Name == "Lava" then   
-               v:Destroy()
-           end
-       end
-       for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
-           if v.Name == "Lava" then   
-               v:Destroy()
-           end
-       end
-   end,
-})
 
-
-Tabs.Misc.CreateLable({
-    Name = "Codes"
-})
-   
-   local x2Code = {
-       "KITTGAMING",
-       "ENYU_IS_PRO",
-       "FUDD10",
-       "BIGNEWS",
-       "THEGREATACE",
-       "SUB2GAMERROBOT_EXP1",
-       "STRAWHATMAIME",
-       "SUB2OFFICIALNOOBIE",
-       "SUB2NOOBMASTER123",
-       "SUB2DAIGROCK",
-       "AXIORE",
-       "TANTAIGAMIMG",
-       "STRAWHATMAINE",
-       "JCWK",
-       "FUDD10_V2",
-       "SUB2FER999",
-       "MAGICBIS",
-       "TY_FOR_WATCHING",
-       "STARCODEHEO"
-    }
-
-
-
-Tabs.Misc:AddButton({
-    Name = "Redeem All Codes",
-   Callback = function()
-       function RedeemCode(value)
-           game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(value)
-       end
-       for i,v in pairs(x2Code) do
-           RedeemCode(v)
-       end
-   end,
-})
 
  
