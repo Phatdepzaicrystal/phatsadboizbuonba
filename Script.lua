@@ -5527,12 +5527,11 @@ end)
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 --RaceV4
-
 Tabs.Race:AddButton({
     Title = "Timple Of Time",
     Description = "",
     Callback = function()
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.(CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875))
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
     end
 })
 
@@ -6429,3 +6428,4 @@ Tabs.Misc:AddButton({
         end
     end
 })
+
