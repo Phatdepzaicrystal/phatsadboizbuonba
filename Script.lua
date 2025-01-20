@@ -6492,7 +6492,6 @@ Tabs.Misc:AddButton({
    end,
 })
 
-local Mastery = Tabs.Misc:AddSection("Ability")
 Tabs.Misc:AddToggle({
     Name = "Auto Race V3",
     Dis = "",
