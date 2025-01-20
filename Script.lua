@@ -5529,12 +5529,6 @@ end)
 --RaceV4
 
 Tabs.Race:AddButton({
-    Title = "Tele To Great Tree(Top) ",
-    Description = "",
-    Callback = function()
-         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.(CFrame.new(2947.556884765625, 2281.630615234375, -7213.54931640625))
-})
-Tabs.Race:AddButton({
     Title = "Timple Of Time",
     Description = "",
     Callback = function()
