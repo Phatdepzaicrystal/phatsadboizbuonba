@@ -6482,7 +6482,7 @@ Tabs.Misc.CreateLable({
 
 Tabs.Misc:AddButton({
     Name = "Redeem All Codes",
-   Callback = function()
+    Callback = function()
        function RedeemCode(value)
            game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(value)
        end
