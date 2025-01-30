@@ -6,16 +6,16 @@ local   ThemeManager = loadstring(game:HttpGet(repo3 .. 'addons/ThemeManager.lua
 local   SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
 game.StarterGui:SetCore("SendNotification", {
-      Icon = "rbxassetid://";
-      Title = "Xero Hub Scripts",
-      Text = "Discord : gg/MgzMeg4jBV",
+      Icon = "rbxassetid://74325986812981";
+      Title = "Lazy Hub Scripts",
+      Text = "Discord : gg/MKMfnMS9",
   })
 
   wait(2)
 
 Date = os.date("%d".." ".."%B".." ".."%Y")
 local Window = Library:CreateWindow({
-    Title = 'Xenon Hub V2 Premuim Scripts '..Date,
+    Title = 'Lazy Hub Scripts '..Date,
     Center = true,
     AutoShow = true,
 })ด
@@ -48,7 +48,7 @@ local CheckQuest = LeftGroupBox8:AddTab('Unlock Quest')
 local LeftGroupBox4 = Tabs.Main:AddLeftTabbox("Main")
 local CheckGun = LeftGroupBox4:AddTab('Guns')
 
-Info:AddLabel("Welcome To Xero Hub v2 Premuim")
+Info:AddLabel("Welcome To Lazy Hub")
     Time = Info:AddLabel("ServerTime")
     function UpdateTime()
         local GameTime = math.floor(workspace.DistributedGameTime+0.5)
