@@ -1,8 +1,7 @@
 local   repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 local   repo2 = 'https://raw.githubusercontent.com/Beammodz/LinoriaHub/main/main/'
 local   repo3 = 'https://raw.githubusercontent.com/Beammodz/LinoriaLiba/main/'
-local   Library = loadstring(game:HttpGet(repo2 .. 'Library.lua'))()
-local   ThemeManager = loadstring(game:HttpGet(repo3 .. 'addons/ThemeManager.lua'))()
+local   Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
 local   SaveManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua'))()
 
 game.StarterGui:SetCore("SendNotification", {
