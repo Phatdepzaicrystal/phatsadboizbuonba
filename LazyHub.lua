@@ -3700,7 +3700,7 @@ end)
 
 
 Library:SetWatermarkVisibility(true)
-Library:SetWatermark('Xenon Hub V.2 Premuim Unlocked')
+Library:SetWatermark('Zzz')
 
 -- UI Settings
 Library.ToggleKeybind = Options.MenuKeybind
