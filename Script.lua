@@ -12,8 +12,6 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.End
 })
 
-local v56 = v28:Window(Enum.KeyCode.RightControl);
-local v57 = v56:T("Trạng thái", "rbxassetid://10734984606");
 
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "home" }); -- Thay "home" thành "grid"
@@ -6576,8 +6574,10 @@ Tabs.Status:AddButton({
     end
 })
 
+local Status = Tabs.Status:AddSection("Status Sever")
+
 Status:Seperator("Thời Gian");
-Time = v57:Label("Thời Gian Hoạt Động");
+Time = Tabs.Status:AddLabel("Thời Gian Hoạt Động");
 function UpdateTime()
 	local v344 = math.floor(workspace.DistributedGameTime + 0.5 );
 	local v345 = math.floor(v344 / (60 ^ 2) ) % 24 ;
@@ -6589,73 +6589,6 @@ spawn(function()
 	while task.wait() do
 		pcall(function()
 			UpdateTime();
-		end);
-	end
-end);
-Client = v57:Label("Client");
-function UpdateClient()
-	local v348 = workspace:GetRealPhysicsFPS();
-	Client:Set("[FPS]: "   .. v348 );
-end
-spawn(function()
-	while true do
-		wait(0.1);
-		UpdateClient();
-	end
-end);
-Client1 = v57:Label("Client");
-function UpdateClient1()
-	local v349 = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString();
-	Client1:Set("[PING]: "   .. v349 );
-end
-spawn(function()
-	while true do
-		wait(0.1);
-		UpdateClient1();
-	end
-end);
-v57:Seperator("Người Chơi");
-local v69 = v57:Label("Tộc");
-spawn(function()
-	while wait() do
-		pcall(function()
-			v69:Set("Race:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.Race.Value );
-		end);
-	end
-end);
-local v70 = v57:Label("Beli");
-spawn(function()
-	while wait() do
-		pcall(function()
-			v70:Set("Beli:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.Beli.Value );
-		end);
-	end
-end);
-local v71 = v57:Label("Điểm Tím");
-spawn(function()
-	while wait() do
-		pcall(function()
-			v71:Set("Diểm Tím:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.Fragments.Value );
-		end);
-	end
-end);
-local v72 = v57:Label("Tiền Thưởng");
-spawn(function()
-	while wait() do
-		pcall(function()
-			v72:Set("Tiền Thưởng:"   .. " "   .. game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value );
-		end);
-	end
-end);
-local v73 = v57:Label("Trái");
-spawn(function()
-	while wait() do
-		pcall(function()
-			if (game:GetService("Players").LocalPlayer.Character:FindFirstChild(game:GetService("Players").LocalPlayer.Data.DevilFruit.Value) or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(game:GetService("Players").LocalPlayer.Data.DevilFruit.Value)) then
-				v73:Set("Trái:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.DevilFruit.Value );
-			else
-				v73:Set("Không Có Trái");
-			end
 		end);
 	end
 end);
