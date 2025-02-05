@@ -6580,7 +6580,7 @@ spawn(function()
 		end);
 	end
 end);
-Client = Tabs.Status:Label("Client");
+Client = Status:Label("Client");
 function UpdateClient()
 	local v348 = workspace:GetRealPhysicsFPS();
 	Client:Set("[FPS]: "   .. v348 );
@@ -6591,7 +6591,7 @@ spawn(function()
 		UpdateClient();
 	end
 end);
-Client1 = Tabs.Status:Label("Client");
+Client1 = Status:Label("Client");
 function UpdateClient1()
 	local v349 = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString();
 	Client1:Set("[PING]: "   .. v349 );
