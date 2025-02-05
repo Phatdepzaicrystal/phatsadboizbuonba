@@ -2573,11 +2573,13 @@ end
         end
     end)
 --------------------------Status
-    local ToggleStatus = Tabs.Status:AddButton("Sao Chép Link Discord", function()
-	setclipboard("https://discord.gg/hyGgHBudcs");
+Tabs.Status:AddSeperator("Info Hub");
+Tabs.Status:AddLabel("Discord PhatCrystal Sever");
+Status:Seperator:AddButton("Click To Copy Link Sever", function()
+	setclipboard("https://discord.gg/s8R9b5NfsU");
 end);
- Tabs.Status:Seperator("Time");	
-Time = v57:Label("Time On");
+Status:AddSeperator("Time");	
+Time = Status:AddLabel("Time On");
 function UpdateTime()
 	local v344 = math.floor(workspace.DistributedGameTime + 0.5 );
 	local v345 = math.floor(v344 / (60 ^ 2) ) % 24 ;
@@ -2614,7 +2616,7 @@ spawn(function()
 		UpdateClient1();
 	end
 end);
-Status:Seperator("Player Status");
+Status:AddSeperator("Player Status");
 local v69 = v57:Label("Race");
 spawn(function()
 	while wait() do
