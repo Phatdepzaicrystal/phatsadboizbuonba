@@ -6565,40 +6565,38 @@ Tabs.Misc:AddButton({
 local StatusTab = Tabs.Status
 local StatusSection = Tabs.Status:AddSection({ Title = "Player Status" })
 
-function UpdateTime()
-    -- Cập nhật thời gian
-    local currentTime = math.floor(workspace.DistributedGameTime + 0.5 );
-    local hours = math.floor(currentTime / (60^2)) % 24 ;
-    local minutes = math.floor(currentTime / 60) % 60 ;
-    local seconds = currentTime % 60 ;
-    TimeLabel:Set("Server Time: " .. hours .. "h " .. minutes .. "m " .. seconds .. "s");
+-- Thêm phân tách (seperator) vào MiscTab
+MiscSection:AddDivider() -- Đây là cách thêm phân tách (seperator)
+
+-- Thêm các label vào MiscTab để hiển thị thông tin
+local TimeLabel = MiscSection:AddLabel("Server Time: Loading...")
+local FpsLabel = MiscSection:AddLabel("FPS: Loading...")
+local PingLabel = MiscSection:AddLabel("Ping: Loading...")
+
+-- Cập nhật trạng thái mỗi giây
+function UpdateStatus()
+    -- Thời gian máy chủ
+    local currentTime = math.floor(workspace.DistributedGameTime + 0.5)
+    local hours = math.floor(currentTime / (60^2)) % 24
+    local minutes = math.floor(currentTime / 60) % 60
+    local seconds = currentTime % 60
+    TimeLabel:Set("Server Time: " .. string.format("%02d:%02d:%02d", hours, minutes, seconds))
+
+    -- FPS
+    local fps = workspace:GetRealPhysicsFPS()
+    FpsLabel:Set("FPS: " .. fps)
+
+    -- Ping
+    local ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+    PingLabel:Set("Ping: " .. ping)
 end
+
+-- Cập nhật trạng thái liên tục mỗi giây
 spawn(function()
-	while task.wait() do
-		pcall(function()
-			UpdateTime();
-		end);
-	end
-end);
-Client = Status:Label("Client");
-function UpdateClient()
-	local v348 = workspace:GetRealPhysicsFPS();
-	Client:Set("[FPS]: "   .. v348 );
-end
-spawn(function()
-	while true do
-		wait(0.1);
-		UpdateClient();
-	end
-end);
-Client1 = Status:Label("Client");
-function UpdateClient1()
-	local v349 = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString();
-	Client1:Set("[PING]: "   .. v349 );
-end
-spawn(function()
-	while true do
-		wait(0.1);
-		UpdateClient1();
-	end
-end);
+    while true do
+        wait(1) -- Cập nhật mỗi giây
+        pcall(function()
+            UpdateStatus()
+        end)
+    end
+end)
