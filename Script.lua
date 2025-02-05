@@ -12,16 +12,16 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
-    Status = Window:AddTab({ Title = "Status", Icon = "home" });
-    Main = Window:AddTab({ Title = "Main", Icon = "home" });
-    Setting = Window:AddTab({ Title = "Settings", Icon = "settings" });
-    Player = Window:AddTab({ Title = "PvP", Icon = "baby" });
-    Teleport = Window:AddTab({ Title = "Teleport", Icon = "palmtree" });
-    Fruit = Window:AddTab({ Title = "Fruit", Icon = "cherry" });
-    Raid = Window:AddTab({ Title = "Raid", Icon = "swords" });
-    Race = Window:AddTab({ Title = "Race", Icon = "chevrons-right" });
-    Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-cart" });
-    Misc = Window:AddTab({ Title = "Misc", Icon = "list-plus" });
+    Status = Window:AddTab({ Title = "Status", Icon = "activity" }); -- Thay "home" thành "activity"
+    Main = Window:AddTab({ Title = "Main", Icon = "grid" }); -- Thay "home" thành "grid"
+    Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); -- Thay "settings" thành "sliders"
+    Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); -- Thay "baby" thành "shield"
+    Teleport = Window:AddTab({ Title = "Teleport", Icon = "map" }); -- Thay "palmtree" thành "map"
+    Fruit = Window:AddTab({ Title = "Fruit", Icon = "apple" }); -- Thay "cherry" thành "apple"
+    Raid = Window:AddTab({ Title = "Raid", Icon = "target" }); -- Thay "swords" thành "target"
+    Race = Window:AddTab({ Title = "Race", Icon = "flag" }); -- Thay "chevrons-right" thành "flag"
+    Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); -- Thay "shopping-cart" thành "shopping-bag"
+    Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); -- Thay "list-plus" thành "menu"
 }
 local Options = Fluent.Options
 do
