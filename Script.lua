@@ -3,15 +3,15 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/P
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "PhatCrystalZzz",
-    SubTitle = "🤓Like And Sub My Channel💤",
+    Title = "PhatCrystal Hub[Free]",
+    SubTitle = "Make by @phat_crystal",
     TabWidth = 160,
     Size = UDim2.fromOffset(530, 350),
     Acrylic = false,
     Theme = "Dark",
     MinimizeKey = Enum.KeyCode.End
 })
-
+local v56 = v28:Window(Enum.KeyCode.RightControl);
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "home" }); -- Thay "home" thành "grid"
     Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); -- Thay "settings" thành "sliders"
@@ -22,7 +22,7 @@ local Tabs = {
     Race = Window:AddTab({ Title = "Race", Icon = "flag" }); -- Thay "chevrons-right" thành "flag"
     Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); -- Thay "shopping-cart" thành "shopping-bag"
     Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); -- Thay "list-plus" thành "menu"
-    Status = Window:AddTab({ Title = "Status", Icon = "loader" }); -- Thay "home" thành "activity"
+    Status = v56:T("Status", "rbxassetid://10734984606");
 }
 local Options = Fluent.Options
 do
@@ -6573,26 +6573,86 @@ Tabs.Status:AddButton({
     end
 })
 
-local Status = Tabs.Status:AddSection("Status Sever")
-
--- Thêm TextLabel vào tab Status
-local TimeLabel = Tabs.Status:AddLabel({
-    Text = "Current Time: 00:00",  -- Nội dung mặc định
-    Size = UDim2.fromOffset(400, 30),  -- Kích thước của TextLabel
-    Position = UDim2.fromOffset(10, 10),  -- Vị trí trong tab Status
-    Font = Enum.Font.Gotham,  -- Phông chữ
-    TextSize = 16,  -- Kích thước chữ
-    TextColor = Color3.fromRGB(255, 255, 255)  -- Màu chữ sáng (trắng)
-})
-
--- Hàm cập nhật thời gian
-local function updateTime()
-    while true do
-        local currentTime = os.date("%H:%M:%S") -- Lấy thời gian hiện tại (theo định dạng H:M:S)
-        TimeLabel.Text = "Current Time: " .. currentTime
-        wait(1) -- Chờ 1 giây rồi cập nhật lại
-    end
+v57:Seperator("Thời Gian");
+Time = v57:Label("Thời Gian Hoạt Động");
+function UpdateTime()
+	local v344 = math.floor(workspace.DistributedGameTime + 0.5 );
+	local v345 = math.floor(v344 / (60 ^ 2) ) % 24 ;
+	local v346 = math.floor(v344 / (60 ^ 1) ) % 60 ;
+	local v347 = math.floor(v344 / (60 ^ 0) ) % 60 ;
+	Time:Set("[Thời Gian Máy Chủ]: Giờ: "   .. v345   .. " Phút: "   .. v346   .. " Giây: "   .. v347 );
 end
-
--- Bắt đầu cập nhật thời gian
-spawn(updateTime)
+spawn(function()
+	while task.wait() do
+		pcall(function()
+			UpdateTime();
+		end);
+	end
+end);
+Client = v57:Label("Client");
+function UpdateClient()
+	local v348 = workspace:GetRealPhysicsFPS();
+	Client:Set("[FPS]: "   .. v348 );
+end
+spawn(function()
+	while true do
+		wait(0.1);
+		UpdateClient();
+	end
+end);
+Client1 = v57:Label("Client");
+function UpdateClient1()
+	local v349 = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString();
+	Client1:Set("[PING]: "   .. v349 );
+end
+spawn(function()
+	while true do
+		wait(0.1);
+		UpdateClient1();
+	end
+end);
+v57:Seperator("Người Chơi");
+local v69 = v57:Label("Tộc");
+spawn(function()
+	while wait() do
+		pcall(function()
+			v69:Set("Race:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.Race.Value );
+		end);
+	end
+end);
+local v70 = v57:Label("Beli");
+spawn(function()
+	while wait() do
+		pcall(function()
+			v70:Set("Beli:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.Beli.Value );
+		end);
+	end
+end);
+local v71 = v57:Label("Điểm Tím");
+spawn(function()
+	while wait() do
+		pcall(function()
+			v71:Set("Diểm Tím:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.Fragments.Value );
+		end);
+	end
+end);
+local v72 = v57:Label("Tiền Thưởng");
+spawn(function()
+	while wait() do
+		pcall(function()
+			v72:Set("Tiền Thưởng:"   .. " "   .. game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value );
+		end);
+	end
+end);
+local v73 = v57:Label("Trái");
+spawn(function()
+	while wait() do
+		pcall(function()
+			if (game:GetService("Players").LocalPlayer.Character:FindFirstChild(game:GetService("Players").LocalPlayer.Data.DevilFruit.Value) or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(game:GetService("Players").LocalPlayer.Data.DevilFruit.Value)) then
+				v73:Set("Trái:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.DevilFruit.Value );
+			else
+				v73:Set("Không Có Trái");
+			end
+		end);
+	end
+end);
