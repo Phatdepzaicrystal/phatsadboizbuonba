@@ -11,6 +11,8 @@ local Window = Fluent:CreateWindow({
     Theme = "Light",
     MinimizeKey = Enum.KeyCode.End
 })
+local Window = v28:Window(Enum.KeyCode.RightControl)
+
 local Tabs = {
     Status = Window:AddTab({ Title = "Status", Icon = "sparkles" }); -- Thay "home" thành "activity"
     Main = Window:AddTab({ Title = "Main", Icon = "house-plus" }); -- Thay "home" thành "grid"
@@ -2522,7 +2524,96 @@ if _G.FastAttack then
 		return v1369;
 	end)();
 end
-	
+----------------------------------------Tab Status-------------------------------
+local StatusTab = Tabs.Status
+StatusTab:Seperator("Info Hub")
+StatusTab:Label("Discord PhatCrystal Sever")
+
+StatusTab:Button("Copy Link Discord", function()
+    setclipboard("https://discord.gg/hyGgHBudcs")
+end)
+
+StatusTab:Seperator("Time")
+local Time = StatusTab:Label("Thời Gian Hoạt Động")
+
+function UpdateTime()
+    local v344 = math.floor(workspace.DistributedGameTime + 0.5)
+    local v345 = math.floor(v344 / (60 ^ 2)) % 24
+    local v346 = math.floor(v344 / (60 ^ 1)) % 60
+    local v347 = math.floor(v344 / (60 ^ 0)) % 60
+    Time:Set("[Time Sever]: Giờ: " .. v345 .. " Phút: " .. v346 .. " Giây: " .. v347)
+end
+
+spawn(function()
+    while task.wait() do
+        pcall(UpdateTime)
+    end
+end)
+
+local Client = StatusTab:Label("Client")
+function UpdateClient()
+    local fps = workspace:GetRealPhysicsFPS()
+    Client:Set("[FPS]: " .. fps)
+end
+
+spawn(function()
+    while true do
+        wait(0.1)
+        UpdateClient()
+    end
+end)
+
+local Client1 = StatusTab:Label("Client")
+function UpdateClient1()
+    local ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+    Client1:Set("[PING]: " .. ping)
+end
+
+spawn(function()
+    while true do
+        wait(0.1)
+        UpdateClient1()
+    end
+end)
+
+StatusTab:Seperator("Player Status")
+
+local RaceLabel = StatusTab:Label("Race")
+spawn(function()
+    while wait() do
+        pcall(function()
+            RaceLabel:Set("Race: " .. game:GetService("Players").LocalPlayer.Data.Race.Value)
+        end)
+    end
+end)
+
+local BeliLabel = StatusTab:Label("Beli")
+spawn(function()
+    while wait() do
+        pcall(function()
+            BeliLabel:Set("Beli: " .. game:GetService("Players").LocalPlayer.Data.Beli.Value)
+        end)
+    end
+end)
+
+local FragmentsLabel = StatusTab:Label("Fragments")
+spawn(function()
+    while wait() do
+        pcall(function()
+            FragmentsLabel:Set("Fragments: " .. game:GetService("Players").LocalPlayer.Data.Fragments.Value)
+        end)
+    end
+end)
+
+local BountyLabel = StatusTab:Label("Bounty")
+spawn(function()
+    while wait() do
+        pcall(function()
+            BountyLabel:Set("Bounty: " .. game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value)
+        end)
+    end
+end)
+
 
 ----------------------------------------Tab Main---------------------------------	
     local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
