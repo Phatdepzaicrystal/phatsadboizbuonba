@@ -6575,13 +6575,14 @@ Tabs.Status:AddButton({
 
 local Status = Tabs.Status:AddSection("Status Sever")
 
-local TimeLabel = Status:AddLabel({
-    Text = "Current Time: 00:00", -- Văn bản ban đầu
-    Size = UDim2.fromOffset(400, 30), -- Kích thước của TextLabel
-    Position = UDim2.fromOffset(10, 10), -- Vị trí của TextLabel trong tab
-    Font = Enum.Font.Gotham, -- Phông chữ
-    TextSize = 16, -- Kích thước chữ
-    TextColor = Color3.fromRGB(255, 255, 255) -- Màu chữ
+-- Thêm TextLabel vào tab Status
+local TimeLabel = Tabs.Status:AddLabel({
+    Text = "Current Time: 00:00",  -- Nội dung mặc định
+    Size = UDim2.fromOffset(400, 30),  -- Kích thước của TextLabel
+    Position = UDim2.fromOffset(10, 10),  -- Vị trí trong tab Status
+    Font = Enum.Font.Gotham,  -- Phông chữ
+    TextSize = 16,  -- Kích thước chữ
+    TextColor = Color3.fromRGB(255, 255, 255)  -- Màu chữ sáng (trắng)
 })
 
 -- Hàm cập nhật thời gian
