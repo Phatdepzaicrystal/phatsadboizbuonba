@@ -8,7 +8,7 @@ local Window = Fluent:CreateWindow({
     TabWidth = 160,
     Size = UDim2.fromOffset(530, 350),
     Acrylic = false,
-    Theme = "Light",
+    Theme = "Night",
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
@@ -2633,6 +2633,80 @@ end
         end
         end)
 
+    local ToggleLevel = Tabs.Main:AddToggle("ToggleLevel", {Title = "Farm Level Fast", Default = false })
+    ToggleLevel:OnChanged(function(Hi)
+        _G.LevelFarmFast = Hi
+    end)
+	spawn(function()
+		pcall(function()
+			while wait() do
+				if (_G.Farmfast and World1) then
+					if (game.Players.LocalPlayer.Data.Level.Value >= 10) then
+						_G.Level = false;
+						_G.LevelFarmFast = true;
+					end
+				end
+			end
+		end);
+	end);
+	spawn(function()
+		while wait() do
+			if (_G.Farmfast and World1) then
+				pcall(function()
+					if (game.Players.LocalPlayer.Data.Level.Value >= 10) then
+						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new( -7894.6176757813, 5547.1416015625, -380.29119873047));
+						for v2118, v2119 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if (v2119.Name == "Shanda") then
+								if (v2119:FindFirstChild("Humanoid") and v2119:FindFirstChild("HumanoidRootPart") and (v2119.Humanoid.Health > 0)) then
+									repeat
+										task.wait();
+										AutoHaki();
+										EquipWeapon(_G.SelectWeapon);
+										v2119.HumanoidRootPart.CanCollide = false;
+										v2119.Humanoid.WalkSpeed = 0;
+										StardMag = true;
+										FastMon = v2119.HumanoidRootPart.CFrame;
+										v2119.HumanoidRootPart.Size = Vector3.new(80, 80, 80);
+										TP1(v2119.HumanoidRootPart.CFrame * Pos );
+									until  not _G.Farmfast or  not v2119.Parent or (v2119.Humanoid.Health <= 0)
+									StardMag = false;
+									TP1(CFrame.new( -7678.48974609375, 5566.40380859375, -497.2156066894531));
+									UnEquipWeapon(_G.SelectWeapon);
+								end
+							end
+						end
+					elseif game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
+						TP1(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5, 10, 2) );
+					end
+				end);
+			end
+		end
+	end);
+	spawn(function()
+		pcall(function()
+			while wait() do
+				if (_G.Farmfast and World1) then
+					if (game.Players.LocalPlayer.Data.Level.Value >= 75) then
+						_G.LevelFarmFast = false;
+						_G.PlayerHunter = true;
+					end
+				end
+			end
+		end);
+	end);
+	spawn(function()
+		pcall(function()
+			while wait() do
+				if (_G.Farmfast and World1) then
+					if (game.Players.LocalPlayer.Data.Level.Value >= 200) then
+						_G.Level = true;
+						_G.PlayerHunter = false;
+					end
+				end
+			end
+		end);
+	end);
+end	
     local ToggleMobAura = Tabs.Main:AddToggle("ToggleMobAura", {Title = "Farm Near", Default = false })
     ToggleMobAura:OnChanged(function(Value)
         _G.AutoNear = Value
@@ -5657,10 +5731,19 @@ end)
 --------------------------------------------------------------------------------------------------------------------------------------------
 --RaceV4
 Tabs.Race:AddButton({
+    Title = "Tele To Temple",
+    Description = "",
+    Callback = function()
+        topos(CFrame.new(2947.556884765625, 2281.630615234375, -7213.54931640625));
+    end
+})
+
+
+Tabs.Race:AddButton({
     Title = "Lever Pull",
     Description = "",
     Callback = function()
-        Tween2(CFrame.new(28575.181640625, 14936.6279296875, 72.31636810302734))
+        topos(CFrame.new(28575.181640625, 14936.6279296875, 72.31636810302734));
     end
 })
 
@@ -5669,10 +5752,37 @@ Tabs.Race:AddButton({
     Title = "Acient One",
     Description = "",
     Callback = function()
-        Tween2(CFrame.new(28981.552734375, 14888.4267578125, -120.245849609375))
+        topos(CFrame.new(28981.552734375, 14888.4267578125, -120.245849609375));
     end
 })
 
+Tabs.Race:AddButton({
+    Title = "Tele To Clock",
+    Description = "",
+    Callback = function()
+	 topos(CFrame.new(29551.9941, 15069.002, -85.5179291));
+    end
+})
+local ToggleBuyGear = Tabs.Race:AddToggle("ToggleBuyGear", {Title = "Auto Buy Gear", function(v1401)
+		_G.BuyGear = v1401;
+		StopTween(_G.BuyGear);
+	end);
+	spawn(function()
+		pcall(function()
+			while wait(0.1) do
+				if _G.BuyGear then
+					local v1703 = {
+						[1] = true
+					};
+					local v1703 = {
+						[1] = "UpgradeRace",
+						[2] = "Buy"
+					};
+					game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer(unpack(v1703));
+				end
+			end
+		end);
+	end);
 
 local Mastery = Tabs.Race:AddSection("Auto Race")
 
@@ -5706,135 +5816,130 @@ Tabs.Race:AddButton({
 })
 
 
-local ToggleHumanandghoul = Tabs.Race:AddToggle("ToggleHumanandghoul", {Title = "Auto [ Human / Ghoul ] Trial", Default = false })
-ToggleHumanandghoul:OnChanged(function(Value)
-    KillAura = Value
-end)
-Options.ToggleHumanandghoul:SetValue(false)
 
 
 local ToggleAutotrial = Tabs.Race:AddToggle("ToggleAutotrial", {Title = "Auto Trial", Default = false })
-ToggleAutotrial:OnChanged(function(Value)
-    _G.AutoQuestRace = Value
-end)
-Options.ToggleAutotrial:SetValue(false)
-spawn(function()
-    pcall(function()
-        while wait() do
-            if _G.AutoQuestRace then
-				if game:GetService("Players").LocalPlayer.Data.Race.Value == "Human" then
-					for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
-						if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-							pcall(function()
-								repeat wait(.1)
-									v.Humanoid.Health = 0
-									v.HumanoidRootPart.CanCollide = false
-									sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-								until not _G.AutoQuestRace or not v.Parent or v.Humanoid.Health <= 0
-							end)
+ToggleAutotrial:OnChanged(function(PhatDepzai)
+    _G.AutoQuestRace = PhatDepzai
+    StopTween(_G.AutoQuestRace);		
+end);
+	spawn(function()
+		pcall(function()
+			while wait() do
+				if _G.QuestRace then
+					if (game:GetService("Players").LocalPlayer.Data.Race.Value == "Human") then
+						for v2240, v2241 in pairs(game.Workspace.Enemies:GetDescendants()) do
+							if (v2241:FindFirstChild("Humanoid") and v2241:FindFirstChild("HumanoidRootPart") and (v2241.Humanoid.Health > 0)) then
+								pcall(function()
+									repeat
+										wait(0.1);
+										v2241.Humanoid.Health = 0;
+										v2241.HumanoidRootPart.CanCollide = false;
+										sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge);
+									until  not _G.QuestRace or  not v2241.Parent or (v2241.Humanoid.Health <= 0)
+								end);
+							end
 						end
-					end
-				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Skypiea" then
-					for i,v in pairs(game:GetService("Workspace").Map.SkyTrial.Model:GetDescendants()) do
-						if v.Name ==  "snowisland_Cylinder.081" then
-							BTPZ(v.CFrame* CFrame.new(0,0,0))
+					elseif (game:GetService("Players").LocalPlayer.Data.Race.Value == "Skypiea") then
+						for v2350, v2351 in pairs(game:GetService("Workspace").Map.SkyTrial.Model:GetDescendants()) do
+							if (v2351.Name == "snowisland_Cylinder.081") then
+								topos(v2351.CFrame * CFrame.new(0, 0, 0) );
+							end
 						end
-					end
-				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Fishman" then
-					for i,v in pairs(game:GetService("Workspace").SeaBeasts.SeaBeast1:GetDescendants()) do
-						if v.Name ==  "HumanoidRootPart" then
-							Tween(v.CFrame* Pos)
-							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-								if v:IsA("Tool") then
-									if v.ToolTip == "Melee" then
-										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+					elseif (game:GetService("Players").LocalPlayer.Data.Race.Value == "Fishman") then
+						for v2459, v2460 in pairs(game:GetService("Workspace").SeaBeasts.SeaBeast1:GetDescendants()) do
+							if (v2460.Name == "HumanoidRootPart") then
+								topos(v2460.CFrame * CFrame.new(PosX, PosY, PosZ) );
+								for v2597, v2598 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+									if v2598:IsA("Tool") then
+										if (v2598.ToolTip == "Melee") then
+											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v2598);
+										end
 									end
 								end
-							end
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							wait(.2)
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							wait(.2)
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-								if v:IsA("Tool") then
-									if v.ToolTip == "Blox Fruit" then
-										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 122, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 122, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								wait(0.2);
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								wait(0.2);
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 99, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 99, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								for v2599, v2600 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+									if v2600:IsA("Tool") then
+										if (v2600.ToolTip == "Blox Fruit") then
+											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v2600);
+										end
 									end
 								end
-							end
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							wait(.2)
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							wait(.2)
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-					
-							wait(0.5)
-							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-								if v:IsA("Tool") then
-									if v.ToolTip == "Sword" then
-										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 122, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 122, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								wait(0.2);
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								wait(0.2);
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 99, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 99, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								wait(0.5);
+								for v2601, v2602 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+									if v2602:IsA("Tool") then
+										if (v2602.ToolTip == "Sword") then
+											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v2602);
+										end
 									end
 								end
-							end
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							wait(.2)
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							wait(.2)
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							wait(0.5)
-							for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-								if v:IsA("Tool") then
-									if v.ToolTip == "Gun" then
-										game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 122, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 122, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								wait(0.2);
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								wait(0.2);
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 99, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 99, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								wait(0.5);
+								for v2603, v2604 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+									if v2604:IsA("Tool") then
+										if (v2604.ToolTip == "Gun") then
+											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v2604);
+										end
 									end
 								end
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 122, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 122, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								wait(0.2);
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								wait(0.2);
+								game:GetService("VirtualInputManager"):SendKeyEvent(true, 99, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
+								game:GetService("VirtualInputManager"):SendKeyEvent(false, 99, false, game.Players.LocalPlayer.Character.HumanoidRootPart);
 							end
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,122,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							wait(.2)
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,120,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							wait(.2)
-							game:GetService("VirtualInputManager"):SendKeyEvent(true,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-							game:GetService("VirtualInputManager"):SendKeyEvent(false,99,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+						end
+					elseif (game:GetService("Players").LocalPlayer.Data.Race.Value == "Cyborg") then
+						topos(CFrame.new(28654, 14898.7832, -30, 1, 0, 0, 0, 1, 0, 0, 0, 1));
+					elseif (game:GetService("Players").LocalPlayer.Data.Race.Value == "Ghoul") then
+						for v2614, v2615 in pairs(game.Workspace.Enemies:GetDescendants()) do
+							if (v2615:FindFirstChild("Humanoid") and v2615:FindFirstChild("HumanoidRootPart") and (v2615.Humanoid.Health > 0)) then
+								pcall(function()
+									repeat
+										wait(0.1);
+										v2615.Humanoid.Health = 0;
+										v2615.HumanoidRootPart.CanCollide = false;
+										sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge);
+									until  not _G.QuestRace or  not v2615.Parent or (v2615.Humanoid.Health <= 0)
+								end);
+							end
+						end
+					elseif (game:GetService("Players").LocalPlayer.Data.Race.Value == "Mink") then
+						for v2653, v2654 in pairs(game:GetService("Workspace"):GetDescendants()) do
+							if (v2654.Name == "StartPoint") then
+								topos(v2654.CFrame * CFrame.new(0, 10, 0) );
+							end
 						end
 					end
-				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Cyborg" then
-					Tween(CFrame.new(28654, 14898.7832, -30, 1, 0, 0, 0, 1, 0, 0, 0, 1))
-				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Ghoul" then
-					for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
-						if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-							pcall(function()
-								repeat wait(.1)
-									v.Humanoid.Health = 0
-									v.HumanoidRootPart.CanCollide = false
-									sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-								until not _G.AutoQuestRace or not v.Parent or v.Humanoid.Health <= 0
-							end)
-						end
-					end
-				elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Mink" then
-					for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
-						if v.Name == "StartPoint" then
-							Tween(v.CFrame* CFrame.new(0,10,0))
-					  	end
-				   	end
 				end
 			end
-        end
-    end)
-end)
-
+		end);
+	end);
 if Third_Sea then
 local ToggleMirageIsland = Tabs.Race:AddToggle("ToggleMirageIsland", {Title = "Hop Mirage Island", Default = false })
 ToggleMirageIsland:OnChanged(function(Value)
