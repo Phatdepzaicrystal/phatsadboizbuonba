@@ -6562,33 +6562,26 @@ Tabs.Misc:AddButton({
     end
 })
 ----------------------------------Tab Status ------------------------
-local StatusTab = Tabs.Status
-local StatusSection = Tabs.Status:AddSection({ Title = "Player Status" })
+Tabs.Status:AddSection({
+    Title = "Game Status"
+})
 
--- Thêm phân tách (seperator) vào MiscTab
-MiscSection:AddDivider() -- Đây là cách thêm phân tách (seperator)
+-- Thêm các label vào tab "Status"
+local StatusSection = Tabs.Status:AddSection({ Title = "Game Status" })
+StatusSection:AddLabel("Server Time: Loading...")
+StatusSection:AddLabel("FPS: Loading...")
+StatusSection:AddLabel("Ping: Loading...")
 
--- Thêm các label vào MiscTab để hiển thị thông tin
-local TimeLabel = MiscSection:AddLabel("Server Time: Loading...")
-local FpsLabel = MiscSection:AddLabel("FPS: Loading...")
-local PingLabel = MiscSection:AddLabel("Ping: Loading...")
-
--- Cập nhật trạng thái mỗi giây
+-- Cập nhật thông tin trạng thái mỗi giây
 function UpdateStatus()
     -- Thời gian máy chủ
     local currentTime = math.floor(workspace.DistributedGameTime + 0.5)
     local hours = math.floor(currentTime / (60^2)) % 24
     local minutes = math.floor(currentTime / 60) % 60
     local seconds = currentTime % 60
-    TimeLabel:Set("Server Time: " .. string.format("%02d:%02d:%02d", hours, minutes, seconds))
-
-    -- FPS
-    local fps = workspace:GetRealPhysicsFPS()
-    FpsLabel:Set("FPS: " .. fps)
-
-    -- Ping
-    local ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
-    PingLabel:Set("Ping: " .. ping)
+    StatusSection:SetLabel(1, "Server Time: " .. string.format("%02d:%02d:%02d", hours, minutes, seconds))  -- Cập nhật thời gian
+    StatusSection:SetLabel(2, "FPS: " .. workspace:GetRealPhysicsFPS())  -- Cập nhật FPS
+    StatusSection:SetLabel(3, "Ping: " .. game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString())  -- Cập nhật Ping
 end
 
 -- Cập nhật trạng thái liên tục mỗi giây
