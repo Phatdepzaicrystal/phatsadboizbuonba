@@ -13,7 +13,6 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Status = Window:AddTab({ Title = "Status", Icon = "sparkles" }); -- Thay "home" thành "activity"
     Main = Window:AddTab({ Title = "Main", Icon = "home" }); -- Thay "home" thành "grid"
     Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); -- Thay "settings" thành "sliders"
     Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); -- Thay "baby" thành "shield"
@@ -23,6 +22,7 @@ local Tabs = {
     Race = Window:AddTab({ Title = "Race", Icon = "flag" }); -- Thay "chevrons-right" thành "flag"
     Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); -- Thay "shopping-cart" thành "shopping-bag"
     Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); -- Thay "list-plus" thành "menu"
+    Status = Window:AddTab({ Title = "Status", Icon = "loader" }); -- Thay "home" thành "activity"
 }
 local Options = Fluent.Options
 do
@@ -6563,6 +6563,7 @@ Tabs.Misc:AddButton({
 })
 ----------------------------------Tab Status ------------------------
 local StatusTab = Tabs.Status:AddSection("Status Player")
+
 StatusTab:Seperator("Info Hub")
 StatusTab:Label("Discord PhatCrystal Sever")
 
