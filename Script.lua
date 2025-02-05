@@ -6563,35 +6563,42 @@ Tabs.Misc:AddButton({
 })
 ----------------------------------Tab Status ------------------------
 local StatusTab = Tabs.Status
-local StatusSection = StatusTab:AddSection({ Title = "Player Status" })
+local StatusSection = Tabs.Status:AddSection({ Title = "Player Status" })
 
--- Tạo các label để hiển thị thông tin trạng thái
-local TimeLabel = StatusSection:AddLabel("Server Time: Waiting...")
-local FpsLabel = StatusSection:AddLabel("FPS: Waiting...")
-local PingLabel = StatusSection:AddLabel("Ping: Waiting...")
-
--- Cập nhật thông tin trạng thái máy chủ
-function UpdateStatus()
+function UpdateTime()
     -- Cập nhật thời gian
-    local currentTime = math.floor(workspace.DistributedGameTime + 0.5)
-    local hours = math.floor(currentTime / (60^2)) % 24
-    local minutes = math.floor(currentTime / 60) % 60
-    local seconds = currentTime % 60
-    TimeLabel:Set("Server Time: " .. hours .. "h " .. minutes .. "m " .. seconds .. "s")
-
-    -- Cập nhật FPS
-    local fps = workspace:GetRealPhysicsFPS()
-    FpsLabel:Set("FPS: " .. fps)
-
-    -- Cập nhật Ping
-    local ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
-    PingLabel:Set("Ping: " .. ping)
+    local currentTime = math.floor(workspace.DistributedGameTime + 0.5 );
+    local hours = math.floor(currentTime / (60^2)) % 24 ;
+    local minutes = math.floor(currentTime / 60) % 60 ;
+    local seconds = currentTime % 60 ;
+    TimeLabel:Set("Server Time: " .. hours .. "h " .. minutes .. "m " .. seconds .. "s");
 end
-
--- Cập nhật trạng thái liên tục
 spawn(function()
-    while true do
-        wait(1) -- Cập nhật mỗi giây
-        UpdateStatus()
-    end
-end)
+	while task.wait() do
+		pcall(function()
+			UpdateTime();
+		end);
+	end
+end);
+Client = Tabs.Status:Label("Client");
+function UpdateClient()
+	local v348 = workspace:GetRealPhysicsFPS();
+	Client:Set("[FPS]: "   .. v348 );
+end
+spawn(function()
+	while true do
+		wait(0.1);
+		UpdateClient();
+	end
+end);
+Client1 = Tabs.Status:Label("Client");
+function UpdateClient1()
+	local v349 = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString();
+	Client1:Set("[PING]: "   .. v349 );
+end
+spawn(function()
+	while true do
+		wait(0.1);
+		UpdateClient1();
+	end
+end);
