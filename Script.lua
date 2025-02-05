@@ -14,7 +14,7 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
     Status = Window:AddTab({ Title = "Status", Icon = "sparkles" }); -- Thay "home" thành "activity"
-    Main = Window:AddTab({ Title = "Main", Icon = "house-plus" }); -- Thay "home" thành "grid"
+    Main = Window:AddTab({ Title = "Main", Icon = "home" }); -- Thay "home" thành "grid"
     Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); -- Thay "settings" thành "sliders"
     Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); -- Thay "baby" thành "shield"
     Teleport = Window:AddTab({ Title = "Teleport", Icon = "map" }); -- Thay "palmtree" thành "map"
@@ -2391,7 +2391,7 @@ x=table.concat(tab)
 return x
 end 
 
-
+----------Fast Attack Source
 _G.FastAttack = true    
 if _G.FastAttack then
 	local _ENV = (getgenv or getrenv or getfenv)();
@@ -2523,7 +2523,6 @@ if _G.FastAttack then
 		return v1369;
 	end)();
 end
-----------------------------------------Tab Status-------------------------------
 
 ----------------------------------------Tab Main---------------------------------	
     local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
