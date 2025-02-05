@@ -11,7 +11,6 @@ local Window = Fluent:CreateWindow({
     Theme = "Light",
     MinimizeKey = Enum.KeyCode.End
 })
-local Window2 = v28:Window(Enum.KeyCode.RightControl)
 
 local Tabs = {
     Status = Window2:AddTab({ Title = "Status", Icon = "sparkles" }); -- Thay "home" thành "activity"
