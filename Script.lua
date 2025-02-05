@@ -2523,13 +2523,7 @@ if _G.FastAttack then
 	end)();
 end
 	
---------------------------Status-------------------------------------------------
-local Statuss = Tabs.Status:AddSection("Status User")
 
-Tabs.Status:AddLabel("Discord PhatCrystal");
-Tabs.Status:AddButton("Sao Chép Link Discord", function()
-	setclipboard("https://discord.gg/s8R9b5NfsU");
-end);
 ----------------------------------------Tab Main---------------------------------	
     local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
         Title = "Weapon",
@@ -5665,13 +5659,6 @@ end)
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 --RaceV4
-Tabs.Race:AddButton({
-    Title = "Tele to Great Tree(Top)",
-    Description = "",
-    Callback = function()
-       TP1(CFrame.new(2947.556884765625, 2281.630615234375, -7213.54931640625))
-   end,
-})
 
 Tabs.Race:AddButton({
     Title = "Timple Of Time",
