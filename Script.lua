@@ -6562,34 +6562,13 @@ Tabs.Misc:AddButton({
     end
 })
 ----------------------------------Tab Status ------------------------
-Tabs.Status:AddSection({
-    Title = "Game Status"
-})
+local Status = Tabs.Status:AddSection("Sever Discord")
 
--- Thêm các label vào tab "Status"
-local StatusSection = Tabs.Status:AddSection({ Title = "Game Status" })
-StatusSection:AddLabel("Server Time: Loading...")
-StatusSection:AddLabel("FPS: Loading...")
-StatusSection:AddLabel("Ping: Loading...")
-
--- Cập nhật thông tin trạng thái mỗi giây
-function UpdateStatus()
-    -- Thời gian máy chủ
-    local currentTime = math.floor(workspace.DistributedGameTime + 0.5)
-    local hours = math.floor(currentTime / (60^2)) % 24
-    local minutes = math.floor(currentTime / 60) % 60
-    local seconds = currentTime % 60
-    StatusSection:SetLabel(1, "Server Time: " .. string.format("%02d:%02d:%02d", hours, minutes, seconds))  -- Cập nhật thời gian
-    StatusSection:SetLabel(2, "FPS: " .. workspace:GetRealPhysicsFPS())  -- Cập nhật FPS
-    StatusSection:SetLabel(3, "Ping: " .. game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString())  -- Cập nhật Ping
-end
-
--- Cập nhật trạng thái liên tục mỗi giây
-spawn(function()
-    while true do
-        wait(1) -- Cập nhật mỗi giây
-        pcall(function()
-            UpdateStatus()
-        end)
+Tabs.Status:AddButton({
+    Title = "Copy Discord Link",
+    Description = "Click to copy the Discord link",
+    Callback = function()
+        setclipboard("https://discord.gg/s8R9b5NfsU")
+        print("Discord link copied!")
     end
-end)
+})
