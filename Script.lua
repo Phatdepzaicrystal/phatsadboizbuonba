@@ -6572,3 +6572,26 @@ Tabs.Status:AddButton({
         print("Discord link copied!")
     end
 })
+
+local Status = Tabs.Status:AddSection("Status Sever")
+
+local TimeLabel = Status:AddLabel({
+    Text = "Current Time: 00:00", -- Văn bản ban đầu
+    Size = UDim2.fromOffset(400, 30), -- Kích thước của TextLabel
+    Position = UDim2.fromOffset(10, 10), -- Vị trí của TextLabel trong tab
+    Font = Enum.Font.Gotham, -- Phông chữ
+    TextSize = 16, -- Kích thước chữ
+    TextColor = Color3.fromRGB(255, 255, 255) -- Màu chữ
+})
+
+-- Hàm cập nhật thời gian
+local function updateTime()
+    while true do
+        local currentTime = os.date("%H:%M:%S") -- Lấy thời gian hiện tại (theo định dạng H:M:S)
+        TimeLabel.Text = "Current Time: " .. currentTime
+        wait(1) -- Chờ 1 giây rồi cập nhật lại
+    end
+end
+
+-- Bắt đầu cập nhật thời gian
+spawn(updateTime)
