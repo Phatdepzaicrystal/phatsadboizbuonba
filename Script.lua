@@ -5661,7 +5661,7 @@ Tabs.Race:AddButton({
     Title = "Tele To Temple",
     Description = "",
     Callback = function()
-        topos(CFrame.new(2947.556884765625, 2281.630615234375, -7213.54931640625));
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(28286.35546875, 14895.3017578125, 102.62469482421875)
     end
 })
 
@@ -5670,7 +5670,7 @@ Tabs.Race:AddButton({
     Title = "Lever Pull",
     Description = "",
     Callback = function()
-        topos(CFrame.new(28575.181640625, 14936.6279296875, 72.31636810302734));
+        TP1(CFrame.new(28575.181640625, 14936.6279296875, 72.31636810302734))
     end
 })
 
@@ -5679,17 +5679,10 @@ Tabs.Race:AddButton({
     Title = "Acient One",
     Description = "",
     Callback = function()
-        topos(CFrame.new(28981.552734375, 14888.4267578125, -120.245849609375));
+        TP1(CFrame.new(28981.552734375, 14888.4267578125, -120.245849609375))
     end
 })
 
-Tabs.Race:AddButton({
-    Title = "Tele To Clock",
-    Description = "",
-    Callback = function()
-	 topos(CFrame.new(29551.9941, 15069.002, -85.5179291));
-    end
-})
 local ToggleBuyGear = Tabs.Race:AddToggle("ToggleBuyGear", {Title = "Auto Buy Gear", function(v1401)
 		_G.BuyGear = v1401;
 		StopTween(_G.BuyGear);
