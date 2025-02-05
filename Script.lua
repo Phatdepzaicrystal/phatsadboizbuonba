@@ -2573,12 +2573,16 @@ end
         end
     end)
 --------------------------Status
+local Statuss = Tabs.Status:AddSection("Status User")
+
+Tabs.Status:AddLabel({
+	Title = "Discord PhatCrystal Sever",
+})
 Tabs.Status:AddSeperator("Info Hub");
-Tabs.Status:AddLabel("Discord PhatCrystal Sever");
-Status:Seperator:AddButton("Click To Copy Link Sever", function()
-	setclipboard("https://discord.gg/s8R9b5NfsU");
+Tabs.Status:AddButton("Sao Chép Link Discord", function()
+	setclipboard("https://discord.gg/hyGgHBudcs");
 end);
-Status:AddSeperator("Time");	
+Tabs.Status:AddSeperator("Time");	
 Time = Status:AddLabel("Time On");
 function UpdateTime()
 	local v344 = math.floor(workspace.DistributedGameTime + 0.5 );
@@ -2594,7 +2598,7 @@ spawn(function()
 		end);
 	end
 end);
-Client = Status:Label("Client");
+Client = Status:AddLabel("Client");
 function UpdateClient()
 	local v348 = workspace:GetRealPhysicsFPS();
 	Client:Set("[FPS]: "   .. v348 );
@@ -2605,7 +2609,7 @@ spawn(function()
 		UpdateClient();
 	end
 end);
-Client1 = Status:Label("Client");
+Client1 = Status:AddLabel("Client");
 function UpdateClient1()
 	local v349 = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString();
 	Client1:Set("[PING]: "   .. v349 );
@@ -2616,8 +2620,8 @@ spawn(function()
 		UpdateClient1();
 	end
 end);
-Status:AddSeperator("Player Status");
-local v69 = v57:Label("Race");
+Tabs.Status:AddSeperator("Player Status");
+local v69 = Tabs.Status:Label("Race");
 spawn(function()
 	while wait() do
 		pcall(function()
@@ -2625,7 +2629,7 @@ spawn(function()
 		end);
 	end
 end);
-local v70 = v57:Label("Beli");
+local v70 = Tabs.Status:Label("Beli");
 spawn(function()
 	while wait() do
 		pcall(function()
@@ -2633,7 +2637,7 @@ spawn(function()
 		end);
 	end
 end);
-local v71 = v57:Label("Fragment");
+local v71 = Tabs.Status:Label("Fragment");
 spawn(function()
 	while wait() do
 		pcall(function()
@@ -2641,7 +2645,7 @@ spawn(function()
 		end);
 	end
 end);
-local v72 = v57:Label("Bouty User");
+local v72 = Tabs.Status:Label("Bouty User");
 spawn(function()
 	while wait() do
 		pcall(function()
