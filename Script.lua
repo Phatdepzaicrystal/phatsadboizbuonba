@@ -12,8 +12,8 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
-    Status = Window:AddTab({ Title = "Status", Icon = "activity" }); -- Thay "home" thành "activity"
-    Main = Window:AddTab({ Title = "Main", Icon = "grid" }); -- Thay "home" thành "grid"
+    Status = Window:AddTab({ Title = "Status", Icon = "sparkles" }); -- Thay "home" thành "activity"
+    Main = Window:AddTab({ Title = "Main", Icon = "house-plus" }); -- Thay "home" thành "grid"
     Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); -- Thay "settings" thành "sliders"
     Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); -- Thay "baby" thành "shield"
     Teleport = Window:AddTab({ Title = "Teleport", Icon = "map" }); -- Thay "palmtree" thành "map"
