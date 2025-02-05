@@ -25,7 +25,8 @@ local Tabs = {
     Shop = Window2:AddTab({ Title = "Shop", Icon = "shopping-bag" }); -- Thay "shopping-cart" thành "shopping-bag"
     Misc = Window2:AddTab({ Title = "Misc", Icon = "menu" }); -- Thay "list-plus" thành "menu"
 }
-
+local Options = Fluent.Options
+do
 
 --Place Id Check
 local id = game.PlaceId
