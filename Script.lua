@@ -23,7 +23,7 @@ local Tabs = {
     Race = Window:AddTab({ Title = "Race", Icon = "flag" }); -- Thay "chevrons-right" thành "flag"
     Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); -- Thay "shopping-cart" thành "shopping-bag"
     Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); -- Thay "list-plus" thành "menu"
-    Status = Window:AddTab({ Title = "Status And Sever", Icon = "loading" });
+    Status = Window:AddTab({ Title = "Status And Sever", Icon = "loader" });
 }
 local Options = Fluent.Options
 do
