@@ -8,7 +8,7 @@ local Window = Fluent:CreateWindow({
     TabWidth = 160,
     Size = UDim2.fromOffset(530, 350),
     Acrylic = false,
-    Theme = "Light",
+    Theme = "Dark",
     MinimizeKey = Enum.KeyCode.End
 })
 
@@ -6565,10 +6565,10 @@ Tabs.Misc:AddButton({
 local Status = Tabs.Status:AddSection("Sever Discord")
 
 Tabs.Status:AddButton({
-    Title = "Copy Discord Link",
+    Title = "Sever Discord PhatCrystal",
     Description = "Click to copy the Discord link",
     Callback = function()
-        setclipboard("https://discord.gg/s8R9b5NfsU")
+        setclipboard("https://discord.gg/hyGgHBudcs")
         print("Discord link copied!")
     end
 })
