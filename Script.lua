@@ -6562,7 +6562,7 @@ Tabs.Misc:AddButton({
     end
 })
 ----------------------------------Tab Status ------------------------
-local StatusTab = Tabs.Status
+local StatusTab = Tabs.Status:AddSection("Status Player")
 StatusTab:Seperator("Info Hub")
 StatusTab:Label("Discord PhatCrystal Sever")
 
