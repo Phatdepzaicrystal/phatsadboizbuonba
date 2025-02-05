@@ -13,16 +13,16 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Status = Window2:AddTab({ Title = "Status", Icon = "sparkles" }); -- Thay "home" thành "activity"
-    Main = Window2:AddTab({ Title = "Main", Icon = "house-plus" }); -- Thay "home" thành "grid"
-    Setting = Window2:AddTab({ Title = "Settings", Icon = "sliders" }); -- Thay "settings" thành "sliders"
-    Player = Window2:AddTab({ Title = "PvP", Icon = "shield" }); -- Thay "baby" thành "shield"
-    Teleport = Window2:AddTab({ Title = "Teleport", Icon = "map" }); -- Thay "palmtree" thành "map"
-    Fruit = Window2:AddTab({ Title = "Fruit", Icon = "apple" }); -- Thay "cherry" thành "apple"
-    Raid = Window2:AddTab({ Title = "Raid", Icon = "target" }); -- Thay "swords" thành "target"
-    Race = Window2:AddTab({ Title = "Race", Icon = "flag" }); -- Thay "chevrons-right" thành "flag"
-    Shop = Window2:AddTab({ Title = "Shop", Icon = "shopping-bag" }); -- Thay "shopping-cart" thành "shopping-bag"
-    Misc = Window2:AddTab({ Title = "Misc", Icon = "menu" }); -- Thay "list-plus" thành "menu"
+    Status = Window:AddTab({ Title = "Status", Icon = "sparkles" }); -- Thay "home" thành "activity"
+    Main = Window:AddTab({ Title = "Main", Icon = "house-plus" }); -- Thay "home" thành "grid"
+    Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); -- Thay "settings" thành "sliders"
+    Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); -- Thay "baby" thành "shield"
+    Teleport = Window:AddTab({ Title = "Teleport", Icon = "map" }); -- Thay "palmtree" thành "map"
+    Fruit = Window:AddTab({ Title = "Fruit", Icon = "apple" }); -- Thay "cherry" thành "apple"
+    Raid = Window:AddTab({ Title = "Raid", Icon = "target" }); -- Thay "swords" thành "target"
+    Race = Window:AddTab({ Title = "Race", Icon = "flag" }); -- Thay "chevrons-right" thành "flag"
+    Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); -- Thay "shopping-cart" thành "shopping-bag"
+    Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); -- Thay "list-plus" thành "menu"
 }
 local Options = Fluent.Options
 do
