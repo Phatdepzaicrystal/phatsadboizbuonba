@@ -11,7 +11,10 @@ local Window = Fluent:CreateWindow({
     Theme = "Dark",
     MinimizeKey = Enum.KeyCode.End
 })
+
 local v56 = v28:Window(Enum.KeyCode.RightControl);
+local v57 = v56:T("Trạng thái", "rbxassetid://10734984606");
+
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "home" }); -- Thay "home" thành "grid"
     Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); -- Thay "settings" thành "sliders"
@@ -22,7 +25,7 @@ local Tabs = {
     Race = Window:AddTab({ Title = "Race", Icon = "flag" }); -- Thay "chevrons-right" thành "flag"
     Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); -- Thay "shopping-cart" thành "shopping-bag"
     Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); -- Thay "list-plus" thành "menu"
-    Status = v56:T("Status", "rbxassetid://10734984606");
+    Status = Window:AddTab({ Title = "Status And Sever", Icon = "loading" });
 }
 local Options = Fluent.Options
 do
@@ -6573,7 +6576,7 @@ Tabs.Status:AddButton({
     end
 })
 
-v57:Seperator("Thời Gian");
+Status:Seperator("Thời Gian");
 Time = v57:Label("Thời Gian Hoạt Động");
 function UpdateTime()
 	local v344 = math.floor(workspace.DistributedGameTime + 0.5 );
