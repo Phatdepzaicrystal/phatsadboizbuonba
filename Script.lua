@@ -2633,8 +2633,8 @@ end
         end
         end)
 
-    local ToggleLevel = Tabs.Main:AddToggle("ToggleLevel", {Title = "Farm Level Fast", Default = false })
-    ToggleLevel:OnChanged(function(Hi)
+    local ToggleLevelFast = Tabs.Main:AddToggle("ToggleLevelFast", {Title = "Farm Level Fast", Default = false })
+    ToggleLevelFast:OnChanged(function(Hi)
         _G.LevelFarmFast = Hi
     end)
 	spawn(function()
