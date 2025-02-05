@@ -2523,6 +2523,14 @@ if _G.FastAttack then
 	end)();
 end
 	
+--------------------------Status-------------------------------------------------
+local Statuss = Tabs.Status:AddSection("Status User")
+
+Tabs.Status:AddLabel("Discord PhatCrystal");
+Tabs.Status:AddButton("Sao Chép Link Discord", function()
+	setclipboard("https://discord.gg/s8R9b5NfsU");
+end);
+----------------------------------------Tab Main---------------------------------	
     local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
         Title = "Weapon",
         Values = {'Melee','Sword','Blox Fruit'},
@@ -2572,8 +2580,8 @@ end
             end)
         end
     end)
---------------------------Status-------------------------------------------------
-----------------------------------------Tab Main---------------------------------	
+
+
     local ToggleLevel = Tabs.Main:AddToggle("ToggleLevel", {Title = "Auto Level", Default = false })
     ToggleLevel:OnChanged(function(Value)
         _G.LevelFarm = Value
@@ -2633,7 +2641,6 @@ end
         end
         end
         end)
-
 
     local ToggleMobAura = Tabs.Main:AddToggle("ToggleMobAura", {Title = "Farm Near", Default = false })
     ToggleMobAura:OnChanged(function(Value)
@@ -5656,7 +5663,16 @@ spawn(function()
     end)
 end)
 
--------------------------------------------------------------------------------------------------------------------RaceV4
+--------------------------------------------------------------------------------------------------------------------------------------------
+--RaceV4
+Tabs.Race:AddButton({
+    Title = "Tele to Great Tree(Top)",
+    Description = "",
+    Callback = function()
+       TP1(CFrame.new(2947.556884765625, 2281.630615234375, -7213.54931640625))
+   end,
+})
+
 Tabs.Race:AddButton({
     Title = "Timple Of Time",
     Description = "",
@@ -5941,7 +5957,6 @@ while wait() do
     end)
 end
 end)
-
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 --shop
