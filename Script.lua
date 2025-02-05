@@ -2572,8 +2572,82 @@ end
             end)
         end
     end)
-
-
+--------------------------Status
+    local ToggleStatus = Tabs.Status:AddButton("Sao Chép Link Discord", function()
+	setclipboard("https://discord.gg/hyGgHBudcs");
+end);
+ Tabs.Status:Seperator("Time");	
+Time = v57:Label("Time On");
+function UpdateTime()
+	local v344 = math.floor(workspace.DistributedGameTime + 0.5 );
+	local v345 = math.floor(v344 / (60 ^ 2) ) % 24 ;
+	local v346 = math.floor(v344 / (60 ^ 1) ) % 60 ;
+	local v347 = math.floor(v344 / (60 ^ 0) ) % 60 ;
+	Time:Set("[Time Sever]: Giờ: "   .. v345   .. " Phút: "   .. v346   .. " Giây: "   .. v347 );
+end
+spawn(function()
+	while task.wait() do
+		pcall(function()
+			UpdateTime();
+		end);
+	end
+end);
+Client = Status:Label("Client");
+function UpdateClient()
+	local v348 = workspace:GetRealPhysicsFPS();
+	Client:Set("[FPS]: "   .. v348 );
+end
+spawn(function()
+	while true do
+		wait(0.1);
+		UpdateClient();
+	end
+end);
+Client1 = Status:Label("Client");
+function UpdateClient1()
+	local v349 = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString();
+	Client1:Set("[PING]: "   .. v349 );
+end
+spawn(function()
+	while true do
+		wait(0.1);
+		UpdateClient1();
+	end
+end);
+Status:Seperator("Player Status");
+local v69 = v57:Label("Race");
+spawn(function()
+	while wait() do
+		pcall(function()
+			v69:Set("Race:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.Race.Value );
+		end);
+	end
+end);
+local v70 = v57:Label("Beli");
+spawn(function()
+	while wait() do
+		pcall(function()
+			v70:Set("Beli:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.Beli.Value );
+		end);
+	end
+end);
+local v71 = v57:Label("Fragment");
+spawn(function()
+	while wait() do
+		pcall(function()
+			v71:Set("Fragment:"   .. " "   .. game:GetService("Players").LocalPlayer.Data.Fragments.Value );
+		end);
+	end
+end);
+local v72 = v57:Label("Bouty User");
+spawn(function()
+	while wait() do
+		pcall(function()
+			v72:Set("Bouty User:"   .. " "   .. game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value );
+		end);
+	end
+end);
+----------------------------------------Tab Main---------------------------------	
     local ToggleLevel = Tabs.Main:AddToggle("ToggleLevel", {Title = "Auto Level", Default = false })
     ToggleLevel:OnChanged(function(Value)
         _G.LevelFarm = Value
