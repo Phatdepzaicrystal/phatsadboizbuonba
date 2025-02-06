@@ -3276,6 +3276,7 @@ local boss = Tabs.Main:AddSection("Boss Farm")
         end
       end)
 
+	---------------------------Tab Sea---------------------------------------
       if Third_Sea then
       local RoughSea = Tabs.Fish:AddSection("Kitsune")
 
