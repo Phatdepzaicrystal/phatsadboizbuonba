@@ -3102,7 +3102,7 @@ local boss = Tabs.Main:AddSection("Boss Farm")
 
 
     local DropdownBoss = Tabs.Main:AddDropdown("DropdownBoss", {
-        Title = "Dropdown",
+        Title = "Boss:",
         Values = tableBoss,
         Multi = false,
         Default = 1,
@@ -3205,7 +3205,7 @@ local boss = Tabs.Main:AddSection("Boss Farm")
         end
 
     local DropdownMaterial = Tabs.Main:AddDropdown("DropdownMaterial", {
-        Title = "Dropdown",
+        Title = "Choose Material",
         Values = MaterialList,
         Multi = false,
         Default = 1,
@@ -3276,8 +3276,7 @@ local boss = Tabs.Main:AddSection("Boss Farm")
         end
       end)
 
-	---------------------------Tab Sea---------------------------------------
-      if Third_Sea then
+---------------------------Tab Sea---------------------------------------
       local RoughSea = Tabs.Fish:AddSection("Kitsune")
 
 
@@ -5297,7 +5296,7 @@ end)
 local Chips = {"Flame","Ice","Quake","Light","Dark","Spider","Rumble","Magma","Buddha","Sand","Phoenix","Dough"}
 
 local DropdownRaid = Tabs.Raid:AddDropdown("DropdownRaid", {
-    Title = "Dropdown",
+    Title = "Choose Raid",
     Values = Chips,
     Multi = false,
     Default = 1,
