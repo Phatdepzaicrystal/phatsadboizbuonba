@@ -6297,6 +6297,27 @@ Tabs.Status:AddButton({
         print("Discord link copied!")
     end
 })
+-- Thêm một section cho "Thời Gian Hoạt Động"
+Tabs.Status:AddSection("Sever Info")
+
+-- Thêm văn bản hiển thị thời gian hoạt động
+local Time = Tabs.Status:AddText("Time")
+
+function UpdateTime()
+	local v344 = math.floor(workspace.DistributedGameTime + 0.5)
+	local v345 = math.floor(v344 / (60 ^ 2)) % 24
+	local v346 = math.floor(v344 / (60 ^ 1)) % 60
+	local v347 = math.floor(v344 / (60 ^ 0)) % 60
+	Time:Set("[Time Sever]: H: " .. v345 .. " M: " .. v346 .. " S: " .. v347)
+end
+
+spawn(function()
+	while task.wait() do
+		pcall(function()
+			UpdateTime()
+		end)
+	end
+end)
 local Status = Tabs.Status:AddSection("Status Sever")
 Tabs.Status:AddButton({
 	Title = "Rejoin Server",
