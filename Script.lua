@@ -53,7 +53,15 @@ Second_Sea = true
 elseif placeId == 7449423635 then
 Third_Sea = true
 end
-
+game.StarterGui:SetCore(
+    "SendNotification",
+    {
+        Title = "Loading",
+        Text = "Chill And Wait",
+        Duration = 3
+    })
+------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------
 function FindQuest()
 local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
 if First_Sea then
@@ -6396,12 +6404,22 @@ function Hop()
 		end
 	end
 	Teleport()
-end      
-local v113 = require(game.ReplicatedStorage.Util.CameraShaker);
-v113:Stop();
-local v114 = game:GetService("Players");
-game:GetService("StarterGui"):SetCore("SendNotification", {
-	Title = "PhatCrystal Hub",
-	Text = "Loaded",
-	Duration = 10
-});
+end     
+-------------------------------------------------------------------------------------------------------- 
+repeat
+    wait()
+until game:IsLoaded()
+if game.PlaceId == 2753915549 then
+    World1 = true
+elseif game.PlaceId == 4442272183 then
+    World2 = true
+elseif game.PlaceId == 7449423635 then
+    World3 = true
+end
+game.StarterGui:SetCore(
+    "SendNotification",
+    {
+        Title = "Script Loaded",
+        Text = "Zzz",
+        Duration = 10
+    })
