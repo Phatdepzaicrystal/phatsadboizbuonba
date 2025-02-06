@@ -4821,7 +4821,7 @@ spawn(function()
     end
 end)
 
-local Teleport = Tabs.Teleport:AddSection("Teleport Func")
+local Teleport = Tabs.Teleport:AddSection("Teleport")
 
 Tabs.Teleport:AddButton({
     Title = "TP To World 1",
@@ -4917,7 +4917,7 @@ elseif Third_Sea then
     end
 
 local DropdownIsland = Tabs.Teleport:AddDropdown("DropdownIsland",{
-    Title = "Dropdown",
+    Title = "Choose Island",
     Values = IslandList,
     Multi = false,
     Default = 1,
@@ -6391,3 +6391,28 @@ function Hop()
 	end
 	Teleport()
 end      
+
+Tabs.Status:AddButton({
+    Title = "Copy JobId Sever",
+    Description = "",
+    Callback = function()
+        setclipboard("tostring(game.JobId"));
+        print("JobId copied!")
+    end
+})
+
+Tabs.Status:AddTextbox({
+    Title = "JobId",
+    Description = "",
+    Callback = function(v609)
+    _G.Job = v609;
+end
+})
+
+Tabs.Status:AddButton({
+    Title = "Join JobId Sever",
+    Description = "",
+    Callback = function()
+    game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, _G.Job, game.Players.LocalPlayer);
+end);
+})
