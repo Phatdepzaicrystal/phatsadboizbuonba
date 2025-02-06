@@ -6308,7 +6308,7 @@ Tabs.Status:AddButton({
 Tabs.Status:AddSection("Sever Info")
 
 -- Thêm văn bản hiển thị thời gian hoạt động
-local TimeLabel = StatusTab:AddLabel("[Thời Gian Máy Chủ]: Đang cập nhật...")
+local TimeLabel = StatusTab:AddParagraph("[Thời Gian Máy Chủ]: Đang cập nhật...")
 
 function UpdateTime()
     local v344 = math.floor(workspace.DistributedGameTime + 0.5)
