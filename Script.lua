@@ -6390,25 +6390,4 @@ Tabs.Status:AddButton({
 		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, v607);
 	end
 end);
-Tabs.Status:AddButton({
-    Title = "Copy JobId Sever",
-    Description = "",
-    Callback = function()
-        setclipboard("tostring(game.JobId"));
-        print("JobId copied!")
-    end
-})
-Tabs.Status:AddTextbox({
-    Title = "JobId",
-    Description = "",
-    Callback = function(v609)
-	_G.Job = v609;
-end
-})
-Tabs.Status:AddButton({
-    Title = "Join JobId Sever",
-    Description = "",
-    Callback = function()
-	game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, _G.Job, game.Players.LocalPlayer);
-end);
-})
+
