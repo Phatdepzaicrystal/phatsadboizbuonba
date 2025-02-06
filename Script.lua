@@ -4096,7 +4096,8 @@ if Second_Sea then
         end)
     end
 ---------------------------------Tab Sea Event---------------------------------
-      if Third_Sea then
+local Seaevent = Tabs.Fish:AddSection("Sea Evenet")    
+  if Third_Sea then
       local RoughSea = Tabs.Fish:AddSection("Kitsune Island")
 
 
