@@ -6396,7 +6396,7 @@ Tabs.Status:AddButton({
     Title = "Copy JobId Sever",
     Description = "",
     Callback = function()
-        setclipboard("tostring(game.JobId"));
+        setclipboard(tostring(game.JobId)) -- Không cần đặt trong dấu ngoặc kép
         print("JobId copied!")
     end
 })
@@ -6404,15 +6404,34 @@ Tabs.Status:AddButton({
 Tabs.Status:AddTextbox({
     Title = "JobId",
     Description = "",
+    PlaceholderText = "Nhập JobId...",
+    RemoveTextAfterFocusLost = false,
     Callback = function(v609)
-    _G.Job = v609;
-end
+        if v609 and v609 ~= "" then
+            _G.Job = v609
+            print("Đã lưu JobId:", _G.Job)
+        else
+            print("Vui lòng nhập JobId hợp lệ")
+        end
+    end
 })
 
 Tabs.Status:AddButton({
-    Title = "Join JobId Sever",
+    Title = "Join JobId Server",
     Description = "",
     Callback = function()
-    game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, _G.Job, game.Players.LocalPlayer);
-end);
+        if _G.Job and _G.Job ~= "" then
+            local TeleportService = game:GetService("TeleportService")
+            local success, err = pcall(function()
+                TeleportService:TeleportToPlaceInstance(game.PlaceId, _G.Job, game.Players.LocalPlayer)
+            end)
+
+            if not success then
+                warn("Lỗi khi dịch chuyển: " .. err)
+            end
+        else
+            warn("JobId không hợp lệ! Vui lòng nhập JobId trước khi dịch chuyển.")
+        end
+    end
 })
+
