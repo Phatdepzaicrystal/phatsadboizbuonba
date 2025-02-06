@@ -14,17 +14,17 @@ local Window = Fluent:CreateWindow({
 
 
 local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "home" }); -- Thay "home" thành "grid"
-    Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); -- Thay "settings" thành "sliders"
-    Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); -- Thay "baby" thành "shield"
+    Main = Window:AddTab({ Title = "Main", Icon = "home" }); 
+    Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); 
+    Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); 
     Item = Window:AddTab({ Title = "Get Item", Icon = "sword" });
-    Fish = Window:AddTab({ Title = "Sea Event", Icon = "dolphin" });	
-    Teleport = Window:AddTab({ Title = "Teleport", Icon = "map" }); -- Thay "palmtree" thành "map"
-    Fruit = Window:AddTab({ Title = "Fruit", Icon = "apple" }); -- Thay "cherry" thành "apple"
-    Raid = Window:AddTab({ Title = "Raid", Icon = "target" }); -- Thay "swords" thành "target"
-    Race = Window:AddTab({ Title = "Race", Icon = "flag" }); -- Thay "chevrons-right" thành "flag"
-    Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); -- Thay "shopping-cart" thành "shopping-bag"
-    Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); -- Thay "list-plus" thành "menu"
+    Fish = Window:AddTab({ Title = "Sea Event", Icon = "ship" });	
+    Teleport = Window:AddTab({ Title = "Teleport", Icon = "map" }); 
+    Fruit = Window:AddTab({ Title = "Fruit", Icon = "apple" }); 
+    Raid = Window:AddTab({ Title = "Raid", Icon = "target" }); 
+    Race = Window:AddTab({ Title = "Race", Icon = "flag" }); 
+    Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); 
+    Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); 
     Status = Window:AddTab({ Title = "Status And Sever", Icon = "loader" });
 }
 local Options = Fluent.Options
