@@ -6397,3 +6397,11 @@ function Hop()
 	end
 	Teleport()
 end      
+local v113 = require(game.ReplicatedStorage.Util.CameraShaker);
+v113:Stop();
+local v114 = game:GetService("Players");
+game:GetService("StarterGui"):SetCore("SendNotification", {
+	Title = "PhatCrystal Hub",
+	Text = "Loaded",
+	Duration = 10
+});
