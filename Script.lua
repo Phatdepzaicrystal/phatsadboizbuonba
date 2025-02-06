@@ -55,8 +55,8 @@ Third_Sea = true
 end
 local players = game:GetService("Players")
 game:GetService("StarterGui"):SetCore("SendNotification", {
-   Title = "CrystalPhat Hub";
-   Text = "Loaded!";
+   Title = "PhatCrystal Hub";
+   Text = "Loaded Success";
    Duration = 10
 })
 ------------------------------------------------------------------------------------------------------------------------------------
