@@ -6304,11 +6304,10 @@ Tabs.Status:AddButton({
         print("Discord link copied!")
     end
 })
--- Thêm một section cho "Thời Gian Hoạt Động"
-Tabs.Status:AddSection("Sever Info")
+StatusTab:AddSection("Thông Tin Server")
 
--- Thêm văn bản hiển thị thời gian hoạt động
-local Time = StatusTab:CreateLabel({
+-- Sử dụng `CreateLabel` để tạo label trong tab Status
+local TimeLabel = StatusTab:CreateLabel({
    Name = "Time"
 })
 
