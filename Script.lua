@@ -17,7 +17,7 @@ local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "home" }); -- Thay "home" thành "grid"
     Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); -- Thay "settings" thành "sliders"
     Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); -- Thay "baby" thành "shield"
-    Item = Window:AddTab({ Title = "Item", Icon = "sword" });
+    Item = Window:AddTab({ Title = "Get Item", Icon = "sword" });
     Teleport = Window:AddTab({ Title = "Teleport", Icon = "map" }); -- Thay "palmtree" thành "map"
     Fruit = Window:AddTab({ Title = "Fruit", Icon = "apple" }); -- Thay "cherry" thành "apple"
     Raid = Window:AddTab({ Title = "Raid", Icon = "target" }); -- Thay "swords" thành "target"
