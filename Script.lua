@@ -3268,7 +3268,7 @@ local boss = Tabs.Main:AddSection("Boss Farm")
       end)
 
       if Third_Sea then
-      local RoughSea = Tabs.Main:AddSection("🦊 Kitsune 🦊")
+      local RoughSea = Tabs.Main:AddSection("Kitsune Island")
 
 
       local ToggleEspKitsune = Tabs.Main:AddToggle("ToggleEspKitsune", {Title = "Esp Kitsune Island", Default = false })
@@ -5946,6 +5946,59 @@ while wait() do
 end
 end)
 
+local ToggleEvoRace = Tabs.Race:AddToggle("ToggleEvoRace", {Title = "Auto Race V2", Default = false })
+        function(v412)
+	_G.EvoRace = v412;
+        StopTween(_G.EvoRace);
+end);
+spawn(function()
+	pcall(function()
+		while wait(0.1) do
+			if _G.EvoRace then
+				if  not game:GetService("Players").LocalPlayer.Data.Race:FindFirstChild("Evolved") then
+					if (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist", "1") == 0) then
+						topos(CFrame.new( -2779.83521, 72.9661407, -3574.02002, -0.730484903, 6.390141e-8, -0.68292886, 3.5996322e-8, 1, 5.5066703e-8, 0.68292886, 1.5642467e-8, -0.730484903));
+						if ((Vector3.new( -2779.83521, 72.9661407, -3574.02002) - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4) then
+							wait(1.3);
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist", "2");
+						end
+					elseif (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist", "1") == 1) then
+						pcall(function()
+							if ( not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 1") and  not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Flower 1")) then
+								topos(game:GetService("Workspace").Flower1.CFrame);
+							elseif ( not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 2") and  not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Flower 2")) then
+								topos(game:GetService("Workspace").Flower2.CFrame);
+							elseif ( not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 3") and  not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Flower 3")) then
+								if game:GetService("Workspace").Enemies:FindFirstChild("Zombie") then
+									for v2664, v2665 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+										if (v2665.Name == "Zombie") then
+											repeat
+												task.wait();
+												AutoHaki();
+												EquipWeapon(_G.SelectWeapon);
+												topos(v2665.HumanoidRootPart.CFrame * Pos );
+												v2665.HumanoidRootPart.CanCollide = false;
+												v2665.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+												PosMonEvo = v2665.HumanoidRootPart.CFrame;
+												StartEvoMagnet = true;
+											until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flower 3") or  not v2665.Parent or (v2665.Humanoid.Health <= 0) or (_G.EvoRace == false)
+											StartEvoMagnet = false;
+										end
+									end
+								else
+									StartEvoMagnet = false;
+									topos(CFrame.new( -5685.9233398438, 48.480125427246, -853.23724365234));
+								end
+							end
+						end);
+					elseif (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist", "1") == 2) then
+						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Alchemist", "3");
+					end
+				end
+			end
+		end
+	end);
+end);
 --------------------------------------------------------------------------------------------------------------------------------------------
 --shop
 
