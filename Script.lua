@@ -40,7 +40,6 @@ end)
 
 local a=Instance.new("ScreenGui")local b=Instance.new("ImageButton")local c=Instance.new("UICorner")a.Parent=game.Players.LocalPlayer:WaitForChild("PlayerGui")a.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;b.Parent=a;b.BackgroundColor3=Color3.fromRGB(255,255,255)b.BorderColor3=Color3.fromRGB(0,0,0)b.BorderSizePixel=0;b.Position=UDim2.new(0.103761353,0,0.214939028,0)b.Size=UDim2.new(0,58,0,55)b.Image="rbxassetid://130657523317624"c.Parent=b;local function d()local e=Instance.new('LocalScript',b)e.Parent.MouseButton1Click:Connect(function()game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)end)end;coroutine.wrap(d)()
 
-
 First_Sea = false
 Second_Sea = false
 Third_Sea = false
@@ -6339,56 +6338,3 @@ function Hop()
 	end
 	Teleport()
 end      
-Tabs.Status:AddButton({
-	Title = "Hop Server Low Player",
-	Description = "",
-	Callback = function()
-		Hop()
-	end
-})
-	getgenv().AutoTeleport = true;
-	getgenv().DontTeleportTheSameNumber = true;
-	getgenv().CopytoClipboard = false;
-	if  not game:IsLoaded() then
-		print("Game is loading waiting...");
-	end
-	local v605 = math.huge;
-	local v606;
-	local v607;
-	local v608 = "https://games.roblox.com/v1/games/"   .. game.PlaceId   .. "/servers/Public?sortOrder=Asc&limit=100" ;
-	function serversearch()
-		for v1427, v1428 in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync(v608)).data) do
-			if ((type(v1428) == "table") and (v1428.playing ~= nil) and (v605 > v1428.playing)) then
-				v606 = v1428.maxPlayers;
-				v605 = v1428.playing;
-				v607 = v1428.id;
-			end
-		end
-	end
-	function getservers()
-		serversearch();
-		for v1429, v1430 in pairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync(v608))) do
-			if (v1429 == "nextPageCursor") then
-				if v608:find("&cursor=") then
-					local v1722 = v608:find("&cursor=");
-					local v1723 = v608:sub(v1722);
-					v608 = v608:gsub(v1723, "");
-				end
-				v608 = v608   .. "&cursor="   .. v1430 ;
-				getservers();
-			end
-		end
-	end
-	getservers();
-	if AutoTeleport then
-		if DontTeleportTheSameNumber then
-			if (( #game:GetService("Players"):GetPlayers() - 4) == v605) then
-				return warn("It has same number of players (except you)");
-			elseif (v607 == game.JobId) then
-				return warn("Your current server is the most empty server atm");
-			end
-		end
-		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, v607);
-	end
-end);
-
