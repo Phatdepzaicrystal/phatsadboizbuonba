@@ -6311,25 +6311,6 @@ Tabs.Status:AddButton({
 })
 local Status = Tabs.Status:AddSection("Status Sever")
 
-Tabs.Status:AddText("Thời Gian Hoạt Động");
-function UpdateTime()
-	local v344 = math.floor(workspace.DistributedGameTime + 0.5 );
-	local v345 = math.floor(v344 / (60 ^ 2) ) % 24 ;
-	local v346 = math.floor(v344 / (60 ^ 1) ) % 60 ;
-	local v347 = math.floor(v344 / (60 ^ 0) ) % 60 ;
-	Time:Set("[Thời Gian Máy Chủ]: Giờ: "   .. v345   .. " Phút: "   .. v346   .. " Giây: "   .. v347 );
-end
-spawn(function()
-	while task.wait() do
-		pcall(function()
-			UpdateTime();
-		end);
-	end
-end);
-
-
-
-
 
 Tabs.Status:AddButton({
 	Title = "Rejoin Server",
