@@ -5950,7 +5950,7 @@ local ToggleEvoRace = Tabs.Race:AddToggle("ToggleEvoRace", {Title = "Auto Race V
 ToggleEvoRace:OnChanged(function(Value)
     _G.EvoRace = Value
 end)
-Options.ToggleBuy:SetValue(false)
+Options.ToggleEvoRace:SetValue(false)
 spawn(function()
 	pcall(function()
 		while wait(0.1) do
