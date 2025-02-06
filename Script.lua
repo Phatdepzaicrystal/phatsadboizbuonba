@@ -5782,8 +5782,6 @@ Tabs.Status:AddButton({
     end
 })
 local Status = Tabs.Status:AddSection("Status Sever")
-
-
 Tabs.Status:AddButton({
 	Title = "Rejoin Server",
 	Description = "",
