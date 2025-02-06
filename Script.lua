@@ -4690,6 +4690,44 @@ if Third_Sea then
             end
         end
 
+        local ToggleHallowScythe = Tabs.Item:AddToggle("ToggleHallowScythe", {Title = "Auto Hallow Scythe", Default = false })
+        ToggleHallowScythe:OnChanged(function(Value)
+            AutoHallowScythe = Value
+        end)
+        Options.ToggleTushita:SetValue(false)
+          spawn(function()
+	while wait() do
+		if _G.FarmBossHallow then
+			pcall(function()
+				if game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper") then
+					for v1898, v1899 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+						if string.find(v1899.Name, "Soul Reaper") then
+							repeat
+								task.wait();
+								EquipWeapon(_G.SelectWeapon);
+								AutoHaki();
+								v1899.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+								topos(v1899.HumanoidRootPart.CFrame * Pos );
+								v1899.HumanoidRootPart.Transparency = 1;
+								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge);
+							until (v1899.Humanoid.Health <= 0) or (_G.FarmBossHallow == false)
+						end
+					end
+				elseif (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hallow Essence")) then
+					repeat
+						topos(CFrame.new( -8932.322265625, 146.83154296875, 6062.55078125));
+						wait();
+					until (CFrame.new( -8932.322265625, 146.83154296875, 6062.55078125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 8
+					EquipWeapon("Hallow Essence");
+				elseif game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper") then
+					topos(game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2) );
+				elseif _G.FarmBossHallowHop then
+					Hop();
+				end
+			end);
+		end
+	end
+end);
 
 if Second_Sea then
         local ToggleFactory = Tabs.Item:AddToggle("ToggleFactory", {Title = "Auto Farm Factory", Default = false })
