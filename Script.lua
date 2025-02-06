@@ -5947,10 +5947,10 @@ end
 end)
 
 local ToggleEvoRace = Tabs.Race:AddToggle("ToggleEvoRace", {Title = "Auto Race V2", Default = false })
-        function(v412)
-	_G.EvoRace = v412;
-        StopTween(_G.EvoRace);
-end);
+ToggleEvoRace:OnChanged(function(Value)
+    _G.EvoRace = Value
+end)
+Options.ToggleBuy:SetValue(false)
 spawn(function()
 	pcall(function()
 		while wait(0.1) do
