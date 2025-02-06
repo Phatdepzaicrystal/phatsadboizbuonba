@@ -53,13 +53,12 @@ Second_Sea = true
 elseif placeId == 7449423635 then
 Third_Sea = true
 end
-game.StarterGui:SetCore(
-    "SendNotification",
-    {
-        Title = "Loading",
-        Text = "Chill And Wait",
-        Duration = 3
-    })
+local players = game:GetService("Players")
+game:GetService("StarterGui"):SetCore("SendNotification", {
+   Title = "CrystalPhat Hub";
+   Text = "Loaded!";
+   Duration = 10
+})
 ------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------
 function FindQuest()
@@ -6309,7 +6308,7 @@ Tabs.Status:AddButton({
 Tabs.Status:AddSection("Sever Info")
 
 -- Thêm văn bản hiển thị thời gian hoạt động
-local Time = Tabs.Status:AddLabel("Time")
+local Time = Tabs.Status:CreateLabel("Time")
 
 function UpdateTime()
 	local v344 = math.floor(workspace.DistributedGameTime + 0.5)
@@ -6405,21 +6404,3 @@ function Hop()
 	end
 	Teleport()
 end     
--------------------------------------------------------------------------------------------------------- 
-repeat
-    wait()
-until game:IsLoaded()
-if game.PlaceId == 2753915549 then
-    World1 = true
-elseif game.PlaceId == 4442272183 then
-    World2 = true
-elseif game.PlaceId == 7449423635 then
-    World3 = true
-end
-game.StarterGui:SetCore(
-    "SendNotification",
-    {
-        Title = "Script Loaded",
-        Text = "Zzz",
-        Duration = 10
-    })
