@@ -6308,22 +6308,23 @@ Tabs.Status:AddButton({
 Tabs.Status:AddSection("Sever Info")
 
 -- Thêm văn bản hiển thị thời gian hoạt động
-local Time = Tabs.Status:CreateLabel("Time")
+local TimeLabel = StatusTab:AddLabel("[Thời Gian Máy Chủ]: Đang cập nhật...")
 
 function UpdateTime()
-	local v344 = math.floor(workspace.DistributedGameTime + 0.5)
-	local v345 = math.floor(v344 / (60 ^ 2)) % 24
-	local v346 = math.floor(v344 / (60 ^ 1)) % 60
-	local v347 = math.floor(v344 / (60 ^ 0)) % 60
-	Time:Set("[Time Sever]: H: " .. v345 .. " M: " .. v346 .. " S: " .. v347)
+    local v344 = math.floor(workspace.DistributedGameTime + 0.5)
+    local v345 = math.floor(v344 / (60 ^ 2)) % 24
+    local v346 = math.floor(v344 / (60 ^ 1)) % 60
+    local v347 = math.floor(v344 / (60 ^ 0)) % 60
+
+    -- Cập nhật nội dung của Label
+    TimeLabel:SetText("[Thời Gian Máy Chủ]: Giờ: " .. v345 .. " Phút: " .. v346 .. " Giây: " .. v347)
 end
 
+-- Chạy cập nhật liên tục
 spawn(function()
-	while task.wait() do
-		pcall(function()
-			UpdateTime()
-		end)
-	end
+    while task.wait(1) do
+        pcall(UpdateTime)
+    end
 end)
 local Status = Tabs.Status:AddSection("Status Sever")
 Tabs.Status:AddButton({
