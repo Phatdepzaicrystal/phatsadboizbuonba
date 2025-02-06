@@ -4929,7 +4929,7 @@ DropdownIsland:OnChanged(function(Value)
 end)
 
 
-local ToggleIsland = Tabs.Teleport:AddToggle("ToggleIsland", {Title = "Teleport", Default = false })
+local ToggleIsland = Tabs.Teleport:AddToggle("ToggleIsland", {Title = "Tween To Island", Default = false })
 ToggleIsland:OnChanged(function(Value)
     _G.TeleportIsland = Value
     if _G.TeleportIsland == true then
