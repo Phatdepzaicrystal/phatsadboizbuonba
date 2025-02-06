@@ -18,7 +18,6 @@ local Tabs = {
     Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); 
     Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); 
     Item = Window:AddTab({ Title = "Get Item", Icon = "sword" });
-    Fish = Window:AddTab({ Title = "Sea Event", Icon = "anchor" });	
     Teleport = Window:AddTab({ Title = "Teleport", Icon = "map" }); 
     Fruit = Window:AddTab({ Title = "Fruit", Icon = "apple" }); 
     Raid = Window:AddTab({ Title = "Raid", Icon = "target" }); 
@@ -2529,7 +2528,7 @@ end
 
 ----------------------------------------Tab Main---------------------------------	
     local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
-        Title = "Weapon",
+        Title = "Choose Weapon",
         Values = {'Melee','Sword','Blox Fruit'},
         Multi = false,
         Default = 1,
