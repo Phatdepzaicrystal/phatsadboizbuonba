@@ -3361,7 +3361,7 @@ spawn(function()
     end
 end)
 end
-
+--------------Tab Sea-------------------
 if Third_Sea then
     local RoughSea = Tabs.Fish:AddSection("Rough Sea")
 
@@ -3993,7 +3993,7 @@ end)
     end)
 end
 
-
+---------------Tab Setting-------------------------------------------
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
  local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true })
