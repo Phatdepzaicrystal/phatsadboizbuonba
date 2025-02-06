@@ -6391,12 +6391,3 @@ function Hop()
 	end
 	Teleport()
 end      
-
-Tabs.Status:AddButton({
-    Title = "Copy JobId Sever",
-    Description = "",
-    Callback = function()
-        setclipboard(tostring(game.JobId)) -- Không cần đặt trong dấu ngoặc kép
-        print("JobId copied!")
-    end
-})
