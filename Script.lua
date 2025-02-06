@@ -6301,7 +6301,7 @@ Tabs.Status:AddButton({
 Tabs.Status:AddSection("Sever Info")
 
 -- Thêm văn bản hiển thị thời gian hoạt động
-local Time = Tabs.Status:AddText("Time")
+local Time = Tabs.Status:AddParagraph("Time")
 
 function UpdateTime()
 	local v344 = math.floor(workspace.DistributedGameTime + 0.5)
