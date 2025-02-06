@@ -6400,38 +6400,3 @@ Tabs.Status:AddButton({
         print("JobId copied!")
     end
 })
-
-Tabs.Status:AddTextbox({
-    Title = "JobId",
-    Description = "",
-    PlaceholderText = "Nhập JobId...",
-    RemoveTextAfterFocusLost = false,
-    Callback = function(v609)
-        if v609 and v609 ~= "" then
-            _G.Job = v609
-            print("Đã lưu JobId:", _G.Job)
-        else
-            print("Vui lòng nhập JobId hợp lệ")
-        end
-    end
-})
-
-Tabs.Status:AddButton({
-    Title = "Join JobId Server",
-    Description = "",
-    Callback = function()
-        if _G.Job and _G.Job ~= "" then
-            local TeleportService = game:GetService("TeleportService")
-            local success, err = pcall(function()
-                TeleportService:TeleportToPlaceInstance(game.PlaceId, _G.Job, game.Players.LocalPlayer)
-            end)
-
-            if not success then
-                warn("Lỗi khi dịch chuyển: " .. err)
-            end
-        else
-            warn("JobId không hợp lệ! Vui lòng nhập JobId trước khi dịch chuyển.")
-        end
-    end
-})
-
