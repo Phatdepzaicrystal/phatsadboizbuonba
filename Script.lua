@@ -3278,8 +3278,9 @@ local boss = Tabs.Main:AddSection("Boss Farm")
 
 ---------------------------Tab Sea---------------------------------------
 
-      if Third_Sea or Second_Sea then
-      local RoughSea = Tabs.Main:AddSection("Kitsune")
+      if Third_Sea then
+      local RoughSea = Tabs.Fish:AddSection("Kitsune")
+
 
       local ToggleEspKitsune = Tabs.Fish:AddToggle("ToggleEspKitsune", {Title = "Esp Kitsune Island", Default = false })
       ToggleEspKitsune:OnChanged(function(Value)
@@ -3370,7 +3371,7 @@ spawn(function()
 end)
 end
 
-if Third_Sea or Second_Sea then
+if Third_Sea then
     local RoughSea = Tabs.Fish:AddSection("Rough Sea")
 
     local ToggleSailBoat = Tabs.Main:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false })
