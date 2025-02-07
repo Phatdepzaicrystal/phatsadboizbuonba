@@ -4007,162 +4007,26 @@ local SettingFarm = Tabs.Setting:AddSection("Setting")
 
  local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true })
 
-ToggleFastAttack:OnChanged(function(Value)
-    _G.FastAttack = Value
+    ToggleFastAttack:OnChanged(function(Value)
+     _G.FastAttackFaiFao = Value
+    end)
+    Options.ToggleFastAttack:SetValue(true)
 
-    if Value then
-        print("Fast Attack đã được bật!")
-        
-        -- Chạy Fast Attack khi bật
-        task.spawn(function()
-            loadstring([[
-                _G.FastAttack = true    
-                if _G.FastAttack then
-                    local _ENV = (getgenv or getrenv or getfenv)();
-                    local function v758(v1363, v1364)
-                        local v1365, v1366 = pcall(function()
-                            return v1363:WaitForChild(v1364);
-                        end);
-                        if ( not v1365 or  not v1366) then
-                            warn("noooooo: "   .. v1364 );
-                        end
-                        return v1366;
-                    end
-                    local function v759(v1367, ...)
-                        local v1368 = v1367;
-                        for v1497, v1498 in {
-                            ...
-                        } do
-                            v1368 = v1368:FindFirstChild(v1498) or v758(v1368, v1498) ;
-                            if  not v1368 then
-                                break;
-                            end
-                        end
-                        return v1368;
-                    end
-                    local v760 = game:GetService("VirtualInputManager");
-                    local v761 = game:GetService("CollectionService");
-                    local v762 = game:GetService("ReplicatedStorage");
-                    local v763 = game:GetService("TeleportService");
-                    local v764 = game:GetService("RunService");
-                    local v765 = game:GetService("Players");
-                    local v766 = v765.LocalPlayer;
-                    if  not v766 then
-                        warn("Không tìm thấy người chơi cục bộ.");
-                        return;
-                    end
-                    local v767 = v758(v762, "Remotes");
-                    if  not v767 then
-                        return;
-                    end
-                    local v768 = v758(v767, "Validator");
-                    local v769 = v758(v767, "CommF_");
-                    local v770 = v758(v767, "CommE");
-                    local v771 = v758(workspace, "ChestModels");
-                    local v772 = v758(workspace, "_WorldOrigin");
-                    local v773 = v758(workspace, "Characters");
-                    local v774 = v758(workspace, "Enemies");
-                    local v775 = v758(workspace, "Map");
-                    local v776 = v758(v772, "EnemySpawns");
-                    local v777 = v758(v772, "Locations");
-                    local v778 = v764.RenderStepped;
-                    local v779 = v764.Heartbeat;
-                    local v780 = v764.Stepped;
-                    local v781 = v758(v762, "Modules");
-                    local v782 = v758(v781, "Net");
-                    local v783 = sethiddenproperty or function(...)
-                        return ...;
-                    end ;
-                    local v784 = setupvalue or (debug and debug.setupvalue) ;
-                    local v785 = getupvalue or (debug and debug.getupvalue) ;
-                    local v786 = {
-                        AutoClick = true,
-                        ClickDelay = 0
-                    };
-                    local v787 = {};
-                    v787.FastAttack = (function()
-                        if _ENV.rz_FastAttack then
-                            return _ENV.rz_FastAttack;
-                        end
-                        local v1369 = {
-                            Distance = 100,
-                            attackMobs = true,
-                            attackPlayers = true,
-                            Equipped = nil
-                        };
-                        local v1370 = v758(v782, "RE/RegisterAttack");
-                        local v1371 = v758(v782, "RE/RegisterHit");
-                        local function v1372(v1499)
-                            return v1499 and v1499:FindFirstChild("Humanoid") and (v1499.Humanoid.Health > 0) ;
-                        end
-                        local function v1373(v1500, v1501)
-                            local v1502 = nil;
-                            for v1591, v1592 in v1501:GetChildren() do
-                                local v1593 = v1592:FindFirstChild("Head");
-                                if (v1593 and v1372(v1592) and (v766:DistanceFromCharacter(v1593.Position) < v1369.Distance)) then
-                                    if (v1592 ~= v766.Character) then
-                                        table.insert(v1500, {
-                                            v1592,
-                                            v1593
-                                        });
-                                        v1502 = v1593;
-                                    end
-                                end
-                            end
-                            return v1502;
-                        end
-                        v1369.Attack = function(v1503, v1504, v1505)
-                            if ( not v1504 or ( #v1505 == 0)) then
-                                return;
-                            end
-                            v1370:FireServer(v786.ClickDelay or 0 );
-                            v1371:FireServer(v1504, v1505);
-                        end;
-                        v1369.AttackNearest = function(v1506)
-                            local v1507 = {};
-                            local v1508 = v1373(v1507, v774);
-                            local v1509 = v1373(v1507, v773);
-                            if ( #v1507 > 0) then
-                                v1506:Attack(v1508 or v1509 , v1507);
-                            else
-                                task.wait(0);
-                            end
-                        end;
-                        v1369.BladeHits = function(v1510)
-                            local v1511 = v1372(v766.Character) and v766.Character:FindFirstChildOfClass("Tool") ;
-                            if (v1511 and (v1511.ToolTip ~= "Gun")) then
-                                v1510:AttackNearest();
-                            else
-                                task.wait(0);
-                            end
-                        end;
-                        task.spawn(function()
-                            while task.wait(v786.ClickDelay) do
-                                if v786.AutoClick then
-                                    v1369:BladeHits();
-                                end
-                            end
-                        end);
-                        _ENV.rz_FastAttack = v1369;
-                        return v1369;
-                    end)();
-                end
-            ]])()
-        end)
-
-    else
-        print("Fast Attack đã bị tắt!")
-        _G.FastAttack = false
-    end
+spawn(function()
+	while wait(0.4) do
+		pcall(function()
+			if _G.FastAttackFaiFao then
+				repeat wait(0)
+					 
+				until not _G.FastAttackFaiFao
+			end
+		end)
+	end
 end)
-
--- Đặt giá trị mặc định khi khởi chạy
-Options.ToggleFastAttack:SetValue(true)
-_G.FastAttack = true
-
 
 local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
 Camera:Stop()
+
 
 
     local ToggleBringMob = Tabs.Setting:AddToggle("ToggleBringMob", {Title = " Enable Bring Mob / Magnet", Default = true })
