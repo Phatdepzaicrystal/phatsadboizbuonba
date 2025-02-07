@@ -4348,6 +4348,8 @@ spawn(function()
     end
 end)
 
+local test = Tabs.Setting:AddSection("Local Player")
+
 local ToggleInfSoru = Tabs.Setting:AddToggle("ToggleInfSoru", {Title = "Inf Soru", Default = false })
 ToggleInfSoru:OnChanged(function(v537)
 	ToggleInfSoru = v537;
@@ -4374,6 +4376,57 @@ spawn(function()
 		end);
 	end
 end);
+
+local ToggleWalkOnWater = Tabs.Setting:AddToggle("ToggleWalkOnWater", {Title = "Wakl On Water", Default = true })
+ToggleWalkOnWater:OnChanged(function(Value)
+    ToggleWalkOnWater = Value
+end);
+Options.ToggleWalkOnWater:SetValue(true)
+ 
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G.WalkWater then
+                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
+            else
+                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
+            end
+        end)
+    end
+end)
+
+local ToggleNoClipz = Tabs.Setting:AddToggle("ToggleNoClipz", {Title = "No Clip", Default = true })
+ToggleNoClipz:OnChanged(function(Value)
+    ToggleNoClipz = Value
+end);
+Options.ToggleToggleNoClipz:SetValue(true)
+ 
+spawn(function()
+	while wait() do
+		if sethiddenproperty then
+			sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 100);
+		end
+		if setscriptable then
+			setscriptable(game.Players.LocalPlayer, "SimulationRadius", true);
+			game.Players.LocalPlayer.SimulationRadius = math.huge * math.huge , (((((((((math.huge * math.huge * 0) / 0) * 0) / 0) * 0) / 0) * 0) / 0) * 0) / 0 ;
+		end
+	end
+end);
+
+local ToggleSafeMode = Tabs.Setting:AddToggle("SafeMode", {Title = "Safe Mode", Default = false })
+ToggleSafeMode:OnChanged(function(Value)
+    ToggleSafeMode = Value
+    StopTween(ToggleSafeMode);
+end);
+spawn(function()
+	pcall(function()
+		while wait() do
+			if ToggleSafeMode then
+				game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame;
+			end
+		end
+	end);
+end);		
 -----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
@@ -4498,25 +4551,7 @@ mouse.Button1Down:Connect(function()
     end
 end)
 
-local test = Tabs.Player:AddSection("Misc")
 
-local ToggleWalkOnWater = Tabs.Player:AddToggle("ToggleWalkOnWater", {Title = "Wakl On Water", Default = true })
-ToggleWalkOnWater:OnChanged(function(Value)
-    _G.WalkWater = Value
-end)
-Options.ToggleWalkOnWater:SetValue(true)
- 
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            if _G.WalkWater then
-                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
-            else
-                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
-            end
-        end)
-    end
-end)
 ---------------------------------Tab Item---------------------------------------
  local AutoElite = Tabs.Item:AddSection("Elite Hunter Farm")
 
@@ -6320,6 +6355,23 @@ Tabs.Misc:AddButton({
         game:GetService("Lighting").ClockTime = 12
         end
     end
+})
+
+Tabs.Misc:AddButton({
+	Title = "Destroy Lava",
+	Description = "",
+	Callback = function()
+	for v866, v867 in pairs(game.Workspace:GetDescendants()) do
+		if (v867.Name == "Lava") then
+			v867:Destroy();
+		end
+	end
+	for v868, v869 in pairs(game.ReplicatedStorage:GetDescendants()) do
+		if (v869.Name == "Lava") then
+			v869:Destroy();
+		end
+	end
+end);
 })
 ----------------------------------Tab Status ------------------------
 local Status = Tabs.Status:AddSection("Sever Discord")
