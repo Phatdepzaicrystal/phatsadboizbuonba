@@ -4010,7 +4010,12 @@ local SettingFarm = Tabs.Setting:AddSection("Setting")
     ToggleFastAttack:OnChanged(function(Value)
      _G.FastAttackFiFai = Value
     end)
-    Options.ToggleFastAttack:SetValue(true)
+ToggleFastAttack:OnChanged(function(Value)
+    _G.FastAttack = Value
+
+    if Value then
+        print("Fast Attack đã được bật!")
+        
         -- Chạy Fast Attack khi bật
         task.spawn(function()
             loadstring([[
@@ -4155,8 +4160,9 @@ local SettingFarm = Tabs.Setting:AddSection("Setting")
 end)
 
 -- Đặt giá trị mặc định khi khởi chạy
-Options.ToggleFastAttack:SetValue(false)
-_G.FastAttack = false
+Options.ToggleFastAttack:SetValue(true)
+_G.FastAttack = true
+
 
 local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
 Camera:Stop()
