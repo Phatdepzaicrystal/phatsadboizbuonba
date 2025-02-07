@@ -3555,9 +3555,9 @@ spawn(function()
 end)
 end
 
-    local AutoMysticIsland = Tabs.Main:AddSection("Mirage Island")
+    local AutoMysticIsland = Tabs.Fish:AddSection("Mirage Island")
 
-local ToggleTweenMirageIsland = Tabs.Main:AddToggle("ToggleTweenMirageIsland", {Title = "Tween To Mirage Island", Default = false })
+local ToggleTweenMirageIsland = Tabs.Fish:AddToggle("ToggleTweenMirageIsland", {Title = "Tween To Mirage Island", Default = false })
 ToggleTweenMirageIsland:OnChanged(function(Value)
     _G.AutoMysticIsland = Value
 end) 
@@ -3577,7 +3577,7 @@ end)
 
 
 
-local ToggleTweenGear = Tabs.Main:AddToggle("ToggleTweenGear", {Title = "Tween To Gear", Default = false })
+local ToggleTweenGear = Tabs.Fish:AddToggle("ToggleTweenGear", {Title = "Tween To Gear", Default = false })
 ToggleTweenGear:OnChanged(function(Value)
     _G.TweenToGear = Value
 end) 
@@ -3604,7 +3604,7 @@ spawn(function()
 
 
 
-    local Togglelockmoon = Tabs.Main:AddToggle("Togglelockmoon", {Title = "Lock Moon and Use Race Skill", Default = false })
+    local Togglelockmoon = Tabs.Fish:AddToggle("Togglelockmoon", {Title = "Lock Moon and Use Race Skill", Default = false })
     Togglelockmoon:OnChanged(function(Value)
         _G.AutoLockMoon = Value
     end) 
@@ -3636,14 +3636,14 @@ spawn(function()
     end)
 
 
-local ToggleMirage = Tabs.Main:AddToggle("ToggleMirage", {Title = "Auto Mirage Island", Default = false })
+local ToggleMirage = Tabs.Fish:AddToggle("ToggleMirage", {Title = "Auto Mirage Island", Default = false })
 ToggleMirage:OnChanged(function(Value)
- _G.AutoSeaBeast = Value
+ _G.AutoMirage = Value
 end) 
 
  Options.ToggleMirage:SetValue(false)
 
- local AutoW = Tabs.Main:AddToggle("AutoW", {Title = "Auto Press W", Default = false })
+ local AutoW = Tabs.Fish:AddToggle("AutoW", {Title = "Auto Press W", Default = false })
  AutoW:OnChanged(function(Value)
     _G.AutoW = Value
      end)
@@ -3659,27 +3659,501 @@ end)
     end)
 end
 
----------------Tab Setting-------------------------------------------
+if Third_Sea then
+    local Sea = Tabs.Fish:AddSection("Sea Beast")
+
+
+local ToggleSeaBeAst = Tabs.Fish:AddToggle("ToggleSeaBeAst", {Title = "Auto Sea Beast", Default = false })
+
+ToggleSeaBeAst:OnChanged(function(Value)
+    _G.AutoSeaBeast = Value
+    end)
+    Options.ToggleSeaBeAst:SetValue(false)
+ 
+    
+    Skillz = true
+    Skillx = true
+    Skillc = true
+    Skillv = true
+    
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if AutoSkill then
+                    if Skillz then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
+                    end
+                    if Skillx then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+                    end
+                    if Skillc then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "C", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "C", false, game)
+                    end
+                    if Skillv then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
+                    end
+                end
+            end)
+        end
+    end)
+    task.spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.AutoSeaBeast then
+                    if not game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") then
+                        if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then 
+                            if not game:GetService("Workspace").Boats:FindFirstChild("PirateBasic") then
+                                if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                    buyb = TweenBoat(CFrame.new(-4513.90087890625, 16.76398277282715, -2658.820556640625))
+                                    if (CFrame.new(-4513.90087890625, 16.76398277282715, -2658.820556640625).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                        if buyb then buyb:Stop() end
+                                        local args = {
+                                            [1] = "BuyBoat",
+                                            [2] = "PirateGrandBrigade"
+                                        }
+            
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                    end
+                                elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                    if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+                                        TweenBoat(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                    elseif game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == true then
+                                        repeat wait()
+                                            if (game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                                TweenShip(CFrame.new(35.04552459716797, 17.750778198242188, 4819.267578125))
+                                            end
+                                        until game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") or _G.AutoSeaBeast == false
+                                    end
+                                end
+                            elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                for is,vs in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                    if vs.Name == "PirateGrandBrigade" then
+                                        if vs:FindFirstChild("VehicleSeat") then
+                                            repeat wait()
+                                                game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                                TweenBoat(vs.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                            until not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") or _G.AutoSeaBeast == false
+                                        end
+                                    end
+                                end
+                            end
+                        elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                            for iss,v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                if v.Name == "PirateGrandBrigade" then
+                                    if v:FindFirstChild("VehicleSeat") then
+                                        repeat wait()
+                                            game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                            TweenBoat(v.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                        until not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") or _G.AutoSeaBeast == false
+                                    end
+                                end
+                            end
+                        end
+                    elseif game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") then  
+                        for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") then
+                                repeat wait()
+                                    game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                    TweenBoat(v.HumanoidRootPart.CFrame * CFrame.new(0,500,0))
+                                    EquipAllWeapon()  
+                                    AutoSkill = true
+                                    AimBotSkillPosition = v.HumanoidRootPart
+                                    Skillaimbot = true
+                                until not v:FindFirstChild("HumanoidRootPart") or _G.AutoSeaBeast == false
+                                AutoSkill = false
+                                Skillaimbot = false
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+
+elseif Second_Sea then
+    local Sea = Tabs.Fish:AddSection("Sea Beast")
+
+
+local ToggleSeaBeAst = Tabs.Fish:AddToggle("ToggleSeaBeAst", {Title = "Auto Sea Beast", Default = false })
+
+ToggleSeaBeAst:OnChanged(function(Value)
+    _G.AutoSeaBeast = Value
+    end)
+    Options.ToggleSeaBeAst:SetValue(false)
+ 
+    
+    Skillz = true
+    Skillx = true
+    Skillc = true
+    Skillv = true
+    
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if AutoSkill then
+                    if Skillz then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
+                    end
+                    if Skillx then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+                    end
+                    if Skillc then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "C", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "C", false, game)
+                    end
+                    if Skillv then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
+                    end
+                end
+            end)
+        end
+    end)
+    task.spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.AutoSeaBeast then
+                    if not game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") then
+                        if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then 
+                            if not game:GetService("Workspace").Boats:FindFirstChild("PirateBasic") then
+                                if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                    buyb = TweenBoat(CFrame.new(-4513.90087890625, 16.76398277282715, -2658.820556640625))
+                                    if (CFrame.new(-4513.90087890625, 16.76398277282715, -2658.820556640625).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                        if buyb then buyb:Stop() end
+                                        local args = {
+                                            [1] = "BuyBoat",
+                                            [2] = "PirateGrandBrigade"
+                                        }
+            
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                    end
+                                elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                    if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+                                        TweenBoat(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                    elseif game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == true then
+                                        repeat wait()
+                                            if (game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                                TweenShip(CFrame.new(35.04552459716797, 17.750778198242188, 4819.267578125))
+                                            end
+                                        until game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") or _G.AutoSeaBeast == false
+                                    end
+                                end
+                            elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                for is,vs in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                    if vs.Name == "PirateGrandBrigade" then
+                                        if vs:FindFirstChild("VehicleSeat") then
+                                            repeat wait()
+                                                game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                                TweenBoat(vs.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                            until not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") or _G.AutoSeaBeast == false
+                                        end
+                                    end
+                                end
+                            end
+                        elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                            for iss,v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                if v.Name == "PirateGrandBrigade" then
+                                    if v:FindFirstChild("VehicleSeat") then
+                                        repeat wait()
+                                            game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                            TweenBoat(v.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                        until not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") or _G.AutoSeaBeast == false
+                                    end
+                                end
+                            end
+                        end
+                    elseif game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") then  
+                        for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") then
+                                repeat wait()
+                                    game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                    TweenBoat(v.HumanoidRootPart.CFrame * CFrame.new(0,500,0))
+                                    EquipAllWeapon()  
+                                    AutoSkill = true
+                                    AimBotSkillPosition = v.HumanoidRootPart
+                                    Skillaimbot = true
+                                until not v:FindFirstChild("HumanoidRootPart") or _G.AutoSeaBeast == false
+                                AutoSkill = false
+                                Skillaimbot = false
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+elseif First_Sea then
+    local Sea = Tabs.Fish:AddSection("Sea Beast")
+
+
+local ToggleSeaBeAst = Tabs.Fish:AddToggle("ToggleSeaBeAst", {Title = "Auto Sea Beast", Default = false })
+
+ToggleSeaBeAst:OnChanged(function(Value)
+    _G.AutoSeaBeast = Value
+    end)
+    Options.ToggleSeaBeAst:SetValue(false)
+ 
+    
+    Skillz = true
+    Skillx = true
+    Skillc = true
+    Skillv = true
+    
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if AutoSkill then
+                    if Skillz then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
+                    end
+                    if Skillx then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+                    end
+                    if Skillc then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "C", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "C", false, game)
+                    end
+                    if Skillv then
+                        game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
+                        wait(.1)
+                        game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
+                    end
+                end
+            end)
+        end
+    end)
+    task.spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.AutoSeaBeast then
+                    if not game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") then
+                        if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then 
+                            if not game:GetService("Workspace").Boats:FindFirstChild("PirateBasic") then
+                                if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                    buyb = TweenBoat(CFrame.new(-4513.90087890625, 16.76398277282715, -2658.820556640625))
+                                    if (CFrame.new(-4513.90087890625, 16.76398277282715, -2658.820556640625).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                        if buyb then buyb:Stop() end
+                                        local args = {
+                                            [1] = "BuyBoat",
+                                            [2] = "PirateGrandBrigade"
+                                        }
+            
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                    end
+                                elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                    if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+                                        TweenBoat(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                    elseif game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == true then
+                                        repeat wait()
+                                            if (game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                                TweenShip(CFrame.new(35.04552459716797, 17.750778198242188, 4819.267578125))
+                                            end
+                                        until game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") or _G.AutoSeaBeast == false
+                                    end
+                                end
+                            elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                for is,vs in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                    if vs.Name == "PirateGrandBrigade" then
+                                        if vs:FindFirstChild("VehicleSeat") then
+                                            repeat wait()
+                                                game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                                TweenBoat(vs.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                            until not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") or _G.AutoSeaBeast == false
+                                        end
+                                    end
+                                end
+                            end
+                        elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                            for iss,v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                if v.Name == "PirateGrandBrigade" then
+                                    if v:FindFirstChild("VehicleSeat") then
+                                        repeat wait()
+                                            game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                            TweenBoat(v.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                        until not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") or _G.AutoSeaBeast == false
+                                    end
+                                end
+                            end
+                        end
+                    elseif game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") then  
+                        for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") then
+                                repeat wait()
+                                    game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit = false
+                                    TweenBoat(v.HumanoidRootPart.CFrame * CFrame.new(0,500,0))
+                                    EquipAllWeapon()  
+                                    AutoSkill = true
+                                    AimBotSkillPosition = v.HumanoidRootPart
+                                    Skillaimbot = true
+                                until not v:FindFirstChild("HumanoidRootPart") or _G.AutoSeaBeast == false
+                                AutoSkill = false
+                                Skillaimbot = false
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+------------------Tab Setting-------------------------------------------
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
  local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true })
 
     ToggleFastAttack:OnChanged(function(Value)
-     _G.FastAttackFaiFao = Value
+     _G.FastAttack = Value
     end)
     Options.ToggleFastAttack:SetValue(true)
 
-spawn(function()
-	while wait(0.4) do
-		pcall(function()
-			if _G.FastAttackFaiFao then
-				repeat wait(0)
-					 
-				until not _G.FastAttackFaiFao
-			end
-		end)
+if _G.FastAttack then
+	local _ENV = (getgenv or getrenv or getfenv)();
+	local function v758(v1363, v1364)
+		local v1365, v1366 = pcall(function()
+			return v1363:WaitForChild(v1364);
+		end);
+		if ( not v1365 or  not v1366) then
+			warn("noooooo: "   .. v1364 );
+		end
+		return v1366;
 	end
-end)
+	local function v759(v1367, ...)
+		local v1368 = v1367;
+		for v1497, v1498 in {
+			...
+		} do
+			v1368 = v1368:FindFirstChild(v1498) or v758(v1368, v1498) ;
+			if  not v1368 then
+				break;
+			end
+		end
+		return v1368;
+	end
+	local v760 = game:GetService("VirtualInputManager");
+	local v761 = game:GetService("CollectionService");
+	local v762 = game:GetService("ReplicatedStorage");
+	local v763 = game:GetService("TeleportService");
+	local v764 = game:GetService("RunService");
+	local v765 = game:GetService("Players");
+	local v766 = v765.LocalPlayer;
+	if  not v766 then
+		warn("Không tìm thấy người chơi cục bộ.");
+		return;
+	end
+	local v767 = v758(v762, "Remotes");
+	if  not v767 then
+		return;
+	end
+	local v768 = v758(v767, "Validator");
+	local v769 = v758(v767, "CommF_");
+	local v770 = v758(v767, "CommE");
+	local v771 = v758(workspace, "ChestModels");
+	local v772 = v758(workspace, "_WorldOrigin");
+	local v773 = v758(workspace, "Characters");
+	local v774 = v758(workspace, "Enemies");
+	local v775 = v758(workspace, "Map");
+	local v776 = v758(v772, "EnemySpawns");
+	local v777 = v758(v772, "Locations");
+	local v778 = v764.RenderStepped;
+	local v779 = v764.Heartbeat;
+	local v780 = v764.Stepped;
+	local v781 = v758(v762, "Modules");
+	local v782 = v758(v781, "Net");
+	local v783 = sethiddenproperty or function(...)
+		return ...;
+	end ;
+	local v784 = setupvalue or (debug and debug.setupvalue) ;
+	local v785 = getupvalue or (debug and debug.getupvalue) ;
+	local v786 = {
+		AutoClick = true,
+		ClickDelay = 0
+	};
+	local v787 = {};
+	v787.FastAttack = (function()
+		if _ENV.rz_FastAttack then
+			return _ENV.rz_FastAttack;
+		end
+		local v1369 = {
+			Distance = 100,
+			attackMobs = true,
+			attackPlayers = true,
+			Equipped = nil
+		};
+		local v1370 = v758(v782, "RE/RegisterAttack");
+		local v1371 = v758(v782, "RE/RegisterHit");
+		local function v1372(v1499)
+			return v1499 and v1499:FindFirstChild("Humanoid") and (v1499.Humanoid.Health > 0) ;
+		end
+		local function v1373(v1500, v1501)
+			local v1502 = nil;
+			for v1591, v1592 in v1501:GetChildren() do
+				local v1593 = v1592:FindFirstChild("Head");
+				if (v1593 and v1372(v1592) and (v766:DistanceFromCharacter(v1593.Position) < v1369.Distance)) then
+					if (v1592 ~= v766.Character) then
+						table.insert(v1500, {
+							v1592,
+							v1593
+						});
+						v1502 = v1593;
+					end
+				end
+			end
+			return v1502;
+		end
+		v1369.Attack = function(v1503, v1504, v1505)
+			if ( not v1504 or ( #v1505 == 0)) then
+				return;
+			end
+			v1370:FireServer(v786.ClickDelay or 0 );
+			v1371:FireServer(v1504, v1505);
+		end;
+		v1369.AttackNearest = function(v1506)
+			local v1507 = {};
+			local v1508 = v1373(v1507, v774);
+			local v1509 = v1373(v1507, v773);
+			if ( #v1507 > 0) then
+				v1506:Attack(v1508 or v1509 , v1507);
+			else
+				task.wait(0);
+			end
+		end;
+		v1369.BladeHits = function(v1510)
+			local v1511 = v1372(v766.Character) and v766.Character:FindFirstChildOfClass("Tool") ;
+			if (v1511 and (v1511.ToolTip ~= "Gun")) then
+				v1510:AttackNearest();
+			else
+				task.wait(0);
+			end
+		end;
+		task.spawn(function()
+			while task.wait(v786.ClickDelay) do
+				if v786.AutoClick then
+					v1369:BladeHits();
+				end
+			end
+		end);
+		_ENV.rz_FastAttack = v1369;
+		return v1369;
+	end)();
+end
 
 local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
 Camera:Stop()
