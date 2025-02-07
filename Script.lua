@@ -4347,12 +4347,12 @@ spawn(function()
     end
 end)
 
-local ToggleInfUtr = Tabs.Player:AddToggle("ToggleInfUt", {Title = "No Cooldown Utra Instic", Default = false })
+local ToggleInfUtr = Tabs.Setting:AddToggle("ToggleInfUt", {Title = "No Cooldown Utra Instic", Default = false })
 ToggleInfUt:OnChanged(function(v526)
 	nododgecool = v526;
 	NoDodgeCool();
 end)
-local ToggleInfGep = Tabs.Item:AddToggle("ToggleInfGep", {Title = "Infinity Geppo", Default = false })
+local ToggleInfGep = Tabs.Setting:AddToggle("ToggleInfGep", {Title = "Infinity Geppo", Default = false })
 
 ToggleInfGep:OnChanged(function(v535)
 	getgenv().InfGeppo = v535;
