@@ -6248,7 +6248,67 @@ Tabs.Misc:AddButton({
 	end
 })
 
+Tabs.Misc:AddButton({
+	Title = "Fake Beli,Exp,Level,...",
+	Description = "",
+	Callback = function()
+              Fake()
+	end
+})
+function Fake()
+	local v443 = game:GetService("Players").LocalPlayer;
+	local v444 = require(game:GetService("ReplicatedStorage").Notification);
+	local v445 = v443:WaitForChild("Data");
+	local v446 = require(game.ReplicatedStorage:WaitForChild("EXPFunction"));
+	local v447 = require(game:GetService("ReplicatedStorage").Effect.Container.LevelUp);
+	local v448 = require(game:GetService("ReplicatedStorage").Util.Sound);
+	local v449 = game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy") or game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp") ;
+	function v129(v811)
+		local v812 = v811;
+		while true do
+			local v1410, v1411 = string.gsub(v812, "^(-?%d+)(%d%d%d)", "%1,%2");
+			v812 = v1410;
+			if (v1411 == 0) then
+				break;
+			end
+		end
+		return v812;
+	end
+	v444.new("<Color=Yellow>QUEST COMPLETED!<Color=/>"):Display();
+	v444.new("Earned <Color=Yellow>9,999,999,999,999 Exp.<Color=/> (+ None)"):Display();
+	v444.new("Earned <Color=Green>$9,999,999,999,999<Color=/>"):Display();
+	v443.Data.Exp.Value = 999999999999;
+	v443.Data.Beli.Value = v443.Data.Beli.Value + 999999999999 ;
+	delay = 0;
+	count = 0;
+	while (v443.Data.Exp.Value - v446(v445.Level.Value)) > 0  do
+		v443.Data.Exp.Value = v443.Data.Exp.Value - v446(v445.Level.Value) ;
+		v443.Data.Level.Value = v443.Data.Level.Value + 1 ;
+		v443.Data.Points.Value = v443.Data.Points.Value + 3 ;
+		v447({
+			v443
+		});
+		v448.Play(v448, v449.Value);
+		v444.new("<Color=Green>LEVEL UP!<Color=/> ("   .. v443.Data.Level.Value   .. ")" ):Display();
+		count = count + 1 ;
+		if (count >= 5) then
+			delay = tick();
+			count = 0;
+			wait(2);
+		end
+	end
+end);
 
+local TextboxFakeBeli = Misc:AddTextbox("TextboxFakeBeli", {
+    Title = "Fake Beli,
+    Default = "30",
+    Placeholder = "...",
+    Numeric = true, -- Chỉ cho phép nhập số
+    Finished = true -- Cập nhật khi người dùng nhấn Enter
+})
+TextboxBeli:OnChanged(function(v456)
+	game:GetService("Players").LocalPlayer.Data.Level.Value = v456;
+end);
 
 local Mastery = Tabs.Misc:AddSection("Misc")
 
