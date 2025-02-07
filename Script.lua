@@ -2907,7 +2907,6 @@ end)
 
 local MiscFarm = Tabs.Main:AddSection("Misc Farm")
 
-if Third_Sea then
 local ToggleBone = Tabs.Main:AddToggle("ToggleBone", {Title = "Auto Bone", Default = false })
 ToggleBone:OnChanged(function(Value)
     _G.AutoBone = Value
@@ -3042,7 +3041,6 @@ spawn(function()
     Options.ToggleSpawnCake:SetValue(true)
 end
 
-    if Second_Sea then
     local ToggleVatChatKiDi = Tabs.Main:AddToggle("ToggleVatChatKiDi", {Title = "Auto Ectoplasm", Default = false })
     ToggleVatChatKiDi:OnChanged(function(Value)
         _G.Ectoplasm = Value
@@ -3277,8 +3275,6 @@ local boss = Tabs.Main:AddSection("Boss Farm")
       end)
 
 ---------------------------Tab Sea---------------------------------------
-
-      if Third_Sea then
       local RoughSea = Tabs.Fish:AddSection("Kitsune")
 
 
@@ -3371,7 +3367,6 @@ spawn(function()
 end)
 end
 
-if Third_Sea then
     local RoughSea = Tabs.Fish:AddSection("Rough Sea")
 
     local ToggleSailBoat = Tabs.Main:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false })
@@ -3764,7 +3759,6 @@ spawn(function()
     end
       end)
 
-if Third_Sea or Second_Sea then
     local Sea = Tabs.Fish:AddSection("Sea Beast")
 
 
