@@ -4347,6 +4347,39 @@ spawn(function()
     end
 end)
 
+local ToggleInfUtr = Tabs.Player:AddToggle("ToggleInfUt", {Title = "No Cooldown Utra Instic", Default = false })
+ToggleInfUt:OnChanged(function(v526)
+	nododgecool = v526;
+	NoDodgeCool();
+end)
+local ToggleInfGep = Tabs.Item:AddToggle("ToggleInfGep", {Title = "Infinity Geppo", Default = false })
+
+ToggleInfGep:OnChanged(function(v535)
+	getgenv().InfGeppo = v535;
+end)
+spawn(function()
+	while wait() do
+		pcall(function()
+			if getgenv().InfGeppo then
+				for v1678, v1679 in next, getgc() do
+					if game:GetService("Players").LocalPlayer.Character.Geppo then
+						if ((typeof(v1679) == "function") and (getfenv(v1679).script == game:GetService("Players").LocalPlayer.Character.Geppo)) then
+							for v2307, v2308 in next, getupvalues(v1679) do
+								if (tostring(v2307) == "9") then
+									repeat
+										wait(0.1);
+										setupvalue(v1679, v2307, 0);
+									until  not getgenv().InfGeppo or (game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0)
+								end
+							end
+						end
+					end
+				end
+			end
+		end);
+	end
+end);
+-----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
     table.insert(Playerslist,v.Name)
@@ -6248,13 +6281,6 @@ Tabs.Misc:AddButton({
 	end
 })
 
-local TextboxFakeBeli = Tabs.Misc:AddTextbox("TextboxFakeBeli", {
-    Title = "Fake Beli,
-    Default = "30",
-    Placeholder = "...",
-    Numeric = true, -- Chỉ cho phép nhập số
-    Finished = true -- Cập nhật khi người dùng nhấn Enter
-})
 
 local Mastery = Tabs.Misc:AddSection("Misc")
 
