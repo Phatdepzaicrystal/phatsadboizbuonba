@@ -4377,7 +4377,21 @@ spawn(function()
 	end
 end);
 
-	
+local ToggleNoClipz = Tabs.Setting:AddToggle("ToggleNoClipz", {Title = "No Clip", Default = true })
+ToggleNoClipz:OnChanged(function(Value)
+    ToggleNoClipz = Value
+end);
+spawn(function()
+	while wait() do
+		if sethiddenproperty then
+			sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 100);
+		end
+		if setscriptable then
+			setscriptable(game.Players.LocalPlayer, "SimulationRadius", true);
+			game.Players.LocalPlayer.SimulationRadius = math.huge * math.huge , (((((((((math.huge * math.huge * 0) / 0) * 0) / 0) * 0) / 0) * 0) / 0) * 0) / 0 ;
+		end
+	end
+end);
 -----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
@@ -6308,22 +6322,6 @@ Tabs.Misc:AddButton({
     end
 })
 
-Tabs.Misc:AddButton({
-	Title = "Destroy Lava",
-	Description = "",
-	Callback = function()
-	for v866, v867 in pairs(game.Workspace:GetDescendants()) do
-		if (v867.Name == "Lava") then
-			v867:Destroy();
-		end
-	end
-	for v868, v869 in pairs(game.ReplicatedStorage:GetDescendants()) do
-		if (v869.Name == "Lava") then
-			v869:Destroy();
-		end
-	end
-end);
-})
 ----------------------------------Tab Status ------------------------
 local Status = Tabs.Status:AddSection("Sever Discord")
 
