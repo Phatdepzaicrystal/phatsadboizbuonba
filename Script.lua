@@ -4392,21 +4392,7 @@ spawn(function()
         end)
     end
 end)
-
-local ToggleSafeMode = Tabs.Setting:AddToggle("SafeMode", {Title = "Safe Mode", Default = false })
-ToggleSafeMode:OnChanged(function(Value)
-    ToggleSafeMode = Value
-    StopTween(ToggleSafeMode);
-end);
-spawn(function()
-	pcall(function()
-		while wait() do
-			if ToggleSafeMode then
-				game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame;
-			end
-		end
-	end);
-end);		
+		
 -----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
