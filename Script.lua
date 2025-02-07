@@ -3368,7 +3368,7 @@ spawn(function()
 end)
 end
 
-elseif Second_Sea then
+      elseif Second_Sea then
 
      local RoughSea = Tabs.Fish:AddSection("Kitsune")
 
@@ -3462,7 +3462,7 @@ spawn(function()
 end)
 end
 
-elseif First_Sea then
+      elseif First_Sea then
      local RoughSea = Tabs.Fish:AddSection("Kitsune")
 
 
