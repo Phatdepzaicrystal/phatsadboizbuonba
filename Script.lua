@@ -4007,9 +4007,6 @@ local SettingFarm = Tabs.Setting:AddSection("Setting")
 
  local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true })
 
-    ToggleFastAttack:OnChanged(function(Value)
-     _G.FastAttackFiFai = Value
-    end)
 ToggleFastAttack:OnChanged(function(Value)
     _G.FastAttack = Value
 
