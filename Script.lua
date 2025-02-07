@@ -6319,6 +6319,22 @@ Tabs.Misc:AddButton({
     end
 })
 
+Tabs.Misc:AddButton({
+   Title = "No Magma",
+   Callback = function()
+       for i,v in pairs(game.Workspace:GetDescendants()) do
+           if v.Name == "Lava" then   
+               v:Destroy()
+           end
+       end
+       for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
+           if v.Name == "Lava" then   
+               v:Destroy()
+           end
+       end
+   end,
+})
+
 local Code = Tabs.Misc:AddSection("Codes")
    local x2Code = {
        "KITTGAMING",
