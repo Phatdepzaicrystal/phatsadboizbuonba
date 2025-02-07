@@ -3278,7 +3278,7 @@ local boss = Tabs.Main:AddSection("Boss Farm")
       local RoughSea = Tabs.Fish:AddSection("Kitsune")
 
 
-      local ToggleEspKitsune = Tabs.Fish:AddToggle("ToggleEspKitsune", {Title = "Esp Kitsune Island", Default = false })
+      local ToggleEspKitsune = Tabs.Main:AddToggle("ToggleEspKitsune", {Title = "Esp Kitsune Island", Default = false })
       ToggleEspKitsune:OnChanged(function(Value)
         KitsuneEsp = Value
         while IslandESP do wait()
@@ -3321,6 +3321,7 @@ local boss = Tabs.Main:AddSection("Boss Farm")
             end)
         end
     end
+
 
       local ToggleTPKitsune = Tabs.Fish:AddToggle("ToggleTPKitsune", {Title = "Tween To Kitsune Island", Default = false })
       ToggleTPKitsune:OnChanged(function(Value)
