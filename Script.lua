@@ -3275,7 +3275,7 @@ local boss = Tabs.Main:AddSection("Boss Farm")
       end)
 
 ---------------------------Tab Sea---------------------------------------
-      if Third_Sea then
+      if First_Sea or Second_Sea or Third_Sea then
       local RoughSea = Tabs.Fish:AddSection("Kitsune")
 
 
@@ -3368,7 +3368,7 @@ spawn(function()
 end)
 end
 
-if Third_Sea then
+if First_Sea or Second_Sea or Third_Sea then
     local RoughSea = Tabs.Fish:AddSection("Rough Sea")
 
     local ToggleSailBoat = Tabs.Fish:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false })
@@ -3761,7 +3761,7 @@ spawn(function()
     end
       end)
 
-if Third_Sea then
+if First_Sea or Second_Sea or Third_Sea then
     local Sea = Tabs.Fish:AddSection("Sea Beast")
 
 
@@ -3879,24 +3879,6 @@ ToggleSeaBeAst:OnChanged(function(Value)
             end)
         end
     end)
-
-local ToggleAutoW = Tabs.Fish:AddToggle("ToggleAutoW", {Title = "Auto Press W", Default = false })
-ToggleAutoW:OnChanged(function(Value)
-    _G.AutoW = Value
-    end)
- Options.ToggleAutoW:SetValue(false)
- spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.AutoW then
-                game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
-            end
-        end)
-    end
-    end)
-
-
-
 
     local AutoMysticIsland = Tabs.Main:AddSection("Mirage Island")
 
@@ -4026,7 +4008,6 @@ end)
 
 local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
 Camera:Stop()
-
 
 
     local ToggleBringMob = Tabs.Setting:AddToggle("ToggleBringMob", {Title = " Enable Bring Mob / Magnet", Default = true })
