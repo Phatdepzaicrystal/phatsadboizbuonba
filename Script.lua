@@ -4381,8 +4381,6 @@ local ToggleWalkOnWater = Tabs.Setting:AddToggle("ToggleWalkOnWater", {Title = "
 ToggleWalkOnWater:OnChanged(function(Value)
     ToggleWalkOnWater = Value
 end);
-Options.ToggleWalkOnWater:SetValue(true)
- 
 spawn(function()
     while task.wait() do
         pcall(function()
@@ -4399,8 +4397,6 @@ local ToggleNoClipz = Tabs.Setting:AddToggle("ToggleNoClipz", {Title = "No Clip"
 ToggleNoClipz:OnChanged(function(Value)
     ToggleNoClipz = Value
 end);
-Options.ToggleToggleNoClipz:SetValue(true)
- 
 spawn(function()
 	while wait() do
 		if sethiddenproperty then
