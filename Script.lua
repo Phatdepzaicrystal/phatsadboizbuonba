@@ -6315,7 +6315,7 @@ spawn(function()
 
 
 
-local Mastery = Tabs.Misc:AddSection("Day")
+local Mastery = Tabs.Misc:AddSection("Map")
 
 Tabs.Misc:AddButton({
 	Title = "Remove Fog",
