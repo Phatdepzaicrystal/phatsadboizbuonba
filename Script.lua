@@ -4377,22 +4377,7 @@ spawn(function()
 	end
 end);
 
-local ToggleWalkOnWater = Tabs.Setting:AddToggle("ToggleWalkOnWater", {Title = "Wakl On Water", Default = true })
-ToggleWalkOnWater:OnChanged(function(Value)
-    ToggleWalkOnWater = Value
-end);
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            if ToggleWalkOnWater then
-                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
-            else
-                game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
-            end
-        end)
-    end
-end)
-		
+	
 -----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
