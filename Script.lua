@@ -4393,22 +4393,6 @@ spawn(function()
     end
 end)
 
-local ToggleNoClipz = Tabs.Setting:AddToggle("ToggleNoClipz", {Title = "No Clip", Default = true })
-ToggleNoClipz:OnChanged(function(Value)
-    ToggleNoClipz = Value
-end);
-spawn(function()
-	while wait() do
-		if sethiddenproperty then
-			sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 100);
-		end
-		if setscriptable then
-			setscriptable(game.Players.LocalPlayer, "SimulationRadius", true);
-			game.Players.LocalPlayer.SimulationRadius = math.huge * math.huge , (((((((((math.huge * math.huge * 0) / 0) * 0) / 0) * 0) / 0) * 0) / 0) * 0) / 0 ;
-		end
-	end
-end);
-
 local ToggleSafeMode = Tabs.Setting:AddToggle("SafeMode", {Title = "Safe Mode", Default = false })
 ToggleSafeMode:OnChanged(function(Value)
     ToggleSafeMode = Value
