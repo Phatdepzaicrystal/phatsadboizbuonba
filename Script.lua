@@ -4237,6 +4237,7 @@ SliderPosZ:OnChanged(function(Value)
      posZ = Value
 end)
 SliderPosZ:SetValue(10)
+local AutoStasts = Tabs.Setting:AddSection("AutoStasts")
 
 local ToggleMelee = Tabs.Setting:AddToggle("ToggleMelee", {Title = "Add Melee", Default = false })
 ToggleMelee:OnChanged(function(Value)
