@@ -2907,6 +2907,7 @@ end)
 
 local MiscFarm = Tabs.Main:AddSection("Misc Farm")
 
+if Third_Sea then
 local ToggleBone = Tabs.Main:AddToggle("ToggleBone", {Title = "Auto Bone", Default = false })
 ToggleBone:OnChanged(function(Value)
     _G.AutoBone = Value
@@ -3041,6 +3042,7 @@ spawn(function()
     Options.ToggleSpawnCake:SetValue(true)
 end
 
+    if Second_Sea then
     local ToggleVatChatKiDi = Tabs.Main:AddToggle("ToggleVatChatKiDi", {Title = "Auto Ectoplasm", Default = false })
     ToggleVatChatKiDi:OnChanged(function(Value)
         _G.Ectoplasm = Value
@@ -3275,9 +3277,9 @@ local boss = Tabs.Main:AddSection("Boss Farm")
       end)
 
 ---------------------------Tab Sea---------------------------------------
-      if First_Sea or Second_Sea or Third_Sea then
-      local RoughSea = Tabs.Fish:AddSection("Kitsune")
 
+      if Third_Sea or Second_Sea then
+      local RoughSea = Tabs.Main:AddSection("Kitsune")
 
       local ToggleEspKitsune = Tabs.Fish:AddToggle("ToggleEspKitsune", {Title = "Esp Kitsune Island", Default = false })
       ToggleEspKitsune:OnChanged(function(Value)
@@ -3368,10 +3370,10 @@ spawn(function()
 end)
 end
 
-if First_Sea or Second_Sea or Third_Sea then
+if Third_Sea or Second_Sea then
     local RoughSea = Tabs.Fish:AddSection("Rough Sea")
 
-    local ToggleSailBoat = Tabs.Fish:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false })
+    local ToggleSailBoat = Tabs.Main:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false })
     ToggleSailBoat:OnChanged(function(Value)
         _G.SailBoat = Value
     end)
@@ -3761,7 +3763,7 @@ spawn(function()
     end
       end)
 
-if First_Sea or Second_Sea or Third_Sea then
+if Third_Sea or Second_Sea then
     local Sea = Tabs.Fish:AddSection("Sea Beast")
 
 
@@ -3880,9 +3882,11 @@ ToggleSeaBeAst:OnChanged(function(Value)
         end
     end)
 
+
+
     local AutoMysticIsland = Tabs.Main:AddSection("Mirage Island")
 
-local ToggleTweenMirageIsland = Tabs.Main:AddToggle("ToggleTweenMirageIsland", {Title = "Tween To Mirage Island", Default = false })
+local ToggleTweenMirageIsland = Tabs.Fish:AddToggle("ToggleTweenMirageIsland", {Title = "Tween To Mirage Island", Default = false })
 ToggleTweenMirageIsland:OnChanged(function(Value)
     _G.AutoMysticIsland = Value
 end) 
@@ -3984,7 +3988,8 @@ end)
     end)
 end
 
-------------------Tab Setting-------------------------------------------
+
+---------------Tab Setting-------------------------------------------
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
  local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true })
