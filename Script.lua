@@ -6298,27 +6298,7 @@ local Mastery = Tabs.Misc:AddSection("Misc")
 
 
 local ToggleRejoin = Tabs.Misc:AddToggle("ToggleRejoin", {Title = "Auto Rejoin", Default = true })
-ToggleRejoin:OnChanged(function(Value)
-	_G.AutoRejoin = Value
-end)
-
-Options.ToggleRejoin:SetValue(true)
-spawn(function()
-	while wait() do
-		if _G.AutoRejoin then
-				getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
-					if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
-						game:GetService("TeleportService"):Teleport(game.PlaceId)
-					end
-				 end)
-			end
-		end
-	end)
-
-
-
-
-local Mastery = Tabs.Misc:AddSection("Day")
+ToggleRejoin:OnChanged(function(VMap")
 
 Tabs.Misc:AddButton({
 	Title = "Remove Fog",
@@ -6339,6 +6319,40 @@ Tabs.Misc:AddButton({
     end
 })
 
+local Code = Tabs.Misc:AddSection("Codes")
+   local x2Code = {
+       "KITTGAMING",
+       "ENYU_IS_PRO",
+       "FUDD10",
+       "BIGNEWS",
+       "THEGREATACE",
+       "SUB2GAMERROBOT_EXP1",
+       "STRAWHATMAIME",
+       "SUB2OFFICIALNOOBIE",
+       "SUB2NOOBMASTER123",
+       "SUB2DAIGROCK",
+       "AXIORE",
+       "TANTAIGAMIMG",
+       "STRAWHATMAINE",
+       "JCWK",
+       "FUDD10_V2",
+       "SUB2FER999",
+       "MAGICBIS",
+       "TY_FOR_WATCHING",
+       "STARCODEHEO"
+   }
+Tabs.Misc:AddButton({
+	Title = "Redeem All Code",
+	Description = "",
+   Callback = function()
+       function RedeemCode(value)
+           game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(value)
+       end
+       for i,v in pairs(x2Code) do
+           RedeemCode(v)
+       end
+   end,
+})	
 ----------------------------------Tab Status ------------------------
 local Status = Tabs.Status:AddSection("Sever Discord")
 
