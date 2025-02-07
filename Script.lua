@@ -6302,40 +6302,21 @@ Tabs.Misc:AddButton({
     end
 })
 
-local Code = Tabs.Misc:AddSection("Codes")
-   local x2Code = {
-       "KITTGAMING",
-       "ENYU_IS_PRO",
-       "FUDD10",
-       "BIGNEWS",
-       "THEGREATACE",
-       "SUB2GAMERROBOT_EXP1",
-       "STRAWHATMAIME",
-       "SUB2OFFICIALNOOBIE",
-       "SUB2NOOBMASTER123",
-       "SUB2DAIGROCK",
-       "AXIORE",
-       "TANTAIGAMIMG",
-       "STRAWHATMAINE",
-       "JCWK",
-       "FUDD10_V2",
-       "SUB2FER999",
-       "MAGICBIS",
-       "TY_FOR_WATCHING",
-       "STARCODEHEO"
-   }
 Tabs.Misc:AddButton({
-	Title = "Redeem All Code",
-	Description = "",
+   Title = "No Magma",
    Callback = function()
-       function RedeemCode(value)
-           game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(value)
+       for i,v in pairs(game.Workspace:GetDescendants()) do
+           if v.Name == "Lava" then
+               v:Destroy()
+           end
        end
-       for i,v in pairs(x2Code) do
-           RedeemCode(v)
+       for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
+           if v.Name == "Lava" then
+               v:Destroy()
+           end
        end
    end,
-})	
+})
 ----------------------------------Tab Status ------------------------
 local Status = Tabs.Status:AddSection("Sever Discord")
 
