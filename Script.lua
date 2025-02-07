@@ -4348,29 +4348,23 @@ spawn(function()
     end
 end)
 
-local ToggleInfUtr = Tabs.Setting:AddToggle("ToggleInfUt", {Title = "No Cooldown Utra Instic", Default = false })
-ToggleInfUt:OnChanged(function(v526)
-	nododgecool = v526;
-	NoDodgeCool();
-end)
-local ToggleInfGep = Tabs.Setting:AddToggle("ToggleInfGep", {Title = "Infinity Geppo", Default = false })
-
-ToggleInfGep:OnChanged(function(v535)
-	getgenv().InfGeppo = v535;
-end)
+local ToggleInfSoru = Tabs.Setting:AddToggle("ToggleInfSoru", {Title = "Inf Soru", Default = false })
+ToggleInfSoru:OnChanged(function(v537)
+	ToggleInfSoru = v537;
+end);
 spawn(function()
 	while wait() do
 		pcall(function()
-			if getgenv().InfGeppo then
-				for v1678, v1679 in next, getgc() do
-					if game:GetService("Players").LocalPlayer.Character.Geppo then
-						if ((typeof(v1679) == "function") and (getfenv(v1679).script == game:GetService("Players").LocalPlayer.Character.Geppo)) then
-							for v2307, v2308 in next, getupvalues(v1679) do
-								if (tostring(v2307) == "9") then
+			if (ToggleInfSoru and (game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") ~= nil)) then
+				for v1680, v1681 in next, getgc() do
+					if game:GetService("Players").LocalPlayer.Character.Soru then
+						if ((typeof(v1681) == "function") and (getfenv(v1681).script == game:GetService("Players").LocalPlayer.Character.Soru)) then
+							for v2309, v2310 in next, getupvalues(v1681) do
+								if (typeof(v2310) == "table") then
 									repeat
 										wait(0.1);
-										setupvalue(v1679, v2307, 0);
-									until  not getgenv().InfGeppo or (game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0)
+										v2310.LastUse = 0;
+									until  not _G.Infsoru or (game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0)
 								end
 							end
 						end
