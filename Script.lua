@@ -4392,7 +4392,20 @@ spawn(function()
 		end
 	end
 end);
-
+local ToggleSafeMode = Tabs.Setting:AddToggle("SafeMode", {Title = "Safe Mode", Default = false })
+ToggleSafeMode:OnChanged(function(Value)
+    ToggleSafeMode = Value
+    StopTween(ToggleSafeMode);
+end);
+spawn(function()
+	pcall(function()
+		while wait() do
+			if ToggleSafeMode then
+				game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame;
+			end
+		end
+	end);
+end);		
 -----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
@@ -4409,6 +4422,7 @@ local SelectedPly = Tabs.Player:AddDropdown("SelectedPly", {
 SelectedPly:OnChanged(function(Value)
     _G.SelectPly = Value
 end)
+
 
 
 local ToggleTeleport = Tabs.Player:AddToggle("ToggleTeleport", {Title = "Teleport To Player", Default = false })
@@ -6281,7 +6295,27 @@ local Mastery = Tabs.Misc:AddSection("Misc")
 
 
 local ToggleRejoin = Tabs.Misc:AddToggle("ToggleRejoin", {Title = "Auto Rejoin", Default = true })
-ToggleRejoin:OnChanged(function(VMap")
+ToggleRejoin:OnChanged(function(Value)
+	_G.AutoRejoin = Value
+end)
+
+Options.ToggleRejoin:SetValue(true)
+spawn(function()
+	while wait() do
+		if _G.AutoRejoin then
+				getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+					if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+						game:GetService("TeleportService"):Teleport(game.PlaceId)
+					end
+				 end)
+			end
+		end
+	end)
+
+
+
+
+local Mastery = Tabs.Misc:AddSection("Day")
 
 Tabs.Misc:AddButton({
 	Title = "Remove Fog",
@@ -6301,6 +6335,7 @@ Tabs.Misc:AddButton({
         end
     end
 })
+
 ----------------------------------Tab Status ------------------------
 local Status = Tabs.Status:AddSection("Sever Discord")
 
