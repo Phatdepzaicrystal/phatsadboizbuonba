@@ -4463,16 +4463,19 @@ local ToggleNoClipz = Tabs.Setting:AddToggle("ToggleNoClipz", {Title = "No Clip"
 ToggleNoClipz:OnChanged(function(Value)
     ToggleNoClipz = Value
 end);
+Options.ToggleNoClipz:SetValue(false)
 spawn(function()
-	while wait() do
-		if sethiddenproperty then
-			sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 100);
-		end
-		if setscriptable then
-			setscriptable(game.Players.LocalPlayer, "SimulationRadius", true);
-			game.Players.LocalPlayer.SimulationRadius = math.huge * math.huge , (((((((((math.huge * math.huge * 0) / 0) * 0) / 0) * 0) / 0) * 0) / 0) * 0) / 0 ;
-		end
-	end
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            if _G.LOf then
+                for v868, v869 in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                    if v869:IsA("BasePart") then
+                        v869.CanCollide = false;
+                    end
+                end
+            end
+        end);
+    end);
 end);
 -----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
@@ -6547,3 +6550,18 @@ local v529 = Tabs.Status:AddParagraph({
             end);
         end
     end);
+local v104 = Tabs.Status:AddParagraph({
+    Title = "kiểm tra Đảo Leviathan trong sever hay không",
+    Content = "check status frozen dimension in sever or no"
+});
+spawn(function()
+    pcall(function()
+        while wait() do
+            if game:GetService("Workspace").Map:FindFirstChild("FrozenDimension") then
+                v104:SetDesc("✅");
+            else
+                v104:SetDesc("❌");
+            end
+        end
+    end);
+end);
