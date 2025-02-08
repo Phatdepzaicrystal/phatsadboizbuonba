@@ -6665,19 +6665,3 @@ local v529 = Tabs.Status:AddParagraph({
             end);
         end
     end);
-
-local v104 = Tabs.Status:AddParagraph({
-    Title = "Leviathan Island",
-    Content = "Status Leviathan Island"
-});
-spawn(function()
-    pcall(function()
-        while wait() do
-            if game:GetService("Workspace").Map:FindFirstChild("FrozenDimension") then
-                v104:SetDesc("✅");
-            else
-                v104:SetDesc("❌");
-            end
-        end
-    end);
-end);
