@@ -5031,8 +5031,9 @@ if First_Sea then
         end
     end
 end);
-local TogglePole = Tabs.Item:AddToggle("TogglePole", {Title = "Auto Pole V1",Default = false })
-    TogglePole:OnChanged(function(Value)
+	
+        local TogglePole = Tabs.Item:AddToggle("TogglePole", {Title = "Auto Pole V1",Default = false })
+TogglePole:OnChanged(function(Value)
       _G.Auto_PoleV1 = Value
 end)
    Options.TogglePole:SetValue(false)
