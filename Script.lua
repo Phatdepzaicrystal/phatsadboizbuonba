@@ -6695,16 +6695,15 @@ spawn(function()
         end
     end);
 end);
-if Sea3 then
-    local v499 = Tabs.Status:AddParagraph({
-        Title = "Trạng Thái Đảo Cáo",
-        Content = "check status kitsune island"
-    });
+local v499 = Tabs.Status:AddParagraph({
+    Title = "Kitsune Island",
+    Content = "Status Kitsune Island"
+});
     function UpdateKitsune()
         if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
-            v499:SetDesc("Kitsune Island : ✅️");
+            v499:SetDesc("Đảo Cáo : ✅️");
         else
-            v499:SetDesc("Kitsune Island : ❌️");
+            v499:SetDesc("Đảo Cáo : ❌️");
         end
     end
     spawn(function()
