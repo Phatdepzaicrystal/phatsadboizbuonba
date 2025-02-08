@@ -23,6 +23,7 @@ local Tabs = {
     Fruit = Window:AddTab({ Title = "Fruit", Icon = "apple" }); 
     Raid = Window:AddTab({ Title = "Raid", Icon = "target" }); 
     Race = Window:AddTab({ Title = "Race", Icon = "flag" }); 
+    Volcano = Window:AddTab({ Title = "Volcano Event", Icon = "volcano" }); 
     Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); 
     Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); 
     Status = Window:AddTab({ Title = "Status And Sever", Icon = "loader" });
@@ -6136,6 +6137,8 @@ spawn(function()
 		end
 	end);
 end);
+----------------------------------------------Tab VolCano-----------------------------------------------------------------------------------------
+
 --------------------------------------------------------------------------------------------------------------------------------------------
 --shop
 
