@@ -4475,6 +4475,13 @@ spawn(function()
         end);
     end);
 end);
+
+local ToggleInfiniteEnergy = Tabs.Setting:AddToggle("ToggleInfiniteEnergy", {Title = "Infinite Energy", Default = false })
+ToggleInfiniteEnergy:OnChanged(function(Value)
+    ToggleNoClipz = Value
+       originalstam = LocalPlayer.Character.Energy.Value
+       print(Value)
+   end,
 -----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
