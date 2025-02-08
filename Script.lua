@@ -6543,3 +6543,45 @@ local v529 = Tabs.Status:AddParagraph({
             end);
         end
     end);
+local MirageStatus = Tabs.Status:AddParagraph({
+        Title = "Mirage Island",
+        Content = "Status Mirage"
+    })
+    task.spawn(function()
+        while task.wait() do
+            pcall(function()
+                local v793 = game:GetService("Lighting").Sky.MoonTextureId;
+                if (v793 == "http://www.roblox.com/asset/?id=9709149431") then
+                    FullMoonStatus = "100%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709149052") then
+                    FullMoonStatus = "75%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709143733") then
+                    FullMoonStatus = "50%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709150401") then
+                    FullMoonStatus = "25%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709149680") then
+                    FullMoonStatus = "15%";
+                else
+                    FullMoonStatus = "0%";
+                end
+            end);
+        end
+    end);
+    task.spawn(function()
+        while task.wait() do
+            pcall(function()
+                if game.Workspace.Map:FindFirstChild("MysticIsland") then
+                    MirageStatus = "✅️";
+                else
+                    MirageStatus = "❌️";
+                end
+            end);
+        end
+    end);
+    spawn(function()
+        pcall(function()
+            while wait() do
+                v532:SetDesc("Đảo Bí Ẩn:mirage " .. MirageStatus .. " | Trăng Tròn:fullmoon " .. FullMoonStatus);
+            end
+        end);
+    end);
