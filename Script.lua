@@ -6366,7 +6366,7 @@ Tabs.Status:AddButton({
 })
 
 
-local Status = Tabs.Status:AddSection("Status Sever")
+local Status = Tabs.Status:AddSection("Sever")
 Tabs.Status:AddButton({
 	Title = "Rejoin Server",
 	Description = "",
@@ -6445,3 +6445,25 @@ function Hop()
 	end
 	Teleport()
 end     
+
+local Siuu = Tabs.Status:AddSection("Status Sever")
+if Third_Sea then
+    local v490 = v16.Main:AddSection("Cake Prince");
+    local v491 = v16.Main:AddParagraph({
+        Title = "Status",
+    });
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
+                elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
+                elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
+                else
+                    v491:SetDesc("Dough Command- Dough King : ✅️");
+                end
+            end);
+        end
+    end);
