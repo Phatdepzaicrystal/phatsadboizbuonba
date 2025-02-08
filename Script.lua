@@ -6681,18 +6681,3 @@ spawn(function()
         end
     end);
 end);
-local v499 = Tabs.Status:AddParagraph({
-    Title = "Kitsune Island",
-    Content = "Status Kitsune Island"
-});
-spawn(function()
-    pcall(function()
-        while wait() do
-            if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
-                v499:SetDesc("✅️");
-            else
-                v499:SetDesc("❌️");
-            end
-        end
-    end);
-end);
