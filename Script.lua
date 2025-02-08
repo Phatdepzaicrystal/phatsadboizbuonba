@@ -6451,6 +6451,7 @@ if Third_Sea then
     local v490 = v16.Main:AddSection("Cake Prince");
     local v491 = v16.Main:AddParagraph({
         Title = "Status",
+        Content = "Status Dough V1 And V2"
     });
     spawn(function()
         while wait() do
