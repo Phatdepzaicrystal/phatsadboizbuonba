@@ -6081,10 +6081,10 @@ local v157 = Tabs.Volcano:AddToggle("ToggleBlazeEmber", {
     Title = "Get Blaze Emmber",
     Description = "",
     Default = false
-});
+})
 ToggleBlazeEmber:OnChanged(function(v387)
     _G.AutoBlazeEmber = v387;
-end);
+end)
 spawn(function()
     while wait() do
         if _G.AutoBlazeEmber then
@@ -6098,7 +6098,7 @@ local v158 = Tabs.Volcano:AddToggle("ToggleReceiveQuest", {
     Title = "Get Quest Dojo",
     Description = "",
     Default = false
-});
+})
 ToggleReceiveQuest:OnChanged(function(v388)
     _G.AutoReceiveQuest = v388;
     if _G.AutoReceiveQuest then
@@ -6157,10 +6157,10 @@ local v160 = Tabs.Volcano:AddToggle("ToggleHydraTree", {
     Title = "Destroy Tree On Hydra Island",
     Description = "",
     Default = false
-});
+})
 ToggleHydraTree:OnChanged(function(v389)
     _G.AutoHydraTree = v389;
-end);
+end)
 local function v161(v390)
     local v391 = game:GetService("VirtualInputManager");
     v391:SendKeyEvent(true, v390, false, game);
@@ -6226,7 +6226,7 @@ Tabs.Volcano:AddButton({
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(5661.5322265625, 1013.0907592773438, - 334.9649963378906));
         Tween2(CFrame.new(5814.42724609375, 1208.3267822265625, 884.5785522460938));
     end
-});
+})
 Tabs.Volcano:AddButton({
     Title = "Craft Volcanic Magnet",
     Description = "",
@@ -6238,15 +6238,15 @@ Tabs.Volcano:AddButton({
         };
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v395));
     end
-});
+})
 local v164 = Tabs.Volcano:AddToggle("ToggleCollectFireFlowers", {
     Title = "Farm Fire Flowers",
     Description = "",
     Default = false
-});
+})
 ToggleCollectFireFlowers:OnChanged(function(v396)
     _G.AutoCollectFireFlowers = v396;
-end);
+end)
 spawn(function()
     while wait() do
         if _G.AutoCollectFireFlowers then
@@ -6274,7 +6274,7 @@ local v165 = Tabs.Volcano:AddToggle("ToggleWhiteBelt", {
     Title = "Auto Get White Belt",
     Description = "",
     Default = false
-});
+})
 ToggleWhiteBelt:OnChanged(function(v397)
     _G.AutoLevel = v397;
     if v397 then
@@ -6304,13 +6304,13 @@ local v166 = Tabs.Volcano:AddParagraph({
     Content = ""
 });
 local v167 = Tabs.Volcano:AddToggle("ToggleTrialTeleport", {
-    Title = "teleport to draco race trials",
-    Description = "teleport to draco race when defense done volcano|dịch chuyển đến cửa trials draco",
+    Title = "Tele To Race Trails Draco",
+    Description = "",
     Default = false
-});
+})
 ToggleTrialTeleport:OnChanged(function(v398)
     _G.AutoTrialTeleport = v398;
-end);
+end)
 spawn(function()
     while wait() do
         if _G.AutoTrialTeleport then
