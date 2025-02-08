@@ -6665,6 +6665,7 @@ local v529 = Tabs.Status:AddParagraph({
             end);
         end
     end);
+
 local v104 = Tabs.Status:AddParagraph({
     Title = "Leviathan Island",
     Content = "Status Leviathan Island"
@@ -6687,7 +6688,7 @@ local v169 = Tabs.Status:AddParagraph({
 spawn(function()
     pcall(function()
         while wait() do
-            if ggame:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
+            if game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
                 v169:SetDesc("✅️");
             else
                 v169:SetDesc("❌️");
@@ -6702,7 +6703,7 @@ local v499 = Tabs.Status:AddParagraph({
 spawn(function()
     pcall(function()
         while wait() do
-            if ggame:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
+            if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
                 v499:SetDesc("✅️");
             else
                 v499:SetDesc("❌️");
