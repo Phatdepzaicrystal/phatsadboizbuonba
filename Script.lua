@@ -6551,8 +6551,8 @@ local v529 = Tabs.Status:AddParagraph({
         end
     end);
 local v104 = Tabs.Status:AddParagraph({
-    Title = "kiểm tra Đảo Leviathan trong sever hay không",
-    Content = "check status frozen dimension in sever or no"
+    Title = "Leviathan Island",
+    Content = "Status Leviathan Island"
 });
 spawn(function()
     pcall(function()
