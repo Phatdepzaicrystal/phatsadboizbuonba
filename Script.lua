@@ -6688,9 +6688,9 @@ spawn(function()
     pcall(function()
         while wait() do
             if ggame:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
-                v169:SetDesc("volcano island: ✅️");
+                v169:SetDesc("✅️");
             else
-                v169:SetDesc("volcano island: ❌️");
+                v169:SetDesc("❌️");
             end
         end
     end);
@@ -6699,17 +6699,14 @@ local v499 = Tabs.Status:AddParagraph({
     Title = "Kitsune Island",
     Content = "Status Kitsune Island"
 });
-    function UpdateKitsune()
-        if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
-            v499:SetDesc("Đảo Cáo : ✅️");
-        else
-            v499:SetDesc("Đảo Cáo : ❌️");
-        end
-    end
-    spawn(function()
-        pcall(function()
-            while wait() do
-                UpdateKitsune();
+spawn(function()
+    pcall(function()
+        while wait() do
+            if ggame:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
+                v169:SetDesc("✅️");
+            else
+                v169:SetDesc("❌️");
             end
-        end);
+        end
     end);
+end);
