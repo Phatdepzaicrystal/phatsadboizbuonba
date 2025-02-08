@@ -2464,7 +2464,7 @@ if _G.FastAttack then
 	local v785 = getupvalue or (debug and debug.getupvalue) ;
 	local v786 = {
 		AutoClick = true,
-		ClickDelay = 0
+		ClickDelay = 0,5
 	};
 	local v787 = {};
 	v787.FastAttack = (function()
@@ -3361,7 +3361,7 @@ local boss = Tabs.Main:AddSection("Boss Farm")
 ---------------------------Tab Sea---------------------------------------
 
       if Second_Sea or Third_Sea then
-      local RoughSea = Tabs.Main:AddSection("Kitsune")
+      local RoughSea = Tabs.Fish:AddSection("Kitsune")
 
       local ToggleEspKitsune = Tabs.Fish:AddToggle("ToggleEspKitsune", {Title = "Esp Kitsune Island", Default = false })
       ToggleEspKitsune:OnChanged(function(Value)
