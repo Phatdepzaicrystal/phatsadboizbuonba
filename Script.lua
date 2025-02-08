@@ -3455,7 +3455,7 @@ end
 if Second_Sea or Third_Sea then
     local RoughSea = Tabs.Fish:AddSection("Rough Sea")
 
-    local ToggleSailBoat = Tabs.Main:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false })
+    local ToggleSailBoat = Tabs.Fish:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false })
     ToggleSailBoat:OnChanged(function(Value)
         _G.SailBoat = Value
     end)
@@ -3966,7 +3966,7 @@ ToggleSeaBeAst:OnChanged(function(Value)
 
 
 
-    local AutoMysticIsland = Tabs.Main:AddSection("Mirage Island")
+    local AutoMysticIsland = Tabs.Fish:AddSection("Mirage Island")
 
 local ToggleTweenMirageIsland = Tabs.Fish:AddToggle("ToggleTweenMirageIsland", {Title = "Tween To Mirage Island", Default = false })
 ToggleTweenMirageIsland:OnChanged(function(Value)
@@ -6652,7 +6652,7 @@ local SeverOw = Tabs.Status:AddSection("Status Sever")
 local v529 = Tabs.Status:AddParagraph({
         Title = "Elite",
         Content = "Status Elite"
-    })
+    });
     spawn(function()
         while wait() do
             pcall(function()
