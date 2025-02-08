@@ -6305,13 +6305,14 @@ Tabs.Misc:AddButton({
 	end
 })
 
-local v153 = Tabs.Misc:AddToggle("ToggleAntiBand", {
+local Banz = Tabs.Misc:AddSection("Anti Ban")
+local v153 = Tabs.Misc:AddToggle("ToggleAntiBan", {
     Title = "Anti Ban",
     Description = "",
     Default = true
 });
-ToggleAntiBand:OnChanged(function(v384)
-    _G.AntiBand = v384;
+ToggleAntiBan:OnChanged(function(v384)
+    _G.AntiBan = v384;
 end);
 local v154 = {
     17884881,
