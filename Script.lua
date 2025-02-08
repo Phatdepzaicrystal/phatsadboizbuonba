@@ -5375,72 +5375,6 @@ spawn(function()
 end
 end)
 
-local Mastery = Tabs.Fruit:AddSection("Esp")
-
-
-local ToggleEspPlayer = Tabs.Fruit:AddToggle("ToggleEspPlayer", {Title = "Esp Player", Default = false })
-
-ToggleEspPlayer:OnChanged(function(Value)
-    ESPPlayer = Value
-	UpdatePlayerChams()
-end)
-Options.ToggleEspPlayer:SetValue(false)
-
-
-local ToggleEspFruit = Tabs.Fruit:AddToggle("ToggleEspFruit", {Title = "Esp Devil Fruit", Default = false })
-
-ToggleEspFruit:OnChanged(function(Value)
-    DevilFruitESP = Value
-    while DevilFruitESP do wait()
-        UpdateDevilChams() 
-    end
-end)
-Options.ToggleEspFruit:SetValue(false)
-
-
-
-
-local ToggleEspIsland = Tabs.Fruit:AddToggle("ToggleEspIsland", {Title = "Esp Island", Default = false })
-
-ToggleEspIsland:OnChanged(function(Value)
-    IslandESP = Value
-    while IslandESP do wait()
-        UpdateIslandESP() 
-    end
-end)
-Options.ToggleEspIsland:SetValue(false)
-
-
-local ToggleEspFlower = Tabs.Fruit:AddToggle("ToggleEspFlower", {Title = "Esp Flower", Default = false })
-
-ToggleEspFlower:OnChanged(function(Value)
-    FlowerESP = Value
-	UpdateFlowerChams() 
-end)
-Options.ToggleEspFlower:SetValue(false)
-
-
-spawn(function()
-    while wait(2) do
-        if FlowerESP then
-            UpdateFlowerChams() 
-        end
-        if DevilFruitESP then
-            UpdateDevilChams() 
-        end
-        if ChestESP then
-            UpdateChestChams() 
-        end
-        if ESPPlayer then
-            UpdatePlayerChams()
-        end
-        if RealFruitESP then
-            UpdateRealFruitChams()
-        end
-    end
-end)
-
-local Chips = {"Flame","Ice","Quake","Light","Dark","Spider","Rumble","Magma","Buddha","Sand","Phoenix","Dough"}
 
 local DropdownRaid = Tabs.Raid:AddDropdown("DropdownRaid", {
     Title = "Choose Raid",
@@ -6397,7 +6331,7 @@ Tabs.Misc:AddButton({
 
 Tabs.Misc:AddInput("Input_Level", {
     Title = "Fake Level",
-    Default = "...",
+    Default = "",
     Placeholder = "Enter",
     Numeric = false,
     Finished = false,
@@ -6408,7 +6342,7 @@ Tabs.Misc:AddInput("Input_Level", {
 
 Tabs.Misc:AddInput("Input_EXP", {
     Title = "Fake EXP",
-    Default = "...",
+    Default = "",
     Placeholder = "Enter",
     Numeric = false,
     Finished = false,
@@ -6419,7 +6353,7 @@ Tabs.Misc:AddInput("Input_EXP", {
 
 Tabs.Misc:AddInput("Input_Beli", {
     Title = "Fake Money",
-    Default = "...",
+    Default = "",
     Placeholder = "Enter",
     Numeric = false,
     Finished = false,
@@ -6429,7 +6363,7 @@ Tabs.Misc:AddInput("Input_Beli", {
 });
 Tabs.Misc:AddInput("Input_Fragments", {
     Title = "Fake Fragment",
-    Default = "...",
+    Default = "",
     Placeholder = "Enter",
     Numeric = false,
     Finished = false,
@@ -6459,7 +6393,72 @@ spawn(function()
 		end
 	end)
 
+local Mastery = Tabs.Misc:AddSection("Esp")
 
+
+local ToggleEspPlayer = Tabs.Misc:AddToggle("ToggleEspPlayer", {Title = "Esp Player", Default = false })
+
+ToggleEspPlayer:OnChanged(function(Value)
+    ESPPlayer = Value
+	UpdatePlayerChams()
+end)
+Options.ToggleEspPlayer:SetValue(false)
+
+
+local ToggleEspFruit = Tabs.Misc:AddToggle("ToggleEspFruit", {Title = "Esp Devil Fruit", Default = false })
+
+ToggleEspFruit:OnChanged(function(Value)
+    DevilFruitESP = Value
+    while DevilFruitESP do wait()
+        UpdateDevilChams() 
+    end
+end)
+Options.ToggleEspFruit:SetValue(false)
+
+
+
+
+local ToggleEspIsland = Tabs.Misc:AddToggle("ToggleEspIsland", {Title = "Esp Island", Default = false })
+
+ToggleEspIsland:OnChanged(function(Value)
+    IslandESP = Value
+    while IslandESP do wait()
+        UpdateIslandESP() 
+    end
+end)
+Options.ToggleEspIsland:SetValue(false)
+
+
+local ToggleEspFlower = Tabs.Misc:AddToggle("ToggleEspFlower", {Title = "Esp Flower", Default = false })
+
+ToggleEspFlower:OnChanged(function(Value)
+    FlowerESP = Value
+	UpdateFlowerChams() 
+end)
+Options.ToggleEspFlower:SetValue(false)
+
+
+spawn(function()
+    while wait(2) do
+        if FlowerESP then
+            UpdateFlowerChams() 
+        end
+        if DevilFruitESP then
+            UpdateDevilChams() 
+        end
+        if ChestESP then
+            UpdateChestChams() 
+        end
+        if ESPPlayer then
+            UpdatePlayerChams()
+        end
+        if RealFruitESP then
+            UpdateRealFruitChams()
+        end
+    end
+end)
+
+local Chips = {"Flame","Ice","Quake","Light","Dark","Spider","Rumble","Magma","Buddha","Sand","Phoenix","Dough"}
 
 
 local Mastery = Tabs.Misc:AddSection("Map")
