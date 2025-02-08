@@ -6306,32 +6306,6 @@ Tabs.Misc:AddButton({
 	end
 })
 
-local Banz = Tabs.Misc:AddSection("Anti Ban")
-local v153 = Tabs.Misc:AddToggle("ToggleAntiBan", {
-    Title = "Anti Ban",
-    Description = "",
-    Default = true
-});
-ToggleAntiBan:OnChanged(function(v384)
-    _G.AntiBan = v384;
-end);
-local v154 = {
-    17884881,
-    120173604,
-    912348
-};
-spawn(function()
-    while wait() do
-        if _G.AntiBand then
-            for v809, v810 in pairs(game:GetService("Players"):GetPlayers()) do
-                if table.find(v154, v810.UserId) then
-                    Hop();
-                end
-            end
-        end
-    end
-end);
-
 local Mastery = Tabs.Misc:AddSection("Fun")
 
 
