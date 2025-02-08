@@ -6558,28 +6558,6 @@ function UpdateRealFruitEsp()
         end
     end
 end
-
-local Mastery = Tabs.Misc:AddSection("Map")
-
-Tabs.Misc:AddButton({
-	Title = "Remove Fog",
-	Description = "",
-	Callback = function()
-        game:GetService("Lighting").LightingLayers:Destroy()
-	    game:GetService("Lighting").Sky:Destroy()
-    end
-})
-
-Tabs.Misc:AddButton({
-	Title = "Always Day",
-	Description = "",
-	Callback = function()
-        game:GetService("RunService").Heartbeat:wait() do
-        game:GetService("Lighting").ClockTime = 12
-        end
-    end
-})
-
 ----------------------------------Tab Status ------------------------
 local Status = Tabs.Status:AddSection("Sever Discord")
 
