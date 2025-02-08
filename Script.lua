@@ -6681,17 +6681,17 @@ spawn(function()
         end
     end);
 end);
-local v169 = Tabs.Status:AddParagraph({
-    Title = "Volcano Island",
-    Content = "Status Vocalno Island"
+local v499 = Tabs.Status:AddParagraph({
+    Title = "Kitsune Island",
+    Content = "Status Kitsune Island"
 });
 spawn(function()
     pcall(function()
         while wait() do
-            if game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
-                v169:SetDesc("✅️");
+            if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
+                v499:SetDesc("✅️");
             else
-                v169:SetDesc("❌️");
+                v499:SetDesc("❌️");
             end
         end
     end);
