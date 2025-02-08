@@ -23,7 +23,6 @@ local Tabs = {
     Fruit = Window:AddTab({ Title = "Fruit", Icon = "apple" }); 
     Raid = Window:AddTab({ Title = "Raid", Icon = "target" }); 
     Race = Window:AddTab({ Title = "Race", Icon = "flag" }); 
-    Volcano = Window:AddTab({ Title = "Volcano Event", Icon = "volcano" }); 
     Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); 
     Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); 
     Status = Window:AddTab({ Title = "Status And Sever", Icon = "loader" });
@@ -6076,248 +6075,7 @@ spawn(function()
 	end);
 end);
 ----------------------------------------------Tab VolCano-----------------------------------------------------------------------------------------
-local Draco = Tabs.Volcano:AddSection("Draco");
-local v157 = Tabs.Volcano:AddToggle("ToggleBlazeEmber", {
-    Title = "Get Blaze Emmber",
-    Description = "",
-    Default = false
-})
-ToggleBlazeEmber:OnChanged(function(v387)
-    _G.AutoBlazeEmber = v387;
-end)
-spawn(function()
-    while wait() do
-        if _G.AutoBlazeEmber then
-            pcall(function()
-                game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/DragonDojoEmber"):FireServer();
-            end);
-        end
-    end
-end);
-local v158 = Tabs.Volcano:AddToggle("ToggleReceiveQuest", {
-    Title = "Get Quest Dojo",
-    Description = "",
-    Default = false
-})
-ToggleReceiveQuest:OnChanged(function(v388)
-    _G.AutoReceiveQuest = v388;
-    if _G.AutoReceiveQuest then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(5661.5322265625, 1013.0907592773438, - 334.9649963378906));
-        Tween2(CFrame.new(5814.42724609375, 1208.3267822265625, 884.5785522460938));
-        spawn(function()
-            pcall(function()
-                while wait() do
-                    local v874 = {
-                        [1] = {
-                            Context = "RequestQuest"
-                        }
-                    };
-                    game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(v874));
-                    local v875 = {
-                        [1] = {
-                            Context = "Check"
-                        }
-                    };
-                    local v876 = game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(v875));
-                end
-            end);
-        end);
-    end
-end);
-local v159 = Tabs.Volcano:AddParagraph({
-    Title = "Status Quest",
-    Content = "",
-});
-spawn(function()
-    pcall(function()
-        while wait() do
-            local v654 = {
-                [1] = {
-                    Context = "Check"
-                }
-            };
-            local v655 = game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(v654));
-            if (typeof(v655) == "table") then
-                for v877, v878 in pairs(v655) do
-                    if (v878 == "Defeat 3 Venomous Assailants on Hydra Island.") then
-                        v159:SetDesc("Defeat 3 Venomous Assailants on Hydra Island.");
-                    elseif (v878 == "Defeat 3 Hydra Enforcers on Hydra Island.") then
-                        v159:SetDesc("Defeat 3 Hydra Enforcers on Hydra Island.");
-                    elseif (v878 == "Destroy 10 trees on Hydra Island.") then
-                        v159:SetDesc("Destroy 10 trees on Hydra Island.");
-                    end
-                end
-            else
-                print(v655);
-            end
-        end
-    end);
-end);
-local v160 = Tabs.Volcano:AddToggle("ToggleHydraTree", {
-    Title = "Destroy Tree On Hydra Island",
-    Description = "",
-    Default = false
-})
-ToggleHydraTree:OnChanged(function(v389)
-    _G.AutoHydraTree = v389;
-end)
-local function v161(v390)
-    local v391 = game:GetService("VirtualInputManager");
-    v391:SendKeyEvent(true, v390, false, game);
-    v391:SendKeyEvent(false, v390, false, game);
-end
-local function v162(v392)
-    local v393 = game.Players.LocalPlayer;
-    local v394 = v393.Backpack;
-    for v562, v563 in pairs(v394:GetChildren()) do
-        if (v563:IsA("Tool") and (v563.ToolTip == v392)) then
-            v563.Parent = v393.Character;
-            for v812, v813 in ipairs({
-                "Z",
-                "X",
-                "C",
-                "V",
-                "F"
-            }) do
-                wait();
-                pcall(function()
-                    v161(v813);
-                end);
-            end
-            v563.Parent = v394;
-            break;
-        end
-    end
-end
-local v163 = {
-    CFrame.new(5288.61962890625, 1005.4000244140625, 392.43011474609375),
-    CFrame.new(5343.39453125, 1004.1998901367188, 361.0687561035156),
-    CFrame.new(5235.78564453125, 1004.1998901367188, 431.4530944824219),
-    CFrame.new(5321.30615234375, 1004.1998901367188, 440.8951416015625),
-    CFrame.new(5258.96484375, 1004.1998901367188, 345.5052490234375)
-};
-spawn(function()
-    while wait() do
-        if _G.AutoHydraTree then
-            AutoHaki();
-            for v814, v815 in ipairs(v163) do
-                if not _G.AutoHydraTree then
-                    break;
-                end
-                Tween2(v815);
-                wait();
-                local v816 = game.Players.LocalPlayer.Character;
-                if (v816 and v816:FindFirstChild("HumanoidRootPart")) then
-                    local v902 = (v816.HumanoidRootPart.Position - v815.Position).Magnitude;
-                    if (v902 <= 1) then
-                        v162("Melee");
-                        v162("Sword");
-                        v162("Gun");
-                    end
-                end
-            end
-        end
-    end
-end);
-Tabs.Volcano:AddButton({
-    Title = "Tele To Dojo Quest",
-    Description = "",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(5661.5322265625, 1013.0907592773438, - 334.9649963378906));
-        Tween2(CFrame.new(5814.42724609375, 1208.3267822265625, 884.5785522460938));
-    end
-})
-Tabs.Volcano:AddButton({
-    Title = "Craft Volcanic Magnet",
-    Description = "",
-    Callback = function()
-        local v395 = {
-            [1] = "CraftItem",
-            [2] = "Craft",
-            [3] = "Volcanic Magnet"
-        };
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v395));
-    end
-})
-local v164 = Tabs.Volcano:AddToggle("ToggleCollectFireFlowers", {
-    Title = "Farm Fire Flowers",
-    Description = "",
-    Default = false
-})
-ToggleCollectFireFlowers:OnChanged(function(v396)
-    _G.AutoCollectFireFlowers = v396;
-end)
-spawn(function()
-    while wait() do
-        if _G.AutoCollectFireFlowers then
-            local v747 = workspace:FindFirstChild("FireFlowers");
-            if v747 then
-                for v903, v904 in pairs(v747:GetChildren()) do
-                    if (v904:IsA("Model") and v904.PrimaryPart) then
-                        local v1367 = v904.PrimaryPart.Position;
-                        local v1368 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
-                        local v1369 = (v1367 - v1368).Magnitude;
-                        if (v1369 <= 1) then
-                            game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game);
-                            wait(1.5);
-                            game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game);
-                        else
-                            Tween2(CFrame.new(v1367));
-                        end
-                    end
-                end
-            end
-        end
-    end
-end);
-local v165 = Tabs.Volcano:AddToggle("ToggleWhiteBelt", {
-    Title = "Auto Get White Belt",
-    Description = "",
-    Default = false
-})
-ToggleWhiteBelt:OnChanged(function(v397)
-    _G.AutoLevel = v397;
-    if v397 then
-        local v656 = {
-            [1] = {
-                NPC = "Dojo Trainer",
-                Command = "RequestQuest"
-            }
-        };
-        game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/InteractDragonQuest"):InvokeServer(unpack(v656));
-        spawn(function()
-            while _G.AutoLevel do
-                local v817 = {
-                    [1] = {
-                        NPC = "Dojo Trainer",
-                        Command = "ClaimQuest"
-                    }
-                };
-                game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/InteractDragonQuest"):InvokeServer(unpack(v817));
-                wait();
-            end
-        end);
-    end
-end);
 
-local v167 = Tabs.Volcano:AddToggle("ToggleTrialTeleport", {
-    Title = "Tele To Race Trails Draco",
-    Description = "",
-    Default = false
-})
-ToggleTrialTeleport:OnChanged(function(v398)
-    _G.AutoTrialTeleport = v398;
-end)
-spawn(function()
-    while wait() do
-        if _G.AutoTrialTeleport then
-            local v748 = workspace.Map.PrehistoricIsland:FindFirstChild("TrialTeleport");
-            if (v748 and v748:IsA("Part")) then
-                Tween2(CFrame.new(v748.Position));
-            end
-        end
-    end
-end);
 -----------------------------------------------Tab Shop--------------------------------------
 
 local ToggleRandomBone = Tabs.Shop:AddToggle("ToggleRandomBone", {Title = "Random Bone", Default = false })
@@ -6547,6 +6305,30 @@ Tabs.Misc:AddButton({
 	end
 })
 
+local v153 = Tabs.Misc:AddToggle("ToggleAntiBand", {
+    Title = "Anti Ban",
+    Description = "",
+    Default = true
+});
+ToggleAntiBand:OnChanged(function(v384)
+    _G.AntiBand = v384;
+end);
+local v154 = {
+    17884881,
+    120173604,
+    912348
+};
+spawn(function()
+    while wait() do
+        if _G.AntiBand then
+            for v809, v810 in pairs(game:GetService("Players"):GetPlayers()) do
+                if table.find(v154, v810.UserId) then
+                    Hop();
+                end
+            end
+        end
+    end
+end);
 
 local Mastery = Tabs.Misc:AddSection("Fun")
 
