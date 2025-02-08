@@ -4076,7 +4076,7 @@ local SettingFarm = Tabs.Setting:AddSection("Setting")
  local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true })
 
     ToggleFastAttack:OnChanged(function(Value)
-     _G.FastAttackFaiFao = Value
+     _G.FastAttack = Value
     end)
     Options.ToggleFastAttack:SetValue(true)
 
@@ -4476,14 +4476,6 @@ spawn(function()
     end);
 end);
 
-local ToggleInfiniteEnergy = Tabs.Setting:AddToggle("ToggleInfiniteEnergy", {Title = "Infinite Energy", Default = false })
-ToggleInfiniteEnergy:OnChanged(function(Value)
-    ToggleNoClipz = Value
-end);
-Options.ToggleNoClipz:SetValue(false)
-       originalstam = LocalPlayer.Character.Energy.Value
-       print(Value)
-   end,
 -----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
