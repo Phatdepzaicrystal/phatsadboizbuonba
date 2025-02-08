@@ -4076,7 +4076,7 @@ local SettingFarm = Tabs.Setting:AddSection("Setting")
  local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true })
 
     ToggleFastAttack:OnChanged(function(Value)
-     _G.FastAttackFaiFao = Value
+     _G.FastAttack = Value
     end)
     Options.ToggleFastAttack:SetValue(true)
 
@@ -4100,7 +4100,7 @@ Camera:Stop()
     ToggleBringMob:OnChanged(function(Value)
         _G.BringMob = Value
     end)
-    Options.ToggleBringMob:SetValue(true)
+    Options.ToggleBringMob:SetValue(false)
         spawn(function()
             while wait() do
                 pcall(function()
@@ -6695,3 +6695,22 @@ spawn(function()
         end
     end);
 end);
+if Sea3 then
+    local v499 = Tabs.Status:AddParagraph({
+        Title = "Trạng Thái Đảo Cáo",
+        Content = "check status kitsune island"
+    });
+    function UpdateKitsune()
+        if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
+            v499:SetDesc("Kitsune Island : ✅️");
+        else
+            v499:SetDesc("Kitsune Island : ❌️");
+        end
+    end
+    spawn(function()
+        pcall(function()
+            while wait() do
+                UpdateKitsune();
+            end
+        end);
+    end);
