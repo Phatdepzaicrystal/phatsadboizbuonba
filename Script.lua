@@ -3275,7 +3275,6 @@ local boss = Tabs.Main:AddSection("Boss Farm")
         end
         end
       end)
-
 ---------------------------Tab Sea---------------------------------------
 
       if Second_Sea or Third_Sea then
@@ -4843,6 +4842,38 @@ if Second_Sea then
         end)
     end
 
+local Chestt = Tabs.Item:AddSection("Chest Farm")
+
+    local ToggleFarmChest = Tabs.Item:AddToggle("ToggleFarmChest", {Title = "Auto Farm Chest", Default = false })
+    ToggleFarmChest:OnChanged(function(Value)
+    _G.AutoCollectChest = Value
+end)
+    Options.ToggleFarmChest:SetValue(false)
+spawn(function()
+    while wait() do
+        if _G.AutoCollectChest then
+            local v673 = game:GetService("Players");
+            local v674 = v673.LocalPlayer;
+            local v675 = v674.Character or v674.CharacterAdded:Wait() ;
+            local v676 = v675:GetPivot().Position;
+            local v677 = game:GetService("CollectionService");
+            local v678 = v677:GetTagged("_ChestTagged");
+            local v679, v680 = math.huge;
+            for v765 = 1, # v678 do
+                local v766 = v678[v765];
+                local v767 = (v766:GetPivot().Position - v676).Magnitude;
+                if (not v766:GetAttribute("IsDisabled") and (v767 < v679)) then
+                    v679, v680 = v767, v766;
+                end
+            end
+            if v680 then
+                local v840 = v680:GetPivot().Position;
+                local v841 = CFrame.new(v840);
+                Tween2(v841);
+            end
+        end
+    end
+end);
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
