@@ -6299,10 +6299,7 @@ ToggleWhiteBelt:OnChanged(function(v397)
         end);
     end
 end);
-local v166 = Tabs.Volcano:AddParagraph({
-    Title = "Auto Trail Draco V4",
-    Content = ""
-});
+
 local v167 = Tabs.Volcano:AddToggle("ToggleTrialTeleport", {
     Title = "Tele To Race Trails Draco",
     Description = "",
