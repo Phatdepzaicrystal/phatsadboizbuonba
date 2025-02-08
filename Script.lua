@@ -6448,8 +6448,8 @@ end
 
 local Siuu = Tabs.Status:AddSection("Status Sever")
 if Third_Sea then
-    local v490 = v16.Main:AddSection("Cake Prince");
-    local v491 = v16.Main:AddParagraph({
+    local v490 = Tabs.Status:AddSection("Cake Prince");
+    local v491 = Tabs.Status:AddParagraph({
         Title = "Status",
         Content = "Status Dough V1 And V2"
     });
