@@ -6142,8 +6142,7 @@ spawn(function()
 end);
 ----------------------------------------------Tab VolCano-----------------------------------------------------------------------------------------
 
---------------------------------------------------------------------------------------------------------------------------------------------
---shop
+-----------------------------------------------Tab Shop--------------------------------------
 
 local ToggleRandomBone = Tabs.Shop:AddToggle("ToggleRandomBone", {Title = "Random Bone", Default = false })
 ToggleRandomBone:OnChanged(function(Value)  
@@ -6396,6 +6395,48 @@ Tabs.Misc:AddButton({
 	end
 })
 
+Tabs.Misc:AddInput("Input_Level", {
+    Title = "Fake Level",
+    Default = "...",
+    Placeholder = "Enter",
+    Numeric = false,
+    Finished = false,
+    Callback = function(v327)
+        game:GetService("Players")['LocalPlayer'].Data.Level.Value = tonumber(v327);
+    end
+});
+
+Tabs.Misc:AddInput("Input_EXP", {
+    Title = "Fake EXP",
+    Default = "...",
+    Placeholder = "Enter",
+    Numeric = false,
+    Finished = false,
+    Callback = function(v329)
+        game:GetService("Players")['LocalPlayer'].Data.Exp.Value = tonumber(v329);
+    end
+});
+
+Tabs.Misc:AddInput("Input_Beli", {
+    Title = "Fake Money",
+    Default = "...",
+    Placeholder = "Enter",
+    Numeric = false,
+    Finished = false,
+    Callback = function(v331)
+        game:GetService("Players")['LocalPlayer'].Data.Beli.Value = tonumber(v331);
+    end
+});
+Tabs.Misc:AddInput("Input_Fragments", {
+    Title = "Fake Fragment",
+    Default = "...",
+    Placeholder = "Enter",
+    Numeric = false,
+    Finished = false,
+    Callback = function(v333)
+        game:GetService("Players")['LocalPlayer'].Data.Fragments.Value = tonumber(v333);
+    end
+});
 
 local Mastery = Tabs.Misc:AddSection("Misc")
 
@@ -6421,7 +6462,7 @@ spawn(function()
 
 
 
-local Mastery = Tabs.Misc:AddSection("Day")
+local Mastery = Tabs.Misc:AddSection("Map")
 
 Tabs.Misc:AddButton({
 	Title = "Remove Fog",
@@ -6534,6 +6575,7 @@ function Hop()
 	end
 	Teleport()
 end     
+
 local SeverOw = Tabs.Status:AddSection("Status Sever")
 local v529 = Tabs.Status:AddParagraph({
         Title = "Elite",
