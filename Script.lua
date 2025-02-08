@@ -6695,36 +6695,3 @@ spawn(function()
         end
     end);
 end);
---------------------------------
-if Second_Sea or Third_Sea then
-    local Levi = Tabs.Fish:AddSection("Leviathan")
-Tabs.Sea:AddButton({
-    Title = "Auto Buy Chip Leviathan",
-    Description = "",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("InfoLeviathan", "2");
-    end
-});
-local Togglelockmoon = Tabs.Sea:AddToggle("ToggleTPFrozenDimension", {
-    Title = "Tele To Frozen Dimension",
-    Description = "",
-    Default = false
-});
-ToggleTPFrozenDimension:OnChanged(function(v385)
-    _G.TweenToFrozenDimension = v385;
-end);
-Options.ToggleTPFrozenDimension:SetValue(false);
-spawn(function()
-    local v386;
-    while not v386 do
-        v386 = game:GetService("Workspace").Map:FindFirstChild("FrozenDimension");
-        wait();
-    end
-    while wait() do
-        if _G.TweenToFrozenDimension then
-            if v386 then
-                Tween(v386.CFrame);
-            end
-        end
-    end
-end);
