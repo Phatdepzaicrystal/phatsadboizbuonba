@@ -4479,6 +4479,8 @@ end);
 local ToggleInfiniteEnergy = Tabs.Setting:AddToggle("ToggleInfiniteEnergy", {Title = "Infinite Energy", Default = false })
 ToggleInfiniteEnergy:OnChanged(function(Value)
     ToggleNoClipz = Value
+end);
+Options.ToggleNoClipz:SetValue(false)
        originalstam = LocalPlayer.Character.Energy.Value
        print(Value)
    end,
