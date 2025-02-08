@@ -4071,6 +4071,7 @@ end)
 end
 
 ---------------Tab Setting-------------------------------------------
+_G.FastAttack = true
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
  local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true })
@@ -4080,16 +4081,19 @@ local SettingFarm = Tabs.Setting:AddSection("Setting")
     end)
     Options.ToggleFastAttack:SetValue(true)
 
-spawn(function()
-	while wait(0.4) do
-		pcall(function()
-			if _G.FastAttackFaiFao then
-				repeat wait(0)
-					 
-				until not _G.FastAttackFaiFao
-			end
-		end)
-	end
+-- Vòng lặp spam đòn đánh
+task.spawn(function()
+    while true do
+        wait(0.1) -- Điều chỉnh tốc độ tấn công
+        pcall(function()
+            if _G.FastAttack then
+                local FastAttack = _ENV.rz_FastAttack
+                if FastAttack then
+                    FastAttack:AttackNearest() -- Tấn công liên tục
+                end
+            end
+        end)
+    end
 end)
 
 local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
