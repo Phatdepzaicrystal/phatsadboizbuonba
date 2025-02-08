@@ -5375,6 +5375,7 @@ spawn(function()
 end
 end)
 
+local Chips = {"Flame","Ice","Quake","Light","Dark","Spider","Rumble","Magma","Buddha","Sand","Phoenix","Dough"}
 
 local DropdownRaid = Tabs.Raid:AddDropdown("DropdownRaid", {
     Title = "Choose Raid",
@@ -6458,7 +6459,6 @@ spawn(function()
     end
 end)
 
-local Chips = {"Flame","Ice","Quake","Light","Dark","Spider","Rumble","Magma","Buddha","Sand","Phoenix","Dough"}
 
 
 local Mastery = Tabs.Misc:AddSection("Map")
