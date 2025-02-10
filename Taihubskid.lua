@@ -1,4 +1,4 @@
-
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Taihubskid.lua"))()
 --fast attack by tdz lý do Strix die fast
 local FastAttack = true
 game:GetService('RunService').Heartbeat:Connect(function()
