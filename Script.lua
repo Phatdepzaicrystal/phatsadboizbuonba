@@ -2910,6 +2910,7 @@ spawn(function()
       until not AutoFarmMasDevilFruit or not v.Parent or v.Humanoid.Health == 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or not TypeMastery == 'Level'
       bringmob = false
       _G.UseSkill = false
+      _G.FastAttack = true 			
       
       end
       end
@@ -2946,7 +2947,8 @@ spawn(function()
       until not AutoFarmMasDevilFruit or not MasteryType == 'Near Mobs' or not v.Parent or v.Humanoid.Health == 0 or not TypeMastery == 'Near Mobs'
       bringmob = false
       _G.UseSkill = false
-      
+      _G.FastAttack = true
+						
     end
 end
 end
