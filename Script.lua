@@ -6392,19 +6392,6 @@ function UpdateRealFruitEsp()
     end
 end
 ----------------------------------Tab Status ------------------------
-local executorName
-if identifyexecutor then
-    executorName=identifyexecutor()
-elseif getexecutorname then
-    executorName=getexecutorname()
-end
-if executorName then
-    Tabs.Status:AddParagraph({
-        Title="Client",
-        Content=executorName
-    })
-end
-
 local Status = Tabs.Status:AddSection("Sever Discord")
 
 Tabs.Status:AddButton({
