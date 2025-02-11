@@ -2486,8 +2486,7 @@ _G.FastAttack = true
           for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
           if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
           if v.Name == Ms then
-          repeat wait(0)
-          repeat wait(_G.Fast_Delay) 
+          repeat wait(0) 
           
 	  bringmob = true
           AutoHaki()
@@ -2531,8 +2530,7 @@ _G.FastAttack = true
           if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
           if v.Name then
           if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v:FindFirstChild("HumanoidRootPart").Position).Magnitude <= 5000 then
-            repeat wait(0)
-            repeat wait(_G.Fast_Delay)      
+            repeat wait(0)    
                 bringmob = true
 	  AutoHaki()
           EquipTool(SelectWeapon)
