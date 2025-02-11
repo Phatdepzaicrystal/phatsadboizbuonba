@@ -6204,7 +6204,7 @@ Tabs.Misc:AddButton({
 Tabs.Misc:AddInput("Input_Level", {
     Title = "Fake Level",
     Default = "",
-    Placeholder = "Enter",
+    Placeholder = "",
     Numeric = false,
     Finished = false,
     Callback = function(v327)
@@ -6215,7 +6215,7 @@ Tabs.Misc:AddInput("Input_Level", {
 Tabs.Misc:AddInput("Input_EXP", {
     Title = "Fake EXP",
     Default = "",
-    Placeholder = "Enter",
+    Placeholder = "",
     Numeric = false,
     Finished = false,
     Callback = function(v329)
@@ -6226,7 +6226,7 @@ Tabs.Misc:AddInput("Input_EXP", {
 Tabs.Misc:AddInput("Input_Beli", {
     Title = "Fake Money",
     Default = "",
-    Placeholder = "Enter",
+    Placeholder = "",
     Numeric = false,
     Finished = false,
     Callback = function(v331)
@@ -6236,7 +6236,7 @@ Tabs.Misc:AddInput("Input_Beli", {
 Tabs.Misc:AddInput("Input_Fragments", {
     Title = "Fake Fragment",
     Default = "",
-    Placeholder = "Enter",
+    Placeholder = "",
     Numeric = false,
     Finished = false,
     Callback = function(v333)
@@ -6520,35 +6520,3 @@ function Hop()
 	end
 	Teleport()
 end     
-local SeverOw = Tabs.Status:AddSection("Status Sever")
-local v529 = Tabs.Status:AddParagraph({
-        Title = "Elite",
-        Content = "Status Elite"
-    });
-    spawn(function()
-        while wait() do
-            pcall(function()
-                if (game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban")) then
-                    v529:SetDesc("Elite Boss: ✅️ | Killed:  " .. game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress"));
-                else
-                    v529:SetDesc("Elite Boss: ❌️ | Killed: " .. game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress"));
-                end
-            end);
-        end
-    end);
-
-local v104 = Tabs.Status:AddParagraph({
-    Title = "Leviathan Island",
-    Content = "Status Leviathan Island"
-});
-spawn(function()
-    pcall(function()
-        while wait() do
-            if game:GetService("Workspace").Map:FindFirstChild("FrozenDimension") then
-                v104:SetDesc(":white_check_mark:");
-            else
-                v104:SetDesc(":x:");
-            end
-        end
-    end);
-end);
