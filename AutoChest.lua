@@ -1,4 +1,27 @@
 --loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/AutoChest.lua"))()
+--//Config
+if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    repeat task.wait()
+        if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
+            if getgenv().config.Setting["Team"] == "Marines" then
+                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Marines"].Frame.TextButton.Activated)) do
+                    for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                       b:Fire() 
+                    end
+                    v.Function()
+                end 
+            else
+                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Pirates"].Frame.TextButton.Activated)) do
+                    for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                       b:Fire() 
+                    end
+                    v.Function()
+                end 
+            end
+        end
+    until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
+end
+
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
@@ -330,7 +353,7 @@ spawn(function()
 end);
 
 local Status = Tabs.Main:AddSection("Sever")
-Tabs.Status:AddButton({
+Tabs.Main:AddButton({
 	Title = "Hop Server",
 	Description = "",
 	Callback = function()
