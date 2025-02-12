@@ -1,4 +1,4 @@
---loadstring(game:HttpGet("""))()
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/AutoChest.lua"))()
 
 --//Config
 if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
