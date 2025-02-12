@@ -322,11 +322,11 @@ spawn(function()
 ---------------------------Tab---------------------------------------------------------------
 local Chestt = Tabs.Main:AddSection("Chest Farm")
 
-    local ToggleFarmChest = Tabs.Main:AddToggle("ToggleFarmChest", {Title = "Auto Farm Chest", Default = false })
+    local ToggleFarmChest = Tabs.Main:AddToggle("ToggleFarmChest", {Title = "Auto Farm Chest", Default = true })
     ToggleFarmChest:OnChanged(function(Value)
     _G.AutoCollectChest = Value
 end)
-    Options.ToggleFarmChest:SetValue(false)
+    Options.ToggleFarmChest:SetValue(true)
 spawn(function()
     while wait() do
         if _G.AutoCollectChest then
