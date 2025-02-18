@@ -4349,6 +4349,49 @@ spawn(function()
     end);
 end);
 
+local v86 = Tabs.Setting:AddToggle("ToggleAutoY", {
+    Title = "Bật Tộc V4",
+    Description = "turn on v4",
+    Default = false
+});
+v86:OnChanged(function(v274)
+    _G.AutoY = v274;
+end);
+Options.ToggleAutoY:SetValue(false);
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoY then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, "Y", false, game);
+                wait();
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, "Y", false, game);
+            end
+        end);
+    end
+end);
+local v87 = Tabs.Setting:AddToggle("ToggleAutoKen", {
+    Title = "Bật Haki Quan Sât",
+    Description = "turn on kentrick",
+    Default = false
+});
+v87:OnChanged(function(v275)
+    _G.AutoKen = v275;
+    if v275 then
+        game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("Ken", true);
+    else
+        game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("Ken", false);
+    end
+end);
+Options.ToggleAutoKen:SetValue(false);
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoKen then
+                game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("Ken", true);
+            end
+        end);
+    end
+end);
 -----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
