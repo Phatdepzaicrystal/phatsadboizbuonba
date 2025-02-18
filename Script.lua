@@ -15,6 +15,7 @@ local Window = Fluent:CreateWindow({
 
 
 local Tabs = {
+    Sever = Window:AddTab({ Title = "Status And Sever", Icon = "loader" });
     Main = Window:AddTab({ Title = "Main", Icon = "home" }); 
     Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); 
     Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); 
@@ -26,7 +27,6 @@ local Tabs = {
     Race = Window:AddTab({ Title = "Race", Icon = "flag" }); 
     Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); 
     Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); 
-    Status = Window:AddTab({ Title = "Status And Sever", Icon = "loader" });
 }
 local Options = Fluent.Options
 do
@@ -2455,6 +2455,148 @@ function to(v233)
         end
     end);
 end
+----------------------------------Tab Sever-------------------------
+local Status = Tabs.Sever:AddSection("Sever Discord")
+
+Tabs.Sever:AddButton({
+    Title = "Sever Discord PhatCrystal",
+    Description = "Click to copy the Discord link",
+    Callback = function()
+        setclipboard("https://discord.gg/hyGgHBudcs")
+        print("Discord link copied!")
+    end
+})
+
+
+local SeverZzz = Tabs.Sever:AddSection("Sever")
+Tabs.Sever:AddButton({
+	Title = "Rejoin Server",
+	Description = "",
+	Callback = function()
+		game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+	end
+})
+
+Tabs.Sever:AddButton({
+	Title = "Hop Server",
+	Description = "",
+	Callback = function()
+		Hop()
+	end
+})
+
+function Hop()
+	local PlaceID = game.PlaceId
+	local AllIDs = {}
+	local foundAnything = ""
+	local actualHour = os.date("!*t").hour
+	local Deleted = false
+	function TPReturner()
+		local Site;
+		if foundAnything == "" then
+			Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+		else
+			Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+		end
+		local ID = ""
+		if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+			foundAnything = Site.nextPageCursor
+		end
+		local num = 0;
+		for i,v in pairs(Site.data) do
+			local Possible = true
+			ID = tostring(v.id)
+			if tonumber(v.maxPlayers) > tonumber(v.playing) then
+				for _,Existing in pairs(AllIDs) do
+					if num ~= 0 then
+						if ID == tostring(Existing) then
+							Possible = false
+						end
+					else
+						if tonumber(actualHour) ~= tonumber(Existing) then
+							local delFile = pcall(function()
+								AllIDs = {}
+								table.insert(AllIDs, actualHour)
+							end)
+						end
+					end
+					num = num + 1
+				end
+				if Possible == true then
+					table.insert(AllIDs, ID)
+					wait()
+					pcall(function()
+						wait()
+						game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+					end)
+					wait(4)
+				end
+			end
+		end
+	end
+	function Teleport() 
+		while wait() do
+			pcall(function()
+				TPReturner()
+				if foundAnything ~= "" then
+					TPReturner()
+				end
+			end)
+		end
+	end
+	Teleport()
+end     
+
+local SeverOw = Tabs.Sever:AddSection("Status Sever")
+local v529 = Tabs.Sever:AddParagraph({
+        Title = "Elite",
+        Content = "Status Elite"
+    });
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if (game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban")) then
+                    v529:SetDesc("Elite Boss: ✅️ | Killed:  " .. game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress"));
+                else
+                    v529:SetDesc("Elite Boss: ❌️ | Killed: " .. game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress"));
+                end
+            end);
+        end
+    end);
+
+local v104 = Tabs.Sever:AddParagraph({
+    Title = "Leviathan Island",
+    Content = "Status Leviathan Island"
+});
+spawn(function()
+    pcall(function()
+        while wait() do
+            if game:GetService("Workspace").Map:FindFirstChild("FrozenDimension") then
+                v104:SetDesc("✅️");
+            else
+                v104:SetDesc("❌️");
+            end
+        end
+    end);
+end);
+
+local v169 = Tabs.Sever:AddParagraph({
+    Title = "Volcanic Island",
+    Content = "Status Volcanic Island"
+});
+spawn(function()
+    pcall(function()
+        while wait() do
+            if ggame:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
+                v169:SetDesc("volcano island: ✅️");
+            else
+                v169:SetDesc("volcano island: ❌️");
+            end
+        end
+    end);
+end);
+
+
 ----------------------------------------Tab Main---------------------------------	
     local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
         Title = "Choose Weapon",
@@ -6492,143 +6634,3 @@ function UpdateRealFruitEsp()
         end
     end
 end
-----------------------------------Tab Status ------------------------
-local Status = Tabs.Status:AddSection("Sever Discord")
-
-Tabs.Status:AddButton({
-    Title = "Sever Discord PhatCrystal",
-    Description = "Click to copy the Discord link",
-    Callback = function()
-        setclipboard("https://discord.gg/hyGgHBudcs")
-        print("Discord link copied!")
-    end
-})
-
-
-local SeverZzz = Tabs.Status:AddSection("Sever")
-Tabs.Status:AddButton({
-	Title = "Rejoin Server",
-	Description = "",
-	Callback = function()
-		game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
-	end
-})
-
-Tabs.Status:AddButton({
-	Title = "Hop Server",
-	Description = "",
-	Callback = function()
-		Hop()
-	end
-})
-
-function Hop()
-	local PlaceID = game.PlaceId
-	local AllIDs = {}
-	local foundAnything = ""
-	local actualHour = os.date("!*t").hour
-	local Deleted = false
-	function TPReturner()
-		local Site;
-		if foundAnything == "" then
-			Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
-		else
-			Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
-		end
-		local ID = ""
-		if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-			foundAnything = Site.nextPageCursor
-		end
-		local num = 0;
-		for i,v in pairs(Site.data) do
-			local Possible = true
-			ID = tostring(v.id)
-			if tonumber(v.maxPlayers) > tonumber(v.playing) then
-				for _,Existing in pairs(AllIDs) do
-					if num ~= 0 then
-						if ID == tostring(Existing) then
-							Possible = false
-						end
-					else
-						if tonumber(actualHour) ~= tonumber(Existing) then
-							local delFile = pcall(function()
-								AllIDs = {}
-								table.insert(AllIDs, actualHour)
-							end)
-						end
-					end
-					num = num + 1
-				end
-				if Possible == true then
-					table.insert(AllIDs, ID)
-					wait()
-					pcall(function()
-						wait()
-						game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
-					end)
-					wait(4)
-				end
-			end
-		end
-	end
-	function Teleport() 
-		while wait() do
-			pcall(function()
-				TPReturner()
-				if foundAnything ~= "" then
-					TPReturner()
-				end
-			end)
-		end
-	end
-	Teleport()
-end     
-
-local SeverOw = Tabs.Status:AddSection("Status Sever")
-local v529 = Tabs.Status:AddParagraph({
-        Title = "Elite",
-        Content = "Status Elite"
-    });
-    spawn(function()
-        while wait() do
-            pcall(function()
-                if (game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban")) then
-                    v529:SetDesc("Elite Boss: ✅️ | Killed:  " .. game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress"));
-                else
-                    v529:SetDesc("Elite Boss: ❌️ | Killed: " .. game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress"));
-                end
-            end);
-        end
-    end);
-
-local v104 = Tabs.Status:AddParagraph({
-    Title = "Leviathan Island",
-    Content = "Status Leviathan Island"
-});
-spawn(function()
-    pcall(function()
-        while wait() do
-            if game:GetService("Workspace").Map:FindFirstChild("FrozenDimension") then
-                v104:SetDesc("✅️");
-            else
-                v104:SetDesc("❌️");
-            end
-        end
-    end);
-end);
-
-local v169 = Tabs.Status:AddParagraph({
-    Title = "Volcanic Island",
-    Content = "Status Volcanic Island"
-});
-spawn(function()
-    pcall(function()
-        while wait() do
-            if ggame:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
-                v169:SetDesc("volcano island: ✅️");
-            else
-                v169:SetDesc("volcano island: ❌️");
-            end
-        end
-    end);
-end);
