@@ -3949,14 +3949,14 @@ local SettingFarm = Tabs.Setting:AddSection("Setting")
  local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true })
 
     ToggleFastAttack:OnChanged(function(Value)
-     _G.FastAttack = Value
+     _G.FastAttackFiFai = Value
     end)
     Options.ToggleFastAttack:SetValue(true)
 
 spawn(function()
 	while wait(0.4) do
 		pcall(function()
-			if _G.FastAttack then
+			if _G.FastAttackFiFai then
 				repeat wait(0)
 					 
 				until not _G.FastAttack
