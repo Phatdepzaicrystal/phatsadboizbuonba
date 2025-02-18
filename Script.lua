@@ -6441,7 +6441,7 @@ Tabs.Status:AddButton({
 })
 
 
-local Statuss = Tabs.Status:AddSection("Sever")
+local Sever = Tabs.Status:AddSection("Sever")
 Tabs.Status:AddButton({
 	Title = "Rejoin Server",
 	Description = "",
@@ -6520,6 +6520,7 @@ function Hop()
 	end
 	Teleport()
 end     
+
 local SeverOw = Tabs.Status:AddSection("Status Sever")
 local v529 = Tabs.Status:AddParagraph({
         Title = "Elite",
