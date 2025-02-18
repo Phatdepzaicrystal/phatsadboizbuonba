@@ -6514,7 +6514,6 @@ Tabs.Status:AddButton({
 	end
 })
 
-
 Tabs.Status:AddButton({
 	Title = "Hop Server",
 	Description = "",
@@ -6613,6 +6612,22 @@ spawn(function()
                 v104:SetDesc("✅️");
             else
                 v104:SetDesc("❌️");
+            end
+        end
+    end);
+end);
+
+local v169 = Tabs.Status:AddParagraph({
+    Title = "Volcanic Island",
+    Content = "Status Volcanic Island"
+});
+spawn(function()
+    pcall(function()
+        while wait() do
+            if ggame:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
+                v169:SetDesc("volcano island: ✅️");
+            else
+                v169:SetDesc("volcano island: ❌️");
             end
         end
     end);
