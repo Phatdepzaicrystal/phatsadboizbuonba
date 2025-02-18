@@ -6441,7 +6441,7 @@ Tabs.Status:AddButton({
 })
 
 
-local Sever = Tabs.Status:AddSection("Sever")
+local SeverZzz = Tabs.Status:AddSection("Sever")
 Tabs.Status:AddButton({
 	Title = "Rejoin Server",
 	Description = "",
