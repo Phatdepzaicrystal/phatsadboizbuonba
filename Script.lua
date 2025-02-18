@@ -4350,9 +4350,30 @@ spawn(function()
     end);
 end);
 
+local AutoV3 = Tabs.Setting:AddToggle("ToggleAutoT", {
+    Title = "Auto Active V3",
+    Description = "",
+    Default = false
+});
+AutoV3:OnChanged(function(Siu)
+    _G.AutoT = Siu;
+end);
+Options.ToggleAutoT:SetValue(false);
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoT then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, "T", false, game);
+                wait();
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, "T", false, game);
+            end
+        end);
+    end
+end);
+		
 local v86 = Tabs.Setting:AddToggle("ToggleAutoY", {
-    Title = "Bật Tộc V4",
-    Description = "turn on v4",
+    Title = "Auto Active V4",
+    Description = "",
     Default = false
 });
 v86:OnChanged(function(v274)
@@ -4372,7 +4393,7 @@ spawn(function()
 end);
 local v87 = Tabs.Setting:AddToggle("ToggleAutoKen", {
     Title = "Bật Haki Quan Sât",
-    Description = "turn on kentrick",
+    Description = "",
     Default = false
 });
 v87:OnChanged(function(v275)
@@ -4388,7 +4409,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.AutoKen then
-                game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("Ken", true);
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game);
+                wait();
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game);
             end
         end);
     end
