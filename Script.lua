@@ -6441,7 +6441,7 @@ Tabs.Status:AddButton({
 })
 
 
-local Status = Tabs.Status:AddSection("Sever")
+local Statuss = Tabs.Status:AddSection("Sever")
 Tabs.Status:AddButton({
 	Title = "Rejoin Server",
 	Description = "",
@@ -6545,9 +6545,9 @@ spawn(function()
     pcall(function()
         while wait() do
             if game:GetService("Workspace").Map:FindFirstChild("FrozenDimension") then
-                v104:SetDesc(":white_check_mark:");
+                v104:SetDesc("✅️");
             else
-                v104:SetDesc(":x:");
+                v104:SetDesc("❌️");
             end
         end
     end);
