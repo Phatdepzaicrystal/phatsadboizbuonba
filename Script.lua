@@ -2589,9 +2589,9 @@ spawn(function()
     pcall(function()
         while wait() do
             if ggame:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland") then
-                v169:SetDesc("volcano island: ✅️");
+                v169:SetDesc("✅️");
             else
-                v169:SetDesc("volcano island: ❌️");
+                v169:SetDesc("❌️");
             end
         end
     end);
@@ -4551,7 +4551,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.AutoKen then
-                game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game);
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", true, game);
             end
         end);
     end
@@ -5537,33 +5537,63 @@ spawn(function()
 end)
 
 
-local ToggleNextIsland = Tabs.Raid:AddToggle("ToggleNextIsland", {Title = "Auto Next Island", Default = false })
-ToggleNextIsland:OnChanged(function(Value)
-    AutoNextIsland = Value
-end)
-Options.ToggleNextIsland:SetValue(false)
+local v140 = Tabs.Raid:AddToggle("ToggleNextIsland", {
+    Title = "Auto Kill&Tween To Next Island",
+    Description = "",
+    Default = false
+});
+v140:OnChanged(function(v356)
+    AutoNextIsland = v356;
+    if not v356 then
+        _G.AutoNear = false;
+    end
+end);
+Options.ToggleNextIsland:SetValue(false);
 spawn(function()
+    local v357 = {};
     while task.wait() do
         if AutoNextIsland then
             pcall(function()
-                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true then
-                    if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
-                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5").CFrame * CFrame.new(0,70,100))
-                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") then
-                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4").CFrame * CFrame.new(0,70,100))
-                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") then
-                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3").CFrame * CFrame.new(0,70,100))
-                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") then
-                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2").CFrame * CFrame.new(0,70,100))
-                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
-                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1").CFrame * CFrame.new(0,70,100))
+                local v806 = game.Players.LocalPlayer.Character;
+                if (v806 and v806:FindFirstChild("HumanoidRootPart")) then
+                    local v900 = game:GetService("Workspace")['_WorldOrigin'].Locations;
+                    local v901 = v806.HumanoidRootPart.Position;
+                    if (((v901 - Vector3.new(- 6438.73535, 250.645355, - 4501.50684)).Magnitude < 1) or ((v901 - Vector3.new(- 5017.40869, 314.844055, - 2823.0127)).Magnitude < 1)) then
+                        v357 = {};
+                    end
+                    if v900:FindFirstChild("Island 1") then
+                        _G.AutoNear = true;
+                    end
+                    if (v900:FindFirstChild("Island 2") and not v357["Island 2"]) then
+                        Tween(v900:FindFirstChild("Island 2").CFrame);
+                        v357["Island 2"] = true;
+                        AutoNextIsland = false;
+                        wait();
+                        AutoNextIsland = true;
+                    elseif (v900:FindFirstChild("Island 3") and not v357["Island 3"]) then
+                        Tween(v900:FindFirstChild("Island 3").CFrame);
+                        v357["Island 3"] = true;
+                        AutoNextIsland = false;
+                        wait();
+                        AutoNextIsland = true;
+                    elseif (v900:FindFirstChild("Island 4") and not v357["Island 4"]) then
+                        Tween(v900:FindFirstChild("Island 4").CFrame);
+                        v357["Island 4"] = true;
+                        AutoNextIsland = false;
+                        wait();
+                        AutoNextIsland = true;
+                    elseif (v900:FindFirstChild("Island 5") and not v357["Island 5"]) then
+                        Tween(v900:FindFirstChild("Island 5").CFrame);
+                        v357["Island 5"] = true;
+                        AutoNextIsland = false;
+                        wait();
+                        AutoNextIsland = true;
                     end
                 end
-            end)
+            end);
         end
     end
-end)
-
+end);
 
 
 local ToggleAwake = Tabs.Raid:AddToggle("ToggleAwake", {Title = "Auto Awake", Default = false })
