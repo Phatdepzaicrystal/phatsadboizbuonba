@@ -4533,29 +4533,6 @@ spawn(function()
         end);
     end
 end);
-local v87 = Tabs.Setting:AddToggle("ToggleAutoKen", {
-    Title = "Auto Utra Instict",
-    Description = "",
-    Default = false
-});
-v87:OnChanged(function(v275)
-    _G.AutoKen = v275;
-    if v275 then
-        game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("Ken", true);
-    else
-        game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("Ken", false);
-    end
-end);
-Options.ToggleAutoKen:SetValue(false);
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.AutoKen then
-                game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", true, game);
-            end
-        end);
-    end
-end);
 -----------------------------------------Tab Player------------------------------------------------------------
 local Playerslist = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
