@@ -7467,7 +7467,7 @@ function UpdateRealFruitEsp()
         end
     end
 end
-local v56 = Tabs.Misc:AddSection("Code");
+local CodeX2 = Tabs.Misc:AddSection("Code");
 local v150 = {
     "KITT_RESET",
     "Sub2UncleKizaru",
