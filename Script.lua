@@ -3028,7 +3028,7 @@ local BoneCFrame2 = CFrame.new(- 9515.75, 174.8521728515625, 6079.40625);
             end
         end
     end);
-local BoneCFrame2 = CFrame.new(- 9515.75, 174.8521728515625, 6079.40625);
+    local v488 = CFrame.new(- 9515.75, 174.8521728515625, 6079.40625);
     spawn(function()
         while wait() do
             if _G.AutoBoneNoQuest then
@@ -6027,18 +6027,6 @@ spawn(function()
         end
     end);
 end);
-local v149 = Tabs.Race:AddToggle("ToggleUpgrade", {
-    Title = "Mua Gear v4",
-    Description = "buy gear upgrade",
-    Default = false
-});
-Options:OnChanged(function(v365)
-    _G.AutoUpgrade = v365;
-    if _G.AutoUpgrade then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("UpgradeRace", "Buy");
-    end
-end);
-
 if Third_Sea then
 local ToggleMirageIsland = Tabs.Race:AddToggle("ToggleMirageIsland", {Title = "Hop Mirage Island", Default = false })
 ToggleMirageIsland:OnChanged(function(Value)
