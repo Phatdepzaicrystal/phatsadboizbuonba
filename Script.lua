@@ -1,3 +1,26 @@
+--//Config
+if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    repeat task.wait()
+        if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
+            if getgenv().Team == "Marines" then
+                for i, h in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Marines"].Frame.TextButton.Activated)) do
+                    for a, z in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                       z:Fire() 
+                    end
+                    h.Function()
+                end 
+            else
+                for i, h in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Pirates"].Frame.TextButton.Activated)) do
+                    for a, z in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                       z:Fire() 
+                    end
+                    h.Function()
+                end 
+            end
+        end
+    until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
+end
+
 ----repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
 ----loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()--------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
@@ -56,28 +79,6 @@ elseif placeId == 7449423635 then
 Third_Sea = true
 end
 
---//Config
-if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
-    repeat task.wait()
-        if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
-            if getgenv().Team == "Marines" then
-                for i, h in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Marines"].Frame.TextButton.Activated)) do
-                    for a, z in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-                       z:Fire() 
-                    end
-                    h.Function()
-                end 
-            else
-                for i, h in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Pirates"].Frame.TextButton.Activated)) do
-                    for a, z in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-                       z:Fire() 
-                    end
-                    h.Function()
-                end 
-            end
-        end
-    until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
-end
 local players = game:GetService("Players")
 game:GetService("StarterGui"):SetCore("SendNotification", {
    Title = "PhatCrystal Hub";
