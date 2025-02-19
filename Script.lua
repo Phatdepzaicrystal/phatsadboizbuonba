@@ -7102,7 +7102,50 @@ Tabs.Shop:AddButton({
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","2")
 	end
 })
-
+Tabs.Shop:AddButton({
+    Title = "Change Ghoul Race",
+    Description = "",
+    Callback = function()
+        local v366 = {
+            [1] = "Ectoplasm",
+            [2] = "Change",
+            [3] = 4
+        };
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v366));
+    end
+});
+Tabs.Shop:AddButton({
+    Title = "Change Cyborg Race",
+    Description = "",
+    Callback = function()
+        local v367 = {
+            [1] = "CyborgTrainer",
+            [2] = "Buy"
+        };
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v367));
+    end
+});
+Tabs.Shop:AddButton({
+    Title = "Change Draco Race",
+    Description = "Sea 3 Plz",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(5661.5322265625, 1013.0907592773438, - 334.9649963378906));
+        Tween2(CFrame.new(5814.42724609375, 1208.3267822265625, 884.5785522460938));
+        local v368 = Vector3.new(5814.42724609375, 1208.3267822265625, 884.5785522460938);
+        local v369 = game.Players.LocalPlayer;
+        local v370 = v369.Character or v369.CharacterAdded:Wait() ;
+        repeat
+            wait();
+        until (v370.HumanoidRootPart.Position - v368).Magnitude < 1
+        local v371 = {
+            [1] = {
+                NPC = "Dragon Wizard",
+                Command = "DragonRace"
+            }
+        };
+        game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/InteractDragonQuest"):InvokeServer(unpack(v371));
+    end
+});
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
