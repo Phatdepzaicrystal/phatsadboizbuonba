@@ -4716,862 +4716,147 @@ end)
 
 local Items = Tabs.Item:AddSection("Items Farm")
 
-local v69 = Tabs.Item:AddToggle("ToggleAutoSaber", {
-    Title = "Auto Saber",
-    Description = "",
-    Default = false
-});
-v69:OnChanged(function(v260)
-    _G.Auto_Saber = v260;
-end);
-Options.ToggleAutoSaber:SetValue(false);
-spawn(function()
-    while task.wait() do
-        if (_G.Auto_Saber and (game.Players.LocalPlayer.Data.Level.Value >= 200)) then
-            pcall(function()
-                if (game:GetService("Workspace").Map.Jungle.Final.Part.Transparency == 0) then
-                    if (game:GetService("Workspace").Map.Jungle.QuestPlates.Door.Transparency == 0) then
-                        if ((CFrame.new(- 1612.55884, 36.9774132, 148.719543, 0.37091279, 3.071715e-9, - 0.928667724, 3.970995e-8, 1, 1.9167935e-8, 0.928667724, - 4.398698e-8, 0.37091279).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100) then
-                            Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame);
-                            wait(1);
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate1.Button.CFrame;
-                            wait(1);
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate2.Button.CFrame;
-                            wait(1);
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate3.Button.CFrame;
-                            wait(1);
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate4.Button.CFrame;
-                            wait(1);
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Jungle.QuestPlates.Plate5.Button.CFrame;
-                            wait(1);
-                        else
-                            Tween(CFrame.new(- 1612.55884, 36.9774132, 148.719543, 0.37091279, 3.071715e-9, - 0.928667724, 3.970995e-8, 1, 1.9167935e-8, 0.928667724, - 4.398698e-8, 0.37091279));
-                        end
-                    elseif (game:GetService("Workspace").Map.Desert.Burn.Part.Transparency == 0) then
-                        if (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Torch") or game.Players.LocalPlayer.Character:FindFirstChild("Torch")) then
-                            EquipTool("Torch");
-                            Tween(CFrame.new(1114.61475, 5.04679728, 4350.22803, - 0.648466587, - 1.2879909e-9, 0.761243105, - 5.706529e-10, 1, 1.2058454e-9, - 0.761243105, 3.4754488e-10, - 0.648466587));
-                        else
-                            Tween(CFrame.new(- 1610.00757, 11.5049858, 164.001587, 0.984807551, - 0.167722285, - 0.0449818149, 0.17364943, 0.951244235, 0.254912198, 0.00003423728, - 0.258850515, 0.965917408));
-                        end
-                    elseif (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "SickMan") ~= 0) then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "GetCup");
-                        wait(0.5);
-                        EquipTool("Cup");
-                        wait(0.5);
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "FillCup", game:GetService("Players").LocalPlayer.Character.Cup);
-                        wait(0);
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "SickMan");
-                    elseif (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") == nil) then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon");
-                    elseif (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") == 0) then
-                        if (game:GetService("Workspace").Enemies:FindFirstChild("Mob Leader") or game:GetService("ReplicatedStorage"):FindFirstChild("Mob Leader")) then
-                            Tween(CFrame.new(- 2967.59521, - 4.91089821, 5328.70703, 0.342208564, - 0.0227849055, 0.939347804, 0.0251603816, 0.999569714, 0.0150796166, - 0.939287126, 0.0184739735, 0.342634559));
-                            for v1799, v1800 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if (v1800.Name == "Mob Leader") then
-                                    if game:GetService("Workspace").Enemies:FindFirstChild("Mob Leader [Lv. 120] [Boss]") then
-                                        if (v1800:FindFirstChild("Humanoid") and v1800:FindFirstChild("HumanoidRootPart") and (v1800.Humanoid.Health > 0)) then
-                                            repeat
-                                                task.wait(_G.Fast_Delay);
-                                                AutoHaki();
-                                                EquipTool(SelectWeapon);
-                                                v1800.HumanoidRootPart.CanCollide = false;
-                                                v1800.Humanoid.WalkSpeed = 0;
-                                                v1800.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
-                                                Tween(v1800.HumanoidRootPart.CFrame * Pos);
-                                                AttackNoCoolDown();
-                                            until (v1800.Humanoid.Health <= 0) or not _G.Auto_Saber
-                                        end
-                                    end
-                                    if game:GetService("ReplicatedStorage"):FindFirstChild("Mob Leader") then
-                                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Mob Leader").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
-                                    end
-                                end
-                            end
-                        end
-                    elseif (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") == 1) then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon");
-                        wait(0.5);
-                        EquipTool("Relic");
-                        wait(0.5);
-                        Tween(CFrame.new(- 1404.91504, 29.9773273, 3.80598116, 0.876514494, 5.6690688e-9, 0.481375456, 2.53852e-8, 1, - 5.799956e-8, - 0.481375456, 6.3057264e-8, 0.876514494));
-                    end
-                elseif (game:GetService("Workspace").Enemies:FindFirstChild("Saber Expert") or game:GetService("ReplicatedStorage"):FindFirstChild("Saber Expert")) then
-                    for v1460, v1461 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if (v1461:FindFirstChild("Humanoid") and v1461:FindFirstChild("HumanoidRootPart") and (v1461.Humanoid.Health > 0)) then
-                            if (v1461.Name == "Saber Expert") then
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    EquipTool(SelectWeapon);
-                                    Tween(v1461.HumanoidRootPart.CFrame * Pos);
-                                    v1461.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
-                                    v1461.HumanoidRootPart.Transparency = 1;
-                                    v1461.Humanoid.JumpPower = 0;
-                                    v1461.Humanoid.WalkSpeed = 0;
-                                    v1461.HumanoidRootPart.CanCollide = false;
-                                    bringmob = true;
-                                    FarmPos = v1461.HumanoidRootPart.CFrame;
-                                    MonFarm = v1461.Name;
-                                    AttackNoCoolDown();
-                                until (v1461.Humanoid.Health <= 0) or not _G.Auto_Saber
-                                bringmob = true;
-                                if (v1461.Humanoid.Health <= 0) then
-                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "PlaceRelic");
-                                end
-                            end
-                        end
-                    end
-                end
-            end);
-        end
-    end
-end);
-local v70 = Tabs.Item:AddToggle("ToggleAutoPoleV1", {
-    Title = "Auto Pole V1",
-    Description = "",
-    Default = false
-});
-v70:OnChanged(function(v261)
-    _G.Auto_PoleV1 = v261;
-end);
-Options.ToggleAutoPoleV1:SetValue(false);
-local v71 = CFrame.new(- 7748.0185546875, 5606.80615234375, - 2305.898681640625);
-spawn(function()
-    while wait() do
-        if _G.Auto_PoleV1 then
-            pcall(function()
-                if game:GetService("Workspace").Enemies:FindFirstChild("Thunder God") then
-                    for v1042, v1043 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if (v1043.Name == "Thunder God") then
-                            if (v1043:FindFirstChild("Humanoid") and v1043:FindFirstChild("HumanoidRootPart") and (v1043.Humanoid.Health > 0)) then
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    AutoHaki();
-                                    EquipTool(SelectWeapon);
-                                    v1043.HumanoidRootPart.CanCollide = false;
-                                    v1043.Humanoid.WalkSpeed = 0;
-                                    v1043.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    Tween(v1043.HumanoidRootPart.CFrame * Pos);
-                                    AttackNoCoolDown();
-                                until not _G.Auto_PoleV1 or not v1043.Parent or (v1043.Humanoid.Health <= 0)
-                            end
-                        end
-                    end
-                elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v71.Position).Magnitude < 1500) then
-                    Tween(v71);
-                end
-                Tween(CFrame.new(- 7748.0185546875, 5606.80615234375, - 2305.898681640625));
-                if game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God") then
-                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
-                end
-            end);
-        end
-    end
-end);
-local v72 = Tabs.Item:AddToggle("ToggleAutoSaw", {
-    Title = "lấy Cưa Cá Mập",
-    Description = "get saw shark",
-    Default = false
-});
-v72:OnChanged(function(v262)
-    _G.Auto_Saw = v262;
-end);
-Options.ToggleAutoSaw:SetValue(false);
-spawn(function()
-    while wait() do
-        if _G.Auto_Saw then
-            pcall(function()
-                if game:GetService("Workspace").Enemies:FindFirstChild("The Saw") then
-                    for v1044, v1045 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if (v1045.Name == "The Saw") then
-                            if (v1045:FindFirstChild("Humanoid") and v1045:FindFirstChild("HumanoidRootPart") and (v1045.Humanoid.Health > 0)) then
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    AutoHaki();
-                                    EquipTool(SelectWeapon);
-                                    v1045.HumanoidRootPart.CanCollide = false;
-                                    v1045.Humanoid.WalkSpeed = 0;
-                                    v1045.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    Tween(v1045.HumanoidRootPart.CFrame * Pos);
-                                    AttackNoCoolDown();
-                                until not _G.Auto_Saw or not v1045.Parent or (v1045.Humanoid.Health <= 0)
-                            end
-                        end
-                    end
-                elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v71.Position).Magnitude < 1500) then
-                    Tween(CFrame.new(- 690.33081054688, 15.09425163269, 1582.2380371094));
-                end
-                Tween(CFrame.new(- 690.33081054688, 15.09425163269, 1582.2380371094));
-                if game:GetService("ReplicatedStorage"):FindFirstChild("The Saw") then
-                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("The Saw").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
-                end
-            end);
-        end
-    end
-end);
-local v73 = Tabs.Item:AddToggle("ToggleAutoWarden", {
-    Title = "lấy Kiếm Quản Ngục",
-    Description = "gets Prisoner Sword",
-    Default = false
-});
-v73:OnChanged(function(v263)
-    _G.Auto_Warden = v263;
-end);
-Options.ToggleAutoWarden:SetValue(false);
-spawn(function()
-    while wait() do
-        if _G.Auto_Warden then
-            pcall(function()
-                if game:GetService("Workspace").Enemies:FindFirstChild("Chief Warden") then
-                    for v1046, v1047 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if (v1047.Name == "Chief Warden") then
-                            if (v1047:FindFirstChild("Humanoid") and v1047:FindFirstChild("HumanoidRootPart") and (v1047.Humanoid.Health > 0)) then
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    AutoHaki();
-                                    EquipTool(SelectWeapon);
-                                    v1047.HumanoidRootPart.CanCollide = false;
-                                    v1047.Humanoid.WalkSpeed = 0;
-                                    v1047.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    Tween(v1047.HumanoidRootPart.CFrame * Pos);
-                                    AttackNoCoolDown();
-                                until not _G.Auto_Warden or not v1047.Parent or (v1047.Humanoid.Health <= 0)
-                            end
-                        end
-                    end
-                elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v74.Position).Magnitude < 1500) then
-                    Tween(CFrame.new(5186.14697265625, 24.86684226989746, 832.1885375976562));
-                end
-                Tween(CFrame.new(5186.14697265625, 24.86684226989746, 832.1885375976562));
-                if game:GetService("ReplicatedStorage"):FindFirstChild("Chief Warden") then
-                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Chief Warden").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
-                end
-            end);
-        end
-    end
-end);
-if Sea3 then
-    local v533 = Tabs.Item:AddToggle("ToggleHallow", {
-        Title = "Auto Hallow Scythe",
-        Description = "",
-        Default = false
-    });
-    v533:OnChanged(function(v640)
-        AutoHallowSycthe = v640;
-    end);
-    Options.ToggleHallow:SetValue(false);
+local Items = Tabs.Item:AddSection("Items Farm")
+
+if Third_Sea then
+    local ToggleHallow = Tabs.Item:AddToggle("ToggleHallow", {Title = "Auto Hallow Scythe", Default = false })
+
+    ToggleHallow:OnChanged(function(Value)
+        AutoHallowSycthe = Value
+    end)
+    Options.ToggleHallow:SetValue(false)
     spawn(function()
         while wait() do
             if AutoHallowSycthe then
                 pcall(function()
                     if game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper") then
-                        for v1462, v1463 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if string.find(v1463.Name, "Soul Reaper") then
-                                repeat
-                                    wait(_G.Fast_Delay);
-                                    AttackNoCoolDown();
-                                    AutoHaki();
-                                    EquipTool(SelectWeapon);
-                                    v1463.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
-                                    Tween(v1463.HumanoidRootPart.CFrame * Pos);
-                                    v1463.HumanoidRootPart.Transparency = 1;
-                                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge);
-                                until (v1463.Humanoid.Health <= 0) or (AutoHallowSycthe == false)
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if string.find(v.Name , "Soul Reaper") then
+                                repeat wait(0)
+                                     
+                                    AutoHaki()
+                                    EquipTool(SelectWeapon)
+                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+                                    v.HumanoidRootPart.Transparency = 1
+                                    sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+									--Click
+                                until v.Humanoid.Health <= 0 or AutoHallowSycthe == false
                             end
                         end
-                    elseif (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hallow Essence")) then
-                        repeat
-                            Tween(CFrame.new(- 8932.322265625, 146.83154296875, 6062.55078125));
-                            wait();
-                        until (CFrame.new(- 8932.322265625, 146.83154296875, 6062.55078125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 8
-                        wait();
-                        EquipTool("Hallow Essence");
-                    elseif game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper") then
-                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
+                    elseif game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hallow Essence") then
+                        repeat Tween(CFrame.new(-8932.322265625, 146.83154296875, 6062.55078125)) wait() until (CFrame.new(-8932.322265625, 146.83154296875, 6062.55078125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 8                        
+                        EquipTool("Hallow Essence")
                     else
-                    end
-                end);
-            end
-        end
-    end);
-    spawn(function()
-        while wait() do
-            if AutoHallowSycthe then
-                local v857 = {
-                    [1] = "Bones",
-                    [2] = "Buy",
-                    [3] = 1,
-                    [4] = 1
-                };
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v857));
-            end
-        end
-    end);
-    local v534 = Tabs.Item:AddToggle("ToggleYama", {
-        Title = "Auto Yama",
-        Description = "",
-        Default = false
-    });
-    v534:OnChanged(function(v641)
-        _G.AutoYama = v641;
-    end);
-    Options.ToggleYama:SetValue(false);
-    spawn(function()
-        while wait() do
-            if _G.AutoYama then
-                if (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress") >= 30) then
-                    repeat
-                        wait();
-                        fireclickdetector(game:GetService("Workspace").Map.Waterfall.SealedKatana.Handle.ClickDetector);
-                    until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Yama") or not _G.AutoYama
-                end
-            end
-        end
-    end);
-    local v535 = Tabs.Item:AddToggle("ToggleTushita", {
-        Title = "Tushita",
-        Description = "get tushita",
-        Default = false
-    });
-    v535:OnChanged(function(v642)
-        AutoTushita = v642;
-    end);
-    Options.ToggleTushita:SetValue(false);
-    spawn(function()
-        while wait() do
-            if AutoTushita then
-                if game:GetService("Workspace").Enemies:FindFirstChild("Longma") then
-                    for v1340, v1341 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if ((v1341.Name == ("Longma" or (v1341.Name == "Longma"))) and (v1341.Humanoid.Health > 0) and v1341:IsA("Model") and v1341:FindFirstChild("Humanoid") and v1341:FindFirstChild("HumanoidRootPart")) then
-                            repeat
-                                wait(_G.Fast_Delay);
-                                AttackNoCoolDown();
-                                AutoHaki();
-                                if not game.Players.LocalPlayer.Character:FindFirstChild(SelectWeapon) then
-                                    wait();
-                                    EquipTool(SelectWeapon);
-                                end
-                                FarmPos = v1341.HumanoidRootPart.CFrame;
-                                v1341.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
-                                v1341.Humanoid.JumpPower = 0;
-                                v1341.Humanoid.WalkSpeed = 0;
-                                v1341.HumanoidRootPart.CanCollide = false;
-                                v1341.Humanoid:ChangeState(11);
-                                Tween(v1341.HumanoidRootPart.CFrame * Pos);
-                            until not AutoTushita or not v1341.Parent or (v1341.Humanoid.Health <= 0)
-                        end
-                    end
-                else
-                    Tween(CFrame.new(- 10238.875976563, 389.7912902832, - 9549.7939453125));
-                end
-            end
-        end
-    end);
-    local v536 = Tabs.Item:AddToggle("ToggleHoly", {
-        Title = "Auto Holy Torch",
-        Description = "",
-        Default = false
-    });
-    v536:OnChanged(function(v643)
-        _G.Auto_Holy_Torch = v643;
-    end);
-    Options.ToggleHoly:SetValue(false);
-    spawn(function()
-        while wait() do
-            if _G.Auto_Holy_Torch then
-                pcall(function()
-                    wait();
-                    repeat
-                        Tween(CFrame.new(- 10752, 417, - 9366));
-                        wait();
-                    until not _G.Auto_Holy_Torch or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(- 10752, 417, - 9366)).Magnitude <= 10)
-                    wait();
-                    repeat
-                        Tween(CFrame.new(- 11672, 334, - 9474));
-                        wait();
-                    until not _G.Auto_Holy_Torch or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(- 11672, 334, - 9474)).Magnitude <= 10)
-                    wait();
-                    repeat
-                        Tween(CFrame.new(- 12132, 521, - 10655));
-                        wait();
-                    until not _G.Auto_Holy_Torch or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(- 12132, 521, - 10655)).Magnitude <= 10)
-                    wait();
-                    repeat
-                        Tween(CFrame.new(- 13336, 486, - 6985));
-                        wait();
-                    until not _G.Auto_Holy_Torch or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(- 13336, 486, - 6985)).Magnitude <= 10)
-                    wait();
-                    repeat
-                        Tween(CFrame.new(- 13489, 332, - 7925));
-                        wait();
-                    until not _G.Auto_Holy_Torch or ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(- 13489, 332, - 7925)).Magnitude <= 10)
-                end);
-            end
-        end
-    end);
-end
-local v75 = Tabs.Item:AddToggle("ToggleAutoCanvander", {
-    Title = "Auto Cavander",
-    Description = "",
-    Default = false
-});
-v75:OnChanged(function(v264)
-    _G.Auto_Canvander = v264;
-end);
-Options.ToggleAutoCanvander:SetValue(false);
-spawn(function()
-    while wait() do
-        if _G.Auto_Canvander then
-            pcall(function()
-                if game:GetService("Workspace").Enemies:FindFirstChild("Beautiful Pirate") then
-                    for v1048, v1049 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if (v1049.Name == "Beautiful Pirate") then
-                            if (v1049:FindFirstChild("Humanoid") and v1049:FindFirstChild("HumanoidRootPart") and (v1049.Humanoid.Health > 0)) then
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    AutoHaki();
-                                    EquipTool(SelectWeapon);
-                                    v1049.HumanoidRootPart.CanCollide = false;
-                                    v1049.Humanoid.WalkSpeed = 0;
-                                    v1049.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    Tween(v1049.HumanoidRootPart.CFrame * Pos);
-                                    AttackNoCoolDown();
-                                until not _G.Auto_Canvander or not v1049.Parent or (v1049.Humanoid.Health <= 0)
-                            end
-                        end
-                    end
-                elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v71.Position).Magnitude < 1500) then
-                    Tween(CFrame.new(5311.07421875, 426.0243835449219, 165.12762451171875));
-                end
-                Tween(CFrame.new(5311.07421875, 426.0243835449219, 165.12762451171875));
-                if game:GetService("ReplicatedStorage"):FindFirstChild("Beautiful Pirate") then
-                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Beautiful Pirate").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
-                end
-            end);
-        end
-    end
-end);
-local v76 = Tabs.Item:AddToggle("ToggleAutoMusketeerHat", {
-    Title = "Auto Musketteers Hat",
-    Description = "",
-    Default = false
-});
-v76:OnChanged(function(v265)
-    _G.Auto_MusketeerHat = v265;
-end);
-Options.ToggleAutoMusketeerHat:SetValue(false);
-spawn(function()
-    pcall(function()
-        while wait(0.1) do
-            if _G.Auto_MusketeerHat then
-                if ((game:GetService("Players").LocalPlayer.Data.Level.Value >= 1800) and (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CitizenQuestProgress").KilledBandits == false)) then
-                    if (string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Forest Pirate") and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "50") and (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true)) then
-                        if game:GetService("Workspace").Enemies:FindFirstChild("Forest Pirate") then
-                            for v1559, v1560 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if (v1560.Name == "Forest Pirate") then
-                                    repeat
-                                        task.wait(_G.Fast_Delay);
-                                        pcall(function()
-                                            EquipTool(SelectWeapon);
-                                            AutoHaki();
-                                            v1560.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                            Tween(v1560.HumanoidRootPart.CFrame * Pos);
-                                            v1560.HumanoidRootPart.CanCollide = false;
-                                            AttackNoCoolDown();
-                                            PosMon = v1560.HumanoidRootPart.CFrame;
-                                            MonFarm = v1560.Name;
-                                            bringmob = true;
-                                        end);
-                                    until (_G.Auto_MusketeerHat == false) or not v1560.Parent or (v1560.Humanoid.Health <= 0) or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false)
-                                    bringmob = false;
-                                end
-                            end
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper") then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
-                            bringmob = false;
-                            Tween(CFrame.new(- 13206.452148438, 425.89199829102, - 7964.5537109375));
-                        end
-                    else
-                        Tween(CFrame.new(- 12443.8671875, 332.40396118164, - 7675.4892578125));
-                        if ((Vector3.new(- 12443.8671875, 332.40396118164, - 7675.4892578125) - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 30) then
-                            wait(1.5);
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", "CitizenQuest", 1);
                         end
                     end
-                elseif ((game:GetService("Players").LocalPlayer.Data.Level.Value >= 1800) and (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CitizenQuestProgress").KilledBoss == false)) then
-                    if (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Captain Elephant") and (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true)) then
-                        if game:GetService("Workspace").Enemies:FindFirstChild("Captain Elephant") then
-                            for v1665, v1666 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if (v1666.Name == "Captain Elephant") then
-                                    OldCFrameElephant = v1666.HumanoidRootPart.CFrame;
-                                    repeat
-                                        task.wait(_G.Fast_Delay);
-                                        pcall(function()
-                                            EquipTool(SelectWeapon);
-                                            AutoHaki();
-                                            v1666.HumanoidRootPart.CanCollide = false;
-                                            v1666.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                            Tween(v1666.HumanoidRootPart.CFrame * Pos);
-                                            v1666.HumanoidRootPart.CanCollide = false;
-                                            v1666.HumanoidRootPart.CFrame = OldCFrameElephant;
-                                            AttackNoCoolDown();
-                                        end);
-                                    until (_G.Auto_MusketeerHat == false) or (v1666.Humanoid.Health <= 0) or not v1666.Parent or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false)
-                                end
-                            end
-                        else
-                            Tween(CFrame.new(- 13374.889648438, 421.27752685547, - 8225.208984375));
-                        end
-                    else
-                        Tween(CFrame.new(- 12443.8671875, 332.40396118164, - 7675.4892578125));
-                        if ((CFrame.new(- 12443.8671875, 332.40396118164, - 7675.4892578125).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4) then
-                            wait(1.5);
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CitizenQuestProgress", "Citizen");
-                        end
-                    end
-                elseif ((game:GetService("Players").LocalPlayer.Data.Level.Value >= 1800) and (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CitizenQuestProgress", "Citizen") == 2)) then
-                    Tween(CFrame.new(- 12512.138671875, 340.39279174805, - 9872.8203125));
-                end
+                end)
+    
             end
         end
-    end);
-end);
-local v77 = Tabs.Item:AddToggle("ToggleAutoObservationV2", {
-    Title = "Auto Ken V2",
-    Description = "",
-    Default = false
-});
-v77:OnChanged(function(v266)
-    _G.Auto_ObservationV2 = v266;
-end);
-Options.ToggleAutoObservationV2:SetValue(false);
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.Auto_ObservationV2 then
-                if (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CitizenQuestProgress", "Citizen") == 3) then
-                    _G.Auto_MusketeerHat = false;
-                    if (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Banana") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Apple") and game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Pineapple")) then
-                        repeat
-                            Tween(CFrame.new(- 12444.78515625, 332.40396118164, - 7673.1806640625));
-                            wait();
-                        until not _G.Auto_ObservationV2 or ((game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(- 12444.78515625, 332.40396118164, - 7673.1806640625)).Magnitude <= 10)
-                        wait(0.5);
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CitizenQuestProgress", "Citizen");
-                    elseif (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fruit Bowl") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Fruit Bowl")) then
-                        repeat
-                            Tween(CFrame.new(- 10920.125, 624.20275878906, - 10266.995117188));
-                            wait();
-                        until not _G.Auto_ObservationV2 or ((game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(- 10920.125, 624.20275878906, - 10266.995117188)).Magnitude <= 10)
-                        wait(0.5);
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("KenTalk2", "Start");
-                        wait(1);
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("KenTalk2", "Buy");
-                    else
-                        for v1561, v1562 in pairs(game:GetService("Workspace"):GetDescendants()) do
-                            if ((v1562.Name == "Apple") or (v1562.Name == "Banana") or (v1562.Name == "Pineapple")) then
-                                v1562.Handle.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 1, 10) ;
-                                wait();
-                                firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, v1562.Handle, 0);
-                                wait();
-                            end
-                        end
+    end)
+	
+	
+	spawn(function()
+           while wait(0.001) do
+           if AutoHallowSycthe then
+           local args = {
+            [1] = "Bones",
+            [2] = "Buy",
+            [3] = 1,
+            [4] = 1
+           }
+          
+           game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+           end
+           end
+           end)
+        
+           
+           local ToggleYama = Tabs.Item:AddToggle("ToggleYama", {Title = "Auto Get Yama", Default = false })
+           ToggleYama:OnChanged(function(Value)
+            _G.AutoYama = Value
+           end)
+           Options.ToggleYama:SetValue(false)
+           spawn(function()
+            while wait() do
+                if _G.AutoYama then
+                    if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress") >= 30 then
+                        repeat wait(.1)
+                            fireclickdetector(game:GetService("Workspace").Map.Waterfall.SealedKatana.Handle.ClickDetector)
+                        until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Yama") or not _G.AutoYama
                     end
-                else
-                    _G.Auto_MusketeerHat = true;
                 end
             end
-        end);
-    end
-end);
-local v78 = Tabs.Item:AddToggle("ToggleAutoRainbowHaki", {
-    Title = "Auto Ranbow Haki",
-    Description = "",
-    Default = false
-});
-v78:OnChanged(function(v267)
-    _G.Auto_RainbowHaki = v267;
-end);
-Options.ToggleAutoRainbowHaki:SetValue(false);
-spawn(function()
-    pcall(function()
-        while wait(0.1) do
-            if _G.Auto_RainbowHaki then
-                if not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                    Tween(CFrame.new(- 11892.0703125, 930.57672119141, - 8760.1591796875));
-                    if ((Vector3.new(- 11892.0703125, 930.57672119141, - 8760.1591796875) - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 30) then
-                        wait(1.5);
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("HornedMan", "Bet");
-                    end
-                elseif (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Stone")) then
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Stone") then
-                        for v1563, v1564 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if (v1564.Name == "Stone") then
-                                OldCFrameRainbow = v1564.HumanoidRootPart.CFrame;
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    EquipTool(SelectWeapon);
-                                    Tween(v1564.HumanoidRootPart.CFrame * Pos);
-                                    v1564.HumanoidRootPart.CanCollide = false;
-                                    v1564.HumanoidRootPart.CFrame = OldCFrameRainbow;
-                                    v1564.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    AttackNoCoolDown();
-                                until not _G.Auto_RainbowHaki or (v1564.Humanoid.Health <= 0) or not v1564.Parent or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
-                            end
+        end)
+
+
+        local ToggleTushita = Tabs.Item:AddToggle("ToggleTushita", {Title = "Auto Tushita", Default = false })
+        ToggleTushita:OnChanged(function(Value)
+            AutoTushita = Value
+        end)
+        Options.ToggleTushita:SetValue(false)
+           spawn(function()
+                   while wait() do
+                               if AutoTushita then
+                                   if game:GetService("Workspace").Enemies:FindFirstChild("Longma") then
+                                       for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                           if v.Name == ("Longma" or v.Name == "Longma") and v.Humanoid.Health > 0 and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+                                            repeat wait(0)
+                                                 
+                                                   AutoHaki()
+                                                   if not game.Players.LocalPlayer.Character:FindFirstChild(SelectWeapon) then
+                                                       wait()
+                                                       EquipTool(SelectWeapon)
+                                                   end
+                                                   FarmPos = v.HumanoidRootPart.CFrame
+                                                     --Click
+                                                   v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                                   v.Humanoid.JumpPower = 0
+                                                   v.Humanoid.WalkSpeed = 0
+                                                   v.HumanoidRootPart.CanCollide = false
+                                                   v.Humanoid:ChangeState(11)
+                                                   Tween(v.HumanoidRootPart.CFrame * Pos)
+                                               until not AutoTushita or not v.Parent or v.Humanoid.Health <= 0
+                                           end
+                                       end
+                                   else
+                                       Tween(CFrame.new(-10238.875976563, 389.7912902832, -9549.7939453125))
+                                   end
+                               end
+                           end
+                   end)
+
+
+                   local ToggleHoly = Tabs.Item:AddToggle("ToggleHoly", {Title = "Auto Holy Torch", Default = false })
+                   ToggleHoly:OnChanged(function(Value)
+                    _G.Auto_Holy_Torch = Value
+                   end)
+                   Options.ToggleHoly:SetValue(false)
+                   spawn(function()
+                    while wait() do
+                        if _G.Auto_Holy_Torch then
+                            pcall(function()
+                                wait(1)
+                                repeat Tween(CFrame.new(-10752, 417, -9366)) wait() until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-10752, 417, -9366)).Magnitude <= 10
+                                wait(1)
+                                repeat Tween(CFrame.new(-11672, 334, -9474)) wait() until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-11672, 334, -9474)).Magnitude <= 10
+                                wait(1)
+                                repeat Tween(CFrame.new(-12132, 521, -10655)) wait() until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-12132, 521, -10655)).Magnitude <= 10
+                                wait(1)
+                                repeat Tween(CFrame.new(-13336, 486, -6985)) wait() until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-13336, 486, -6985)).Magnitude <= 10
+                                wait(1)
+                                repeat Tween(CFrame.new(-13489, 332, -7925)) wait() until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-13489, 332, -7925)).Magnitude <= 10
+                            end)
                         end
-                    else
-                        Tween(CFrame.new(- 1086.11621, 38.8425903, 6768.71436));
                     end
-                elseif (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Hydra Leader")) then
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Hydra Leader") then
-                        for v1669, v1670 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if (v1670.Name == "Hydra Leader") then
-                                OldCFrameRainbow = v1670.HumanoidRootPart.CFrame;
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    EquipTool(SelectWeapon);
-                                    Tween(v1670.HumanoidRootPart.CFrame * Pos);
-                                    v1670.HumanoidRootPart.CanCollide = false;
-                                    v1670.HumanoidRootPart.CFrame = OldCFrameRainbow;
-                                    v1670.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    AttackNoCoolDown();
-                                until not _G.Auto_RainbowHaki or (v1670.Humanoid.Health <= 0) or not v1670.Parent or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
-                            end
-                        end
-                    else
-                        Tween(CFrame.new(5713.98877, 601.922974, 202.751251));
-                    end
-                elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Kilo Admiral") then
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Kilo Admiral") then
-                        for v1762, v1763 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if (v1763.Name == "Kilo Admiral") then
-                                OldCFrameRainbow = v1763.HumanoidRootPart.CFrame;
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    EquipTool(SelectWeapon);
-                                    Tween(v1763.HumanoidRootPart.CFrame * Pos);
-                                    v1763.HumanoidRootPart.CanCollide = false;
-                                    v1763.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    v1763.HumanoidRootPart.CFrame = OldCFrameRainbow;
-                                    AttackNoCoolDown();
-                                until not _G.Auto_RainbowHaki or (v1763.Humanoid.Health <= 0) or not v1763.Parent or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
-                            end
-                        end
-                    else
-                        Tween(CFrame.new(2877.61743, 423.558685, - 7207.31006));
-                    end
-                elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Captain Elephant") then
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Captain Elephant") then
-                        for v1774, v1775 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if (v1775.Name == "Captain Elephant") then
-                                OldCFrameRainbow = v1775.HumanoidRootPart.CFrame;
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    EquipTool(SelectWeapon);
-                                    Tween(v1775.HumanoidRootPart.CFrame * Pos);
-                                    v1775.HumanoidRootPart.CanCollide = false;
-                                    v1775.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    v1775.HumanoidRootPart.CFrame = OldCFrameRainbow;
-                                    AttackNoCoolDown();
-                                until not _G.Auto_RainbowHaki or (v1775.Humanoid.Health <= 0) or not v1775.Parent or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
-                            end
-                        end
-                    else
-                        Tween(CFrame.new(- 13485.0283, 331.709259, - 8012.4873));
-                    end
-                elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Beautiful Pirate") then
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Beautiful Pirate") then
-                        for v1802, v1803 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if (v1803.Name == "Beautiful Pirate") then
-                                OldCFrameRainbow = v1803.HumanoidRootPart.CFrame;
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    EquipTool(SelectWeapon);
-                                    Tween(v1803.HumanoidRootPart.CFrame * Pos);
-                                    v1803.HumanoidRootPart.CanCollide = false;
-                                    v1803.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    v1803.HumanoidRootPart.CFrame = OldCFrameRainbow;
-                                    AttackNoCoolDown();
-                                until not _G.Auto_RainbowHaki or (v1803.Humanoid.Health <= 0) or not v1803.Parent or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
-                            end
-                        end
-                    else
-                        Tween(CFrame.new(5312.3598632813, 20.141201019287, - 10.158538818359));
-                    end
-                else
-                    Tween(CFrame.new(- 11892.0703125, 930.57672119141, - 8760.1591796875));
-                    if ((Vector3.new(- 11892.0703125, 930.57672119141, - 8760.1591796875) - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 30) then
-                        wait(1.5);
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("HornedMan", "Bet");
-                    end
-                end
+                end)
             end
         end
-    end);
-end);
-local v79 = Tabs.Item:AddToggle("ToggleAutoSkullGuitar", {
-    Title = "Auto Skull Guitar",
-    Description = "",
-    Default = false
-});
-v79:OnChanged(function(v268)
-    _G.Auto_SkullGuitar = v268;
-end);
-Options.ToggleAutoSkullGuitar:SetValue(false);
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.Auto_SkullGuitar then
-                if (GetWeaponInventory("Skull Guitar") == false) then
-                    if ((CFrame.new(- 9681.458984375, 6.139880657196045, 6341.3720703125).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000) then
-                        if game:GetService("Workspace").NPCs:FindFirstChild("Skeleton Machine") then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("soulGuitarBuy", true);
-                        elseif (game:GetService("Workspace").Map["Haunted Castle"].Candle1.Transparency == 0) then
-                            if (game:GetService("Workspace").Map["Haunted Castle"].Placard1.Left.Part.Transparency == 0) then
-                                Quest2 = true;
-                                repeat
-                                    wait();
-                                    Tween(CFrame.new(- 8762.69140625, 176.84783935546875, 6171.3076171875));
-                                until ((CFrame.new(- 8762.69140625, 176.84783935546875, 6171.3076171875).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) or not _G.Auto_SkullGuitar
-                                wait(1);
-                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard7.Left.ClickDetector);
-                                wait(1);
-                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard6.Left.ClickDetector);
-                                wait(1);
-                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard5.Left.ClickDetector);
-                                wait(1);
-                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard4.Right.ClickDetector);
-                                wait(1);
-                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard3.Left.ClickDetector);
-                                wait(1);
-                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard2.Right.ClickDetector);
-                                wait(1);
-                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard1.Right.ClickDetector);
-                                wait(1);
-                            elseif game:GetService("Workspace").Map["Haunted Castle"].Tablet.Segment1:FindFirstChild("ClickDetector") then
-                                if game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part1:FindFirstChild("ClickDetector") then
-                                    Quest4 = true;
-                                    repeat
-                                        wait();
-                                        Tween(CFrame.new(- 9553.5986328125, 65.62338256835938, 6041.58837890625));
-                                    until ((CFrame.new(- 9553.5986328125, 65.62338256835938, 6041.58837890625).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) or not _G.Auto_SkullGuitar
-                                    wait(1);
-                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part3.CFrame);
-                                    wait(1);
-                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part3.ClickDetector);
-                                    wait(1);
-                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.CFrame);
-                                    wait(1);
-                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector);
-                                    wait(1);
-                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector);
-                                    wait(1);
-                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector);
-                                    wait(1);
-                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.CFrame);
-                                    wait(1);
-                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.ClickDetector);
-                                    wait(1);
-                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.ClickDetector);
-                                    wait(1);
-                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part8.CFrame);
-                                    wait(1);
-                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part8.ClickDetector);
-                                    wait(1);
-                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.CFrame);
-                                    wait(1);
-                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector);
-                                    wait(1);
-                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector);
-                                    wait(1);
-                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector);
-                                else
-                                    Quest3 = true;
-                                end
-                            else
-                                if game:GetService("Workspace").NPCs:FindFirstChild("Ghost") then
-                                    local v1798 = {
-                                        [1] = "GuitarPuzzleProgress",
-                                        [2] = "Ghost"
-                                    };
-                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1798));
-                                end
-                                if game.Workspace.Enemies:FindFirstChild("Living Zombie") then
-                                    for v1804, v1805 in pairs(game.Workspace.Enemies:GetChildren()) do
-                                        if (v1805:FindFirstChild("HumanoidRootPart") and v1805:FindFirstChild("Humanoid") and (v1805.Humanoid.Health > 0)) then
-                                            if (v1805.Name == "Living Zombie") then
-                                                EquipTool(SelectWeapon);
-                                                v1805.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
-                                                v1805.HumanoidRootPart.Transparency = 1;
-                                                v1805.Humanoid.JumpPower = 0;
-                                                v1805.Humanoid.WalkSpeed = 0;
-                                                v1805.HumanoidRootPart.CanCollide = false;
-                                                v1805.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0) ;
-                                                Tween(CFrame.new(- 10160.787109375, 138.6616973876953, 5955.03076171875));
-                                                game:GetService("VirtualUser"):CaptureController();
-                                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672));
-                                            end
-                                        end
-                                    end
-                                else
-                                    Tween(CFrame.new(- 10160.787109375, 138.6616973876953, 5955.03076171875));
-                                end
-                            end
-                        elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2), "Error") then
-                            Tween(CFrame.new(- 8653.2060546875, 140.98487854003906, 6160.033203125));
-                        elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2), "Nothing") then
-                            Tween("Wait Full Moon");
-                        else
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2, true);
-                        end
-                    else
-                        Tween(CFrame.new(- 9681.458984375, 6.139880657196045, 6341.3720703125));
-                    end
-                end
-            end
-        end);
-    end
-end);
-local v80 = Tabs.Item:AddToggle("ToggleAutoBuddy", {
-    Title = "Auto Buddy",
-    Description = "",
-    Default = false
-});
-v80:OnChanged(function(v269)
-    _G.Auto_Buddy = v269;
-end);
-Options.ToggleAutoBuddy:SetValue(false);
-spawn(function()
-    while wait() do
-        if _G.Auto_Buddy then
-            pcall(function()
-                if game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen") then
-                    for v1050, v1051 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if (v1051.Name == "Cake Queen") then
-                            if (v1051:FindFirstChild("Humanoid") and v1051:FindFirstChild("HumanoidRootPart") and (v1051.Humanoid.Health > 0)) then
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    AutoHaki();
-                                    EquipTool(SelectWeapon);
-                                    v1051.HumanoidRootPart.CanCollide = false;
-                                    v1051.Humanoid.WalkSpeed = 0;
-                                    v1051.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    Tween(v1051.HumanoidRootPart.CFrame * Pos);
-                                    AttackNoCoolDown();
-                                until not _G.Auto_Buddy or not v1051.Parent or (v1051.Humanoid.Health <= 0)
-                            end
-                        end
-                    end
-                elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v81.Position).Magnitude < 1500) then
-                    Tween(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
-                end
-                Tween(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
-                if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen") then
-                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
-                end
-            end);
-        end
-    end
-end);
+
 local v82 = Tabs.Item:AddToggle("ToggleAutoDualKatana", {
     Title = "Auto CDK",
     Description = "",
