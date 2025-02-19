@@ -4152,7 +4152,30 @@ Camera:Stop()
     end)
     Options.ToggleBypassTP:SetValue(false)
 
-
+local v153 = Tabs.Setting:AddToggle("ToggleAntiBand", {
+    Title = "Anti Band",
+    Description = "",
+    Default = true
+});
+v153:OnChanged(function(v384)
+    _G.AntiBand = v384;
+end);
+local v154 = {
+    17884881,
+    120173604,
+    912348
+};
+spawn(function()
+    while wait() do
+        if _G.AntiBand then
+            for v809, v810 in pairs(game:GetService("Players"):GetPlayers()) do
+                if table.find(v154, v810.UserId) then
+                    Hop();
+                end
+            end
+        end
+    end
+end);
 local ToggleRemove = Tabs.Setting:AddToggle("ToggleRemove", {Title = " Enable Remove Dame Text", Default = true })
 ToggleRemove:OnChanged(function(Value)
     FaiFaoRemovetext = Value
