@@ -7490,6 +7490,7 @@ function UpdateRealFruitEsp()
         end
     end
 end
+
 local CodeX2 = Tabs.Misc:AddSection("Code");
 local v150 = {
     "KITT_RESET",
