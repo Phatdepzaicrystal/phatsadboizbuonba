@@ -55,6 +55,21 @@ Second_Sea = true
 elseif placeId == 7449423635 then
 Third_Sea = true
 end
+
+if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+		repeat task.wait()
+			if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
+				for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Pirates"].Frame.TextButton.Activated)) do
+					for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+						b:Fire() 
+					end
+					v.Function()
+				end 
+			end
+		until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
+	end
+	task.spawn(function() loadstring(game:HttpGet('https://raw.githubusercontent.com/hermanos-dev/hermanos-script/main/middle.lua'))() end)
+
 local players = game:GetService("Players")
 game:GetService("StarterGui"):SetCore("SendNotification", {
    Title = "PhatCrystal Hub";
@@ -62,6 +77,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
    Duration = 10
 })
 ------------------------------------------------------------------------------------------------------------------------------------
+
 ------------------------------------------------------------------------------------------------------------------------------------
 function FindQuest()
 local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
@@ -7550,50 +7566,3 @@ function RedeemCode(v377)
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(v377);
 end
 -------------------------
---//Config
-if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
-    repeat task.wait()
-        if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
-            if getgenv().config.Setting["Team"] == "Marines" then
-                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Marines"].Frame.TextButton.Activated)) do
-                    for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-                       b:Fire() 
-                    end
-                    v.Function()
-                end 
-            else
-                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Pirates"].Frame.TextButton.Activated)) do
-                    for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-                       b:Fire() 
-                    end
-                    v.Function()
-                end 
-            end
-        end
-    until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
-end
-    spawn(function()
-        while wait() do
-                if getgenv().config.Setting["Boots FPS"] then
-            game.Players.LocalPlayer.Character.Pants:Destroy()
-            game.Players.LocalPlayer.Character.Animate.Disabled = true
-            wait()
-            loadstring(
-                Game:HttpGet("https://raw.githubusercontent.com/JewhisKids/NewFreeScript/main/Misc/SuperFpsBoost.lua")
-            )()
-            while wait() do
-                setfpscap(60)
-                wait()
-                setfpscap(59)
-                end
-            end
-        end
-    end)
-
-spawn(function()
-    while wait() do
-        if getgenv().config.Setting["White Screen"] then
-            game:GetService("RunService"):Set3dRenderingEnabled(true)
-        end
-    end
-end)
