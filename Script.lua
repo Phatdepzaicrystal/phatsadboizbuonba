@@ -1,34 +1,3 @@
-----repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
-----loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()--------
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
-
-local Window = Fluent:CreateWindow({
-    Title = "PhatCrystal Hub[Free]",
-    SubTitle = "Make by @phat_crystal",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(530, 350),
-    Acrylic = false,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.End
-})
-
-
-local Tabs = {
-    Sever = Window:AddTab({ Title = "Status And Sever", Icon = "loader" });
-    Main = Window:AddTab({ Title = "Main", Icon = "home" }); 
-    Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); 
-    Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); 
-    Item = Window:AddTab({ Title = "Get Item", Icon = "sword" });
-    Fish = Window:AddTab({ Title = "Sea Event", Icon = "anchor" });
-    Teleport = Window:AddTab({ Title = "Teleport", Icon = "map" }); 
-    Fruit = Window:AddTab({ Title = "Fruit", Icon = "apple" }); 
-    Raid = Window:AddTab({ Title = "Raid", Icon = "target" }); 
-    Race = Window:AddTab({ Title = "Race", Icon = "flag" }); 
-    Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); 
-    Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); 
-}
 repeat wait()
     pcall(function()
         if game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible == true then
@@ -111,6 +80,37 @@ repeat wait()
         end
     end)
 until game:GetService("Players").LocalPlayer.Team ~= nil
+----repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
+----loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()--------
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "PhatCrystal Hub[Free]",
+    SubTitle = "Make by @phat_crystal",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(530, 350),
+    Acrylic = false,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.End
+})
+
+
+local Tabs = {
+    Sever = Window:AddTab({ Title = "Status And Sever", Icon = "loader" });
+    Main = Window:AddTab({ Title = "Main", Icon = "home" }); 
+    Setting = Window:AddTab({ Title = "Settings", Icon = "sliders" }); 
+    Player = Window:AddTab({ Title = "PvP", Icon = "shield" }); 
+    Item = Window:AddTab({ Title = "Get Item", Icon = "sword" });
+    Fish = Window:AddTab({ Title = "Sea Event", Icon = "anchor" });
+    Teleport = Window:AddTab({ Title = "Teleport", Icon = "map" }); 
+    Fruit = Window:AddTab({ Title = "Fruit", Icon = "apple" }); 
+    Raid = Window:AddTab({ Title = "Raid", Icon = "target" }); 
+    Race = Window:AddTab({ Title = "Race", Icon = "flag" }); 
+    Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); 
+    Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); 
+}
 local Options = Fluent.Options
 do
 
