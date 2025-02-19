@@ -2971,11 +2971,9 @@ end
 end
 end)
 
-local MiscFarm = Tabs.Main:AddSection("Misc Farm")
-
 if Third_Sea then
-    local v484 = v16.Main:AddSection("Bone");
-    local v485 = v16.Main:AddParagraph({
+    local v484 = Tabs.Main:AddSection("Bone");
+    local v485 = Tabs.Main:AddParagraph({
         Title = "Status Bone",
         Content = "_________"
     });
@@ -2987,7 +2985,7 @@ if Third_Sea then
             end
         end);
     end);
-    local v486 = v16.Main:AddToggle("ToggleBone", {
+    local v486 = Tabs.Main:AddToggle("ToggleBone", {
         Title = "Auto Farm Bone",
         Description = "_________",
         Default = false
@@ -3108,8 +3106,8 @@ if Third_Sea then
         end
     });
 if Third_Sea then
-    local v490 = v16.Main:AddSection("Tư Lệnh Bánh|dough king v1");
-    local v491 = v16.Main:AddParagraph({
+    local v490 = Tabs.Main:AddSection("Tư Lệnh Bánh|dough king v1");
+    local v491 = Tabs.Main:AddParagraph({
         Title = "Trạng Thái dough king v1-2",
         Content = "status dough king v1-2"
     });
@@ -3128,7 +3126,7 @@ if Third_Sea then
             end);
         end
     end);
-    local v492 = v16.Main:AddToggle("ToggleCake", {
+    local v492 = Tabs.Main:AddToggle("ToggleCake", {
         Title = "Cày Tư Lệnh Bánh",
         Description = "_________",
         Default = false
@@ -3202,7 +3200,7 @@ if Third_Sea then
             end
         end
     end);
-    local v494 = v16.Main:AddToggle("ToggleDoughKing", {
+    local v494 = Tabs.Main:AddToggle("ToggleDoughKing", {
         Title = "Đấm Vua Bột",
         Description = "farm dough king",
         Default = false
@@ -3242,7 +3240,7 @@ if Third_Sea then
             end
         end
     end);
-    local v495 = v16.Main:AddToggle("ToggleSpawnCake", {
+    local v495 = Tabs.Main:AddToggle("ToggleSpawnCake", {
         Title = "Triệu Hồi Tư Lệnh Bánh",
         Description = "spawn dough king bot v1-2",
         Default = true
