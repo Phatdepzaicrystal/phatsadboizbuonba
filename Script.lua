@@ -1,26 +1,3 @@
---//Config
-if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
-    repeat task.wait()
-        if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
-            if getgenv().Team == "Marines" then
-                for i, h in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Marines"].Frame.TextButton.Activated)) do
-                    for a, z in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-                       z:Fire() 
-                    end
-                    h.Function()
-                end 
-            else
-                for i, h in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container["Pirates"].Frame.TextButton.Activated)) do
-                    for a, z in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-                       z:Fire() 
-                    end
-                    h.Function()
-                end 
-            end
-        end
-    until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
-end
-
 ----repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
 ----loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()--------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
@@ -52,6 +29,88 @@ local Tabs = {
     Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-bag" }); 
     Misc = Window:AddTab({ Title = "Misc", Icon = "menu" }); 
 }
+repeat wait()
+    pcall(function()
+        if game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible == true then
+            if _G.Teams == "Pirates" then
+                game:GetService("Workspace").Camera.CameraType = Enum.CameraType.Custom
+                local args = {
+                    [1] = "SetTeam",
+                    [2] = "Pirates"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible = false
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Fragments.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Beli.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.HP.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Energy.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Skills.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Level.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.MenuButton.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Compass.Visible = true
+                for i,v in pairs(game:GetService("Players")["LocalPlayer"].PlayerGui.Main:GetChildren()) do
+                    if v:IsA("ImageButton") then
+                        if v.Name ~= "Settings_" then
+                            if v.Visible == false then
+                                v.Visible = true
+                            end
+                        end
+                    end
+                end
+            elseif _G.Teams == "Marines" then 
+                game:GetService("Workspace").Camera.CameraType = Enum.CameraType.Custom
+                local args = {
+                    [1] = "SetTeam",
+                    [2] = "Marines"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible = false
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Fragments.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Beli.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.HP.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Energy.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Skills.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Level.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.MenuButton.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Compass.Visible = true
+                for i,v in pairs(game:GetService("Players")["LocalPlayer"].PlayerGui.Main:GetChildren()) do
+                    if v:IsA("ImageButton") then
+                        if v.Name ~= "Settings_" then
+                            if v.Visible == false then
+                                v.Visible = true
+                            end
+                        end
+                    end
+                end
+            else
+                game:GetService("Workspace").Camera.CameraType = Enum.CameraType.Custom
+                local args = {
+                    [1] = "SetTeam",
+                    [2] = "Pirates"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible = false
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Beli.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Fragments.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.HP.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Energy.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Skills.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Level.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.MenuButton.Visible = true
+                game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Compass.Visible = true
+                for i,v in pairs(game:GetService("Players")["LocalPlayer"].PlayerGui.Main:GetChildren()) do
+                    if v:IsA("ImageButton") then
+                        if v.Name ~= "Settings_" then
+                            if v.Visible == false then
+                                v.Visible = true
+                            end
+                        end
+                    end
+                end
+            end    
+        end
+    end)
+until game:GetService("Players").LocalPlayer.Team ~= nil
 local Options = Fluent.Options
 do
 
