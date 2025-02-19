@@ -2971,9 +2971,177 @@ end
 end
 end)
 
+local MiscFarm = Tabs.Main:AddSection("Misc Farm")
 
+if Third_Sea then
+local ToggleBone = Tabs.Main:AddToggle("ToggleBone", {Title = "Auto Bone", Default = false })
+ToggleBone:OnChanged(function(Value)
+    _G.AutoBone = Value
+end)
+Options.ToggleBone:SetValue(false)
+local BoneCFrame2 = CFrame.new(- 9515.75, 174.8521728515625, 6079.40625);
+    spawn(function()
+        while wait() do
+            if _G.AutoBone then
+                pcall(function()
+                    local v894 = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text;
+                    if not string.find(v894, "Demonic Soul") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest");
+                    end
+                    if (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false) then
+                        Tween(v487);
+                        if ((v487.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", "HauntedQuest2", 1);
+                        end
+                    elseif (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true) then
+                        if (game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy")) then
+                            for v1661, v1662 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if (v1662:FindFirstChild("HumanoidRootPart") and v1662:FindFirstChild("Humanoid") and (v1662.Humanoid.Health > 0)) then
+                                    if ((v1662.Name == "Reborn Skeleton") or (v1662.Name == "Living Zombie") or (v1662.Name == "Demonic Soul") or (v1662.Name == "Posessed Mummy")) then
+                                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Demonic Soul") then
+                                            repeat
+                                                wait(_G.Fast_Delay);
+                                                AttackNoCoolDown();
+                                                AutoHaki();
+                                                bringmob = true;
+                                                EquipTool(SelectWeapon);
+                                                Tween(v1662.HumanoidRootPart.CFrame * Pos);
+                                                v1662.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
+                                                v1662.HumanoidRootPart.Transparency = 1;
+                                                v1662.Humanoid.JumpPower = 0;
+                                                v1662.Humanoid.WalkSpeed = 0;
+                                                v1662.HumanoidRootPart.CanCollide = false;
+                                                FarmPos = v1662.HumanoidRootPart.CFrame;
+                                                MonFarm = v1662.Name;
+                                            until not _G.AutoBone or (v1662.Humanoid.Health <= 0) or not v1662.Parent or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false)
+                                        else
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest");
+                                            bringmob = false;
+                                        end
+                                    end
+                                end
+                            end
+                        else
+                        end
+                    end
+                end);
+            end
+        end
+    end);
+    local v488 = CFrame.new(- 9515.75, 174.8521728515625, 6079.40625);
+    spawn(function()
+        while wait() do
+            if _G.AutoBoneNoQuest then
+                pcall(function()
+                    Tween(v488);
+                    if ((v488.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) then
+                    end
+                    if (game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy")) then
+                        for v1436, v1437 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if (v1437:FindFirstChild("HumanoidRootPart") and v1437:FindFirstChild("Humanoid") and (v1437.Humanoid.Health > 0)) then
+                                if ((v1437.Name == "Reborn Skeleton") or (v1437.Name == "Living Zombie") or (v1437.Name == "Demonic Soul") or (v1437.Name == "Posessed Mummy")) then
+                                    repeat
+                                        wait(_G.Fast_Delay);
+                                        AttackNoCoolDown();
+                                        AutoHaki();
+                                        bringmob = true;
+                                        EquipTool(SelectWeapon);
+                                        Tween(v1437.HumanoidRootPart.CFrame * Pos);
+                                        v1437.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
+                                        v1437.HumanoidRootPart.Transparency = 1;
+                                        v1437.Humanoid.JumpPower = 0;
+                                        v1437.Humanoid.WalkSpeed = 0;
+                                        v1437.HumanoidRootPart.CanCollide = false;
+                                        FarmPos = v1437.HumanoidRootPart.CFrame;
+                                        MonFarm = v1437.Name;
+                                    until not _G.AutoBoneNoQuest or (v1437.Humanoid.Health <= 0) or not v1437.Parent
+                                end
+                            end
+                        end
+                    end
+                end);
+            end
+        end
+    end);
+local ToggleCake = Tabs.Main:AddToggle("ToggleCake", {Title = "Auto Cake Prince", Default = false })
+ToggleCake:OnChanged(function(Value)
+ _G.CakePrince = Value
+   local v493 = true;				
+        if v575 then
+            if v493 then
+                v493 = false;
+                local v895 = CFrame.new(- 2003.932861328125, 380.4824523925781, - 12561.0185546875);
+                Tween(v895);
+            end
+        else
+            v493 = true;
+            wait();
+            Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame);
+            wait();
+        end
+    end);
+Options.ToggleCake:SetValue(false)
+    spawn(function()
+        while wait() do
+            if _G.CakePrince then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+                        for v1438, v1439 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if (v1439.Name == "Cake Prince") then
+                                if (v1439:FindFirstChild("Humanoid") and v1439:FindFirstChild("HumanoidRootPart") and (v1439.Humanoid.Health > 0)) then
+                                    repeat
+                                        task.wait(_G.Fast_Delay);
+                                        AutoHaki();
+                                        EquipTool(SelectWeapon);
+                                        v1439.HumanoidRootPart.CanCollide = false;
+                                        v1439.Humanoid.WalkSpeed = 0;
+                                        v1439.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
+                                        Tween(v1439.HumanoidRootPart.CFrame * Pos);
+                                        AttackNoCoolDown();
+                                    until not _G.CakePrince or not v1439.Parent or (v1439.Humanoid.Health <= 0)
+                                end
+                            end
+                        end
+                    elseif game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
+                    elseif (game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1) then
+                        if (game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Guard") or game:GetService("Workspace").Enemies:FindFirstChild("Baking Staff") or game:GetService("Workspace").Enemies:FindFirstChild("Head Baker")) then
+                            for v1754, v1755 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if ((v1755.Name == "Cookie Crafter") or (v1755.Name == "Cake Guard") or (v1755.Name == "Baking Staff") or (v1755.Name == "Head Baker")) then
+                                    if (v1755:FindFirstChild("Humanoid") and v1755:FindFirstChild("HumanoidRootPart") and (v1755.Humanoid.Health > 0)) then
+                                        repeat
+                                            task.wait(_G.Fast_Delay);
+                                            AutoHaki();
+                                            bringmob = true;
+                                            EquipTool(SelectWeapon);
+                                            v1755.HumanoidRootPart.CanCollide = false;
+                                            v1755.Humanoid.WalkSpeed = 0;
+                                            v1755.Head.CanCollide = false;
+                                            v1755.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
+                                            FarmPos = v1755.HumanoidRootPart.CFrame;
+                                            MonFarm = v1755.Name;
+                                            Tween(v1755.HumanoidRootPart.CFrame * Pos);
+                                            AttackNoCoolDown();
+                                        until not _G.CakePrince or not v1755.Parent or (v1755.Humanoid.Health <= 0) or (game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0) or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]")
+                                        bringmob = false;
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end);
+            end
+        end
+    end);
 
-if Second_Sea then
+    local ToggleSpawnCake = Tabs.Main:AddToggle("ToggleSpawnCake", {Title = "Auto Spawn Cake Prince", Default = true })
+    ToggleSpawnCake:OnChanged(function(Value)
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner",Value)
+    end)
+    Options.ToggleSpawnCake:SetValue(true)
+end
+
+    if Second_Sea then
     local ToggleVatChatKiDi = Tabs.Main:AddToggle("ToggleVatChatKiDi", {Title = "Auto Ectoplasm", Default = false })
     ToggleVatChatKiDi:OnChanged(function(Value)
         _G.Ectoplasm = Value
