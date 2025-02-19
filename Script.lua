@@ -1980,7 +1980,7 @@ end
   function Tween2(P1)
     local Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance >= 1 then
-    Speed = 300
+    Speed = 350
     end
     game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {
       CFrame = P1
@@ -4877,7 +4877,6 @@ v72:OnChanged(function(v262)
     _G.Auto_Saw = v262;
 end);
 Options.ToggleAutoSaw:SetValue(false);
-local v71 = CFrame.new(- 690.33081054688, 15.09425163269, 1582.2380371094);
 spawn(function()
     while wait() do
         if _G.Auto_Saw then
@@ -4900,7 +4899,7 @@ spawn(function()
                         end
                     end
                 elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v71.Position).Magnitude < 1500) then
-                    Tween(v71);
+                    Tween(CFrame.new(- 690.33081054688, 15.09425163269, 1582.2380371094));
                 end
                 Tween(CFrame.new(- 690.33081054688, 15.09425163269, 1582.2380371094));
                 if game:GetService("ReplicatedStorage"):FindFirstChild("The Saw") then
@@ -4919,7 +4918,6 @@ v73:OnChanged(function(v263)
     _G.Auto_Warden = v263;
 end);
 Options.ToggleAutoWarden:SetValue(false);
-local v74 = CFrame.new(5186.14697265625, 24.86684226989746, 832.1885375976562);
 spawn(function()
     while wait() do
         if _G.Auto_Warden then
@@ -4942,7 +4940,7 @@ spawn(function()
                         end
                     end
                 elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v74.Position).Magnitude < 1500) then
-                    Tween(v74);
+                    Tween(CFrame.new(5186.14697265625, 24.86684226989746, 832.1885375976562));
                 end
                 Tween(CFrame.new(5186.14697265625, 24.86684226989746, 832.1885375976562));
                 if game:GetService("ReplicatedStorage"):FindFirstChild("Chief Warden") then
@@ -5121,7 +5119,6 @@ v75:OnChanged(function(v264)
     _G.Auto_Canvander = v264;
 end);
 Options.ToggleAutoCanvander:SetValue(false);
-local v71 = CFrame.new(5311.07421875, 426.0243835449219, 165.12762451171875);
 spawn(function()
     while wait() do
         if _G.Auto_Canvander then
@@ -5144,7 +5141,7 @@ spawn(function()
                         end
                     end
                 elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v71.Position).Magnitude < 1500) then
-                    Tween(v71);
+                    Tween(CFrame.new(5311.07421875, 426.0243835449219, 165.12762451171875));
                 end
                 Tween(CFrame.new(5311.07421875, 426.0243835449219, 165.12762451171875));
                 if game:GetService("ReplicatedStorage"):FindFirstChild("Beautiful Pirate") then
@@ -5543,7 +5540,6 @@ v80:OnChanged(function(v269)
     _G.Auto_Buddy = v269;
 end);
 Options.ToggleAutoBuddy:SetValue(false);
-local v81 = CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875);
 spawn(function()
     while wait() do
         if _G.Auto_Buddy then
@@ -5566,7 +5562,7 @@ spawn(function()
                         end
                     end
                 elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v81.Position).Magnitude < 1500) then
-                    Tween(v81);
+                    Tween(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
                 end
                 Tween(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
                 if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen") then
