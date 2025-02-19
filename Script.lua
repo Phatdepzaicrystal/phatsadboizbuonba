@@ -2974,12 +2974,34 @@ end)
 local MiscFarm = Tabs.Main:AddSection("Misc Farm")
 
 if Third_Sea then
-local ToggleBone = Tabs.Main:AddToggle("ToggleBone", {Title = "Auto Bone", Default = false })
-ToggleBone:OnChanged(function(Value)
-    _G.AutoBone = Value
-end)
-Options.ToggleBone:SetValue(false)
-local BoneCFrame2 = CFrame.new(- 9515.75, 174.8521728515625, 6079.40625);
+    local v484 = v16.Main:AddSection("Bone");
+    local v485 = v16.Main:AddParagraph({
+        Title = "Status Bone",
+        Content = "_________"
+    });
+    spawn(function()
+        pcall(function()
+            while wait() do
+                local v768 = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones", "Check");
+                v485:SetDesc("Bone:" .. tostring(v768) .. " Xương");
+            end
+        end);
+    end);
+    local v486 = v16.Main:AddToggle("ToggleBone", {
+        Title = "Auto Farm Bone",
+        Description = "_________",
+        Default = false
+    });
+    v486:OnChanged(function(v571)
+        _G.AutoBone = v571;
+        if (v571 == false) then
+            wait();
+            Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame);
+            wait();
+        end
+    end);
+    Options.ToggleBone:SetValue(false);
+    local v487 = CFrame.new(- 9515.75, 174.8521728515625, 6079.40625);
     spawn(function()
         while wait() do
             if _G.AutoBone then
@@ -3063,10 +3085,57 @@ local BoneCFrame2 = CFrame.new(- 9515.75, 174.8521728515625, 6079.40625);
             end
         end
     end);
-local ToggleCake = Tabs.Main:AddToggle("ToggleCake", {Title = "Auto Cake Prince", Default = false })
-ToggleCake:OnChanged(function(Value)
- _G.CakePrince = Value
-   local v493 = true;				
+    Tabs.Main:AddButton({
+        Title = "Pray",
+        Description = "_________",
+        Callback = function()
+            local v572 = {
+                [1] = "gravestoneEvent",
+                [2] = 1
+            };
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v572));
+        end
+    });
+    Tabs.Main:AddButton({
+        Title = "Auto Try Luck",
+        Description = "_________",
+        Callback = function()
+            local v573 = {
+                [1] = "gravestoneEvent",
+                [2] = 2
+            };
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v573));
+        end
+    });
+if Third_Sea then
+    local v490 = v16.Main:AddSection("Tư Lệnh Bánh|dough king v1");
+    local v491 = v16.Main:AddParagraph({
+        Title = "Trạng Thái dough king v1-2",
+        Content = "status dough king v1-2"
+    });
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
+                elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
+                elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
+                else
+                    v491:SetDesc("Tư Lệnh Bánh|dough king : ✅️");
+                end
+            end);
+        end
+    end);
+    local v492 = v16.Main:AddToggle("ToggleCake", {
+        Title = "Cày Tư Lệnh Bánh",
+        Description = "_________",
+        Default = false
+    });
+    local v493 = true;
+    v492:OnChanged(function(v575)
+        _G.CakePrince = v575;
         if v575 then
             if v493 then
                 v493 = false;
@@ -3080,7 +3149,7 @@ ToggleCake:OnChanged(function(Value)
             wait();
         end
     end);
-Options.ToggleCake:SetValue(false)
+    Options.ToggleCake:SetValue(false);
     spawn(function()
         while wait() do
             if _G.CakePrince then
@@ -3133,13 +3202,71 @@ Options.ToggleCake:SetValue(false)
             end
         end
     end);
-
-    local ToggleSpawnCake = Tabs.Main:AddToggle("ToggleSpawnCake", {Title = "Auto Spawn Cake Prince", Default = true })
-    ToggleSpawnCake:OnChanged(function(Value)
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner",Value)
-    end)
-    Options.ToggleSpawnCake:SetValue(true)
+    local v494 = v16.Main:AddToggle("ToggleDoughKing", {
+        Title = "Đấm Vua Bột",
+        Description = "farm dough king",
+        Default = false
+    });
+    v494:OnChanged(function(v576)
+        _G.DoughKing = v576;
+        if (v576 == false) then
+            wait();
+            Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame);
+            wait();
+        end
+    end);
+    Options.ToggleDoughKing:SetValue(false);
+    spawn(function()
+        while wait() do
+            if _G.DoughKing then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
+                        for v1440, v1441 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if (v1441.Name == "Dough King") then
+                                if (v1441:FindFirstChild("Humanoid") and v1441:FindFirstChild("HumanoidRootPart") and (v1441.Humanoid.Health > 0)) then
+                                    repeat
+                                        task.wait(_G.Fast_Delay);
+                                        AutoHaki();
+                                        EquipTool(SelectWeapon);
+                                        v1441.HumanoidRootPart.CanCollide = false;
+                                        v1441.Humanoid.WalkSpeed = 0;
+                                        v1441.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
+                                        Tween(v1441.HumanoidRootPart.CFrame * Pos);
+                                        AttackNoCoolDown();
+                                    until not _G.DoughKing or not v1441.Parent or (v1441.Humanoid.Health <= 0)
+                                end
+                            end
+                        end
+                    end
+                end);
+            end
+        end
+    end);
+    local v495 = v16.Main:AddToggle("ToggleSpawnCake", {
+        Title = "Triệu Hồi Tư Lệnh Bánh",
+        Description = "spawn dough king bot v1-2",
+        Default = true
+    });
+    v495:OnChanged(function(v577)
+        _G.SpawnCakePrince = v577;
+    end);
+    Options.ToggleSpawnCake:SetValue(true);
 end
+spawn(function()
+    while wait() do
+        if _G.SpawnCakePrince then
+            local v681 = {
+                [1] = "CakePrinceSpawner",
+                [2] = true
+            };
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v681));
+            local v681 = {
+                [1] = "CakePrinceSpawner"
+            };
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v681));
+        end
+    end
+end);
 
     if Second_Sea then
     local ToggleVatChatKiDi = Tabs.Main:AddToggle("ToggleVatChatKiDi", {Title = "Auto Ectoplasm", Default = false })
