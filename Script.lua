@@ -4717,8 +4717,8 @@ end)
 local Items = Tabs.Item:AddSection("Items Farm")
 
 local v69 = Tabs.Item:AddToggle("ToggleAutoSaber", {
-    Title = "lấy Saber",
-    Description = "get saber",
+    Title = "Auto Saber",
+    Description = "Sea 1",
     Default = false
 });
 v69:OnChanged(function(v260)
@@ -4828,7 +4828,7 @@ spawn(function()
 end);
 local v70 = Tabs.Item:AddToggle("ToggleAutoPoleV1", {
     Title = "Auto Pole V1",
-    Description = "v",
+    Description = "Sea 1",
     Default = false
 });
 v70:OnChanged(function(v261)
@@ -4869,8 +4869,8 @@ spawn(function()
     end
 end);
 local v72 = Tabs.Item:AddToggle("ToggleAutoSaw", {
-    Title = "lấy Cưa Cá Mập",
-    Description = "get saw shark",
+    Title = "Auto Shark Saw",
+    Description = "Sea 1",
     Default = false
 });
 v72:OnChanged(function(v262)
@@ -4911,8 +4911,8 @@ spawn(function()
     end
 end);
 local v73 = Tabs.Item:AddToggle("ToggleAutoWarden", {
-    Title = "lấy Kiếm Quản Ngục",
-    Description = "gets Prisoner Sword",
+    Title = "Auto Warden Sword",
+    Description = "Sea 1",
     Default = false
 });
 v73:OnChanged(function(v263)
@@ -5519,6 +5519,131 @@ spawn(function()
             end);
         end
     end
+end);
+local v78 = Tabs.Item:AddToggle("ToggleAutoRainbowHaki", {
+    Title = "Auto Ranbow Haki",
+    Description = "get quest to doing get it 7 haki color",
+    Default = false
+});
+v78:OnChanged(function(v267)
+    _G.Auto_RainbowHaki = v267;
+end);
+Options.ToggleAutoRainbowHaki:SetValue(false);
+spawn(function()
+    pcall(function()
+        while wait(0.1) do
+            if _G.Auto_RainbowHaki then
+                if not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                    Tween(CFrame.new(- 11892.0703125, 930.57672119141, - 8760.1591796875));
+                    if ((Vector3.new(- 11892.0703125, 930.57672119141, - 8760.1591796875) - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 30) then
+                        wait(1.5);
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("HornedMan", "Bet");
+                    end
+                elseif (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Stone")) then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Stone") then
+                        for v1563, v1564 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if (v1564.Name == "Stone") then
+                                OldCFrameRainbow = v1564.HumanoidRootPart.CFrame;
+                                repeat
+                                    task.wait(_G.Fast_Delay);
+                                    EquipTool(SelectWeapon);
+                                    Tween(v1564.HumanoidRootPart.CFrame * Pos);
+                                    v1564.HumanoidRootPart.CanCollide = false;
+                                    v1564.HumanoidRootPart.CFrame = OldCFrameRainbow;
+                                    v1564.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                    AttackNoCoolDown();
+                                until not _G.Auto_RainbowHaki or (v1564.Humanoid.Health <= 0) or not v1564.Parent or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
+                            end
+                        end
+                    else
+                        Tween(CFrame.new(- 1086.11621, 38.8425903, 6768.71436));
+                    end
+                elseif (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Hydra Leader")) then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Hydra Leader") then
+                        for v1669, v1670 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if (v1670.Name == "Hydra Leader") then
+                                OldCFrameRainbow = v1670.HumanoidRootPart.CFrame;
+                                repeat
+                                    task.wait(_G.Fast_Delay);
+                                    EquipTool(SelectWeapon);
+                                    Tween(v1670.HumanoidRootPart.CFrame * Pos);
+                                    v1670.HumanoidRootPart.CanCollide = false;
+                                    v1670.HumanoidRootPart.CFrame = OldCFrameRainbow;
+                                    v1670.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                    AttackNoCoolDown();
+                                until not _G.Auto_RainbowHaki or (v1670.Humanoid.Health <= 0) or not v1670.Parent or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
+                            end
+                        end
+                    else
+                        Tween(CFrame.new(5713.98877, 601.922974, 202.751251));
+                    end
+                elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Kilo Admiral") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Kilo Admiral") then
+                        for v1762, v1763 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if (v1763.Name == "Kilo Admiral") then
+                                OldCFrameRainbow = v1763.HumanoidRootPart.CFrame;
+                                repeat
+                                    task.wait(_G.Fast_Delay);
+                                    EquipTool(SelectWeapon);
+                                    Tween(v1763.HumanoidRootPart.CFrame * Pos);
+                                    v1763.HumanoidRootPart.CanCollide = false;
+                                    v1763.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                    v1763.HumanoidRootPart.CFrame = OldCFrameRainbow;
+                                    AttackNoCoolDown();
+                                until not _G.Auto_RainbowHaki or (v1763.Humanoid.Health <= 0) or not v1763.Parent or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
+                            end
+                        end
+                    else
+                        Tween(CFrame.new(2877.61743, 423.558685, - 7207.31006));
+                    end
+                elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Captain Elephant") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Captain Elephant") then
+                        for v1774, v1775 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if (v1775.Name == "Captain Elephant") then
+                                OldCFrameRainbow = v1775.HumanoidRootPart.CFrame;
+                                repeat
+                                    task.wait(_G.Fast_Delay);
+                                    EquipTool(SelectWeapon);
+                                    Tween(v1775.HumanoidRootPart.CFrame * Pos);
+                                    v1775.HumanoidRootPart.CanCollide = false;
+                                    v1775.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                    v1775.HumanoidRootPart.CFrame = OldCFrameRainbow;
+                                    AttackNoCoolDown();
+                                until not _G.Auto_RainbowHaki or (v1775.Humanoid.Health <= 0) or not v1775.Parent or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
+                            end
+                        end
+                    else
+                        Tween(CFrame.new(- 13485.0283, 331.709259, - 8012.4873));
+                    end
+                elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Beautiful Pirate") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Beautiful Pirate") then
+                        for v1802, v1803 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if (v1803.Name == "Beautiful Pirate") then
+                                OldCFrameRainbow = v1803.HumanoidRootPart.CFrame;
+                                repeat
+                                    task.wait(_G.Fast_Delay);
+                                    EquipTool(SelectWeapon);
+                                    Tween(v1803.HumanoidRootPart.CFrame * Pos);
+                                    v1803.HumanoidRootPart.CanCollide = false;
+                                    v1803.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                    v1803.HumanoidRootPart.CFrame = OldCFrameRainbow;
+                                    AttackNoCoolDown();
+                                until not _G.Auto_RainbowHaki or (v1803.Humanoid.Health <= 0) or not v1803.Parent or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
+                            end
+                        end
+                    else
+                        Tween(CFrame.new(5312.3598632813, 20.141201019287, - 10.158538818359));
+                    end
+                else
+                    Tween(CFrame.new(- 11892.0703125, 930.57672119141, - 8760.1591796875));
+                    if ((Vector3.new(- 11892.0703125, 930.57672119141, - 8760.1591796875) - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 30) then
+                        wait(1.5);
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("HornedMan", "Bet");
+                    end
+                end
+            end
+        end
+    end);
 end);
 if Second_Sea then
         local ToggleFactory = Tabs.Item:AddToggle("ToggleFactory", {Title = "Auto Farm Factory", Default = false })
