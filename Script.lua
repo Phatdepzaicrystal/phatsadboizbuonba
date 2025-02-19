@@ -1,6 +1,4 @@
-repeat wait()
-    pcall(function()
-        if game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible == true then
+if game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible == true then
             if _G.Teams == "Pirates" then
                 game:GetService("Workspace").Camera.CameraType = Enum.CameraType.Custom
                 local args = {
