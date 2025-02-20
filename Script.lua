@@ -2406,9 +2406,9 @@ return x
 end 
 
 ----------Fast Attack Source
-local FastAttack = true
+local _G.FastAttack = true
 game:GetService('RunService').Heartbeat:Connect(function()
-    if FastAttack then
+    if _G.FastAttack then
         for i, v in next, workspace.Enemies:GetChildren() do
             if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
                 game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(0)
