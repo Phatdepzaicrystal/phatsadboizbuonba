@@ -7662,7 +7662,7 @@ function UpdateRealFruitEsp()
     end
 end
 
-local CodeX2 = Tabs.Setting:AddSection("Code");
+local CodeX2 = Tabs.Misc:AddSection("Code");
 local v150 = {
     "KITT_RESET",
     "Sub2UncleKizaru",
@@ -7706,9 +7706,9 @@ local v150 = {
     "fudd10_v2",
     "Fudd10",
     "Bignews",
-    "SECRET_ADMIN"
+    "SECRET_ADMIN",
 };
-Tabs.Setting:AddButton({
+Tabs.Misc:AddButton({
     Title = "Redeem All Code",
     Description = "",
     Callback = function()
