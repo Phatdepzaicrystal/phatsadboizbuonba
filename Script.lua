@@ -58,7 +58,7 @@ end
 
 if getgenv().Team == "Pirates" then
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pirates")
-else if getgenv().Team == "Marines" then
+elseif getgenv().Team == "Marines" then
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
 end 
 ------------------------------------------------------------------------------------------------------------------------------------
