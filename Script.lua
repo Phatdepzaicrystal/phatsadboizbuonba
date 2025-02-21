@@ -1,3 +1,9 @@
+if getgenv().Team == "Pirates" then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pirates")
+elseif getgenv().Team == "Marines" then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
+end 
+-------------------------------------------------------------------------------------------------
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
 ----loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()--------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
@@ -56,11 +62,6 @@ elseif placeId == 7449423635 then
 Third_Sea = true
 end
 
-if getgenv().Team == "Pirates" then
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pirates")
-elseif getgenv().Team == "Marines" then
-game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
-end 
 ------------------------------------------------------------------------------------------------------------------------------------
 local players = game:GetService("Players")
 game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -7137,7 +7138,6 @@ spawn(function()
 		end
 	end);
 end);
-----------------------------------------------Tab VolCano-----------------------------------------------------------------------------------------
 
 -----------------------------------------------Tab Shop--------------------------------------
 
@@ -7321,7 +7321,7 @@ Tabs.Shop:AddButton({
 });
 Tabs.Shop:AddButton({
     Title = "Change Draco Race",
-    Description = "Sea 3 Plz",
+    Description = "Go To Sea 3 Plz",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(5661.5322265625, 1013.0907592773438, - 334.9649963378906));
         Tween2(CFrame.new(5814.42724609375, 1208.3267822265625, 884.5785522460938));
