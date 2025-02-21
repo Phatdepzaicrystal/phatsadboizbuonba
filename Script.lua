@@ -65,7 +65,7 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------
 local players = game:GetService("Players")
 game:GetService("StarterGui"):SetCore("SendNotification", {
-   Title = "PhatCrystal Hub";
+   Title = "Phat Crystal Hub";
    Text = "Loaded Success";
    Duration = 10
 })
