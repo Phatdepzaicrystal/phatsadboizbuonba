@@ -56,7 +56,11 @@ elseif placeId == 7449423635 then
 Third_Sea = true
 end
 
-
+if getgenv().Team == "Pirates" then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pirates")
+else if getgenv().Team == "Marines" then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
+end 
 ------------------------------------------------------------------------------------------------------------------------------------
 local players = game:GetService("Players")
 game:GetService("StarterGui"):SetCore("SendNotification", {
