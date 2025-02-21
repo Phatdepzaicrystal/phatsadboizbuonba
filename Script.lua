@@ -7706,7 +7706,7 @@ local v150 = {
     "fudd10_v2",
     "Fudd10",
     "Bignews",
-    "SECRET_ADMIN",
+    "SECRET_ADMIN"
 };
 Tabs.Misc:AddButton({
     Title = "Redeem All Code",
