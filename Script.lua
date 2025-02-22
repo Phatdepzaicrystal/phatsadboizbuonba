@@ -2478,9 +2478,11 @@ if _G.FastAttack then
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
 local Settings = {
     AutoClick = false, -- Mặc định tắt
-    ClickDelay = 0.1,  -- Thời gian chờ giữa mỗi lần click
+    ClickDelay = 0.5,  -- Thời gian chờ giữa mỗi lần click
 }
 
 -- Toggle Auto Click
@@ -2492,10 +2494,12 @@ Tabs.Setting:AddToggle("Auto Click", {Title = "Auto Click", Default = Settings.A
         task.spawn(function()
             while Settings.AutoClick do
                 task.wait(Settings.ClickDelay) -- Chờ theo ClickDelay
+                
                 if Settings.AutoClick then
-                    UserInputService.InputBegan:Fire(Enum.UserInputType.MouseButton1) -- Giả lập nhấn chuột trái
-                    task.wait(0.01)
-                    UserInputService.InputEnded:Fire(Enum.UserInputType.MouseButton1) -- Thả chuột trái
+                    -- Giả lập click chuột trái bằng VirtualInputManager
+                    VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
+                    task.wait(0.01) -- Nhấn giữ chuột một chút
+                    VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
                 end
             end
         end)
