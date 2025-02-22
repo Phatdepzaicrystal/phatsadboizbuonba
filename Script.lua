@@ -2481,11 +2481,11 @@ local RunService = game:GetService("RunService")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 
 local Settings = {
-    AutoClick = false, -- Mặc định tắt
-    ClickDelay = 0.5,  -- Thời gian chờ giữa mỗi lần click
+    AutoClick = false, -- Bật/Tắt Auto Click
+    ClickDelay = 0.3,  -- Thời gian chờ giữa mỗi lần click (giây)
 }
 
--- Toggle Auto Click
+-- Tạo Toggle Auto Click trong Tab Settings
 Tabs.Setting:AddToggle("Auto Click", {Title = "Auto Click", Default = Settings.AutoClick}, function(state)
     Settings.AutoClick = state -- Cập nhật trạng thái
     Fluent:Notify({Title = "Auto Click", Content = state and "Đã bật" or "Đã tắt", Duration = 2})
@@ -2496,9 +2496,9 @@ Tabs.Setting:AddToggle("Auto Click", {Title = "Auto Click", Default = Settings.A
                 task.wait(Settings.ClickDelay) -- Chờ theo ClickDelay
                 
                 if Settings.AutoClick then
-                    -- Giả lập click chuột trái bằng VirtualInputManager
+                    -- Giả lập click chuột trái
                     VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
-                    task.wait(0.01) -- Nhấn giữ chuột một chút
+                    task.wait(0.01) -- Giữ chuột một chút
                     VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
                 end
             end
@@ -2506,7 +2506,7 @@ Tabs.Setting:AddToggle("Auto Click", {Title = "Auto Click", Default = Settings.A
     end
 end)
 
--- Slider chỉnh tốc độ click
+-- Tạo Slider chỉnh tốc độ click
 Tabs.Setting:AddSlider("Click Delay", {
     Title = "Click Delay (s)", 
     Default = Settings.ClickDelay, 
@@ -2517,6 +2517,7 @@ Tabs.Setting:AddSlider("Click Delay", {
     Settings.ClickDelay = value -- Cập nhật tốc độ click
     Fluent:Notify({Title = "Click Delay", Content = "Delay: " .. tostring(value) .. "s", Duration = 2})
 end)
+
     local Module = {}
 
     Module.FastAttack = (function()
