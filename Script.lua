@@ -2475,6 +2475,9 @@ if _G.FastAttack then
     local setupvalue = setupvalue or (debug and debug.setupvalue)
     local getupvalue = getupvalue or (debug and debug.getupvalue)
 
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
 local Settings = {
     AutoClick = false, -- Mặc định tắt
     ClickDelay = 0.5,  -- Thời gian chờ giữa mỗi lần click
@@ -2488,10 +2491,12 @@ Tabs.Setting:AddToggle("Auto Click", {Title = "Auto Click", Default = Settings.A
     if state then
         task.spawn(function()
             while Settings.AutoClick do
-                task.wait(Settings.ClickDelay) -- Sử dụng giá trị trong Settings
-                local VirtualUser = game:GetService("VirtualUser")
-                VirtualUser:Button1Down(Vector2.new(0, 0))
-                VirtualUser:Button1Up(Vector2.new(0, 0))
+                task.wait(Settings.ClickDelay) -- Chờ theo ClickDelay
+                if Settings.AutoClick then
+                    UserInputService.InputBegan:Fire(Enum.UserInputType.MouseButton1) -- Giả lập nhấn chuột trái
+                    task.wait(0.01)
+                    UserInputService.InputEnded:Fire(Enum.UserInputType.MouseButton1) -- Thả chuột trái
+                end
             end
         end)
     end
