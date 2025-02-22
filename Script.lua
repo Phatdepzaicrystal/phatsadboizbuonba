@@ -2485,19 +2485,33 @@ local Settings = {
     ClickDelay = 0.3,  -- Thời gian chờ giữa mỗi lần click (giây)
 }
 
-local ContextActionService = game:GetService("ContextActionService")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
 
 local Settings = {
     AutoClick = false, -- Bật/Tắt Auto Click
     ClickDelay = 0.3,  -- Thời gian giữa các lần click
 }
 
--- Hàm thực hiện Auto Click
+-- Hàm mô phỏng click trực tiếp vào nhân vật
+local function Click()
+    local player = Players.LocalPlayer
+    local mouse = player:GetMouse() -- Lấy chuột của người chơi
+
+    if mouse.Target then -- Kiểm tra xem chuột có đang trỏ vào vật thể nào không
+        mouse1press() -- Nhấn chuột
+        task.wait(0.05)
+        mouse1release() -- Thả chuột
+    end
+end
+
+-- Chạy Auto Click liên tục
 local function AutoClick()
     while Settings.AutoClick do
-        task.wait(Settings.ClickDelay)
+        task.wait(Settings.ClickDelay) -- Chờ thời gian giữa các lần click
         if Settings.AutoClick then
-            ContextActionService:CallFunction("ClickButton1") -- Giả lập click chuột trái
+            Click() -- Click vào vị trí hiện tại của chuột
         end
     end
 end
