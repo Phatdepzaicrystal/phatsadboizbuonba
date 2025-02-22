@@ -2480,10 +2480,6 @@ local RunService = game:GetService("RunService")
 
 local VirtualInputManager = game:GetService("VirtualInputManager")
 
-local Settings = {
-    AutoClick = false, -- Bật/Tắt Auto Click
-    ClickDelay = 0.3,  -- Thời gian chờ giữa mỗi lần click (giây)
-}
 
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
@@ -2493,8 +2489,6 @@ local Settings = {
     AutoClick = false, -- Bật/Tắt Auto Click
     ClickDelay = 0.3,  -- Thời gian giữa các lần click
 }
-
-local AutoClick = false -- Biến bật/tắt Auto Click
 
 function StartAutoClick()
     while AutoClick do
