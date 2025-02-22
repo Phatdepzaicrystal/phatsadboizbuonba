@@ -2781,6 +2781,25 @@ spawn(function()
     end);
 end);
 
+local JobId = Tabs.Sever:AddSection("Job ID")
+
+local v105 = Tabs.Sever:AddInput("Input", {
+    Title = "Job ID",
+    Default = "",
+    Placeholder = "",
+    Numeric = false,
+    Finished = false,
+    Callback = function(v301)
+        _G.Job = v301;
+    end
+});
+Tabs.Status:AddButton({
+    Title = "Join Sever",
+    Description = "",
+    Callback = function()
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, _G.Job, game.Players.LocalPlayer);
+    end
+});
 
 ----------------------------------------Tab Main---------------------------------	
     local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
