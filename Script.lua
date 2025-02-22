@@ -2793,7 +2793,7 @@ local v105 = Tabs.Sever:AddInput("Input", {
         _G.Job = v301;
     end
 });
-Tabs.Status:AddButton({
+Tabs.Sever:AddButton({
     Title = "Join Sever",
     Description = "",
     Callback = function()
