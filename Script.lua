@@ -3,7 +3,7 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pira
 elseif getgenv().Team == "Marines" then
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
 end 
-wait(6)
+wait(8)
 -------------------------------------------------------------------------------------------------
 --repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
 ----loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()--------
@@ -2479,7 +2479,13 @@ if _G.FastAttack then
         AutoClick = true,
         ClickDelay = 0.5,
     }
+-- Thêm Toggle Auto Click vào Tab "Settings"
+local AutoClickToggle = Tabs.Setting:AddToggle("AutoClick", {Title = "Auto Click", Default = Settings.AutoClick })
 
+AutoClickToggle:OnChanged(function(state)
+    Settings.AutoClick = state
+    warn("Auto Click: " .. (state and "BẬT" or "TẮT"))
+end)
     local Module = {}
 
     Module.FastAttack = (function()
