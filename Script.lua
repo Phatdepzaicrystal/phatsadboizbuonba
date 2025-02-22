@@ -2475,46 +2475,10 @@ if _G.FastAttack then
     local setupvalue = setupvalue or (debug and debug.setupvalue)
     local getupvalue = getupvalue or (debug and debug.getupvalue)
 
-local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
-
-local VirtualInputManager = game:GetService("VirtualInputManager")
-
-
-local RunService = game:GetService("RunService")
-local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-
-local Settings = {
-    AutoClick = false, -- Bật/Tắt Auto Click
-    ClickDelay = 0.3,  -- Thời gian giữa các lần click
-}
-
-function StartAutoClick()
-    while AutoClick do
-        task.wait(0.3) -- Đợi 0.3 giây giữa mỗi lần click
-        pcall(function()
-            local player = game.Players.LocalPlayer
-            local mouse = player:GetMouse()
-
-            if mouse.Target then -- Kiểm tra nếu chuột đang trỏ vào mục tiêu nào đó
-                mouse1press() -- Nhấn chuột trái
-                task.wait(0.05)
-                mouse1release() -- Thả chuột trái
-            end
-        end)
-    end
-end
-
--- Toggle Bật/Tắt Auto Click
-Tabs.Setting:AddToggle("Auto Click", {Title = "Auto Click", Default = AutoClick}, function(state)
-    AutoClick = state
-    Fluent:Notify({Title = "Auto Click", Content = state and "Đã bật" or "Đã tắt", Duration = 2})
-
-    if state then
-        task.spawn(StartAutoClick) -- Bắt đầu Auto Click
-    end
-end)
+    local Settings = {
+        AutoClick = true,
+        ClickDelay = 0,
+    }
 
     local Module = {}
 
@@ -2589,6 +2553,7 @@ end)
         return FastAttack
     end)()
 end
+
 
 ---------------------------------------idk
 function to(v232)
