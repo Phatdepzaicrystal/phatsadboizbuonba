@@ -2494,50 +2494,33 @@ local Settings = {
     ClickDelay = 0.3,  -- Thời gian giữa các lần click
 }
 
--- Hàm mô phỏng click trực tiếp vào nhân vật
-local function Click()
-    local player = Players.LocalPlayer
-    local mouse = player:GetMouse() -- Lấy chuột của người chơi
+local AutoClick = false -- Biến bật/tắt Auto Click
 
-    if mouse.Target then -- Kiểm tra xem chuột có đang trỏ vào vật thể nào không
-        mouse1press() -- Nhấn chuột
-        task.wait(0.05)
-        mouse1release() -- Thả chuột
-    end
-end
+function StartAutoClick()
+    while AutoClick do
+        task.wait(0.3) -- Đợi 0.3 giây giữa mỗi lần click
+        pcall(function()
+            local player = game.Players.LocalPlayer
+            local mouse = player:GetMouse()
 
--- Chạy Auto Click liên tục
-local function AutoClick()
-    while Settings.AutoClick do
-        task.wait(Settings.ClickDelay) -- Chờ thời gian giữa các lần click
-        if Settings.AutoClick then
-            Click() -- Click vào vị trí hiện tại của chuột
-        end
+            if mouse.Target then -- Kiểm tra nếu chuột đang trỏ vào mục tiêu nào đó
+                mouse1press() -- Nhấn chuột trái
+                task.wait(0.05)
+                mouse1release() -- Thả chuột trái
+            end
+        end)
     end
 end
 
 -- Toggle Bật/Tắt Auto Click
-Tabs.Setting:AddToggle("Auto Click", {Title = "Auto Click", Default = Settings.AutoClick}, function(state)
-    Settings.AutoClick = state
+Tabs.Setting:AddToggle("Auto Click", {Title = "Auto Click", Default = AutoClick}, function(state)
+    AutoClick = state
     Fluent:Notify({Title = "Auto Click", Content = state and "Đã bật" or "Đã tắt", Duration = 2})
 
     if state then
-        task.spawn(AutoClick) -- Chạy Auto Click
+        task.spawn(StartAutoClick) -- Bắt đầu Auto Click
     end
 end)
-
--- Slider chỉnh tốc độ click
-Tabs.Setting:AddSlider("Click Delay", {
-    Title = "Click Delay (s)", 
-    Default = Settings.ClickDelay, 
-    Min = 0.1, 
-    Max = 1.5, 
-    Rounding = 2
-}, function(value)
-    Settings.ClickDelay = value -- Cập nhật tốc độ click
-    Fluent:Notify({Title = "Click Delay", Content = "Delay: " .. tostring(value) .. "s", Duration = 2})
-end)
-
 
     local Module = {}
 
