@@ -2475,16 +2475,38 @@ if _G.FastAttack then
     local setupvalue = setupvalue or (debug and debug.setupvalue)
     local getupvalue = getupvalue or (debug and debug.getupvalue)
 
-    local Settings = {
-        AutoClick = true,
-        ClickDelay = 0.5,
-    }
--- Thêm Toggle Auto Click vào Tab "Settings"
-local AutoClickToggle = Tabs.Setting:AddToggle("AutoClick", {Title = "Auto Click", Default = Settings.AutoClick })
+local Settings = {
+    AutoClick = false, -- Mặc định tắt
+    ClickDelay = 0.5,  -- Thời gian chờ giữa mỗi lần click
+}
 
-AutoClickToggle:OnChanged(function(state)
-    Settings.AutoClick = state
-    warn("Auto Click: " .. (state and "BẬT" or "TẮT"))
+-- Toggle Auto Click
+Tabs.Setting:AddToggle("Auto Click", {Title = "Auto Click", Default = Settings.AutoClick}, function(state)
+    Settings.AutoClick = state -- Cập nhật trạng thái
+    Fluent:Notify({Title = "Auto Click", Content = state and "Đã bật" or "Đã tắt", Duration = 2})
+
+    if state then
+        task.spawn(function()
+            while Settings.AutoClick do
+                task.wait(Settings.ClickDelay) -- Sử dụng giá trị trong Settings
+                local VirtualUser = game:GetService("VirtualUser")
+                VirtualUser:Button1Down(Vector2.new(0, 0))
+                VirtualUser:Button1Up(Vector2.new(0, 0))
+            end
+        end)
+    end
+end)
+
+-- Slider chỉnh tốc độ click
+Tabs.Setting:AddSlider("Click Delay", {
+    Title = "Click Delay (s)", 
+    Default = Settings.ClickDelay, 
+    Min = 0.1, 
+    Max = 1.5, 
+    Rounding = 2
+}, function(value)
+    Settings.ClickDelay = value -- Cập nhật tốc độ click
+    Fluent:Notify({Title = "Click Delay", Content = "Delay: " .. tostring(value) .. "s", Duration = 2})
 end)
     local Module = {}
 
@@ -4263,7 +4285,6 @@ spawn(function()
 end)
 local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
 Camera:Stop()
-
 
     local ToggleBringMob = Tabs.Setting:AddToggle("ToggleBringMob", {Title = " Enable Bring Mob / Magnet", Default = false })
     ToggleBringMob:OnChanged(function(Value)
