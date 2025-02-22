@@ -2480,7 +2480,7 @@ local RunService = game:GetService("RunService")
 
 local Settings = {
     AutoClick = false, -- Mặc định tắt
-    ClickDelay = 0.5,  -- Thời gian chờ giữa mỗi lần click
+    ClickDelay = 0.1,  -- Thời gian chờ giữa mỗi lần click
 }
 
 -- Toggle Auto Click
