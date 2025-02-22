@@ -5882,7 +5882,7 @@ if Second_Sea then
     end
 
         if Third_Sea then
-    local ToggleCakeV2 = Tabs.Item:AddToggle("ToggleCakeV2", {Title = "Kill Dough King [Need Spawn]", Default = false })
+    local ToggleCakeV2 = Tabs.Item:AddToggle("ToggleCakeV2", {Title = "Kill Dough King", Default = false })
     ToggleCakeV2:OnChanged(function(Value)
         _G.AutoCakeV2 = Value
     end)
@@ -5964,6 +5964,53 @@ if Second_Sea then
             end
         end)
     end
+if Second_Sea then
+local ToggleDarkCoat = Tabs.Item:AddToggle("ToggleDarkCoat", {Title = "Auto Dark Coat [Hop]",Default = false })
+   ToggleDarkCoat:OnChanged(function(Value)
+   _G.AutoDarkCoat = Value
+   StopTween(_G.AutoDarkCoat)
+       print(v)
+   end,
+}) 
+spawn(function()
+       while wait() do
+           if  _G.AutoDarkCoat and Second_Sea then
+               pcall(function()
+                   if game:GetService("Workspace").Enemies:FindFirstChild("Darkbeard") then
+                       for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                           if v.Name == "Darkbeard" then
+                               if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                   repeat task.wait()
+                                       AutoHaki()
+                                       EquipWeapon(_G.SelectWeapon)
+                                       v.HumanoidRootPart.CanCollide = false
+                                       v.Humanoid.WalkSpeed = 0
+                                       v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                       topos(v.HumanoidRootPart.CFrame * Pos)
+                                       game:GetService("VirtualUser"):CaptureController()
+                                       game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                       sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+                                   until not  _G.AutoDarkCoat or not v.Parent or v.Humanoid.Health <= 0
+                               end
+                           end
+                       end
+                   else
+                   UnEquipWeapon(_G.SelectWeapon)
+                   topos(CFrame.new(3677.08203125, 62.751937866211, -3144.8332519531))
+                       if game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard") then
+                           topos(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                       else
+                           if  _G.AutoDarkCoatHop then
+                               Hop()
+                           end
+                       end
+                   end
+               end)
+           end
+       end
+   end)
+end
+
 
 local Chestt = Tabs.Item:AddSection("Chest Farm")
 
@@ -6863,7 +6910,7 @@ Tabs.Race:AddButton({
 })
 
 
-local ToggleAutotrial = Tabs.Race:AddToggle("ToggleAutotrial", {Title = "Auto Trial", Default = false })
+local ToggleAutotrial = Tabs.Race:AddToggle("ToggleAutotrial", {Title = "Auto Finish Trial", Default = false })
 ToggleAutotrial:OnChanged(function(Value)
     _G.AutoQuestRace = Value
 end)
@@ -6985,27 +7032,38 @@ spawn(function()
         end
     end);
 end);
-if Third_Sea then
-local ToggleMirageIsland = Tabs.Race:AddToggle("ToggleMirageIsland", {Title = "Hop Mirage Island", Default = false })
-ToggleMirageIsland:OnChanged(function(Value)
-    _G.FindMirageIsland = Value
-end)
-Options.ToggleMirageIsland:SetValue(false)
-
+local v146 = Tabs.Race:AddToggle("ToggleKillTrial", {
+    Title = "Auto Kill Player",
+    Description = "",
+    Default = false
+});
+v146:OnChanged(function(v363)
+    _G.AutoKillTrial = v363;
+end);
+Options.ToggleKillTrial:SetValue(false);
 spawn(function()
     while wait() do
-    if _G.FindMirageIsland then
-        if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") or game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
-            if HighestPointRealCFrame and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - HighestPointRealCFrame.Position).Magnitude > 10 then
-            Tween(getHighestPoint().CFrame * CFrame.new(0, 211.88, 0))
+        pcall(function()
+            if _G.AutoKillTrial then
+                for v870, v871 in pairs(game:GetService("Players"):GetChildren()) do
+                    if (v871.Name and (v871.Name ~= game.Players.LocalPlayer.Name) and ((v871.Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100)) then
+                        if (v871.Character.Humanoid.Health > 0) then
+                            repeat
+                                wait(_G.Fast_Delay);
+                                EquipTool(SelectWeapon);
+                                AutoHaki();
+                                Tween(v871.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5));
+                                v871.Character.HumanoidRootPart.CanCollide = false;
+                                v871.Character.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
+                                AttackNoCoolDown();
+                            until not _G.AutoKillTrial or not v871.Parent or (v871.Character.Humanoid.Health <= 0)
+                        end
+                    end
                 end
-        elseif not game:GetService("Workspace").Map:FindFirstChild("MysticIsland") or not game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
-            Hop()
             end
-        end
+        end);
     end
-end)
-end
+end);
 
 local Mastery = Tabs.Race:AddSection("Auto Train")
 
