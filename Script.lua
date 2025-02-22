@@ -2485,28 +2485,34 @@ local Settings = {
     ClickDelay = 0.3,  -- Thời gian chờ giữa mỗi lần click (giây)
 }
 
--- Tạo Toggle Auto Click trong Tab Settings
+local ContextActionService = game:GetService("ContextActionService")
+
+local Settings = {
+    AutoClick = false, -- Bật/Tắt Auto Click
+    ClickDelay = 0.3,  -- Thời gian giữa các lần click
+}
+
+-- Hàm thực hiện Auto Click
+local function AutoClick()
+    while Settings.AutoClick do
+        task.wait(Settings.ClickDelay)
+        if Settings.AutoClick then
+            ContextActionService:CallFunction("ClickButton1") -- Giả lập click chuột trái
+        end
+    end
+end
+
+-- Toggle Bật/Tắt Auto Click
 Tabs.Setting:AddToggle("Auto Click", {Title = "Auto Click", Default = Settings.AutoClick}, function(state)
-    Settings.AutoClick = state -- Cập nhật trạng thái
+    Settings.AutoClick = state
     Fluent:Notify({Title = "Auto Click", Content = state and "Đã bật" or "Đã tắt", Duration = 2})
 
     if state then
-        task.spawn(function()
-            while Settings.AutoClick do
-                task.wait(Settings.ClickDelay) -- Chờ theo ClickDelay
-                
-                if Settings.AutoClick then
-                    -- Giả lập click chuột trái
-                    VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
-                    task.wait(0.01) -- Giữ chuột một chút
-                    VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
-                end
-            end
-        end)
+        task.spawn(AutoClick) -- Chạy Auto Click
     end
 end)
 
--- Tạo Slider chỉnh tốc độ click
+-- Slider chỉnh tốc độ click
 Tabs.Setting:AddSlider("Click Delay", {
     Title = "Click Delay (s)", 
     Default = Settings.ClickDelay, 
@@ -2517,6 +2523,7 @@ Tabs.Setting:AddSlider("Click Delay", {
     Settings.ClickDelay = value -- Cập nhật tốc độ click
     Fluent:Notify({Title = "Click Delay", Content = "Delay: " .. tostring(value) .. "s", Duration = 2})
 end)
+
 
     local Module = {}
 
