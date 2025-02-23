@@ -2734,7 +2734,27 @@ local v529 = Tabs.Sever:AddParagraph({
             end);
         end
     end);
-
+	
+local v491 = Tabs.Sever:AddParagraph({
+        Title = "Status Dough Prince Or Dough King",
+        Content = ""
+    });
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
+                elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
+                elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86) then
+                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
+                else
+                    v491:SetDesc("Dough king : ✅️");
+                end
+            end);
+        end
+    end);
+	
 local v104 = Tabs.Sever:AddParagraph({
     Title = "Leviathan Island",
     Content = "Status Leviathan Island"
