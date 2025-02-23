@@ -2743,11 +2743,11 @@ local v491 = Tabs.Sever:AddParagraph({
         while wait() do
             pcall(function()
                 if (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88) then
-                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
+                    v491:SetDesc("Mob: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41) .. "");
                 elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87) then
-                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
+                    v491:SetDesc("Mob: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 40) .. "");
                 elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86) then
-                    v491:SetDesc("Còn: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
+                    v491:SetDesc("Mob: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
                 else
                     v491:SetDesc("Dough king : ✅️");
                 end
@@ -2829,6 +2829,22 @@ spawn(function()
             end
         end);
     end);
+
+local v499 = Tabs.Sever:AddParagraph({
+    Title = "Kitsune Island",
+    Content = "Status Kitsune Island"
+});
+spawn(function()
+    pcall(function()
+        while wait() do
+            if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
+                v169:SetDesc("✅️");
+            else
+                v169:SetDesc("❌️");
+            end
+        end
+    end);
+end);	
 ----------------------------------------Tab Main---------------------------------	
     local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
         Title = "Choose Weapon",
