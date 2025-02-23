@@ -3,8 +3,7 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pira
 elseif getgenv().Team == "Marines" then
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
 end 
-wait(10)
-wait(1)
+wait(12)
 -------------------------------------------------------------------------------------------------
 --repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
 ----loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()--------
