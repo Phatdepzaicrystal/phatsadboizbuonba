@@ -7061,7 +7061,7 @@ spawn(function()
 end);
 if Third_Sea then
     local ToggleMirageIsland = Tabs.Race:AddToggle("ToggleMirageIsland", {Title = "Hop Mirage Island", Default = false })
-    
+
     ToggleMirageIsland:OnChanged(function(Value)
         _G.FindMirageIsland = Value
     end)
@@ -7074,10 +7074,8 @@ if Third_Sea then
     local LocalPlayer = game.Players.LocalPlayer
 
     -- API lấy danh sách server
-    local ServerAPI = "https://games.roblox.com/v1/games/2753915549/servers/Public?sortOrder=Asc&limit=100"
-
-    -- Hàm lấy danh sách server
     local function GetServers()
+        local ServerAPI = "https://games.roblox.com/v1/games/2753915549/servers/Public?sortOrder=Asc&limit=100"
         local success, response = pcall(function()
             return HttpService:JSONDecode(game:HttpGet(ServerAPI))
         end)
@@ -7089,30 +7087,30 @@ if Third_Sea then
         end
     end
 
-    -- Hàm tìm server có Mirage Island
+    -- Hàm teleport tới server
+    local function HopToServer(serverId)
+        print("Đang chuyển vào server:", serverId)
+        TeleportService:TeleportToPlaceInstance(PlaceId, serverId, LocalPlayer)
+    end
+
+    -- Hàm tìm server có Mirage
     local function FindMirageServer()
         local servers = GetServers()
-
         for _, server in pairs(servers) do
             if server.playing < server.maxPlayers then -- Chỉ join server có slot trống
-                print("Đang kiểm tra server:", server.id)
-                return server.id
+                print("Kiểm tra server:", server.id)
+                HopToServer(server.id) -- Chuyển server để kiểm tra Mirage
+                wait(10) -- Đợi 10 giây để vào game và kiểm tra Mirage
+                if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+                    print("Tìm thấy Mirage Island! Dừng hop server.")
+                    return
+                end
             end
         end
 
-        return nil
-    end
-
-    -- Hàm teleport tới server có Mirage
-    local function HopToServer()
-        local targetServerId = FindMirageServer()
-
-        if targetServerId then
-            print("Đang chuyển vào server:", targetServerId)
-            TeleportService:TeleportToPlaceInstance(PlaceId, targetServerId, LocalPlayer)
-        else
-            print("Không tìm thấy server có Mirage.")
-        end
+        print("Không tìm thấy server có Mirage. Thử lại...")
+        wait(2)
+        FindMirageServer() -- Lặp lại quá trình
     end
 
     spawn(function()
@@ -7121,18 +7119,15 @@ if Third_Sea then
                 local MirageIsland = game:GetService("Workspace").Map:FindFirstChild("MysticIsland")
 
                 if MirageIsland then
-                    if HighestPointRealCFrame and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - HighestPointRealCFrame.Position).Magnitude > 10 then
-                        Tween(getHighestPoint().CFrame * CFrame.new(0, 211.88, 0))
-                    end
+                    print("Mirage Island đã xuất hiện!")
                 else
-                    print("Không tìm thấy Mirage Island, hop server...")
-                    HopToServer()
+                    print("Không tìm thấy Mirage, bắt đầu hop server...")
+                    FindMirageServer()
                 end
             end
         end
     end)
 end
-
 
 local Mastery = Tabs.Race:AddSection("Auto Train")
 
