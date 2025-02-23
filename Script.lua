@@ -5964,7 +5964,7 @@ if Second_Sea then
             end
         end)
     end
-if Second_Sea then
+
 local ToggleDarkCoat = Tabs.Item:AddToggle("ToggleDarkCoat", {Title = "Auto Dark Coat [Hop]",Default = false })
    ToggleDarkCoat:OnChanged(function(Value)
    _G.AutoDarkCoat = Value
@@ -7064,6 +7064,27 @@ spawn(function()
         end);
     end
 end);
+if Third_Sea then
+local ToggleMirageIsland = Tabs.Race:AddToggle("ToggleMirageIsland", {Title = "Hop Mirage Island", Default = false })
+ToggleMirageIsland:OnChanged(function(Value)
+    _G.FindMirageIsland = Value
+end)
+Options.ToggleMirageIsland:SetValue(false)
+
+spawn(function()
+    while wait() do
+    if _G.FindMirageIsland then
+        if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") or game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+            if HighestPointRealCFrame and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - HighestPointRealCFrame.Position).Magnitude > 10 then
+            Tween(getHighestPoint().CFrame * CFrame.new(0, 211.88, 0))
+                end
+        elseif not game:GetService("Workspace").Map:FindFirstChild("MysticIsland") or not game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+            Hop()
+            end
+        end
+    end
+end)
+end
 
 local Mastery = Tabs.Race:AddSection("Auto Train")
 
