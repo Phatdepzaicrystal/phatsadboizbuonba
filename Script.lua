@@ -2766,7 +2766,7 @@ local v491 = Tabs.Sever:AddParagraph({
                 elseif (string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86) then
                     v491:SetDesc("Mob: " .. string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 39) .. " ");
                 else
-                    v491:SetDesc("Dough king : ✅️");
+                    v491:SetDesc("Dough Prince : ✅️");
                 end
             end);
         end
@@ -4887,7 +4887,7 @@ spawn(function()
                             end    
                         end    
                     else
-                        Tween(CFrame.new(-2009.2802734375, 4532.97216796875, -14937.3076171875)) 
+                        Tween2(CFrame.new(-2009.2802734375, 4532.97216796875, -14937.3076171875)) 
                     end
                 else
                     if game.Workspace.Enemies:FindFirstChild("Baking Staff") or game.Workspace.Enemies:FindFirstChild("Head Baker") or game.Workspace.Enemies:FindFirstChild("Cake Guard") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter") then
@@ -4907,7 +4907,7 @@ spawn(function()
                         end
                     else
                         bringmob = false
-                        Tween(CFrame.new(-1579.9111328125, 329.7358703613281, -12310.365234375)) 
+                        Tween2(CFrame.new(-1579.9111328125, 329.7358703613281, -12310.365234375)) 
                     end
                 end
             end)
@@ -4952,7 +4952,7 @@ spawn(function()
                             end    
                         end    
                     else
-                        Tween(CFrame.new(-2009.2802734375, 4532.97216796875, -14937.3076171875)) 
+                        Tween2(CFrame.new(-2009.2802734375, 4532.97216796875, -14937.3076171875)) 
                     end
                 else
                     if game.Workspace.Enemies:FindFirstChild("Baking Staff") or game.Workspace.Enemies:FindFirstChild("Head Baker") or game.Workspace.Enemies:FindFirstChild("Cake Guard") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter") then
@@ -4972,7 +4972,7 @@ spawn(function()
                         end
                     else
                         bringmob = false
-                        Tween(CFrame.new(-1579.9111328125, 329.7358703613281, -12310.365234375)) 
+                        Tween2(CFrame.new(-1579.9111328125, 329.7358703613281, -12310.365234375)) 
                     end
                 end
             end)
@@ -4995,7 +4995,7 @@ spawn(function()
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                 end
                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible==false then
-                 Tween(BoneCFrame)
+                 Tween2(BoneCFrame)
                 if (BoneCFrame.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude<=3 then    
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest","HauntedQuest2",1)
                     end
