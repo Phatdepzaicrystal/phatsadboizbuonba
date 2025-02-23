@@ -9,11 +9,11 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pira
 elseif getgenv().Team == "Marines" then
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
 end 
-wait(10)
 ---------------------------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
+wait(10)
 
 local Window = Fluent:CreateWindow({
     Title = "PhatCrystal Hub[Free]",
@@ -66,7 +66,6 @@ Second_Sea = true
 elseif placeId == 7449423635 then
 Third_Sea = true
 end
-wait(5)
 ------------------------------------------------------------------------------------------------------------------------------------
 local players = game:GetService("Players")
 game:GetService("StarterGui"):SetCore("SendNotification", {
