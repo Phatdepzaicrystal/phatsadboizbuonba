@@ -3053,6 +3053,7 @@ end);
         end
         end)
 
+--[[
 local Mastery = Tabs.Main:AddSection("Mastery Farm")
     local DropdownMastery = Tabs.Main:AddDropdown("DropdownMastery", {
         Title = "Mastery Mode",
@@ -3195,6 +3196,7 @@ spawn(function()
       end
       end
       end)
+	]]--
 ---------Near Mas
     elseif AutoFarmMasDevilFruit and TypeMastery == 'Near Mobs' then
     pcall(function()
