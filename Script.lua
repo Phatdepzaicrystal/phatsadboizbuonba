@@ -5714,7 +5714,7 @@ spawn(function()
 end);
 local v78 = Tabs.Item:AddToggle("ToggleAutoRainbowHaki", {
     Title = "Auto Ranbow Haki",
-    Description = "get quest to doing get it 7 haki color",
+    Description = "",
     Default = false
 });
 v78:OnChanged(function(v267)
