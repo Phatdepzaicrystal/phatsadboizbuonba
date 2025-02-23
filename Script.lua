@@ -2838,9 +2838,9 @@ spawn(function()
     pcall(function()
         while wait() do
             if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
-                v169:SetDesc("✅️");
+                v499:SetDesc("✅️");
             else
-                v169:SetDesc("❌️");
+                v499:SetDesc("❌️");
             end
         end
     end);
