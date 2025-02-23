@@ -4861,7 +4861,7 @@ end)
 
 local FarmZzzIz = Tabs.Item:AddSection("Other Farm")
 
-local ToggleCake = Tabs.Fish:AddToggle("ToggleCake", {Title = "Auto Cake Prince", Default = false })
+local ToggleCake = Tabs.Item:AddToggle("ToggleCake", {Title = "Auto Cake Prince", Default = false })
 ToggleCake:OnChanged(function(Value)
     _G.CakePrice = Value
 end) 
