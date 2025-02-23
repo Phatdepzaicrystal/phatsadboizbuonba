@@ -6466,6 +6466,55 @@ for i,v in next,Remote_GetFruits do
         table.insert(ShopDevilSell,v.Name)
     end
 end
+
+local HopPre = Tabs.Teleport:AddSection("Hop Prenium")
+
+local HttpService = game:GetService("HttpService")
+local TeleportService = game:GetService("TeleportService")
+
+local ToggleDoughHop = Tabs.Teleport:AddToggle("ToggleDoughHop", {
+    Title = "Hop Dough",
+    Default = false
+})
+
+ToggleDoughHop:OnChanged(function(Value)
+    _G.DoughHop = Value
+    if _G.DoughHop then
+        HopToDoughKingServer()
+    end
+end)
+
+Options.ToggleDoughHop:SetValue(false)
+
+function GetJobIdFromWebhook()
+    local webhookUrl = "https://discord.com/api/webhooks/1315205641111081001/8JGJflwA4JQsZXk8uvVsChyrn00mNMO9gVwdrxc3m6WHHhYewQE0-GfPS5s6cWUmbFOF" -- Thay URL webhook của bạn vào đây
+    local response = HttpService:GetAsync(webhookUrl)
+    local data = HttpService:JSONDecode(response)
+
+    if data and data.embeds and data.embeds[1] and data.embeds[1].fields then
+        local bossField = data.embeds[1].fields[1] -- Value 1 (Boss status)
+        local jobIdField = data.embeds[1].fields[3] -- Value 2 (Job ID)
+
+        if bossField.name == "Boss-spawn" and bossField.value == "```Boss Spawn (Dough King)```" then
+            return jobIdField.value
+        end
+    end
+    return nil
+end
+
+function HopToDoughKingServer()
+    while _G.DoughHop do
+        wait(5) -- Kiểm tra mỗi 5 giây
+
+        local jobId = GetJobIdFromWebhook()
+        if jobId and jobId ~= game.JobId then
+            TeleportService:TeleportToPlaceInstance(2753915549, jobId, game.Players.LocalPlayer)
+            return
+        end
+    end
+end
+
+
 _G.SelectFruit = "Leopard"
 
 local DropdownFruit = Tabs.Fruit:AddDropdown("DropdownFruit", {
