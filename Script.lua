@@ -13,7 +13,6 @@ end
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
-wait(10)
 
 local Window = Fluent:CreateWindow({
     Title = "PhatCrystal Hub[Free]",
@@ -66,13 +65,7 @@ Second_Sea = true
 elseif placeId == 7449423635 then
 Third_Sea = true
 end
-------------------------------------------------------------------------------------------------------------------------------------
-local players = game:GetService("Players")
-game:GetService("StarterGui"):SetCore("SendNotification", {
-   Title = "Phat Crystal Hub";
-   Text = "Loaded Success";
-   Duration = 10
-})
+
 ------------------------------------------------------------------------------------------------------------------------------------
 function FindQuest()
 local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
@@ -8084,3 +8077,10 @@ function UpdateRealFruitEsp()
         end
     end
 end
+-------------------------------------------------
+local players = game:GetService("Players")
+game:GetService("StarterGui"):SetCore("SendNotification", {
+   Title = "Phat Crystal Hub";
+   Text = "Loaded Success";
+   Duration = 10
+})
