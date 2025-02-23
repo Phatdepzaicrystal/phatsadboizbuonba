@@ -3053,7 +3053,7 @@ end);
         end
         end)
 
---[[
+
 local Mastery = Tabs.Main:AddSection("Mastery Farm")
     local DropdownMastery = Tabs.Main:AddDropdown("DropdownMastery", {
         Title = "Mastery Mode",
@@ -3144,7 +3144,7 @@ end
 end
 end)
 spawn(function()
-    while task.wait(.1) do
+    while wait(.1) do
     if AutoFarmMasDevilFruit and TypeMastery == 'Level' then
     pcall(function()
       CheckLevel(SelectMonster)
@@ -3152,13 +3152,13 @@ spawn(function()
       game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
       if BypassTP then
         if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude > 2500 then
-        BTP(CFrameQ)
+        BTPZ(CFrameQ)
         wait(0.2)
         elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude < 2500 then
-        Tween(CFrameQ)
+        Tween2(CFrameQ)
         end
         else
-          Tween(CFrameQ)
+          Tween2(CFrameQ)
         end
       if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
       game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,QuestLv)
@@ -3196,7 +3196,6 @@ spawn(function()
       end
       end
       end)
-	]]--
 ---------Near Mas
     elseif AutoFarmMasDevilFruit and TypeMastery == 'Near Mobs' then
     pcall(function()
@@ -3278,7 +3277,7 @@ if Second_Sea then
                         if Distance > 20000 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
                         end
-                        Tween(CFrame.new(904.4072265625, 181.05767822266, 33341.38671875))
+                        Tween2(CFrame.new(904.4072265625, 181.05767822266, 33341.38671875))
                     end
                 end
             end)
