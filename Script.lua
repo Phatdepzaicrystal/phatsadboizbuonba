@@ -12,8 +12,11 @@ end
 wait(10)
 ---------------------------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+wait(1)
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua"))()
+wait(1)
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
+wait(1)
 
 local Window = Fluent:CreateWindow({
     Title = "PhatCrystal Hub[Free]",
