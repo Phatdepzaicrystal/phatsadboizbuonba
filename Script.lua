@@ -2727,7 +2727,7 @@ local function v103()
     local v298 = math.floor(v297 / (60 ^ 2)) % 24 ;
     local v299 = math.floor(v297 / 60) % 60 ;
     local v300 = v297 % 60 ;
-    v102:SetDesc(string.format("|%02d H, %02d m, %02d s.|", v298, v299, v300));
+    v102:SetDesc(string.format("%02d H - %02d m - %02d s", v298, v299, v300));
 end
 spawn(function()
     while task.wait() do
@@ -2753,7 +2753,7 @@ local v529 = Tabs.Sever:AddParagraph({
     end);
 	
 local v491 = Tabs.Sever:AddParagraph({
-        Title = "Status Dough Prince Or Dough King",
+        Title = "Status Dough Prince",
         Content = ""
     });
     spawn(function()
@@ -4999,6 +4999,124 @@ end)
            end
        end)
     end
+
+local EzPhatdepzai = Tabs.Item:AddSection("World Quest")
+
+local v119 = Tabs.Item:AddToggle("ToggleAutoSea2", {
+    Title = "Auto Second Sea",
+    Description = "",
+    Default = false
+});
+v119:OnChanged(function(v315)
+    _G.Auto_Sea2 = v315;
+end);
+Options.ToggleAutoSea2:SetValue(false);
+spawn(function()
+    while wait() do
+        if _G.Auto_Sea2 then
+            pcall(function()
+                local v800 = game:GetService("Players").LocalPlayer.Data.Level.Value;
+                if ((v800 >= 700) and First_Sea) then
+                    if ((game:GetService("Workspace").Map.Ice.Door.CanCollide == false) and (game:GetService("Workspace").Map.Ice.Door.Transparency == 1)) then
+                        local v1346 = CFrame.new(4849.29883, 5.65138149, 719.611877);
+                        repeat
+                            Tween(v1346);
+                            wait();
+                        until ((v1346.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) or (_G.Auto_Sea2 == false)
+                        wait(1.1);
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress", "Detective");
+                        wait(0.5);
+                        EquipTool("Key");
+                        repeat
+                            Tween(CFrame.new(1347.7124, 37.3751602, - 1325.6488));
+                            wait();
+                        until ((Vector3.new(1347.7124, 37.3751602, - 1325.6488) - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) or (_G.Auto_Sea2 == false)
+                        wait(0.5);
+                    elseif ((game:GetService("Workspace").Map.Ice.Door.CanCollide == false) and (game:GetService("Workspace").Map.Ice.Door.Transparency == 1)) then
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Ice Admiral") then
+                            for v1680, v1681 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if (v1681.Name == "Ice Admiral") then
+                                    if (not v1681.Humanoid.Health <= 0) then
+                                        if (v1681:FindFirstChild("Humanoid") and v1681:FindFirstChild("HumanoidRootPart") and (v1681.Humanoid.Health > 0)) then
+                                            OldCFrameSecond = v1681.HumanoidRootPart.CFrame;
+                                            repeat
+                                                task.wait(_G.Fast_Delay);
+                                                AutoHaki();
+                                                EquipTool(SelectWeapon);
+                                                v1681.HumanoidRootPart.CanCollide = false;
+                                                v1681.Humanoid.WalkSpeed = 0;
+                                                v1681.Head.CanCollide = false;
+                                                v1681.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                                v1681.HumanoidRootPart.CFrame = OldCFrameSecond;
+                                                Tween(v1681.HumanoidRootPart.CFrame * Pos);
+                                                AttackNoCoolDown();
+                                                sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge);
+                                            until not _G.Auto_Sea2 or not v1681.Parent or (v1681.Humanoid.Health <= 0)
+                                        end
+                                    else
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa");
+                                    end
+                                end
+                            end
+                        elseif game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral") then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral").HumanoidRootPart.CFrame * CFrame.new(5, 10, 7));
+                        end
+                    end
+                end
+            end);
+        end
+    end
+end);
+
+local v120 = Tabs.Item:AddToggle("ToggleAutoSea3", {
+    Title = "Auto Third Sea",
+    Description = "",
+    Default = false
+});
+v120:OnChanged(function(v316)
+    _G.Auto_Sea3 = v316;
+end);
+Options.ToggleAutoSea3:SetValue(false);
+spawn(function()
+    while wait() do
+        if _G.AutoSea3 then
+            pcall(function()
+                if ((game:GetService("Players").LocalPlayer.Data.Level.Value >= 1500) and Second_Sea) then
+                    _G.AutoLevel = false;
+                    if (game:GetService("ReplicatedStorage").Remotes['CommF_']:InvokeServer("ZQuestProgress", "General") == 0) then
+                        Tween(CFrame.new(- 1926.3221435547, 12.819851875305, 1738.3092041016));
+                        if ((CFrame.new(- 1926.3221435547, 12.819851875305, 1738.3092041016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10) then
+                            wait(1.5);
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress", "Begin");
+                        end
+                        wait(1.8);
+                        if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
+                            for v1578, v1579 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if (v1579.Name == "rip_indra") then
+                                    OldCFrameThird = v1579.HumanoidRootPart.CFrame;
+                                    repeat
+                                        task.wait(_G.Fast_Delay);
+                                        AutoHaki();
+                                        EquipTool(SelectWeapon);
+                                        Tween(v1579.HumanoidRootPart.CFrame * Pos);
+                                        v1579.HumanoidRootPart.CFrame = OldCFrameThird;
+                                        v1579.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                        v1579.HumanoidRootPart.CanCollide = false;
+                                        v1579.Humanoid.WalkSpeed = 0;
+                                        AttackNoCoolDown();
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou");
+                                    until (_G.AutoSea3 == false) or (v1579.Humanoid.Health <= 0) or not v1579.Parent
+                                end
+                            end
+                        elseif (not game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") and ((CFrame.new(- 26880.93359375, 22.848554611206, 473.18951416016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000)) then
+                            Tween(CFrame.new(- 26880.93359375, 22.848554611206, 473.18951416016));
+                        end
+                    end
+                end
+            end);
+        end
+    end
+end);	
 
 local Items = Tabs.Item:AddSection("Items Farm")
 
