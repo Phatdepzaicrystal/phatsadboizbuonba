@@ -1,12 +1,16 @@
+--[[
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+getgenv().Team = "Marines"          -- Pirates or Marines
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()
+]]--
+
 if getgenv().Team == "Pirates" then
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pirates")
 elseif getgenv().Team == "Marines" then
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
 end 
-wait(10)
--------------------------------------------------------------------------------------------------
---repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
-----loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()--------
+wait(18)
+---------------------------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
