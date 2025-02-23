@@ -5006,17 +5006,13 @@ spawn(function()
                                 if v.Name=="Reborn Skeleton" or v.Name=="Living Zombie" or v.Name=="Demonic Soul" or v.Name=="Posessed Mummy" then
                                     if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Demonic Soul") then
                                         repeat wait(_G.Fast_Delay)
-                                            AttackNoCoolDown()
-                                            AutoHaki()
-                                            bringmob=true
-                                            EquipTool(SelectWeapon)
-                                            Tween(v.HumanoidRootPart.CFrame*Pos)
-                                            v.HumanoidRootPart.Size=Vector3.new(60, 60, 60)
-                                            v.HumanoidRootPart.Transparency=1
-                                            v.Humanoid.JumpPower=0
-                                            v.Humanoid.WalkSpeed=0
-                                            v.HumanoidRootPart.CanCollide=false
-                                            FarmPos=v.HumanoidRootPart.CFrame
+                                           AutoHaki()  
+                                             EquipTool(SelectWeapon)  
+                                            v.HumanoidRootPart.CanCollide = false  
+                                            v.Humanoid.WalkSpeed = 0  
+                                            v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)  
+                                            Tween(v.HumanoidRootPart.CFrame * Pos)  
+                                            AttackNoCoolDown() 
                                             MonFarm=v.Name
                                         until not _G.Bone or v.Humanoid.Health<=0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible==false
                                     else
