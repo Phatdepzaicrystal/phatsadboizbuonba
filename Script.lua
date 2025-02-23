@@ -6472,6 +6472,7 @@ local HopPre = Tabs.Teleport:AddSection("Hop Prenium")
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local DoughKingEvent = ReplicatedStorage:WaitForChild("DoughKingEvent")
 
 local DoughKingEvent = Instance.new("RemoteEvent", ReplicatedStorage)
 DoughKingEvent.Name = "DoughKingEvent"
@@ -6485,7 +6486,7 @@ local ToggleDoughHop = Tabs.Teleport:AddToggle("ToggleDoughHop", {
 ToggleDoughHop:OnChanged(function(Value)
     _G.DoughHop = Value
     if _G.DoughHop then
-        HopToDoughKingServer()
+        DoughKingEvent:FireServer() 
     end
 end)
 
@@ -6493,31 +6494,32 @@ Options.ToggleDoughHop:SetValue(false)
 
 function GetJobIdFromWebhook()
     local webhookUrl = "https://discord.com/api/webhooks/1315205641111081001/8JGJflwA4JQsZXk8uvVsChyrn00mNMO9gVwdrxc3m6WHHhYewQE0-GfPS5s6cWUmbFOF" -- Thay URL webhook của bạn vào đây
-    local response = HttpService:GetAsync(webhookUrl)
-    local data = HttpService:JSONDecode(response)
+    local success, response = pcall(function()
+        return HttpService:GetAsync(webhookUrl)
+    end)
 
-    if data and data.embeds and data.embeds[1] and data.embeds[1].fields then
-        local bossField = data.embeds[1].fields[1] 
-        local jobIdField = data.embeds[1].fields[3] 
+    if success then
+        local data = HttpService:JSONDecode(response)
+        if data and data.embeds and data.embeds[1] and data.embeds[1].fields then
+            local bossField = data.embeds[1].fields[0] -- Value 1 (Boss Status)
+            local jobIdField = data.embeds[1].fields[2] -- Value 2 (Job ID)
 
-        if bossField.name == "Boss-spawn" and bossField.value == "```Boss Spawn (Dough King)```" then
-            return jobIdField.value
+            -- Chỉ lấy Job ID nếu server có Dough King
+            if bossField.name == "Boss-spawn" and bossField.value == "```Boss Spawn (Dough King)```" then
+                return jobIdField.value
+            end
         end
     end
     return nil
 end
 
-function HopToDoughKingServer()
-    while _G.DoughHop do
-        wait(5) -- Kiểm tra mỗi 5 giây
-
-        local jobId = GetJobIdFromWebhook()
-        if jobId and jobId ~= game.JobId then
-            TeleportService:TeleportToPlaceInstance(2753915549, jobId, game.Players.LocalPlayer)
-            return
-        end
+-- Khi Client yêu cầu hop, Server sẽ kiểm tra Job ID và teleport
+DoughKingEvent.OnServerEvent:Connect(function(player)
+    local jobId = GetJobIdFromWebhook()
+    if jobId and jobId ~= game.JobId then
+        TeleportService:TeleportToPlaceInstance(2753915549, jobId, player)
     end
-end
+end)
 
 
 _G.SelectFruit = "Leopard"
