@@ -3,7 +3,7 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pira
 elseif getgenv().Team == "Marines" then
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
 end 
-wait(10)
+wait(14)
 -------------------------------------------------------------------------------------------------
 --repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
 ----loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()--------
@@ -6471,9 +6471,14 @@ local HopPre = Tabs.Teleport:AddSection("Hop Prenium")
 
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local DoughKingEvent = Instance.new("RemoteEvent", ReplicatedStorage)
+DoughKingEvent.Name = "DoughKingEvent"
 
 local ToggleDoughHop = Tabs.Teleport:AddToggle("ToggleDoughHop", {
-    Title = "Hop Dough",
+    Title = "Hop Dough King",
+    Description = "Hop To Sever Have Dough King",
     Default = false
 })
 
@@ -6492,8 +6497,8 @@ function GetJobIdFromWebhook()
     local data = HttpService:JSONDecode(response)
 
     if data and data.embeds and data.embeds[1] and data.embeds[1].fields then
-        local bossField = data.embeds[1].fields[1] -- Value 1 (Boss status)
-        local jobIdField = data.embeds[1].fields[3] -- Value 2 (Job ID)
+        local bossField = data.embeds[1].fields[1] 
+        local jobIdField = data.embeds[1].fields[3] 
 
         if bossField.name == "Boss-spawn" and bossField.value == "```Boss Spawn (Dough King)```" then
             return jobIdField.value
