@@ -6805,7 +6805,7 @@ end)
 
 if Second_Sea then
 Tabs.Raid:AddButton({
-    Title = "Raid Lab",
+    Title = "Teleport To Raid Lab",
     Description = "",
     Callback = function()
         Tween2(CFrame.new(-6438.73535, 250.645355, -4501.50684))
@@ -6813,7 +6813,7 @@ Tabs.Raid:AddButton({
 })
 elseif Third_Sea then
     Tabs.Raid:AddButton({
-        Title = "Raid Lab",
+        Title = "Teleport To Raid Lab",
         Description = "",
         Callback = function()
             Tween2(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
@@ -7634,6 +7634,63 @@ Tabs.Misc:AddInput("Input_Fragments", {
 
 local Mastery = Tabs.Misc:AddSection("Misc")
 
+local v150 = {
+    "KITT_RESET",
+    "Sub2UncleKizaru",
+    "SUB2GAMERROBOT_RESET1",
+    "Sub2Fer999",
+    "Enyu_is_Pro",
+    "JCWK",
+    "StarcodeHEO",
+    "MagicBus",
+    "KittGaming",
+    "Sub2CaptainMaui",
+    "Sub2OfficalNoobie",
+    "TheGreatAce",
+    "Sub2NoobMaster123",
+    "Sub2Daigrock",
+    "Axiore",
+    "StrawHatMaine",
+    "TantaiGaming",
+    "Bluxxy",
+    "SUB2GAMERROBOT_EXP1",
+    "Chandler",
+    "NOMOREHACK",
+    "BANEXPLOIT",
+    "WildDares",
+    "BossBuild",
+    "GetPranked",
+    "EARN_FRUITS",
+    "FIGHT4FRUIT",
+    "NOEXPLOITER",
+    "NOOB2ADMIN",
+    "CODESLIDE",
+    "ADMINHACKED",
+    "ADMINDARES",
+    "fruitconcepts",
+    "krazydares",
+    "TRIPLEABUSE",
+    "SEATROLLING",
+    "24NOADMIN",
+    "REWARDFUN",
+    "NEWTROLL",
+    "fudd10_v2",
+    "Fudd10",
+    "Bignews",
+    "SECRET_ADMIN"
+};
+Tabs.Misc:AddButton({
+    Title = "Redeem All X2 Code",
+    Description = "",
+    Callback = function()
+        for v559, v560 in ipairs(v150) do
+            RedeemCode(v560);
+        end
+    end
+});
+function RedeemCode(v377)
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(v377);
+end
 
 local ToggleRejoin = Tabs.Misc:AddToggle("ToggleRejoin", {Title = "Auto Rejoin", Default = true })
 ToggleRejoin:OnChanged(function(Value)
