@@ -4981,7 +4981,7 @@ spawn(function()
 end)
 
 local ToggleBone = Tabs.Item:AddToggle("ToggleBone", {Title = "Auto Bone", Default = false })
-ToggleCake:OnChanged(function(Value)
+ToggleBone:OnChanged(function(Value)
     _G.Bone = Value
 end) 
 Options.ToggleBone:SetValue(false)
