@@ -2528,7 +2528,7 @@ if _G.FastAttack then
             if #OthersEnemies > 0 then
                 self:Attack(Part1 or Part2, OthersEnemies)
             else
-                task.wait(0)
+                wait(0)
             end
         end
 
@@ -2537,11 +2537,11 @@ if _G.FastAttack then
             if Equipped and Equipped.ToolTip ~= "Gun" then
                 self:AttackNearest()
             else
-                task.wait(0)
+                wait(0)
             end
         end
 
-        task.spawn(function()
+        spawn(function()
             while task.wait(Settings.ClickDelay) do
                 if Settings.AutoClick then
                     FastAttack:BladeHits()
