@@ -3,7 +3,7 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pira
 elseif getgenv().Team == "Marines" then
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
 end 
-wait(15)
+wait(10)
 -------------------------------------------------------------------------------------------------
 --repeat wait() until game:IsLoaded() and game.Players.LocalPlayer 
 ----loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()--------
@@ -2730,7 +2730,7 @@ local function v103()
     v102:SetDesc(string.format("%02d H - %02d m - %02d s", v298, v299, v300));
 end
 spawn(function()
-    while task.wait() do
+    while wait() do
         pcall(v103);
     end
 end);
