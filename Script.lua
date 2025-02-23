@@ -2735,56 +2735,6 @@ spawn(function()
         pcall(v103);
     end
 end);
-
-
-local HttpService = game:GetService("HttpService")
-local TeleportService = game:GetService("TeleportService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-local DoughKingEvent = Instance.new("RemoteEvent", ReplicatedStorage)
-DoughKingEvent.Name = "DoughKingEvent"
-
-local ToggleDoughHop = Tabs.Race:AddToggle("ToggleDoughHop", {
-    Title = "Hop Dough",
-    Default = false
-})
-
-ToggleDoughHop:OnChanged(function(Value)
-    _G.DoughHop = Value
-    if _G.DoughHop then
-        DoughKingEvent:FireServer() -- Gửi yêu cầu hop đến Server
-    end
-end)
-Options.ToggleDoughHop:SetValue(false)
-
-function GetJobIdFromWebhook()
-    local webhookUrl = "https://discord.com/api/webhooks/1315205641111081001/8JGJflwA4JQsZXk8uvVsChyrn00mNMO9gVwdrxc3m6WHHhYewQE0-GfPS5s6cWUmbFOF" -- Thay webhook của bạn vào đây
-    local success, response = pcall(function()
-        return HttpService:GetAsync(webhookUrl)
-    end)
-
-    if success then
-        local data = HttpService:JSONDecode(response)
-        if data and data.embeds and data.embeds[1] and data.embeds[1].fields then
-            local bossField = data.embeds[1].fields[1] -- Value 1 (Boss Status)
-            local jobIdField = data.embeds[1].fields[2] -- Value 2 (Job ID)
-
-            -- Chỉ lấy Job ID nếu server có Dough King
-            if bossField.name == "Boss-spawn" and bossField.value == "```Boss Spawn (Dough King)```" then
-                return jobIdField.value
-            end
-        end
-    end
-    return nil
-end
-
--- Khi Client gửi yêu cầu, Server sẽ lấy Job ID và teleport
-DoughKingEvent.OnServerEvent:Connect(function(player)
-    local jobId = GetJobIdFromWebhook()
-    if jobId and jobId ~= game.JobId then
-        TeleportService:TeleportToPlaceInstance(2753915549, jobId, player)
-    end
-end)
 	
 local SeverOw = Tabs.Sever:AddSection("Status Sever")
 local v529 = Tabs.Sever:AddParagraph({
