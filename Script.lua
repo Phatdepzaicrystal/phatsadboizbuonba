@@ -6474,9 +6474,6 @@ local TeleportService = game:GetService("TeleportService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local DoughKingEvent = ReplicatedStorage:WaitForChild("DoughKingEvent")
 
-local DoughKingEvent = Instance.new("RemoteEvent", ReplicatedStorage)
-DoughKingEvent.Name = "DoughKingEvent"
-
 local ToggleDoughHop = Tabs.Teleport:AddToggle("ToggleDoughHop", {
     Title = "Hop Dough King",
     Description = "Hop To Sever Have Dough King",
