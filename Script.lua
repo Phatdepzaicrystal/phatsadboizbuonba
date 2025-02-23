@@ -5033,39 +5033,6 @@ spawn(function()
         end
     end
 end)
-local BoneNoQuest = CFrame.new(-9515.75, 174.8521728515625, 6079.40625)
-spawn(function()
-    while wait() do
-        if _G.AutoBoneNoQuest then
-            pcall(function()
-                Tween(BoneNoQuest)
-                if (BoneNoQuest.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude<=3 then
-                end
-                if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy") then
-                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health>0 then
-                            if v.Name=="Reborn Skeleton" or v.Name=="Living Zombie" or v.Name=="Demonic Soul" or v.Name=="Posessed Mummy" then
-                                repeat wait(_G.Fast_Delay)
-                                    AttackNoCoolDown()
-                                    AutoHaki()
-                                    bringmob=true
-                                    EquipTool(SelectWeapon)
-                                    Tween(v.HumanoidRootPart.CFrame*Pos)
-                                    v.HumanoidRootPart.Size=Vector3.new(60, 60, 60)
-                                    v.HumanoidRootPart.Transparency=1
-                                    v.Humanoid.JumpPower=0
-                                    v.Humanoid.WalkSpeed=0
-                                    v.HumanoidRootPart.CanCollide=false
-                                    FarmPos=v.HumanoidRootPart.CFrame
-                                    MonFarm=v.Name
-                                until not _G.AutoBoneNoQuest or v.Humanoid.Health<=0 or not v.Parent
-                            end
-                        end
-                    end
-                end
-            end)
-        end
-    end
 			
 local EzPhatdepzai = Tabs.Item:AddSection("World Quest")
 
