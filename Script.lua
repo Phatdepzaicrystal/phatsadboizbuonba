@@ -3021,8 +3021,8 @@ end);
         while wait() do
             if _G.CastleRaid then
                 pcall(function()
-                    local CFrameCastleRaid = CFrame.new(-5496.17432, 313.768921, -2841.53027, 0.924894512, 7.37058015e-09, 0.380223751, 3.5881019e-08, 1, -1.06665446e-07, -0.380223751, 1.12297109e-07, 0.924894512)
-                    if (CFrame.new(-5539.3115234375, 313.800537109375, -2972.372314453125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                    local CFrameCastleRaid = CFrame.new(-5075.50927734375, 314.5155029296875, -3150.0224609375)
+                    if (CFrame.new(-5075.50927734375, 314.5155029296875, -3150.0224609375).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                             if _G.CastleRaid and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                 if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
@@ -3042,9 +3042,9 @@ end);
                     else
                         if BypassTP then
                         if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameCastleRaid.Position).Magnitude > 2500 then
-                        BTP(CFrameCastleRaid)
+                        BTPZ(CFrameCastleRaid)
                         elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameCastleRaid.Position).Magnitude < 2500 then
-                        Tween(CFrameCastleRaid)
+                        Tween2(CFrameCastleRaid)
                         end
                         end
                     end
