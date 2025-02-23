@@ -2767,7 +2767,48 @@ spawn(function()
     end);
 end);
 
-
+local Mirage = Tabs.Sever:AddParagraph({	
+    Title = "Mirage Island",
+    Content = "Status Mirage Island"
+});
+task.spawn(function()
+        while wait() do
+            pcall(function()
+                local v793 = game:GetService("Lighting").Sky.MoonTextureId;
+                if (v793 == "http://www.roblox.com/asset/?id=9709149431") then
+                    FullMoonStatus = "100%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709149052") then
+                    FullMoonStatus = "75%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709143733") then
+                    FullMoonStatus = "50%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709150401") then
+                    FullMoonStatus = "25%";
+                elseif (v793 == "http://www.roblox.com/asset/?id=9709149680") then
+                    FullMoonStatus = "15%";
+                else
+                    FullMoonStatus = "0%";
+                end
+            end);
+        end
+    end);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if game.Workspace.Map:FindFirstChild("MysticIsland") then
+                    MirageStatus = "✅️";
+                else
+                    MirageStatus = "❌️";
+                end
+            end);
+        end
+    end);
+    spawn(function()
+        pcall(function()
+            while wait() do
+                v532:SetDesc("Đảo Bí Ẩn:mirage " .. MirageStatus .. " | Trăng Tròn:fullmoon " .. FullMoonStatus);
+            end
+        end);
+    end);	
 ----------------------------------------Tab Main---------------------------------	
     local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
         Title = "Choose Weapon",
@@ -5964,52 +6005,6 @@ if Second_Sea then
             end
         end)
     end
-
-local ToggleDarkCoat = Tabs.Item:AddToggle("ToggleDarkCoat", {Title = "Auto Dark Coat [Hop]",Default = false })
-   ToggleDarkCoat:OnChanged(function(Value)
-   _G.AutoDarkCoat = Value
-   StopTween(_G.AutoDarkCoat)
-       print(v)
-   end,
-}) 
-spawn(function()
-       while wait() do
-           if  _G.AutoDarkCoat and Second_Sea then
-               pcall(function()
-                   if game:GetService("Workspace").Enemies:FindFirstChild("Darkbeard") then
-                       for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                           if v.Name == "Darkbeard" then
-                               if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                   repeat task.wait()
-                                       AutoHaki()
-                                       EquipWeapon(_G.SelectWeapon)
-                                       v.HumanoidRootPart.CanCollide = false
-                                       v.Humanoid.WalkSpeed = 0
-                                       v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                       topos(v.HumanoidRootPart.CFrame * Pos)
-                                       game:GetService("VirtualUser"):CaptureController()
-                                       game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                                       sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
-                                   until not  _G.AutoDarkCoat or not v.Parent or v.Humanoid.Health <= 0
-                               end
-                           end
-                       end
-                   else
-                   UnEquipWeapon(_G.SelectWeapon)
-                   topos(CFrame.new(3677.08203125, 62.751937866211, -3144.8332519531))
-                       if game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard") then
-                           topos(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
-                       else
-                           if  _G.AutoDarkCoatHop then
-                               Hop()
-                           end
-                       end
-                   end
-               end)
-           end
-       end
-   end)
-end
 
 
 local Chestt = Tabs.Item:AddSection("Chest Farm")
