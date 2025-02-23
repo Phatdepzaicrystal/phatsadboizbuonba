@@ -2718,35 +2718,6 @@ function Hop()
 	Teleport()
 end     
 
-local v100 = Tabs.Sever:AddParagraph({
-    Title = "Time Sever",
-    Content = ""
-});
-local function v101()
-    local v285 = os.date("*t");
-    local v286 = v285.hour % 24 ;
-    local v287 = ((v286 < 12) and "AM") or "PM" ;
-    local v288 = string.format("%02i:%02i:%02i %s", ((v286 - 1) % 12) + 1, v285.min, v285.sec, v287);
-    local v289 = string.format("%02d/%02d/%04d", v285.day, v285.month, v285.year);
-    local v290 = game:GetService("LocalizationService");
-    local v291 = game:GetService("Players");
-    local v292 = v291.LocalPlayer;
-    local v293 = v292.Name;
-    local v294 = "Unknown";
-    local v295, v296 = pcall(function()
-        return v290:GetCountryRegionForPlayerAsync(v292);
-    end);
-    if v295 then
-        v294 = v296;
-    end
-    v100:SetDesc(v289 .. "-" .. v288 .. " [ " .. v294 .. " ]");
-end
-spawn(function()
-    while true do
-        v101();
-        game:GetService("RunService").RenderStepped:Wait();
-    end
-end);
 local v102 = Tabs.Sever:AddParagraph({
     Title = "Time In Sever",
     Content = ""
@@ -2756,7 +2727,7 @@ local function v103()
     local v298 = math.floor(v297 / (60 ^ 2)) % 24 ;
     local v299 = math.floor(v297 / 60) % 60 ;
     local v300 = v297 % 60 ;
-    v102:SetDesc(string.format("%02d Tiếng-%02d Phút-%02d Giây", v298, v299, v300));
+    v102:SetDesc(string.format("|%02d H, %02d m, %02d s.|", v298, v299, v300));
 end
 spawn(function()
     while task.wait() do
