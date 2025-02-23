@@ -9,6 +9,8 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pira
 elseif getgenv().Team == "Marines" then
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Marines")
 end 
+wait(10)
+wait(4)
 ---------------------------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua"))()
@@ -66,6 +68,14 @@ elseif placeId == 7449423635 then
 Third_Sea = true
 end
 
+------------------------------------Notify	
+local players = game:GetService("Players")
+game:GetService("StarterGui"):SetCore("SendNotification", {
+   Title = "Phat Crystal Hub";
+   Text = "Loaded Success";
+   Duration = 10
+})
+	
 ------------------------------------------------------------------------------------------------------------------------------------
 function FindQuest()
 local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
@@ -8078,9 +8088,3 @@ function UpdateRealFruitEsp()
     end
 end
 -------------------------------------------------
-local players = game:GetService("Players")
-game:GetService("StarterGui"):SetCore("SendNotification", {
-   Title = "Phat Crystal Hub";
-   Text = "Loaded Success";
-   Duration = 10
-})
