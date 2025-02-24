@@ -22,7 +22,7 @@ task.spawn(function()
 end)
 
 repeat wait() until isLoaded -- Chờ đến khi mọi thứ load xong
-
+wait(6)
 local Window =
     Fluent:CreateWindow(
     {
