@@ -6915,47 +6915,6 @@ spawn(
 local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
 Camera:Stop()
 
-local ToggleBringMob = Tabs.Setting:AddToggle("ToggleBringMob", {Title = " Enable Bring Mob / Magnet", Default = false})
-ToggleBringMob:OnChanged(
-    function(Value)
-        _G.BringMob = Value
-    end
-)
-Options.ToggleBringMob:SetValue(false)
-spawn(
-    function()
-        while wait() do
-            pcall(
-                function()
-                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if _G.BringMob and bringmob then
-                            if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                if v.Name == "Factory Staff" then
-                                    if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                                        v.HumanoidRootPart.CFrame = FarmPos
-                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                    end
-                                elseif v.Name == MonFarm then
-                                    if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                                        v.HumanoidRootPart.CFrame = FarmPos
-                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            )
-        end
-    end
-)
-
 local ToggleBypassTP = Tabs.Setting:AddToggle("ToggleBypassTP", {Title = "Enable Bypass Tp", Default = false})
 ToggleBypassTP:OnChanged(
     function(Value)
@@ -6992,46 +6951,6 @@ spawn(
                         Hop()
                     end
                 end
-            end
-        end
-    end
-)
-local ToggleRemove = Tabs.Setting:AddToggle("ToggleRemove", {Title = " Enable Remove Dame Text", Default = true})
-ToggleRemove:OnChanged(
-    function(Value)
-        FaiFaoRemovetext = Value
-    end
-)
-Options.ToggleRemove:SetValue(true)
-
-spawn(
-    function()
-        while wait() do
-            if FaiFaoRemovetext then
-                game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
-            else
-                game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
-            end
-        end
-    end
-)
-
-local ToggleRemoveNotify =
-    Tabs.Setting:AddToggle("ToggleRemoveNotify", {Title = " Enable Remove All Notify", Default = false})
-ToggleRemoveNotify:OnChanged(
-    function(Value)
-        RemoveNotify = Value
-    end
-)
-Options.ToggleRemoveNotify:SetValue(false)
-
-spawn(
-    function()
-        while wait() do
-            if RemoveNotify then
-                game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
-            else
-                game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
             end
         end
     end
