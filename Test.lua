@@ -7029,6 +7029,129 @@ ToggleF:OnChanged(
     end
 )
 Options.ToggleF:SetValue(false)
+
+local AutoStasts = Tabs.Setting:AddSection("AutoStasts")
+
+local ToggleMelee = Tabs.Setting:AddToggle("ToggleMelee", {Title = "Add Melee", Default = false})
+ToggleMelee:OnChanged(
+    function(Value)
+        _G.Auto_Stats_Melee = Value
+    end
+)
+Options.ToggleMelee:SetValue(false)
+
+local ToggleDe = Tabs.Setting:AddToggle("ToggleDe", {Title = "Add Defense", Default = false})
+ToggleDe:OnChanged(
+    function(Value)
+        _G.Auto_Stats_Defense = Value
+    end
+)
+Options.ToggleDe:SetValue(false)
+
+local ToggleSword = Tabs.Setting:AddToggle("ToggleSword", {Title = "Add Sword", Default = false})
+ToggleSword:OnChanged(
+    function(Value)
+        _G.Auto_Stats_Sword = Value
+    end
+)
+Options.ToggleSword:SetValue(false)
+
+local ToggleGun = Tabs.Setting:AddToggle("ToggleGun", {Title = "Add Gun", Default = false})
+ToggleGun:OnChanged(
+    function(Value)
+        _G.Auto_Stats_Gun = Value
+    end
+)
+Options.ToggleGun:SetValue(false)
+
+local ToggleFruit = Tabs.Setting:AddToggle("ToggleFruit", {Title = "Add Demon Fruit", Default = false})
+ToggleFruit:OnChanged(
+    function(Value)
+        _G.Auto_Stats_Devil_Fruit = Value
+    end
+)
+Options.ToggleFruit:SetValue(false)
+
+spawn(
+    function()
+        while wait() do
+            if _G.Auto_Stats_Devil_Fruit then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Demon Fruit",
+                    [3] = 3
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
+spawn(
+    function()
+        while wait() do
+            if _G.Auto_Stats_Gun then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Gun",
+                    [3] = 3
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
+spawn(
+    function()
+        while wait() do
+            if _G.Auto_Stats_Sword then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Sword",
+                    [3] = 3
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
+spawn(
+    function()
+        while wait() do
+            if _G.Auto_Stats_Defense then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Defense",
+                    [3] = 3
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
+spawn(
+    function()
+        while wait() do
+            if _G.Auto_Stats_Melee then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Melee",
+                    [3] = 3
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
         
         -----------------------------------------Tab Player------------------------------------------------------------
         local Playerslist = {}
