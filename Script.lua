@@ -1,3 +1,4 @@
+wait(5)
 --[[
 getgenv().Team = "Marines"          -- Pirates or Marines
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()
@@ -22,7 +23,7 @@ task.spawn(function()
 end)
 
 repeat wait() until isLoaded -- Chờ đến khi mọi thứ load xong
-wait(6)
+
 local Window =
     Fluent:CreateWindow(
     {
@@ -12371,4 +12372,3 @@ function UpdateRealFruitEsp()
         end
     end
 end
--------------------------------------------------
