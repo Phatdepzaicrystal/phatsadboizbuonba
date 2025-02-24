@@ -1,8 +1,13 @@
 --[[
 getgenv().Team = "Marines"          -- Pirates or Marines
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()
 ]] --
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+if getgenv().Team == "Pirates" then
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
+elseif getgenv().Team == "Marines" then
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
+end
 
 local Fluent, SaveManager, InterfaceManager
 local isLoaded = false
