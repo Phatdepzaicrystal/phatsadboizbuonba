@@ -6989,6 +6989,18 @@ function FPSBooster()
     end
 end
 
+Tabs.Setting:AddButton(
+    {
+        Title = "No Frog",
+        Description = "",
+        Callback = function()
+           game:GetService("Lighting").LightingLayers:Destroy()
+           game:GetService("Lighting").Sky:Destroy()
+           game.Lighting.FogEnd = 9e9
+   end,
+  }
+)
+
 local SKill = Tabs.Setting:AddSection("Settings Mastery")
 local ToggleZ = Tabs.Setting:AddToggle("ToggleZ", {Title = "Skill Z", Default = true})
 ToggleZ:OnChanged(
