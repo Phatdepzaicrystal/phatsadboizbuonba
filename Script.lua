@@ -7,6 +7,7 @@ if getgenv().Team == "Pirates" then
 elseif getgenv().Team == "Marines" then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
 end
+wait(11)
 ------------------------------------------------------------------------------------------------------------------------------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager =
@@ -30,7 +31,6 @@ local Window =
         MinimizeKey = Enum.KeyCode.End
     }
 )
-wait(5)
 local Tabs = {
     Sever = Window:AddTab({Title = "Status And Sever", Icon = "loader"}),
     Main = Window:AddTab({Title = "Main", Icon = "home"}),
