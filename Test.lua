@@ -7001,6 +7001,25 @@ Tabs.Setting:AddButton(
   }
 )
 
+Tabs.Setting:AddButton(
+    {
+        Title = "No Magma",
+        Description = "",
+        Callback = function()
+           for i,v in pairs(game.Workspace:GetDescendants()) do
+           if v.Name == "Lava" then   
+               v:Destroy()
+           end
+       end
+       for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
+           if v.Name == "Lava" then   
+               v:Destroy()
+           end
+       end
+   end,
+  }
+)
+
 local SKill = Tabs.Setting:AddSection("Settings Mastery")
 local ToggleZ = Tabs.Setting:AddToggle("ToggleZ", {Title = "Skill Z", Default = true})
 ToggleZ:OnChanged(
