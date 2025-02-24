@@ -6,21 +6,17 @@ repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 
 local isLoaded = false
 
-if getgenv().Team == "Pirates" then
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
-elseif getgenv().Team == "Marines" then
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
-end
----------------------------
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager =
-    loadstring(
-    game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua")
-)()
-local InterfaceManager =
-    loadstring(
-    game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua")
-)()
+task.spawn(function()
+    if getgenv().Team == "Pirates" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
+    elseif getgenv().Team == "Marines" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
+    end
+
+    -- Chờ các thư viện bên ngoài tải xong
+    Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+    SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua"))()
+    InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
 
     isLoaded = true
 end)
@@ -117,7 +113,7 @@ do
         "SendNotification",
         {
             Title = "Phat Crystal Hub",
-            Text = "Loaded Success",
+            Text = "Loaded Successfully!",
             Duration = 10
         }
     )
