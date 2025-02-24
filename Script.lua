@@ -35,7 +35,6 @@ wait(5)
 local Tabs = {
     Sever = Window:AddTab({Title = "Status And Sever", Icon = "loader"}),
     Main = Window:AddTab({Title = "Main", Icon = "home"}),
-    Setting = Window:AddTab({Title = "Settings", Icon = "sliders"}),
     Player = Window:AddTab({Title = "PvP", Icon = "shield"}),
     Item = Window:AddTab({Title = "Get Item", Icon = "sword"}),
     Fish = Window:AddTab({Title = "Sea Event", Icon = "anchor"}),
@@ -45,6 +44,7 @@ local Tabs = {
     Race = Window:AddTab({Title = "Race", Icon = "flag"}),
     Shop = Window:AddTab({Title = "Shop", Icon = "shopping-bag"}),
     Misc = Window:AddTab({Title = "Misc", Icon = "menu"})
+    Setting = Window:AddTab({Title = "Settings", Icon = "sliders"}),
 }
 local Options = Fluent.Options
 do
