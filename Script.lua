@@ -11846,47 +11846,6 @@ spawn(
         end
     end
 )
-local ToggleRemove = Tabs.Setting:AddToggle("ToggleRemove", {Title = " Enable Remove Dame Text", Default = true})
-ToggleRemove:OnChanged(
-    function(Value)
-        FaiFaoRemovetext = Value
-    end
-)
-Options.ToggleRemove:SetValue(true)
-
-spawn(
-    function()
-        while wait() do
-            if FaiFaoRemovetext then
-                game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
-            else
-                game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
-            end
-        end
-    end
-)
-
-local ToggleRemoveNotify =
-    Tabs.Setting:AddToggle("ToggleRemoveNotify", {Title = " Enable Remove All Notify", Default = false})
-ToggleRemoveNotify:OnChanged(
-    function(Value)
-        RemoveNotify = Value
-    end
-)
-Options.ToggleRemoveNotify:SetValue(false)
-
-spawn(
-    function()
-        while wait() do
-            if RemoveNotify then
-                game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
-            else
-                game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
-            end
-        end
-    end
-)
-
 local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
 ToggleWhite:OnChanged(
     function(Value)
@@ -11956,6 +11915,7 @@ function FPSBooster()
 end
 
 local SKill = Tabs.Setting:AddSection("Settings Mastery")
+
 local ToggleZ = Tabs.Setting:AddToggle("ToggleZ", {Title = "Skill Z", Default = true})
 ToggleZ:OnChanged(
     function(Value)
