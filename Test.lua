@@ -6798,36 +6798,6 @@ spawn(
     end
 )
 
-
-local ToggleInfiGeppo = Tabs.Setting:AddToggle("ToggleInfiGeppo", {Title = "Inf Geppo", Default = true})
-ToggleInfiGeppo:OnChanged(
-    function(v)
-        getgenv().InfGeppo = v
-    end
-)
-Options.ToggleInfiGeppo:SetValue(false)
-spawn(function()
-       while wait() do
-           pcall(function()
-               if getgenv().InfGeppo then
-                   for i,v in next, getgc() do
-                       if game:GetService("Players").LocalPlayer.Character.Geppo then
-                           if typeof(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.Character.Geppo then
-                               for i2,v2 in next, getupvalues(v) do
-                                   if tostring(i2) == "9" then
-                                       repeat wait(1)
-                                           setupvalue(v,i2,0)
-                                       until not getgenv().InfGeppo or game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0 
-                                   end
-                               end
-                           end
-                       end
-                   end
-               end
-           end)
-       end
-   end)
-
 local AutoV3 =
     Tabs.Setting:AddToggle(
     "ToggleAutoT",
