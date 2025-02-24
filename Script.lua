@@ -27,10 +27,8 @@ task.spawn(function()
     end
 end)
 
--- Chờ tải thư viện xong
 repeat wait() until isLoaded
 
--- 🔹 Tạo UI
 local Window = Fluent:CreateWindow({
     Title = "PhatCrystal Hub[Free]",
     SubTitle = "Make by @phat_crystal",
