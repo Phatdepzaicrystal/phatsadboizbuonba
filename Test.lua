@@ -7061,7 +7061,7 @@ ToggleF:OnChanged(
 )
 Options.ToggleF:SetValue(false)
 
-local AutoStasts = Tabs.Setting:AddSection("AutoStasts")
+local AutoStasts = Tabs.Setting:AddSection("Auto Stasts")
 
 local ToggleMelee = Tabs.Setting:AddToggle("ToggleMelee", {Title = "Add Melee", Default = false})
 ToggleMelee:OnChanged(
