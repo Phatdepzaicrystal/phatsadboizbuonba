@@ -4231,9 +4231,6 @@ do
         )
     end
     ----------------------------------Tab Sever-------------------------
-local LoadSettings = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Setting.lua"))()
-LoadSettings(Tabs)
----------------------------------
     local JobId = Tabs.Sever:AddSection("Job ID")
 
     local v105 =
@@ -6756,8 +6753,9 @@ LoadSettings(Tabs)
                 end
             )
         end
-
-        
+        ------------------------------------------------Setting-------- 
+        local LoadSettings = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Setting.lua"))()
+        LoadSettings(Tabs)
 
         -----------------------------------------Tab Player------------------------------------------------------------
         local Playerslist = {}
