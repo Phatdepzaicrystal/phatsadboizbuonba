@@ -6754,9 +6754,6 @@ do
             )
         end
         ------------------------------------------------Setting-------- 
-        local LoadSettings = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Setting.lua"))()
-        LoadSettings(Tabs)
-
         -----------------------------------------Tab Player------------------------------------------------------------
         local Playerslist = {}
         for i, v in pairs(game:GetService("Players"):GetChildren()) do
