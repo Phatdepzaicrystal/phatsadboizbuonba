@@ -20,7 +20,7 @@ local InterfaceManager =
     loadstring(
     game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua")
 )()
-
+wait(3)
 local Window =
     Fluent:CreateWindow(
     {
