@@ -34,8 +34,8 @@ local Window =
 wait(5)
 local Tabs = {
     Sever = Window:AddTab({Title = "Status And Sever", Icon = "loader"}),
-    Setting = Window:AddTab({Title = "Settings", Icon = "sliders"}),
     Main = Window:AddTab({Title = "Main", Icon = "home"}),
+    Setting = Window:AddTab({Title = "Settings", Icon = "sliders"}),
     Player = Window:AddTab({Title = "PvP", Icon = "shield"}),
     Item = Window:AddTab({Title = "Get Item", Icon = "sword"}),
     Fish = Window:AddTab({Title = "Sea Event", Icon = "anchor"}),
