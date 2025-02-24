@@ -1,15 +1,16 @@
 --[[
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Team = "Marines"          -- Pirates or Marines
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()
 ]] --
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+
+local isLoaded = false
 
 if getgenv().Team == "Pirates" then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
 elseif getgenv().Team == "Marines" then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
 end
-wait(5)
 ---------------------------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager =
@@ -20,7 +21,12 @@ local InterfaceManager =
     loadstring(
     game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua")
 )()
-wait(3)
+
+    isLoaded = true
+end)
+
+repeat wait() until isLoaded -- Chờ đến khi mọi thứ load xong
+
 local Window =
     Fluent:CreateWindow(
     {
