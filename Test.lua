@@ -6754,6 +6754,138 @@ do
                 end
             )
         end
+----------------------------------------------------Setting----------------------------
+local test = Tabs.Setting:AddSection("Local Player")
+
+local ToggleInfSoru = Tabs.Setting:AddToggle("ToggleInfSoru", {Title = "Inf Soru", Default = false})
+ToggleInfSoru:OnChanged(
+    function(v537)
+        ToggleInfSoru = v537
+    end
+)
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    if
+                        (ToggleInfSoru and
+                            (game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") ~= nil))
+                     then
+                        for v1680, v1681 in next, getgc() do
+                            if game:GetService("Players").LocalPlayer.Character.Soru then
+                                if
+                                    ((typeof(v1681) == "function") and
+                                        (getfenv(v1681).script == game:GetService("Players").LocalPlayer.Character.Soru))
+                                 then
+                                    for v2309, v2310 in next, getupvalues(v1681) do
+                                        if (typeof(v2310) == "table") then
+                                            repeat
+                                                wait(0.1)
+                                                v2310.LastUse = 0
+                                            until not _G.Infsoru or
+                                                (game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            )
+        end
+    end
+)
+
+local ToggleNoClipz = Tabs.Setting:AddToggle("ToggleNoClipz", {Title = "No Clip", Default = true})
+ToggleNoClipz:OnChanged(
+    function(Value)
+        ToggleNoClipz = Value
+    end
+)
+Options.ToggleNoClipz:SetValue(false)
+spawn(
+    function()
+        pcall(
+            function()
+                game:GetService("RunService").Stepped:Connect(
+                    function()
+                        if _G.LOf then
+                            for v868, v869 in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                                if v869:IsA("BasePart") then
+                                    v869.CanCollide = false
+                                end
+                            end
+                        end
+                    end
+                )
+            end
+        )
+    end
+)
+
+local AutoV3 =
+    Tabs.Setting:AddToggle(
+    "ToggleAutoT",
+    {
+        Title = "Auto Active V3",
+        Description = "",
+        Default = false
+    }
+)
+AutoV3:OnChanged(
+    function(Siu)
+        _G.AutoT = Siu
+    end
+)
+Options.ToggleAutoT:SetValue(false)
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    if _G.AutoT then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "T", false, game)
+                        wait()
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "T", false, game)
+                    end
+                end
+            )
+        end
+    end
+)
+
+local v86 =
+    Tabs.Setting:AddToggle(
+    "ToggleAutoY",
+    {
+        Title = "Auto Active V4",
+        Description = "",
+        Default = false
+    }
+)
+v86:OnChanged(
+    function(v274)
+        _G.AutoY = v274
+    end
+)
+Options.ToggleAutoY:SetValue(false)
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    if _G.AutoY then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "Y", false, game)
+                        wait()
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "Y", false, game)
+                    end
+                end
+            )
+        end
+    end
+)
+
         
         -----------------------------------------Tab Player------------------------------------------------------------
         local Playerslist = {}
@@ -11735,114 +11867,3 @@ function UpdateRealFruitEsp()
         end
     end
 end
----------------Tab Setting-------------------------------------------
-local SettingFarm = Tabs.Setting:AddSection("Setting")
-
-local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true})
-
-ToggleFastAttack:OnChanged(
-    function(Value)
-        _G.FastAttackFiFai = Value
-    end
-)
-Options.ToggleFastAttack:SetValue(true)
-
-spawn(
-    function()
-        while wait(0.4) do
-            pcall(
-                function()
-                    if _G.FastAttackFiFai then
-                        repeat
-                            wait(0)
-                        until not _G.FastAttack
-                    end
-                end
-            )
-        end
-    end
-)
-local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
-Camera:Stop()
-
-local ToggleBringMob = Tabs.Setting:AddToggle("ToggleBringMob", {Title = " Enable Bring Mob / Magnet", Default = false})
-ToggleBringMob:OnChanged(
-    function(Value)
-        _G.BringMob = Value
-    end
-)
-Options.ToggleBringMob:SetValue(false)
-spawn(
-    function()
-        while wait() do
-            pcall(
-                function()
-                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if _G.BringMob and bringmob then
-                            if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                if v.Name == "Factory Staff" then
-                                    if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                                        v.HumanoidRootPart.CFrame = FarmPos
-                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                    end
-                                elseif v.Name == MonFarm then
-                                    if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                                        v.HumanoidRootPart.CFrame = FarmPos
-                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            )
-        end
-    end
-)
-
-local ToggleBypassTP = Tabs.Setting:AddToggle("ToggleBypassTP", {Title = "Enable Bypass Tp", Default = false})
-ToggleBypassTP:OnChanged(
-    function(Value)
-        BypassTP = Value
-    end
-)
-Options.ToggleBypassTP:SetValue(false)
-
-local v153 =
-    Tabs.Setting:AddToggle(
-    "ToggleAntiBand",
-    {
-        Title = "Anti Band",
-        Description = "",
-        Default = true
-    }
-)
-v153:OnChanged(
-    function(v384)
-        _G.AntiBand = v384
-    end
-)
-local v154 = {
-    17884881,
-    120173604,
-    912348
-}
-spawn(
-    function()
-        while wait() do
-            if _G.AntiBand then
-                for v809, v810 in pairs(game:GetService("Players"):GetPlayers()) do
-                    if table.find(v154, v810.UserId) then
-                        Hop()
-                    end
-                end
-            end
-        end
-    end
-)
