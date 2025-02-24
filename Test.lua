@@ -6886,6 +6886,224 @@ spawn(
     end
 )
 
+local SettingFarm = Tabs.Setting:AddSection("Setting")
+
+local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true})
+
+ToggleFastAttack:OnChanged(
+    function(Value)
+        _G.FastAttackFiFai = Value
+    end
+)
+Options.ToggleFastAttack:SetValue(true)
+
+spawn(
+    function()
+        while wait(0.4) do
+            pcall(
+                function()
+                    if _G.FastAttackFiFai then
+                        repeat
+                            wait(0)
+                        until not _G.FastAttack
+                    end
+                end
+            )
+        end
+    end
+)
+local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
+Camera:Stop()
+
+local ToggleBringMob = Tabs.Setting:AddToggle("ToggleBringMob", {Title = " Enable Bring Mob / Magnet", Default = false})
+ToggleBringMob:OnChanged(
+    function(Value)
+        _G.BringMob = Value
+    end
+)
+Options.ToggleBringMob:SetValue(false)
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if _G.BringMob and bringmob then
+                            if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == "Factory Staff" then
+                                    if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                        v.HumanoidRootPart.CFrame = FarmPos
+                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                    end
+                                elseif v.Name == MonFarm then
+                                    if (v.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                        v.HumanoidRootPart.CFrame = FarmPos
+                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            )
+        end
+    end
+)
+
+local ToggleBypassTP = Tabs.Setting:AddToggle("ToggleBypassTP", {Title = "Enable Bypass Tp", Default = false})
+ToggleBypassTP:OnChanged(
+    function(Value)
+        BypassTP = Value
+    end
+)
+Options.ToggleBypassTP:SetValue(false)
+
+local v153 =
+    Tabs.Setting:AddToggle(
+    "ToggleAntiBand",
+    {
+        Title = "Anti Band",
+        Description = "",
+        Default = true
+    }
+)
+v153:OnChanged(
+    function(v384)
+        _G.AntiBand = v384
+    end
+)
+local v154 = {
+    17884881,
+    120173604,
+    912348
+}
+spawn(
+    function()
+        while wait() do
+            if _G.AntiBand then
+                for v809, v810 in pairs(game:GetService("Players"):GetPlayers()) do
+                    if table.find(v154, v810.UserId) then
+                        Hop()
+                    end
+                end
+            end
+        end
+    end
+)
+local ToggleRemove = Tabs.Setting:AddToggle("ToggleRemove", {Title = " Enable Remove Dame Text", Default = true})
+ToggleRemove:OnChanged(
+    function(Value)
+        FaiFaoRemovetext = Value
+    end
+)
+Options.ToggleRemove:SetValue(true)
+
+spawn(
+    function()
+        while wait() do
+            if FaiFaoRemovetext then
+                game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+            else
+                game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
+            end
+        end
+    end
+)
+
+local ToggleRemoveNotify =
+    Tabs.Setting:AddToggle("ToggleRemoveNotify", {Title = " Enable Remove All Notify", Default = false})
+ToggleRemoveNotify:OnChanged(
+    function(Value)
+        RemoveNotify = Value
+    end
+)
+Options.ToggleRemoveNotify:SetValue(false)
+
+spawn(
+    function()
+        while wait() do
+            if RemoveNotify then
+                game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+            else
+                game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+            end
+        end
+    end
+)
+
+local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
+ToggleWhite:OnChanged(
+    function(Value)
+        _G.WhiteScreen = Value
+        if _G.WhiteScreen == true then
+            game:GetService("RunService"):Set3dRenderingEnabled(false)
+        elseif _G.WhiteScreen == false then
+            game:GetService("RunService"):Set3dRenderingEnabled(true)
+        end
+    end
+)
+Options.ToggleWhite:SetValue(false)
+
+Tabs.Setting:AddButton(
+    {
+        Title = "Fps Booster",
+        Description = "Boost your fps",
+        Callback = function()
+            FPSBooster()
+        end
+    }
+)
+
+function FPSBooster()
+    local decalsyeeted = true
+    local g = game
+    local w = g.Workspace
+    local l = g.Lighting
+    local t = w.Terrain
+    sethiddenproperty(l, "Technology", 2)
+    sethiddenproperty(t, "Decoration", false)
+    t.WaterWaveSize = 0
+    t.WaterWaveSpeed = 0
+    t.WaterReflectance = 0
+    t.WaterTransparency = 0
+    l.GlobalShadows = false
+    l.FogEnd = 9e9
+    l.Brightness = 0
+    settings().Rendering.QualityLevel = "Level01"
+    for i, v in pairs(g:GetDescendants()) do
+        if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+            v.Material = "Plastic"
+            v.Reflectance = 0
+        elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+            v.Transparency = 1
+        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+            v.Lifetime = NumberRange.new(0)
+        elseif v:IsA("Explosion") then
+            v.BlastPressure = 1
+            v.BlastRadius = 1
+        elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+            v.Enabled = false
+        elseif v:IsA("MeshPart") then
+            v.Material = "Plastic"
+            v.Reflectance = 0
+            v.TextureID = 10385902758728957
+        end
+    end
+    for i, e in pairs(l:GetChildren()) do
+        if
+            e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or
+                e:IsA("DepthOfFieldEffect")
+         then
+            e.Enabled = false
+        end
+    end
+end
         
         -----------------------------------------Tab Player------------------------------------------------------------
         local Playerslist = {}
