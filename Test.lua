@@ -6798,32 +6798,6 @@ spawn(
     end
 )
 
-local ToggleNoClipz = Tabs.Setting:AddToggle("ToggleNoClipz", {Title = "No Clip", Default = true})
-ToggleNoClipz:OnChanged(
-    function(Value)
-        ToggleNoClipz = Value
-    end
-)
-Options.ToggleNoClipz:SetValue(true)
-spawn(
-    function()
-        pcall(
-            function()
-                game:GetService("RunService").Stepped:Connect(
-                    function()
-                        if _G.LOf then
-                            for v868, v869 in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                                if v869:IsA("BasePart") then
-                                    v869.CanCollide = false
-                                end
-                            end
-                        end
-                    end
-                )
-            end
-        )
-    end
-)
 
 local ToggleInfiGeppo = Tabs.Setting:AddToggle("ToggleInfiGeppo", {Title = "Inf Geppo", Default = true})
 ToggleInfiGeppo:OnChanged(
@@ -6841,7 +6815,7 @@ spawn(function()
                            if typeof(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.Character.Geppo then
                                for i2,v2 in next, getupvalues(v) do
                                    if tostring(i2) == "9" then
-                                       repeat wait(.1)
+                                       repeat wait(1)
                                            setupvalue(v,i2,0)
                                        until not getgenv().InfGeppo or game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0 
                                    end
