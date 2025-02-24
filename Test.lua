@@ -6888,41 +6888,6 @@ spawn(
 
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
-local ToggleFastAttack = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack", Default = true})
-
-ToggleFastAttack:OnChanged(
-    function(Value)
-        _G.FastAttackFiFai = Value
-    end
-)
-Options.ToggleFastAttack:SetValue(true)
-
-spawn(
-    function()
-        while wait(0.4) do
-            pcall(
-                function()
-                    if _G.FastAttackFiFai then
-                        repeat
-                            wait(0)
-                        until not _G.FastAttack
-                    end
-                end
-            )
-        end
-    end
-)
-local Camera = require(game.ReplicatedStorage.Util.CameraShaker)
-Camera:Stop()
-
-local ToggleBypassTP = Tabs.Setting:AddToggle("ToggleBypassTP", {Title = "Enable Bypass Tp", Default = false})
-ToggleBypassTP:OnChanged(
-    function(Value)
-        BypassTP = Value
-    end
-)
-Options.ToggleBypassTP:SetValue(false)
-
 local v153 =
     Tabs.Setting:AddToggle(
     "ToggleAntiBand",
@@ -7023,6 +6988,47 @@ function FPSBooster()
         end
     end
 end
+
+local SKill = Tabs.Setting:AddSection("Settings Mastery")
+local ToggleZ = Tabs.Setting:AddToggle("ToggleZ", {Title = "Skill Z", Default = true})
+ToggleZ:OnChanged(
+    function(Value)
+        SkillZ = Value
+    end
+)
+Options.ToggleZ:SetValue(true)
+
+local ToggleX = Tabs.Setting:AddToggle("ToggleX", {Title = "Skill X", Default = true})
+ToggleX:OnChanged(
+    function(Value)
+        SkillX = Value
+    end
+)
+Options.ToggleX:SetValue(true)
+
+local ToggleC = Tabs.Setting:AddToggle("ToggleC", {Title = "Skill C", Default = true})
+ToggleC:OnChanged(
+    function(Value)
+        SkillC = Value
+    end
+)
+Options.ToggleC:SetValue(true)
+
+local ToggleV = Tabs.Setting:AddToggle("ToggleV", {Title = "Skill V", Default = true})
+ToggleV:OnChanged(
+    function(Value)
+        SkillV = Value
+    end
+)
+Options.ToggleV:SetValue(true)
+
+local ToggleF = Tabs.Setting:AddToggle("ToggleF", {Title = "Skill F", Default = false})
+ToggleF:OnChanged(
+    function(Value)
+        SkillF = Value
+    end
+)
+Options.ToggleF:SetValue(false)
         
         -----------------------------------------Tab Player------------------------------------------------------------
         local Playerslist = {}
