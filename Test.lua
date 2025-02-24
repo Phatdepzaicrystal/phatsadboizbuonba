@@ -5762,7 +5762,7 @@ do
     end
 
      local DropdownAzu =
-        Tabs.Main:AddDropdown(
+        Tabs.Main:AddSlider(
         "DropdownAzu",
         {
             Title = "Aure Ember",
@@ -5774,14 +5774,6 @@ do
                  print(v)
             end,
         }
-    )
-
-    DropdownMaterial:SetValue("Conjured Cocoa")
-
-    DropdownMaterial:OnChanged(
-        function(Value)
-            SelectMaterial = Value
-        end
     )
 
     if Second_Sea or Third_Sea then
