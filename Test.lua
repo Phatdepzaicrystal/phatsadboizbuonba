@@ -5761,20 +5761,6 @@ do
         )
     end
 
-     local DropdownAzu =
-        Tabs.Main:AddSlider(
-        "DropdownAzu",
-        {
-            Title = "Aure Ember",
-            Max = 30,
-            Min = 10,
-            Values = 20,
-            Format = function(v)
-            _G.SetToTradeAureEmber = v
-                 print(v)
-            end,
-        }
-    )
 
     if Second_Sea or Third_Sea then
         local RoughSea = Tabs.Fish:AddSection("Rough Sea")
@@ -6634,6 +6620,377 @@ do
                     end
                 end
             )
+       local ListSeaZone = {
+       "Zone 1",
+       "Zone 2",
+       "Zone 3",
+       "Zone 4",
+       "Zone 5",
+       "Zone 6"
+   }
+    _G.SelectedZone = "Zone 5"
+Tabs.Fish:AddDropdown({
+   Name = "SelectedZone",
+   Value = "Zone 5",
+   List = ListSeaZone,
+   Callback = function(v)
+   _G.SelectedZone = v
+       print(v)
+   end,
+})
+
+
+   spawn(function()
+       pcall(function()
+           while wait() do
+               if _G.SelectedZone == "Zone 1" then
+                   CFrameSelectedZone = CFrame.new(-21998.375, 30.0006084, -682.309143, 0.120013528, 0.00690158736, 0.99274826, -0.0574118942, 0.998350561, -2.36509201e-10, -0.991110802, -0.0569955558, 0.120211802)
+               elseif _G.SelectedZone == "Zone 2" then
+                   CFrameSelectedZone = CFrame.new(-26779.5215, 30.0005474, -822.858032, 0.307457417, 0.019647358, 0.951358974, -0.0637726262, 0.997964442, -4.15334017e-10, -0.949422479, -0.0606706589, 0.308084518)
+               elseif _G.SelectedZone == "Zone 3" then
+                   CFrameSelectedZone = CFrame.new(-31171.957, 30.0001011, -2256.93774, 0.37637493, 0.0150483791, 0.926345229, -0.0399504974, 0.999201655, 2.70896673e-11, -0.925605655, -0.0370079502, 0.376675636)
+               elseif _G.SelectedZone == "Zone 4" then
+                   CFrameSelectedZone = CFrame.new(-34054.6875, 30.2187767, -2560.12012, 0.0935864747, -0.00122954219, 0.995610416, 0.0624034069, 0.998040259, -0.00463332096, -0.993653536, 0.062563099, 0.0934797972)
+               elseif _G.SelectedZone == "Zone 5" then
+                   CFrameSelectedZone = CFrame.new(-38887.5547, 30.0004578, -2162.99023, -0.188895494, -0.00704088295, 0.981971979, -0.0372481011, 0.999306023, -1.39882339e-09, -0.981290519, -0.0365765914, -0.189026669)
+               elseif _G.SelectedZone == "Zone 6" then
+                   CFrameSelectedZone = CFrame.new(-44541.7617, 30.0003204, -1244.8584, -0.0844199061, -0.00553312758, 0.9964149, -0.0654025897, 0.997858942, 2.02319411e-10, -0.99428153, -0.0651681125, -0.0846010372)
+               end
+           end
+       end)
+   end)
+
+Tabs.Fish:AddToggle({
+   Name = "mua thuyền và zone",
+   Dis = "",
+   Value = false,
+   Callback = function(v)
+   _G.SailBoat = v
+   StopTween(_G.SailBoat)
+       stopboat:Stop()
+       print(v)
+   end,
+}) 
+
+
+function CheckBoat()
+   for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+       if v.Name == _G.SelectedBoat then
+           for _, child in pairs(v:GetChildren()) do
+               if child.Name == "MyBoatEsp" then
+                   return v
+               end
+           end
+       end
+   end
+   return false
+end
+
+   function CheckSeaBeast()
+       if game:GetService("Workspace"):FindFirstChild("SeaBeasts") then
+           for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+               if v:FindFirstChild("Humanoid") or v:FindFirstChild("HumanoidRootPart") or v.Health.Value < 0 then
+                   return true
+               end
+           end
+       end
+       return false
+   end
+
+function AddEsp(Name, Parent)
+   local BillboardGui = Instance.new("BillboardGui")
+   local TextLabel = Instance.new("TextLabel")
+
+   BillboardGui.Parent = Parent
+   BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+   BillboardGui.Active = true
+   BillboardGui.Name = Name
+   BillboardGui.AlwaysOnTop = true
+   BillboardGui.LightInfluence = 1.000
+   BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+   BillboardGui.StudsOffset = Vector3.new(0, 2.5, 0)
+
+   TextLabel.Parent = BillboardGui
+   TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   TextLabel.BackgroundTransparency = 1.000
+   TextLabel.Size = UDim2.new(1, 0, 1, 0)
+   TextLabel.Font = Enum.Font.GothamBold
+   TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+   spawn(function()
+           while wait() do
+               pcall(function()
+                   wait(0.1) 
+                   game:GetService('TweenService'):Create(
+                       TextLabel,TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),
+                       {TextColor3 = Color3.fromRGB(255, 0, 0)}
+                   ):Play() 
+                   wait(.5)            
+                   game:GetService('TweenService'):Create(
+                       TextLabel,TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),
+                       {TextColor3 = Color3.fromRGB(255, 155, 0)}
+                   ):Play() 
+                   wait(.5)            
+                   game:GetService('TweenService'):Create(
+                       TextLabel,TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),
+                       {TextColor3 = Color3.fromRGB(255, 255, 0)}
+                   ):Play() 
+                   wait(.5)            
+                   game:GetService('TweenService'):Create(
+                       TextLabel,TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),
+                       {TextColor3 = Color3.fromRGB(0, 255, 0)}
+                   ):Play() 
+                   wait(.5)            
+                   game:GetService('TweenService'):Create(
+                       TextLabel,TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),
+                       {TextColor3 = Color3.fromRGB(0, 255, 255)}
+                   ):Play() 
+                   wait(.5)            
+                   game:GetService('TweenService'):Create(
+                       TextLabel,TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),
+                       {TextColor3 = Color3.fromRGB(0, 155, 255)}
+                   ):Play() 
+                   wait(.5)            
+                   game:GetService('TweenService'):Create(
+                       TextLabel,TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),
+                       {TextColor3 = Color3.fromRGB(255, 0, 255)}
+                   ):Play() 
+                   wait(.5)            
+                   game:GetService('TweenService'):Create(
+                       TextLabel,TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),
+                       {TextColor3 = Color3.fromRGB(255, 0, 155)}
+                   ):Play() 
+                   wait(.5)
+               end)
+           end
+       end)
+   TextLabel.TextSize = 15
+   TextLabel.Text = ""
+end
+   
+   
+   spawn(function()
+       while wait() do
+           pcall(function()
+               if _G.SailBoat then
+                       if not CheckBoat() then
+                           local BuyBoatCFrame = CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781)
+                           if (BuyBoatCFrame.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+                               BTPZ(BuyBoatCFrame)
+                           else
+                               buyb = TPP(BuyBoatCFrame)
+                           end
+                           if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                               if buyb then buyb:Stop() end
+                               game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBoat", _G.SelectedBoat)
+                               for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                   if v.Name == _G.SelectedBoat then
+                                       if (v.VehicleSeat.CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
+                                           AddEsp('MyBoatEsp', v)
+                                       end
+                                   end
+                               end
+                           end
+                       elseif CheckBoat() then
+                           for i,v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                               if v.Name == _G.SelectedBoat then
+                                   if v:FindFirstChild("MyBoatEsp") then
+                                   if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+                                       if ((game:GetService("Workspace").Enemies:FindFirstChild("Shark") and _G.AutoKillShark) or (game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") and _G.AutoTerrorshark) or (game:GetService("Workspace").Enemies:FindFirstChild("Piranha") and _G.AutoKillPiranha) or (game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") and _G.AutoKillFishCrew) or (workspace.Enemies:FindFirstChild("FishBoat") and _G.RelzFishBoat) or (workspace.Enemies:FindFirstChild("PirateBrigade") and _G.RelzPirateBrigade) or (workspace.Enemies:FindFirstChild("PirateGrandBrigade") and _G.RelzPirateGrandBrigade) or (CheckSeaBeast() and _G.AutoSeaBest)) then
+                                           if stoppos then stoppos:Stop() end
+                                       else
+                                           local stoppos = TPP(v.VehicleSeat.CFrame * CFrame.new(0,1,0))
+                                       end
+                                   else
+                                       repeat wait()
+                                           local stopboat = TPB(CFrameSelectedZone, v.VehicleSeat)
+                                       until ((game:GetService("Workspace").Enemies:FindFirstChild("Shark") and _G.AutoKillShark) or (game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") and _G.AutoTerrorshark) or (game:GetService("Workspace").Enemies:FindFirstChild("Piranha") and _G.AutoKillPiranha) or (game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") and _G.AutoKillFishCrew) or (workspace.Enemies:FindFirstChild("FishBoat") and _G.RelzFishBoat) or (workspace.Enemies:FindFirstChild("PirateBrigade") and _G.RelzPirateBrigade) or (workspace.Enemies:FindFirstChild("PirateGrandBrigade") and _G.RelzPirateGrandBrigade) or (CheckSeaBeast() and _G.AutoSeaBest)) or game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false or _G.SailBoat == false
+                                       if stopboat then stopboat:Stop() end
+                                       game:GetService("VirtualInputManager"):SendKeyEvent(true, 32, false, game)
+                                       wait(0.1)
+                                       game:GetService("VirtualInputManager"):SendKeyEvent(false, 32, false, game)
+                                   end
+                                   end
+                               end
+                           end
+                       end
+               end
+           end)
+       end
+   end)
+
+           spawn(function()
+               pcall(function()
+                   while wait() do
+                       if _G.SailBoat then
+                           if ((game:GetService("Workspace").Enemies:FindFirstChild("Shark") and _G.AutoKillShark) or (game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") and _G.AutoTerrorshark) or (game:GetService("Workspace").Enemies:FindFirstChild("Piranha") and _G.AutoKillPiranha) or (game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") and _G.AutoKillFishCrew) or (game:GetService("Workspace").Enemies:FindFirstChild("FishBoat") or workspace.Enemies:FindFirstChild("PirateBrigade") or workspace.Enemies:FindFirstChild("PirateGrandBrigade") and _G.RelzFishBoat) or (CheckSeaBeast() and _G.AutoSeaBest)) then
+                               if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+                                   game:GetService("VirtualInputManager"):SendKeyEvent(true, 32, false, game)
+                                   wait(0.1)
+                                   game:GetService("VirtualInputManager"):SendKeyEvent(false, 32, false, game)
+                               end
+                           end
+                       end
+                   end
+               end)
+           end)
+
+   spawn(function()
+       while wait() do
+           pcall(function()
+               if _G.SailBoat then
+                   if game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") and _G.AutoKillFishCrew then
+                       for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                           if game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
+                               if v.Name == "Fish Crew Member" then
+                                   if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                   repeat wait(_G.FastAttackDelay)
+                                       AutoHaki()
+                                       EquipWeapon(_G.SelectWeapon)
+                                       topos(v.HumanoidRootPart.CFrame * Pos)
+                                       AttackNoCD()
+                                       _G.SeaSkill = false
+                                   until not _G.AutoKillFishCrew or not v.Parent or v.Humanoid.Health <= 0
+                                   StartBring = false
+                                   end
+                               end
+                           end
+                       end
+                   elseif workspace.Enemies:FindFirstChild("FishBoat") and _G.RelzFishBoat then
+                       for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                           if workspace.Enemies:FindFirstChild("FishBoat") then
+                               repeat wait()
+                                   local BoatCFrame1 = v.VehicleSeat.CFrame
+                                   if (BoatCFrame1.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+                                       _G.SeaSkill = true
+                                   else
+                                       _G.SeaSkill = false
+                                   end
+                                   topos(BoatCFrame1 * CFrame.new(0, 20, -20))
+                                   Skillaimbot = true
+                                   AimBotSkillPosition = v.VehicleSeat.Position
+                               until not v.Parent or not v:FindFirstChild("Health") or v.Health.Value <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild("FishBoat") or not v:FindFirstChild("VehicleSeat") or not _G.RelzFishBoat
+                               Skillaimbot = false
+                               _G.SeaSkill = false
+                           end
+                       end
+                   elseif workspace.Enemies:FindFirstChild("PirateBrigade") and _G.RelzPirateBrigade then
+                       for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                           if workspace.Enemies:FindFirstChild("PirateBrigade") then
+                               repeat task.wait()
+                                   local BoatCFrame2 = v.VehicleSeat.CFrame
+                                   if (BoatCFrame2.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+                                       _G.SeaSkill = true
+                                   else
+                                       _G.SeaSkill = false
+                                   end
+                                   topos(BoatCFrame2 * CFrame.new(0, 20, -20))
+                                   Skillaimbot = true
+                                   AimBotSkillPosition = v.VehicleSeat.Position
+                               until not v.Parent or not v:FindFirstChild("Health") or v.Health.Value <= 0 or not workspace.Enemies:FindFirstChild("PirateBrigade") or not v:FindFirstChild("VehicleSeat") or not _G.RelzFishBoat
+                               Skillaimbot = false
+                               _G.SeaSkill = false
+                           end
+                       end                        
+                   elseif workspace.Enemies:FindFirstChild("PirateGrandBrigade") and _G.RelzPirateGrandBrigade then
+                       for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                           if workspace.Enemies:FindFirstChild("PirateGrandBrigade") then
+                               repeat task.wait()
+                                   local BoatCFrame3 = v.VehicleSeat.CFrame
+                                   if (BoatCFrame3.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+                                       _G.SeaSkill = true
+                                   else
+                                       _G.SeaSkill = false
+                                   end
+                                   topos(BoatCFrame3 * CFrame.new(0, 20, -20))
+                                   Skillaimbot = true
+                                   AimBotSkillPosition = v.VehicleSeat.Position
+                               until not v.Parent or not v:FindFirstChild("Health") or v.Health.Value <= 0 or not workspace.Enemies:FindFirstChild("PirateGrandBrigade") or not v:FindFirstChild("VehicleSeat") or not _G.RelzFishBoat
+                               Skillaimbot = false
+                               _G.SeaSkill = false
+                           end
+                       end
+                   elseif CheckSeaBeast() and _G.AutoSeaBest then
+                       if game:GetService("Workspace"):FindFirstChild("SeaBeasts") then
+                           for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+                               if CheckSeaBeast() then
+                               repeat wait()
+                                   CFrameSeaBeast = v.HumanoidRootPart.CFrame
+                                   if (CFrameSeaBeast.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 550 then
+                                       _G.SeaSkill = true
+                                   else
+                                       _G.SeaSkill = false
+                                   end
+                                   Skillaimbot = true
+                                   AimBotSkillPosition = v.HumanoidRootPart.Position
+                                   topos(CFrameSeaBeast * CFrame.new(0,500,0))
+                               until not _G.AutoSeaBest or CheckSeaBeast() == false or not v:FindFirstChild("Humanoid") or not v:FindFirstChild("HumanoidRootPart") or v.Health.Value <= 0 or not v.Parent
+                               Skillaimbot = false
+                               _G.SeaSkill = false
+                               else
+                               Skillaimbot = false
+                               _G.SeaSkill = false
+                               end
+                           end
+                       end
+                   elseif game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") and _G.AutoTerrorshark then
+                       for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                           if game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") then
+                               if v.Name == "Terrorshark" then
+                                   if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                       repeat wait(_G.FastAttackDelay)
+                                           AutoHaki()
+                                           EquipWeapon(_G.SelectWeapon)
+                                           AttackNoCD()
+                                           _G.SeaSkill = false
+                                           topos(v.HumanoidRootPart.CFrame * CFrame.new(0, 60, 0))
+                                       until not  _G.AutoTerrorshark or not v.Parent or v.Humanoid.Health <= 0
+                                   end
+                               end
+                           end
+                       end
+                   elseif game:GetService("Workspace").Enemies:FindFirstChild("Piranha") and _G.AutoKillPiranha then
+                       for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                           if game:GetService("Workspace").Enemies:FindFirstChild("Piranha") then
+                               if v.Name == "Piranha" then
+                                   if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                   repeat wait(_G.FastAttackDelay)
+                                       AutoHaki()
+                                       EquipWeapon(_G.SelectWeapon)
+                                       topos(v.HumanoidRootPart.CFrame * Pos)
+                                       AttackNoCD()
+                                       _G.SeaSkill = false
+                                   until not _G.AutoKillPiranha or not v.Parent or v.Humanoid.Health <= 0
+                                   end
+                               end
+                           end
+                       end
+                   elseif game:GetService("Workspace").Enemies:FindFirstChild("Shark") and _G.AutoKillShark then
+                       for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                           if game:GetService("Workspace").Enemies:FindFirstChild("Shark") then
+                               if v.Name == "Shark" then
+                                   if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                   repeat wait(_G.FastAttackDelay)
+                                       AutoHaki()
+                                       EquipWeapon(_G.SelectWeapon)
+                                       topos(v.HumanoidRootPart.CFrame * Pos)
+                                       AttackNoCD()
+                                       _G.SeaSkill = false
+                                   until not _G.AutoKillShark or not v.Parent or v.Humanoid.Health <= 0
+                                   end
+                               end
+                           end
+                       end
+                   else
+                       Skillaimbot = false
+                       _G.SeaSkill = false
+                       UnEquipWeapon(_G.SelectWeapon)
+                   end
+               end
+           end)
+       end
+   end)
+   
+
 
             local AutoMysticIsland = Tabs.Fish:AddSection("Mirage Island")
 
