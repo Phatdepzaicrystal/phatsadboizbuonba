@@ -5761,6 +5761,29 @@ do
         )
     end
 
+     local DropdownAzu =
+        Tabs.Main:AddDropdown(
+        "DropdownAzu",
+        {
+            Title = "Aure Ember",
+            Max = 30,
+            Min = 10,
+            Values = 20,
+            Format = function(v)
+            _G.SetToTradeAureEmber = v
+                 print(v)
+            end,
+        }
+    )
+
+    DropdownMaterial:SetValue("Conjured Cocoa")
+
+    DropdownMaterial:OnChanged(
+        function(Value)
+            SelectMaterial = Value
+        end
+    )
+
     if Second_Sea or Third_Sea then
         local RoughSea = Tabs.Fish:AddSection("Rough Sea")
 
