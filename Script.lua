@@ -1,44 +1,44 @@
-wait(5)
 --[[
 getgenv().Team = "Marines"          -- Pirates or Marines
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/Script.lua"))()
 ]] --
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 
+local Fluent, SaveManager, InterfaceManager
 local isLoaded = false
+local isUIReady = false  -- Biến để kiểm tra UI đã tạo đủ tab chưa
 
 task.spawn(function()
-    if getgenv().Team == "Pirates" then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
-    elseif getgenv().Team == "Marines" then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
-    end
-
-    -- Chờ các thư viện bên ngoài tải xong
+    -- Tải Fluent UI và các thư viện khác
     Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
     SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/SaveManager.lua"))()
     InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Script/refs/heads/main/InterfaceManager.lua"))()
 
-    isLoaded = true
+    -- Kiểm tra xem mọi thư viện đã tải xong chưa
+    if Fluent and SaveManager and InterfaceManager then
+        isLoaded = true
+    else
+        warn("⚠️ Có lỗi khi tải thư viện!")
+    end
 end)
 
-repeat wait() until isLoaded -- Chờ đến khi mọi thứ load xong
+-- Chờ tải thư viện xong
+repeat wait() until isLoaded
 
-local Window =
-    Fluent:CreateWindow(
-    {
-        Title = "PhatCrystal Hub[Free]",
-        SubTitle = "Make by @phat_crystal",
-        TabWidth = 160,
-        Size = UDim2.fromOffset(530, 350),
-        Acrylic = false,
-        Theme = "Dark",
-        MinimizeKey = Enum.KeyCode.End
-    }
-)
+-- 🔹 Tạo UI
+local Window = Fluent:CreateWindow({
+    Title = "PhatCrystal Hub[Free]",
+    SubTitle = "Make by @phat_crystal",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(530, 350),
+    Acrylic = false,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.End
+})
 
+-- 🔹 Tạo các tab (Chờ hoàn tất trước khi tiếp tục)
 local Tabs = {
-    Sever = Window:AddTab({Title = "Status And Sever", Icon = "loader"}),
+    Server = Window:AddTab({Title = "Status And Server", Icon = "loader"}),
     Main = Window:AddTab({Title = "Main", Icon = "home"}),
     Setting = Window:AddTab({Title = "Settings", Icon = "sliders"}),
     Player = Window:AddTab({Title = "PvP", Icon = "shield"}),
@@ -51,6 +51,13 @@ local Tabs = {
     Shop = Window:AddTab({Title = "Shop", Icon = "shopping-bag"}),
     Misc = Window:AddTab({Title = "Misc", Icon = "menu"})
 }
+
+-- ✅ Xác nhận UI đã có đủ tab
+isUIReady = true
+
+-- 🔹 Chờ đến khi UI sẵn sàng rồi mới hiển thị
+repeat wait() until isUIReady
+
 local Options = Fluent.Options
 do
     --Place Id Check
