@@ -26,12 +26,13 @@ local Window =
         SubTitle = "Make by @phat_crystal",
         TabWidth = 160,
         Size = UDim2.fromOffset(530, 350),
+        Draggable = true
         Acrylic = false,
         Theme = "Dark",
         MinimizeKey = Enum.KeyCode.End
     }
 )
-wait(5)
+wait(4)
 local Tabs = {
     Sever = Window:AddTab({Title = "Status And Sever", Icon = "loader"}),
     Main = Window:AddTab({Title = "Main", Icon = "home"}),
@@ -71,13 +72,14 @@ do
     local a = Instance.new("ScreenGui")
     local b = Instance.new("ImageButton")
     local c = Instance.new("UICorner")
+    local tweenService = game:GetService("TweenService")
     a.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     a.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     b.Parent = a
     b.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     b.BorderColor3 = Color3.fromRGB(0, 0, 0)
     b.BorderSizePixel = 0
-    b.Position = UDim2.new(0.103761353, 0, 0.214939028, 0)
+    b.Position = UDim2.new(0.120833337 - 0.1, 0, 0.0952890813 + 0.01, 0)
     b.Size = UDim2.new(0, 50, 0, 50)
     b.Image = "rbxassetid://106595114856025"
     c.Parent = b
@@ -89,7 +91,30 @@ do
             end
         )
     end
+    -- Tạo ParticleEmitter (hiệu ứng tia lửa)
+    local particle = Instance.new("ParticleEmitter")
+    particle.Parent = b
+    particle.Texture = "rbxassetid://13378977956"  -- Thay đổi nếu muốn hiệu ứng khác
+    particle.Rate = 0  -- Chỉ tạo hiệu ứng khi bấm
+    particle.Lifetime = NumberRange.new(0.3, 0.5)
+    particle.Speed = NumberRange.new(10, 20)
+    particle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0)})
+    particle.LightEmission = 1
+    particle.Color = ColorSequence.new(Color3.fromRGB(255, 170, 0), Color3.fromRGB(255, 85, 0)) -- Màu cam lửa
+
+    local function d()
+        local e = Instance.new("LocalScript", b)
+         e.Parent.MouseButton1Click:Connect(function()
+            -- Hiệu ứng tia lửa
+            particle:Emit(10)
+
+            -- Kích hoạt phím END
+           game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.End, false, game)
+       end)
+    end
+
     coroutine.wrap(d)()
+
 
     First_Sea = false
     Second_Sea = false
