@@ -6930,7 +6930,9 @@ ToggleSafeMode:OnChanged(
                    end
                end)
            end)
-
+    
+Options.ToggleSafeMode:SetValue(false)
+    
 local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
 ToggleWhite:OnChanged(
     function(Value)
