@@ -26,7 +26,6 @@ local Window =
         SubTitle = "Make by @phat_crystal",
         TabWidth = 160,
         Size = UDim2.fromOffset(530, 350),
-        Draggable = true
         Acrylic = false,
         Theme = "Dark",
         MinimizeKey = Enum.KeyCode.End
