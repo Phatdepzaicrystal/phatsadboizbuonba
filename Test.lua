@@ -5792,9 +5792,9 @@ do
         local v506 = game:GetService("VirtualInputManager");
         local v507 = game:GetService("Workspace");
         local v508 = 350;
-        local v509 = v16.Sea:AddSlider("SliderSpeedBoat", {
+        local v509 = Tabs.Sea:AddSlider("SliderSpeedBoat", {
             Title = "Boat Speed",
-           Description = "",
+            Description = "",
             Default = v508,
             Min = 0,
             Max = 350,
