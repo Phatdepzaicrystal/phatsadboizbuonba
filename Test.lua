@@ -11180,6 +11180,18 @@ spawn(
     end
 )
 
+local v149 = Tabs.Race:AddToggle("ToggleUpgrade", {
+    Title = "Auto Buy Gear",
+    Description = "",
+    Default = false
+});
+v149:OnChanged(function(v365)
+    _G.AutoUpgrade = v365;
+    if _G.AutoUpgrade then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("UpgradeRace", "Buy");
+    end
+end);
+
 local Mastery = Tabs.Race:AddSection("Auto Train")
 
 local ToggleAutoAcientQuest = Tabs.Race:AddToggle("ToggleAutoAcientQuest", {Title = "Auto Train", Default = false})
