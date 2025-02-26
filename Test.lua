@@ -32,7 +32,7 @@ local Window =
         MinimizeKey = Enum.KeyCode.End
     }
 )
-wait(4)
+wait(5)
 local Tabs = {
     Sever = Window:AddTab({Title = "Status And Sever", Icon = "loader"}),
     Main = Window:AddTab({Title = "Main", Icon = "home"}),
