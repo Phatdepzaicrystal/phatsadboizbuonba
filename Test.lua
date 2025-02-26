@@ -92,25 +92,6 @@ do
     end
     coroutine.wrap(d)()
 
-    local function createLightningEffect()
-        local lightning = Instance.new("ImageLabel")
-        lightning.Parent = a
-        lightning.Image = "rbxassetid://4725930005"  -- ID hình ảnh tia sét
-        lightning.Size = UDim2.new(0.5, 0, 0.5, 0)
-        lightning.Position = UDim2.new(0.25, 0, 0.1, 0)
-        lightning.BackgroundTransparency = 1
-        lightning.ImageTransparency = 0
-
-        for i = 1, 3 do
-            lightning.ImageTransparency = 0
-            wait(0.05)
-            lightning.ImageTransparency = 1
-            wait(0.05)
-        end
-        lightning:Destroy()       
-    end
-
-
     First_Sea = false
     Second_Sea = false
     Third_Sea = false
