@@ -4085,7 +4085,7 @@ do
             end
 
             local FastAttack = {
-                Distance = 100,
+                Distance = 200,
                 attackMobs = true,
                 attackPlayers = true,
                 Equipped = nil
@@ -4908,7 +4908,7 @@ do
                                         (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
                                             CFrameCastleRaid.Position).Magnitude < 2500
                                      then
-                                        Tween2(CFrameCastleRaid)
+                                        Tween(CFrameCastleRaid)
                                     end
                                 end
                             end
