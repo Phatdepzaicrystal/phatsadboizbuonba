@@ -3896,10 +3896,10 @@ do
             end
         end);
     end
-    Type1 = 1
+    Type = 1
     spawn(
         function()
-            while wait(.1) do
+            while wait() do
                 if Type == 1 then
                     Pos = CFrame.new(0, 40, 0)
                 elseif Type == 2 then
@@ -3915,7 +3915,7 @@ do
 
     spawn(
         function()
-            while wait(.1) do
+            while wait() do
                 Type = 1
                 wait(1)
                 Type = 2
@@ -4108,7 +4108,7 @@ do
             end
 
             local FastAttack = {
-                Distance = 200,
+                Distance = 500,
                 attackMobs = true,
                 attackPlayers = true,
                 Equipped = nil
