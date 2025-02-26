@@ -2620,62 +2620,65 @@ function to(v233)
         end
     end);
 end
-local v22 = Instance.new("ScreenGui");
-local v23 = Instance.new("ImageButton");
-local v24 = Instance.new("UICorner");
-local v25 = Instance.new("ParticleEmitter");
-local v26 = game:GetService("TweenService");
-v22.Parent = game.CoreGui;
-v22.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
-v23.Parent = v22;
-v23.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
-v23.BorderSizePixel = 0;
-v23.Position = UDim2.new(0.120833337 - 0.1, 0, 0.0952890813 + 0.01, 0);
-v23.Size = UDim2.new(0, 50, 0, 50);
-v23.Draggable = true;
-v23.Image = "http://www.roblox.com/asset/?id=13717478897";
-v24.Parent = v23;
-v24.CornerRadius = UDim.new(0, 12);
-v25.Parent = v23;
-v25.LightEmission = 1;
-v25.Size = NumberSequence.new({
-    NumberSequenceKeypoint.new(0, 0.1),
-    NumberSequenceKeypoint.new(1, 0)
-});
-v25.Lifetime = NumberRange.new(0.5, 1);
-v25.Rate = 0;
-v25.Speed = NumberRange.new(5, 10);
-v25.Color = ColorSequence.new(Color3.fromRGB(255, 85, 255), Color3.fromRGB(85, 255, 255));
-local v47 = v26:Create(v23, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-    Rotation = 360
-});
+local v22 = Instance.new("ScreenGui")
+local v23 = Instance.new("ImageButton")
+local v24 = Instance.new("UICorner")
+local v25 = Instance.new("ParticleEmitter")
+local v26 = game:GetService("TweenService")
+
+-- Cấu hình GUI
+v22.Parent = game.CoreGui
+v23.Parent = v22
+v23.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+v23.BorderSizePixel = 0
+v23.Position = UDim2.new(0.1, 0, 0.1, 0)
+v23.Size = UDim2.new(0, 50, 0, 50)
+v23.Draggable = true
+v23.Image = "http://www.roblox.com/asset/?id=13717478897"
+v24.Parent = v23
+v24.CornerRadius = UDim.new(0, 12)
+
+-- Tạo hiệu ứng điện (Beam)
+local function createLightning(parent)
+    local beam = Instance.new("Beam")
+    beam.Parent = parent
+    beam.Attachment0 = Instance.new("Attachment", parent)
+    beam.Attachment1 = Instance.new("Attachment", parent)
+    beam.Attachment0.Position = Vector3.new(math.random(-2, 2), math.random(-2, 2), 0)
+    beam.Attachment1.Position = Vector3.new(math.random(-2, 2), math.random(-2, 2), 0)
+    
+    beam.Color = ColorSequence.new(Color3.fromRGB(0, 100, 255), Color3.fromRGB(255, 255, 255))
+    beam.LightEmission = 1
+    beam.Width0 = 0.3
+    beam.Width1 = 0
+    beam.FaceCamera = true
+
+    -- Tạo hiệu ứng nhấp nháy
+    local tween = v26:Create(beam, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Width0 = 0, Width1 = 0})
+    tween:Play()
+    
+    -- Xóa tia sau khi chạy xong
+    tween.Completed:Connect(function()
+        beam:Destroy()
+    end)
+end
+
+-- Sự kiện khi nhấn nút
 v23.MouseButton1Down:Connect(function()
-    v25.Rate = 100;
-    task.delay(1, function()
-        v25.Rate = 0;
-    end);
-    v47:Play();
-    game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.End, false, game);
-    v47.Completed:Connect(function()
-        v23.Rotation = 0;
-    end);
-    local v235 = v26:Create(v23, TweenInfo.new(0.2, Enum.EasingStyle.Bounce, Enum.EasingDirection.Out), {
-        Size = UDim2.new(0, 60, 0, 60)
-    });
-    v235:Play();
-    v235.Completed:Connect(function()
-        local v483 = v26:Create(v23, TweenInfo.new(0.2, Enum.EasingStyle.Bounce, Enum.EasingDirection.Out), {
-            Size = UDim2.new(0, 50, 0, 50)
-        });
-        v483:Play();
-    end);
-end);
-if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-    game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy();
-end
-if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-    game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy();
-end
+    -- Hiệu ứng điện xuất hiện
+    for i = 1, 3 do
+        createLightning(v23)
+        task.wait(0.1)
+    end
+
+    -- Phát sáng nhanh
+    local glowTween = v26:Create(v23, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0.5})
+    glowTween:Play()
+    glowTween.Completed:Connect(function()
+        local fadeOut = v26:Create(v23, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1})
+        fadeOut:Play()
+    end)
+end)
 v16.Home:AddButton({
     Title = "discord support",
     Description = "sever discord hỗ trợ|discord sever support",
