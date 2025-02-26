@@ -6917,6 +6917,20 @@ spawn(
     end
 )
 
+local ToggleSafeMode = Tabs.Setting:AddToggle("ToggleSafeMode", {Title = "Safe Mode", Default = false})
+ToggleSafeMode:OnChanged(
+     function(Value)
+         _G.Safe_Mode = Value
+        spawn(function()
+               pcall(function()
+                   while wait() do
+                       if _G.Safe_Mode then
+                           game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,200,0)
+                       end
+                   end
+               end)
+           end)
+
 local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
 ToggleWhite:OnChanged(
     function(Value)
