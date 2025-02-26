@@ -4764,7 +4764,7 @@ do
                                 if
                                     (CFrameQ.Position -
                                         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                                        5
+                                        
                                  then
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                         "StartQuest",
@@ -4811,7 +4811,7 @@ do
                                     if string.find(v.Name, NameMon) then
                                         if
                                             (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >=
-                                                3
+                                                10
                                          then
                                             Tween(v.CFrame * CFrame.new(posX, posY, posZ))
                                         end
@@ -6916,19 +6916,6 @@ spawn(
         end
     end
 )
-
-local ToggleSafeMode = Tabs.Setting:AddToggle("ToggleSafeMode", {Title = "Safe Mode", Default = false})
-ToggleSafeMode:OnChanged(
-     function(Value)
-         _G.Safe_Mode = Value
-         spawn(function()
-               pcall(function()
-                   while wait() do
-                       if _G.Safe_Mode then
-                           game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,200,0)
-                       end
-)    
-Options.ToggleSafeMode:SetValue(false)
     
 local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
 ToggleWhite:OnChanged(
