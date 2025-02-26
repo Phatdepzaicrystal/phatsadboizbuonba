@@ -72,14 +72,13 @@ do
     local a = Instance.new("ScreenGui")
     local b = Instance.new("ImageButton")
     local c = Instance.new("UICorner")
-    local tweenService = game:GetService("TweenService")
     a.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     a.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     b.Parent = a
     b.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     b.BorderColor3 = Color3.fromRGB(0, 0, 0)
     b.BorderSizePixel = 0
-    b.Position = UDim2.new(0.120833337 - 0.1, 0, 0.0952890813 + 0.01, 0)
+    b.Position = UDim2.new(0.103761353, 0, 0.214939028, 0)
     b.Size = UDim2.new(0, 50, 0, 50)
     b.Image = "rbxassetid://106595114856025"
     c.Parent = b
@@ -91,23 +90,30 @@ do
             end
         )
     end
-        coroutine.wrap(d)()
-   local particle = Instance.new("ParticleEmitter")
-   particle.Parent = b
-   particle.Texture = "rbxassetid://13378977956"  -- Đổi nếu muốn hiệu ứng khác
-   particle.Rate = 0  -- Chỉ phát khi bấm
-   particle.Lifetime = NumberRange.new(0.3, 0.5)
-   particle.Speed = NumberRange.new(10, 20)
-   particle.Size = NumberSequence.new(1, 0)
-   particle.LightEmission = 1
-   particle.Color = ColorSequence.new(Color3.fromRGB(255, 170, 0), Color3.fromRGB(255, 85, 0)) -- Màu cam lửa
+    coroutine.wrap(d)()
 
-   b.MouseButton1Click:Connect(function()
-       if particle then
-           particle:Emit(10)  -- Phát ra 10 tia lửa
-       end
-       game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.End, false, game)
-   end)
+    -- Thêm hiệu ứng tia lửa sau function d()
+    local particle = Instance.new("ParticleEmitter")
+    particle.Parent = b
+    particle.Texture = "rbxassetid://241837157" -- ID texture tia lửa
+    particle.Rate = 0  -- Chỉ bắn khi bấm
+    particle.Lifetime = NumberRange.new(0.3, 0.6)
+    particle.Speed = NumberRange.new(15, 30)
+    particle.Rotation = NumberRange.new(0, 360)
+    particle.RotSpeed = NumberRange.new(-200, 200)
+    particle.Size = NumberSequence.new({
+        NumberSequenceKeypoint.new(0, 1),
+        NumberSequenceKeypoint.new(1, 0)
+    })
+    particle.LightEmission = 0.8
+    particle.Color = ColorSequence.new(Color3.fromRGB(255, 200, 0), Color3.fromRGB(255, 0, 0))
+
+    b.MouseButton1Click:Connect(function()
+        particle:Emit(15) -- Phát ra 15 tia lửa
+        b.Size = UDim2.new(0, 55, 0, 55)
+        wait(0.1)
+        b.Size = UDim2.new(0, 50, 0, 50)
+    end)
 
     First_Sea = false
     Second_Sea = false
