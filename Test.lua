@@ -5787,24 +5787,6 @@ do
 
     if Second_Sea or Third_Sea then
         local RoughSea = Tabs.Fish:AddSection("Rough Sea")
-        local v504 = game:GetService("Players");
-        local v505 = game:GetService("RunService");
-        local v506 = game:GetService("VirtualInputManager");
-        local v507 = game:GetService("Workspace");
-        local v508 = 350;
-        local v509 = Tabs.Sea:AddSlider("SliderSpeedBoat", {
-            Title = "Boat Speed",
-            Description = "",
-            Default = v508,
-            Min = 0,
-            Max = 350,
-            Rounding = 1,
-            Callback = function(v583)
-                v508 = v583;
-            end
-        });
-        v509:SetValue(v508);
-
         local ToggleSailBoat = Tabs.Fish:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false})
         ToggleSailBoat:OnChanged(
             function(Value)
