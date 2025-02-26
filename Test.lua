@@ -6927,10 +6927,7 @@ ToggleSafeMode:OnChanged(
                        if _G.Safe_Mode then
                            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,200,0)
                        end
-                   end
-               end)
-           end)
-    
+)    
 Options.ToggleSafeMode:SetValue(false)
     
 local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
