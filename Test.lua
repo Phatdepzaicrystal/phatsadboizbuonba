@@ -3873,6 +3873,29 @@ do
     end
 
     ---Method Farm
+     function AttackNoCoolDown()
+        local v228 = {};
+        local v229 = game:GetService("Workspace").Enemies:GetChildren();
+        local v230 = FindEnemiesInRange(v228, v229);
+        if not v230 then
+            return;
+        end
+        local v231 = GetEquippedTool();
+        if not v231 then
+            return;
+        end
+       pcall(function()
+            local v477 = game:GetService("ReplicatedStorage");
+            local v478 = v477:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack");
+            local v479 = v477:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit");
+            if (# v228 > 0) then
+                v478:FireServer(1e-9);
+                v479:FireServer(v230, v228);
+            else
+                task.wait(1e-9);
+            end
+        end);
+    end
     Type1 = 1
     spawn(
         function()
