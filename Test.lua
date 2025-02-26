@@ -91,7 +91,7 @@ do
             end
         )
     end
-   task.wait() -- Đợi 1 tick để tránh lỗi
+        coroutine.wrap(d)()
    local particle = Instance.new("ParticleEmitter")
    particle.Parent = b
    particle.Texture = "rbxassetid://13378977956"  -- Đổi nếu muốn hiệu ứng khác
@@ -108,9 +108,6 @@ do
        end
        game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.End, false, game)
    end)
-
-    coroutine.wrap(d)()
-
 
     First_Sea = false
     Second_Sea = false
