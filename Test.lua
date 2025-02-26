@@ -4764,6 +4764,7 @@ do
                                 if
                                     (CFrameQ.Position -
                                         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
+                                           5
                                         
                                  then
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
@@ -4811,7 +4812,7 @@ do
                                     if string.find(v.Name, NameMon) then
                                         if
                                             (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >=
-                                                10
+                                                5
                                          then
                                             Tween(v.CFrame * CFrame.new(posX, posY, posZ))
                                         end
