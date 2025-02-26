@@ -2632,7 +2632,7 @@ v22.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 v23.Parent = v22
 v23.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 v23.BorderSizePixel = 0
-v23.Position = UDim2.new(0.120833337 - 0.1, 0, 0.0952890813 + 0.01, 0)
+v23.Position = UDim2.new(0.1, 0, 0.1, 0)
 v23.Size = UDim2.new(0, 50, 0, 50)
 v23.Draggable = true
 v23.Image = "http://www.roblox.com/asset/?id=13717478897"
@@ -2640,60 +2640,57 @@ v23.Image = "http://www.roblox.com/asset/?id=13717478897"
 v24.Parent = v23
 v24.CornerRadius = UDim.new(0, 12)
 
--- Hiệu ứng điện (ParticleEmitter)
+-- Tạo hiệu ứng tia điện
 v25.Parent = v23
 v25.LightEmission = 1
 v25.Size = NumberSequence.new({
-    NumberSequenceKeypoint.new(0, 0.2), -- Hạt bắt đầu nhỏ
-    NumberSequenceKeypoint.new(1, 0) -- Biến mất dần
+    NumberSequenceKeypoint.new(0, 0.2),
+    NumberSequenceKeypoint.new(1, 0)
 })
-v25.Lifetime = NumberRange.new(0.2, 0.5) -- Tồn tại ngắn hơn để giống điện
+v25.Lifetime = NumberRange.new(0.2, 0.4)
 v25.Rate = 0
-v25.Speed = NumberRange.new(10, 20) -- Tăng tốc độ
-v25.VelocitySpread = 360 -- Bay theo mọi hướng
-v25.Rotation = NumberRange.new(0, 360) -- Quay ngẫu nhiên
-v25.Color = ColorSequence.new(Color3.fromRGB(0, 85, 255), Color3.fromRGB(255, 255, 255)) -- Xanh điện + trắng
-v25.LightInfluence = 1 -- Làm hạt sáng hơn
+v25.Speed = NumberRange.new(20, 30)
+v25.Color = ColorSequence.new(Color3.fromRGB(85, 255, 255), Color3.fromRGB(255, 255, 85)) -- Xanh + Vàng
 
 -- Hiệu ứng xoay
-local v47 = v26:Create(v23, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+local rotateTween = v26:Create(v23, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
     Rotation = 360
 })
 
 -- Khi bấm nút
 v23.MouseButton1Down:Connect(function()
-    -- Bật hiệu ứng điện
-    v25.Rate = 150
-    task.delay(0.5, function() -- Hiệu ứng trong 0.5s rồi tắt
-        v25.Rate = 0
+    v25.Rate = 100 -- Bật tia điện
+    rotateTween:Play() -- Xoay 360°
+    
+    task.delay(0.2, function()
+        v25.Rate = 0 -- Tắt tia điện sau 0.2s
     end)
-
-    -- Xoay nút
-    v47:Play()
+    
+    rotateTween.Completed:Connect(function()
+        v23.Rotation = 0 -- Reset xoay
+    end)
+end)
+v23.MouseButton1Down:Connect(function()
+    v25.Rate = 100;
+    task.delay(1, function()
+        v25.Rate = 0;
+    end);
+    v47:Play();
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.End, false, game);
     v47.Completed:Connect(function()
-        v23.Rotation = 0
-    end)
-
-    -- Co giãn nút
+        v23.Rotation = 0;
+    end);
     local v235 = v26:Create(v23, TweenInfo.new(0.2, Enum.EasingStyle.Bounce, Enum.EasingDirection.Out), {
         Size = UDim2.new(0, 60, 0, 60)
-    })
-    v235:Play()
+    });
+    v235:Play();
     v235.Completed:Connect(function()
         local v483 = v26:Create(v23, TweenInfo.new(0.2, Enum.EasingStyle.Bounce, Enum.EasingDirection.Out), {
             Size = UDim2.new(0, 50, 0, 50)
-        })
-        v483:Play()
-    end)
-end)
-
--- Xóa hiệu ứng dư thừa
-if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-    game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
-end
-if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-    game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
-end
+        });
+        v483:Play();
+    end);
+end);
 v16.Home:AddButton({
     Title = "discord support",
     Description = "sever discord hỗ trợ|discord sever support",
