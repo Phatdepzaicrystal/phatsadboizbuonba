@@ -5787,6 +5787,23 @@ do
 
     if Second_Sea or Third_Sea then
         local RoughSea = Tabs.Fish:AddSection("Rough Sea")
+        local v504 = game:GetService("Players");
+        local v505 = game:GetService("RunService");
+        local v506 = game:GetService("VirtualInputManager");
+        local v507 = game:GetService("Workspace");
+        local v508 = 350;
+        local v509 = v16.Sea:AddSlider("SliderSpeedBoat", {
+            Title = "Boat Speed",
+           Description = "",
+            Default = v508,
+            Min = 0,
+            Max = 350,
+            Rounding = 1,
+            Callback = function(v583)
+                v508 = v583;
+            end
+        });
+        v509:SetValue(v508);
 
         local ToggleSailBoat = Tabs.Fish:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false})
         ToggleSailBoat:OnChanged(
@@ -10354,35 +10371,34 @@ ToggleStart:OnChanged(
 )
 Options.ToggleStart:SetValue(false)
 
-spawn(
-    function()
-        while wait(.1) do
-            pcall(
-                function()
-                    if _G.Auto_StartRaid then
-                        if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
-                            if
-                                not game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and
-                                    game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or
-                                    game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip")
-                             then
-                                if Second_Sea then
-                                    fireclickdetector(
-                                        game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector
-                                    )
-                                elseif Third_Sea then
-                                    fireclickdetector(
-                                        game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector
-                                    )
-                                end
-                            end
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Auto_StartRaid then
+                if (game:GetService("Players")['LocalPlayer'].PlayerGui.Main.Timer.Visible == false) then
+                    if (not game:GetService("Workspace")['_WorldOrigin'].Locations:FindFirstChild("Island 1") and (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip"))) then
+                        if Sea2 then
+                            Tween2(CFrame.new(- 6438.73535, 250.645355, - 4501.50684));
+                            local v1547 = {
+                                [1] = "SetSpawnPoint"
+                            };
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1547));
+                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector);
+                        elseif Sea3 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 5075.50927734375, 314.5155029296875, - 3150.0224609375));
+                            Tween2(CFrame.new(- 5017.40869, 314.844055, - 2823.0127, - 0.925743818, 4.482175e-8, - 0.378151238, 4.5550315e-9, 1, 1.0737756e-7, 0.378151238, 9.768162e-8, - 0.925743818));
+                            local v1656 = {
+                                [1] = "SetSpawnPoint"
+                            };
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1656));
+                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector);
                         end
                     end
                 end
-            )
-        end
+            end
+        end);
     end
-)
+end);
 
 local ToggleKillAura = Tabs.Raid:AddToggle("ToggleKillAura", {Title = "Kill Aura", Default = false})
 ToggleKillAura:OnChanged(
@@ -10460,25 +10476,25 @@ spawn(
                                 _G.AutoNear = true
                             end
                             if (v900:FindFirstChild("Island 2") and not v357["Island 2"]) then
-                                Tween(v900:FindFirstChild("Island 2").CFrame)
+                                Tween2(v900:FindFirstChild("Island 2").CFrame)
                                 v357["Island 2"] = true
                                 AutoNextIsland = false
                                 wait()
                                 AutoNextIsland = true
                             elseif (v900:FindFirstChild("Island 3") and not v357["Island 3"]) then
-                                Tween(v900:FindFirstChild("Island 3").CFrame)
+                                Tween2(v900:FindFirstChild("Island 3").CFrame)
                                 v357["Island 3"] = true
                                 AutoNextIsland = false
                                 wait()
                                 AutoNextIsland = true
                             elseif (v900:FindFirstChild("Island 4") and not v357["Island 4"]) then
-                                Tween(v900:FindFirstChild("Island 4").CFrame)
+                                Tween2(v900:FindFirstChild("Island 4").CFrame)
                                 v357["Island 4"] = true
                                 AutoNextIsland = false
                                 wait()
                                 AutoNextIsland = true
                             elseif (v900:FindFirstChild("Island 5") and not v357["Island 5"]) then
-                                Tween(v900:FindFirstChild("Island 5").CFrame)
+                                Tween2(v900:FindFirstChild("Island 5").CFrame)
                                 v357["Island 5"] = true
                                 AutoNextIsland = false
                                 wait()
