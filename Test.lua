@@ -4735,20 +4735,34 @@ do
     spawn(
         function()
             while task.wait() do
-                if _G.AutoLevel then
+                if _G.LevelFarm then
                     pcall(
                         function()
-                            CheckLevel()
+                            FindQuest()
                             if
                                 not string.find(
                                     game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,
                                     NameMon
-                                ) or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false))
+                                ) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                              then
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                               Tween(CFrameQ)
+                                if BypassTP then
+                                    if
+                                        (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude >
+                                            2500
+                                     then
+                                        BTP(CFrameQ)
+                                    elseif
+                                        (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude <=
+                                            2500
+                                     then
+                                        Tween(CFrameQ)
+                                    end
+                                else
+                                    Tween(CFrameQ)
+                                end
                                 if
-                                    ((CFrameQ.Position -
+                                    (CFrameQ.Position -
                                         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
                                         5
                                  then
@@ -4762,42 +4776,42 @@ do
                                 string.find(
                                     game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,
                                     NameMon
-                                ) or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true))
+                                ) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true
                              then
-                                for v1432, v1433 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                     if
-                                        (v1433:FindFirstChild("Humanoid") and v1433:FindFirstChild("HumanoidRootPart") and
-                                            (v1433.Humanoid.Health > 0))
+                                        v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and
+                                            v.Humanoid.Health > 0
                                      then
-                                        if (v1433.Name == Ms) then
+                                        if v.Name == Ms then
                                             repeat
                                                 wait(0)
-                                                AttackNoCoolDown()
+
                                                 bringmob = true
                                                 AutoHaki()
                                                 EquipTool(SelectWeapon)
                                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
-                                                v1433.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                                v1433.HumanoidRootPart.Transparency = 1
-                                                v1433.Humanoid.JumpPower = 0
-                                                v1433.Humanoid.WalkSpeed = 0
-                                                v1433.HumanoidRootPart.CanCollide = false
-                                                FarmPos = v1433.HumanoidRootPart.CFrame
-                                                MonFarm = v1433.Name
-                                            until not _G.AutoLevel or not v1433.Parent or (v1433.Humanoid.Health <= 0) or
-                                                not game:GetService("Workspace").Enemies:FindFirstChild(v1433.Name) or
-                                                (game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false)
+                                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                                v.HumanoidRootPart.Transparency = 1
+                                                v.Humanoid.JumpPower = 0
+                                                v.Humanoid.WalkSpeed = 0
+                                                v.HumanoidRootPart.CanCollide = false
+                                                FarmPos = v.HumanoidRootPart.CFrame
+                                                MonFarm = v.Name
+                                            until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0 or
+                                                not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or
+                                                game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                             bringmob = false
                                         end
                                     end
                                 end
-                                for v1434, v1435 in pairs(
+                                for i, v in pairs(
                                     game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()
                                 ) do
-                                    if string.find(v1435.Name, NameMon) then
+                                    if string.find(v.Name, NameMon) then
                                         if
-                                            (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v1435.Position).Magnitude >=
-                                                10
+                                            (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >=
+                                                3
                                          then
                                             Tween(v.CFrame * CFrame.new(posX, posY, posZ))
                                         end
@@ -4805,11 +4819,12 @@ do
                                 end
                             end
                         end
-                     )
+                    )
                 end
             end
         end
     )
+
 
     local ToggleMobAura = Tabs.Main:AddToggle("ToggleMobAura", {Title = "Farm Near", Default = false})
     ToggleMobAura:OnChanged(
