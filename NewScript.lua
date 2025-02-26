@@ -1,5 +1,5 @@
 -- discord.gg/25ms
-
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Broken-Heart/refs/heads/main/NewScript.lua"))()
 
 shared.LoaderTitle = "discord https://discord.gg/baGVBKvVAs";
 shared.LoaderKeyFrames = {
