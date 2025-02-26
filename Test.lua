@@ -91,27 +91,23 @@ do
             end
         )
     end
-    -- Tạo ParticleEmitter (hiệu ứng tia lửa)
-    local particle = Instance.new("ParticleEmitter")
-    particle.Parent = b
-    particle.Texture = "rbxassetid://13378977956"  -- Thay đổi nếu muốn hiệu ứng khác
-    particle.Rate = 0  -- Chỉ tạo hiệu ứng khi bấm
-    particle.Lifetime = NumberRange.new(0.3, 0.5)
-    particle.Speed = NumberRange.new(10, 20)
-    particle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0, 1), NumberSequenceKeypoint.new(1, 0)})
-    particle.LightEmission = 1
-    particle.Color = ColorSequence.new(Color3.fromRGB(255, 170, 0), Color3.fromRGB(255, 85, 0)) -- Màu cam lửa
+   task.wait() -- Đợi 1 tick để tránh lỗi
+   local particle = Instance.new("ParticleEmitter")
+   particle.Parent = b
+   particle.Texture = "rbxassetid://13378977956"  -- Đổi nếu muốn hiệu ứng khác
+   particle.Rate = 0  -- Chỉ phát khi bấm
+   particle.Lifetime = NumberRange.new(0.3, 0.5)
+   particle.Speed = NumberRange.new(10, 20)
+   particle.Size = NumberSequence.new(1, 0)
+   particle.LightEmission = 1
+   particle.Color = ColorSequence.new(Color3.fromRGB(255, 170, 0), Color3.fromRGB(255, 85, 0)) -- Màu cam lửa
 
-    local function d()
-        local e = Instance.new("LocalScript", b)
-         e.Parent.MouseButton1Click:Connect(function()
-            -- Hiệu ứng tia lửa
-            particle:Emit(10)
-
-            -- Kích hoạt phím END
-           game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.End, false, game)
-       end)
-    end
+   b.MouseButton1Click:Connect(function()
+       if particle then
+           particle:Emit(10)  -- Phát ra 10 tia lửa
+       end
+       game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.End, false, game)
+   end)
 
     coroutine.wrap(d)()
 
