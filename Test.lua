@@ -4734,13 +4734,13 @@ do
 
     spawn(
         function()
-            while wait() do
+            while task.wait() do
                 if _G.AutoLevel then
                     pcall(
                         function()
                             CheckLevel()
                             if
-                                (not string.find(
+                                not string.find(
                                     game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,
                                     NameMon
                                 ) or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false))
@@ -4750,7 +4750,7 @@ do
                                 if
                                     ((CFrameQ.Position -
                                         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                                        5)
+                                        5
                                  then
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                         "StartQuest",
@@ -4759,7 +4759,7 @@ do
                                     )
                                 end
                             elseif
-                                (string.find(
+                                string.find(
                                     game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,
                                     NameMon
                                 ) or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true))
@@ -4771,12 +4771,12 @@ do
                                      then
                                         if (v1433.Name == Ms) then
                                             repeat
-                                                wait(_G.Fast_Delay)
+                                                wait(0)
                                                 AttackNoCoolDown()
                                                 bringmob = true
                                                 AutoHaki()
                                                 EquipTool(SelectWeapon)
-                                                Tween(v1433.HumanoidRootPart.CFrame * Pos)
+                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
                                                 v1433.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                                 v1433.HumanoidRootPart.Transparency = 1
                                                 v1433.Humanoid.JumpPower = 0
@@ -4796,10 +4796,10 @@ do
                                 ) do
                                     if string.find(v1435.Name, NameMon) then
                                         if
-                                            ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v1435.Position).Magnitude >=
-                                                10)
+                                            (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v1435.Position).Magnitude >=
+                                                10
                                          then
-                                            Tween(v1435.HumanoidRootPart.CFrame * Pos)
+                                            Tween(v.CFrame * CFrame.new(posX, posY, posZ))
                                         end
                                     end
                                 end
