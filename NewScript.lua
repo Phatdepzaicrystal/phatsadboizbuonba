@@ -2623,7 +2623,6 @@ end
 local v22 = Instance.new("ScreenGui")
 local v23 = Instance.new("ImageButton")
 local v24 = Instance.new("UICorner")
-local v25 = Instance.new("ParticleEmitter")
 local v26 = game:GetService("TweenService")
 
 -- Cấu hình GUI
@@ -2641,44 +2640,51 @@ v24.CornerRadius = UDim.new(0, 12)
 -- Tạo hiệu ứng điện (Beam)
 local function createLightning(parent)
     local beam = Instance.new("Beam")
+    local attach0 = Instance.new("Attachment", parent)
+    local attach1 = Instance.new("Attachment", parent)
+
+    -- Random vị trí tia điện trong phạm vi nút
+    attach0.Position = Vector3.new(math.random(-2, 2), math.random(-2, 2), 0)
+    attach1.Position = Vector3.new(math.random(-2, 2), math.random(-2, 2), 0)
+
+    beam.Attachment0 = attach0
+    beam.Attachment1 = attach1
     beam.Parent = parent
-    beam.Attachment0 = Instance.new("Attachment", parent)
-    beam.Attachment1 = Instance.new("Attachment", parent)
-    beam.Attachment0.Position = Vector3.new(math.random(-2, 2), math.random(-2, 2), 0)
-    beam.Attachment1.Position = Vector3.new(math.random(-2, 2), math.random(-2, 2), 0)
-    
     beam.Color = ColorSequence.new(Color3.fromRGB(0, 100, 255), Color3.fromRGB(255, 255, 255))
     beam.LightEmission = 1
     beam.Width0 = 0.3
     beam.Width1 = 0
     beam.FaceCamera = true
 
-    -- Tạo hiệu ứng nhấp nháy
+    -- Làm tia điện biến mất dần
     local tween = v26:Create(beam, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Width0 = 0, Width1 = 0})
     tween:Play()
-    
-    -- Xóa tia sau khi chạy xong
+
+    -- Xóa tia điện sau khi hoàn thành hiệu ứng
     tween.Completed:Connect(function()
         beam:Destroy()
+        attach0:Destroy()
+        attach1:Destroy()
     end)
 end
 
 -- Sự kiện khi nhấn nút
 v23.MouseButton1Down:Connect(function()
-    -- Hiệu ứng điện xuất hiện
+    -- Tạo 3 tia điện ngẫu nhiên
     for i = 1, 3 do
         createLightning(v23)
         task.wait(0.1)
     end
 
-    -- Phát sáng nhanh
-    local glowTween = v26:Create(v23, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0.5})
+    -- Làm nút phát sáng nhanh rồi tắt dần
+    local glowTween = v26:Create(v23, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0.5})
     glowTween:Play()
     glowTween.Completed:Connect(function()
-        local fadeOut = v26:Create(v23, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1})
+        local fadeOut = v26:Create(v23, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1})
         fadeOut:Play()
     end)
 end)
+
 v16.Home:AddButton({
     Title = "discord support",
     Description = "sever discord hỗ trợ|discord sever support",
