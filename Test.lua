@@ -6921,7 +6921,7 @@ local ToggleSafeMode = Tabs.Setting:AddToggle("ToggleSafeMode", {Title = "Safe M
 ToggleSafeMode:OnChanged(
      function(Value)
          _G.Safe_Mode = Value
-        spawn(function()
+         spawn(function()
                pcall(function()
                    while wait() do
                        if _G.Safe_Mode then
