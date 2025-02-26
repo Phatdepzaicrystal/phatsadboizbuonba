@@ -92,28 +92,24 @@ do
     end
     coroutine.wrap(d)()
 
-    -- Thêm hiệu ứng tia lửa sau function d()
-    local particle = Instance.new("ParticleEmitter")
-    particle.Parent = b
-    particle.Texture = "rbxassetid://241837157" -- ID texture tia lửa
-    particle.Rate = 0  -- Chỉ bắn khi bấm
-    particle.Lifetime = NumberRange.new(0.3, 0.6)
-    particle.Speed = NumberRange.new(15, 30)
-    particle.Rotation = NumberRange.new(0, 360)
-    particle.RotSpeed = NumberRange.new(-200, 200)
-    particle.Size = NumberSequence.new({
-        NumberSequenceKeypoint.new(0, 1),
-        NumberSequenceKeypoint.new(1, 0)
-    })
-    particle.LightEmission = 0.8
-    particle.Color = ColorSequence.new(Color3.fromRGB(255, 200, 0), Color3.fromRGB(255, 0, 0))
+    local function createLightningEffect()
+        local lightning = Instance.new("ImageLabel")
+        lightning.Parent = a
+        lightning.Image = "rbxassetid://4725930005"  -- ID hình ảnh tia sét
+        lightning.Size = UDim2.new(0.5, 0, 0.5, 0)
+        lightning.Position = UDim2.new(0.25, 0, 0.1, 0)
+        lightning.BackgroundTransparency = 1
+        lightning.ImageTransparency = 0
 
-    b.MouseButton1Click:Connect(function()
-        particle:Emit(15) -- Phát ra 15 tia lửa
-        b.Size = UDim2.new(0, 55, 0, 55)
-        wait(0.1)
-        b.Size = UDim2.new(0, 50, 0, 50)
-    end)
+        for i = 1, 3 do
+            lightning.ImageTransparency = 0
+            wait(0.05)
+            lightning.ImageTransparency = 1
+            wait(0.05)
+        end
+        lightning:Destroy()       
+    end
+
 
     First_Sea = false
     Second_Sea = false
