@@ -4753,7 +4753,7 @@ do
                                      then
                                         BTP(CFrameQ)
                                     elseif
-                                        (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude <
+                                        (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude <=
                                             2500
                                      then
                                         Tween(CFrameQ)
@@ -4811,7 +4811,7 @@ do
                                     if string.find(v.Name, NameMon) then
                                         if
                                             (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >=
-                                                10
+                                                3
                                          then
                                             Tween(v.CFrame * CFrame.new(posX, posY, posZ))
                                         end
