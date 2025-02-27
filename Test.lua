@@ -1,6 +1,6 @@
 --[[
 getgenv().Team = "Marines"          -- Pirates or Marines
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/Broken-Heart/refs/heads/main/Test.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/phatyeuem/refs/heads/main/Test.lua"))()
 ]] --
 if getgenv().Team == "Pirates" then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
@@ -3873,41 +3873,18 @@ do
     end
 
     ---Method Farm
-     function AttackNoCoolDown()
-        local v228 = {};
-        local v229 = game:GetService("Workspace").Enemies:GetChildren();
-        local v230 = FindEnemiesInRange(v228, v229);
-        if not v230 then
-            return;
-        end
-        local v231 = GetEquippedTool();
-        if not v231 then
-            return;
-        end
-       pcall(function()
-            local v477 = game:GetService("ReplicatedStorage");
-            local v478 = v477:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack");
-            local v479 = v477:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit");
-            if (# v228 > 0) then
-                v478:FireServer(1e-9);
-                v479:FireServer(v230, v228);
-            else
-                task.wait(1e-9);
-            end
-        end);
-    end
-    Type = 1
+    Type1 = 1
     spawn(
         function()
-            while wait() do
+            while wait(.1) do
                 if Type == 1 then
-                    Pos = CFrame.new(0, 40, 0)
+                    Pos = CFrame.new(10, 40, 10)
                 elseif Type == 2 then
-                    Pos = CFrame.new(- 40, 40, 0)
+                    Pos = CFrame.new(-30, 10, -30)
                 elseif Type == 3 then
-                    Pos = CFrame.new(40, 40, 0)
+                    Pos = CFrame.new(10, 10, -40)
                 elseif Type == 4 then
-                    Pos = CFrame.new(0, 40, 40)
+                    Pos = CFrame.new(-40, 10, 10)
                 end
             end
         end
@@ -3915,7 +3892,7 @@ do
 
     spawn(
         function()
-            while wait() do
+            while wait(.1) do
                 Type = 1
                 wait(1)
                 Type = 2
@@ -4108,7 +4085,7 @@ do
             end
 
             local FastAttack = {
-                Distance = 500,
+                Distance = 100,
                 attackMobs = true,
                 attackPlayers = true,
                 Equipped = nil
@@ -4753,7 +4730,7 @@ do
                                      then
                                         BTP(CFrameQ)
                                     elseif
-                                        (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude <=
+                                        (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude <
                                             2500
                                      then
                                         Tween(CFrameQ)
@@ -4764,7 +4741,7 @@ do
                                 if
                                     (CFrameQ.Position -
                                         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                                            3
+                                        5
                                  then
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                         "StartQuest",
@@ -4811,7 +4788,7 @@ do
                                     if string.find(v.Name, NameMon) then
                                         if
                                             (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >=
-                                                5
+                                                10
                                          then
                                             Tween(v.CFrame * CFrame.new(posX, posY, posZ))
                                         end
@@ -4824,7 +4801,6 @@ do
             end
         end
     )
-
 
     local ToggleMobAura = Tabs.Main:AddToggle("ToggleMobAura", {Title = "Farm Near", Default = false})
     ToggleMobAura:OnChanged(
@@ -4932,7 +4908,7 @@ do
                                         (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
                                             CFrameCastleRaid.Position).Magnitude < 2500
                                      then
-                                        Tween(CFrameCastleRaid)
+                                        Tween2(CFrameCastleRaid)
                                     end
                                 end
                             end
@@ -5788,6 +5764,7 @@ do
 
     if Second_Sea or Third_Sea then
         local RoughSea = Tabs.Fish:AddSection("Rough Sea")
+
         local ToggleSailBoat = Tabs.Fish:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false})
         ToggleSailBoat:OnChanged(
             function(Value)
@@ -6917,7 +6894,7 @@ spawn(
         end
     end
 )
-    
+
 local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
 ToggleWhite:OnChanged(
     function(Value)
@@ -10354,34 +10331,35 @@ ToggleStart:OnChanged(
 )
 Options.ToggleStart:SetValue(false)
 
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.Auto_StartRaid then
-                if (game:GetService("Players")['LocalPlayer'].PlayerGui.Main.Timer.Visible == false) then
-                    if (not game:GetService("Workspace")['_WorldOrigin'].Locations:FindFirstChild("Island 1") and (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip"))) then
-                        if Sea2 then
-                            Tween2(CFrame.new(- 6438.73535, 250.645355, - 4501.50684));
-                            local v1547 = {
-                                [1] = "SetSpawnPoint"
-                            };
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1547));
-                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector);
-                        elseif Sea3 then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 5075.50927734375, 314.5155029296875, - 3150.0224609375));
-                            Tween2(CFrame.new(- 5017.40869, 314.844055, - 2823.0127, - 0.925743818, 4.482175e-8, - 0.378151238, 4.5550315e-9, 1, 1.0737756e-7, 0.378151238, 9.768162e-8, - 0.925743818));
-                            local v1656 = {
-                                [1] = "SetSpawnPoint"
-                            };
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1656));
-                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector);
+spawn(
+    function()
+        while wait(.1) do
+            pcall(
+                function()
+                    if _G.Auto_StartRaid then
+                        if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
+                            if
+                                not game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and
+                                    game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or
+                                    game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip")
+                             then
+                                if Second_Sea then
+                                    fireclickdetector(
+                                        game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector
+                                    )
+                                elseif Third_Sea then
+                                    fireclickdetector(
+                                        game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector
+                                    )
+                                end
+                            end
                         end
                     end
                 end
-            end
-        end);
+            )
+        end
     end
-end);
+)
 
 local ToggleKillAura = Tabs.Raid:AddToggle("ToggleKillAura", {Title = "Kill Aura", Default = false})
 ToggleKillAura:OnChanged(
@@ -10441,7 +10419,7 @@ Options.ToggleNextIsland:SetValue(false)
 spawn(
     function()
         local v357 = {}
-        while task.wait() do
+        while wait() do
             if AutoNextIsland then
                 pcall(
                     function()
@@ -10459,25 +10437,25 @@ spawn(
                                 _G.AutoNear = true
                             end
                             if (v900:FindFirstChild("Island 2") and not v357["Island 2"]) then
-                                Tween2(v900:FindFirstChild("Island 2").CFrame)
+                                Tween(v900:FindFirstChild("Island 2").CFrame)
                                 v357["Island 2"] = true
                                 AutoNextIsland = false
                                 wait()
                                 AutoNextIsland = true
                             elseif (v900:FindFirstChild("Island 3") and not v357["Island 3"]) then
-                                Tween2(v900:FindFirstChild("Island 3").CFrame)
+                                Tween(v900:FindFirstChild("Island 3").CFrame)
                                 v357["Island 3"] = true
                                 AutoNextIsland = false
                                 wait()
                                 AutoNextIsland = true
                             elseif (v900:FindFirstChild("Island 4") and not v357["Island 4"]) then
-                                Tween2(v900:FindFirstChild("Island 4").CFrame)
+                                Tween(v900:FindFirstChild("Island 4").CFrame)
                                 v357["Island 4"] = true
                                 AutoNextIsland = false
                                 wait()
                                 AutoNextIsland = true
                             elseif (v900:FindFirstChild("Island 5") and not v357["Island 5"]) then
-                                Tween2(v900:FindFirstChild("Island 5").CFrame)
+                                Tween(v900:FindFirstChild("Island 5").CFrame)
                                 v357["Island 5"] = true
                                 AutoNextIsland = false
                                 wait()
@@ -11162,18 +11140,6 @@ spawn(
         end
     end
 )
-
-local v149 = Tabs.Race:AddToggle("ToggleUpgrade", {
-    Title = "Auto Buy Gear",
-    Description = "",
-    Default = false
-});
-v149:OnChanged(function(v365)
-    _G.AutoUpgrade = v365;
-    if _G.AutoUpgrade then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("UpgradeRace", "Buy");
-    end
-end);
 
 local Mastery = Tabs.Race:AddSection("Auto Train")
 
