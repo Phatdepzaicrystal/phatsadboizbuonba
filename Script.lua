@@ -9928,35 +9928,34 @@ ToggleStart:OnChanged(
 )
 Options.ToggleStart:SetValue(false)
 
-spawn(
-    function()
-        while wait(.1) do
-            pcall(
-                function()
-                    if _G.Auto_StartRaid then
-                        if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
-                            if
-                                not game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and
-                                    game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or
-                                    game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip")
-                             then
-                                if Second_Sea then
-                                    fireclickdetector(
-                                        game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector
-                                    )
-                                elseif Third_Sea then
-                                    fireclickdetector(
-                                        game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector
-                                    )
-                                end
-                            end
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Auto_StartRaid then
+                if (game:GetService("Players")['LocalPlayer'].PlayerGui.Main.Timer.Visible == false) then
+                    if (not game:GetService("Workspace")['_WorldOrigin'].Locations:FindFirstChild("Island 1") and (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip"))) then
+                        if Second_Sea then
+                            Tween2(CFrame.new(- 6438.73535, 250.645355, - 4501.50684));
+                            local v1547 = {
+                                [1] = "SetSpawnPoint"
+                            };
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1547));
+                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector);
+                        elseif Third_Sea then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 5075.50927734375, 314.5155029296875, - 3150.0224609375));
+                            Tween2(CFrame.new(- 5017.40869, 314.844055, - 2823.0127, - 0.925743818, 4.482175e-8, - 0.378151238, 4.5550315e-9, 1, 1.0737756e-7, 0.378151238, 9.768162e-8, - 0.925743818));
+                            local v1656 = {
+                                [1] = "SetSpawnPoint"
+                            };
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1656));
+                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector);
                         end
                     end
                 end
-            )
-        end
+            end
+        end);
     end
-)
+end);
 
 local ToggleKillAura = Tabs.Raid:AddToggle("ToggleKillAura", {Title = "Kill Aura", Default = false})
 ToggleKillAura:OnChanged(
@@ -10016,7 +10015,7 @@ Options.ToggleNextIsland:SetValue(false)
 spawn(
     function()
         local v357 = {}
-        while task.wait() do
+        while wait() do
             if AutoNextIsland then
                 pcall(
                     function()
@@ -10075,7 +10074,7 @@ ToggleAwake:OnChanged(
 Options.ToggleAwake:SetValue(false)
 spawn(
     function()
-        while task.wait() do
+        while wait() do
             if AutoAwakenAbilities then
                 pcall(
                     function()
@@ -10737,82 +10736,6 @@ spawn(
         end
     end
 )
-if Third_Sea then
-    local ToggleMirageIsland = Tabs.Race:AddToggle("ToggleMirageIsland", {Title = "Hop Mirage Island", Default = false})
-
-    ToggleMirageIsland:OnChanged(
-        function(Value)
-            _G.FindMirageIsland = Value
-        end
-    )
-
-    Options.ToggleMirageIsland:SetValue(false)
-
-    local HttpService = game:GetService("HttpService")
-    local TeleportService = game:GetService("TeleportService")
-    local PlaceId = game.PlaceId
-    local LocalPlayer = game.Players.LocalPlayer
-
-    -- API lấy danh sách server
-    local function GetServers()
-        local ServerAPI = "https://games.roblox.com/v1/games/2753915549/servers/Public?sortOrder=Asc&limit=100"
-        local success, response =
-            pcall(
-            function()
-                return HttpService:JSONDecode(game:HttpGet(ServerAPI))
-            end
-        )
-
-        if success and response and response.data then
-            return response.data
-        else
-            return {}
-        end
-    end
-
-    -- Hàm teleport tới server
-    local function HopToServer(serverId)
-        print("Đang chuyển vào server:", serverId)
-        TeleportService:TeleportToPlaceInstance(PlaceId, serverId, LocalPlayer)
-    end
-
-    -- Hàm tìm server có Mirage
-    local function FindMirageServer()
-        local servers = GetServers()
-        for _, server in pairs(servers) do
-            if server.playing < server.maxPlayers then -- Chỉ join server có slot trống
-                print("Kiểm tra server:", server.id)
-                HopToServer(server.id) -- Chuyển server để kiểm tra Mirage
-                wait(10) -- Đợi 10 giây để vào game và kiểm tra Mirage
-                if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
-                    print("Tìm thấy Mirage Island! Dừng hop server.")
-                    return
-                end
-            end
-        end
-
-        print("Không tìm thấy server có Mirage. Thử lại...")
-        wait(2)
-        FindMirageServer() -- Lặp lại quá trình
-    end
-
-    spawn(
-        function()
-            while wait() do
-                if _G.FindMirageIsland then
-                    local MirageIsland = game:GetService("Workspace").Map:FindFirstChild("MysticIsland")
-
-                    if MirageIsland then
-                        print("Mirage Island đã xuất hiện!")
-                    else
-                        print("Không tìm thấy Mirage, bắt đầu hop server...")
-                        FindMirageServer()
-                    end
-                end
-            end
-        end
-    )
-end
 
 local Mastery = Tabs.Race:AddSection("Auto Train")
 
