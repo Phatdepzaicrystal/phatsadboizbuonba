@@ -5804,12 +5804,12 @@ local v509 = Tabs.Fish:AddSlider("SliderSpeedBoat", {
         end
     });
     v509:SetValue(v508);
-    local v510 = v16.Sea:AddToggle("AutoFindPrehistoric", {
+    local v510 = Tabs.Fish:AddToggle("AutoFindPrehistoric", {
         Title = "Tìm Đảo Dung Nham",
         Description = "auto find volcano",
         Default = false
     });
-    v17.AutoFindPrehistoric:SetValue(false);
+    Options.AutoFindPrehistoric:SetValue(false);
     v510:OnChanged(function(v584)
         _G.AutoFindPrehistoric = v584;
     end);
