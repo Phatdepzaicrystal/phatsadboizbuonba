@@ -11219,7 +11219,7 @@ end
 
 ----------------------
 if Sea3 then
-    local v503 = Tabs.Fish:AddSection("Biển");
+    local v503 = Tabs.Fish:AddSection("Sea");
     local v504 = game:GetService("Players");
     local v505 = game:GetService("RunService");
     local v506 = game:GetService("VirtualInputManager");
