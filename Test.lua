@@ -5786,24 +5786,24 @@ do
     end
 
     if Third_Sea then
-        local v503 = Tabs.Fish:AddSection("Biển");
-        local v504 = game:GetService("Players");
-        local v505 = game:GetService("RunService");
-        local v506 = game:GetService("VirtualInputManager");
-        local v507 = game:GetService("Workspace");
-        local v508 = 350;
-        local v509 = Tabs.Fish:AddSlider("SliderSpeedBoat", {
-            Title = "chỉnh sửa Tốc Độ Thuyền",
-            Description = "edite speed ship",
-            Default = v508,
-            Min = 0,
-            Max = 350,
-            Rounding = 1,
-            Callback = function(v583)
-            v508 = v583;
-            end
-        });
-        v509:SetValue(v508);
+local v503 = Tabs.Fish:AddSection("Biển");
+local v504 = game:GetService("Players");
+local v505 = game:GetService("RunService");
+local v506 = game:GetService("VirtualInputManager");
+local v507 = game:GetService("Workspace");
+local v508 = 350;
+local v509 = Tabs.Fish:AddSlider("SliderSpeedBoat", {
+        Title = "chỉnh sửa Tốc Độ Thuyền",
+        Description = "edite speed ship",
+        Default = v508,
+        Min = 0,
+        Max = 350,
+        Rounding = 1,
+        Callback = function(v583)
+        v508 = v583;
+        end
+    });
+    v509:SetValue(v508);
 
             local AutoMysticIsland = Tabs.Fish:AddSection("Mirage Island")
 
