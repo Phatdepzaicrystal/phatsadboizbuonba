@@ -6807,7 +6807,7 @@ ToggleInfGeppo:OnChanged(
 spawn(function()
 	while wait() do
 		pcall(function()
-			if getgenv().InfGeppo then
+			if _G.InfiGeppo then
 				for v2195, v2196 in next, getgc() do
 					if game:GetService("Players").LocalPlayer.Character.Geppo then
 						if ((typeof(v2196) == "function") and (getfenv(v2196).script == game:GetService("Players").LocalPlayer.Character.Geppo)) then
