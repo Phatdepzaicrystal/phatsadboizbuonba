@@ -6798,32 +6798,24 @@ spawn(
     end
 )
 
-local ToggleInfGeppo = Tabs.Setting:AddToggle("ToggleInfGeppo", {Title = "Inf Geppo", Default = false})
-ToggleInfGeppo:OnChanged(
-    function(phatdepzai)
-        _G.InfiGeppo = phatdepzai
-    end
-)
-spawn(function()
-	while wait() do
-		pcall(function()
-			if _G.InfiGeppo then
-				for v2195, v2196 in next, getgc() do
-					if game:GetService("Players").LocalPlayer.Character.Geppo then
-						if ((typeof(v2196) == "function") and (getfenv(v2196).script == game:GetService("Players").LocalPlayer.Character.Geppo)) then
-							for v2849, v2850 in next, getupvalues(v2196) do
-								if (tostring(v2849) == "10000") then
-									repeat
-										wait(0.1);
-										setupvalue(v2196, v2849, 0);
-									until  not _G.InfiGeppo or (game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0)
-								end
-							end
-						end
-					end
-				end
+local ToggleInfOb = Tabs.Setting:AddToggle("ToggleInfOb", {Title = "Inf Ob", Default = false})
+ToggleInfOb:OnChanged(
+    function(zzz)
+        _G.InfiOb = zzz
+	local v666 = game:GetService("Players").LocalPlayer.VisionRadius.Value;
+	while _G.InfiOb do
+		wait();
+		local v1010 = game:GetService("Players").LocalPlayer;
+		local v1011 = v1010.Character;
+		local v1012 = v1010.VisionRadius;
+		if v1010 then
+			if (v1011.Humanoid.Health <= 0) then
+				wait(5);
 			end
-		end);
+			v1012.Value = math.huge;
+		elseif ((_G.InfiOb == false) and v1010) then
+			v1012.Value = v666;
+		end
 	end
 end);
 
