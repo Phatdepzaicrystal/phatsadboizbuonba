@@ -6798,6 +6798,35 @@ spawn(
     end
 )
 
+local ToggleInfGeppo = Tabs.Setting:AddToggle("ToggleInfGeppo", {Title = "Inf Geppo", Default = false})
+ToggleInfGeppo:OnChanged(
+    function(phatdepzai)
+        _G.InfiGeppo = phatdepzai
+    end
+)
+spawn(function()
+	while wait() do
+		pcall(function()
+			if getgenv().InfGeppo then
+				for v2195, v2196 in next, getgc() do
+					if game:GetService("Players").LocalPlayer.Character.Geppo then
+						if ((typeof(v2196) == "function") and (getfenv(v2196).script == game:GetService("Players").LocalPlayer.Character.Geppo)) then
+							for v2849, v2850 in next, getupvalues(v2196) do
+								if (tostring(v2849) == "9") then
+									repeat
+										wait(0.1);
+										setupvalue(v2196, v2849, 0);
+									until  not _G.InfiGeppo or (game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0)
+								end
+							end
+						end
+					end
+				end
+			end
+		end);
+	end
+end);
+
 local AutoV3 =
     Tabs.Setting:AddToggle(
     "ToggleAutoT",
