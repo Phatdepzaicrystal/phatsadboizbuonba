@@ -79,6 +79,7 @@ do
     b.BorderSizePixel = 0
     b.Position = UDim2.new(0.103761353, 0, 0.214939028, 0)
     b.Size = UDim2.new(0, 50, 0, 50)
+    b.Draggable = true
     b.Image = "rbxassetid://106595114856025"
     c.Parent = b
     local function d()
