@@ -9560,8 +9560,12 @@ spawn(
 )
 
 local ToggleFarmChestBP = Tabs.Item:AddToggle("ToggleFarmChestBP", {Title = "Auto Farm Chest[Bypass]", Default = false})
-	_G.ChestBypass = v488;
-end);
+ToggleFarmChestBP:OnChanged(
+    function(v488)
+        _G.ChestBypass = v488;
+    end
+)
+Options.ToggleFarmChestBP:SetValue(false)
 spawn(function()
 	while wait() do
 		if _G.ChestBypass then
@@ -9585,7 +9589,7 @@ spawn(function()
 				if v2093 then
 					local v2220 = v2093:GetPivot().Position;
 					v1999:PivotTo(CFrame.new(v2220));
-					task.wait(0.2);
+					wait(0.2);
 				else
 					break;
 				end
@@ -9597,6 +9601,7 @@ spawn(function()
 		end
 	end
 end);
+
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
