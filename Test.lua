@@ -12130,3 +12130,112 @@ function UpdateRealFruitEsp()
         end
     end
 end
+
+-------------------------------------------------
+local Volcano = Tabs.Volcanic.AddAddSection("Volcano")
+
+local DojoQ = Tabs.Volcanic:AddToggle("DojoQ", {Title = "Auto Quest Dojo Trainer", Default = false })
+DojoQ:OnChanged(function(Value)
+    getgenv().DojoClaimQuest = Value
+	end)
+Options.DojoQ:SetValue(false)
+
+local DojoQuestNpc = CFrame.new(5855.19629, 1208.32178, 872.713501, 0.606994748, -1.81058823e-09, -0.794705868, 5.72712722e-09, 1, 2.09605577e-09, 0.794705868, -5.82367621e-09, 0.606994748)
+spawn(function()
+    while wait(0.2) do
+        if getgenv().DojoClaimQuest and Third_Sea then
+            pcall(function()
+                if BypassTP then
+                    BTP(DojoQuestNpc)
+                else
+                    Tween(DojoQuestNpc)
+                end
+                local distance = (DojoQuestNpc.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                if distance <= 5 then
+                    local claimQuestTable = {
+                        ["NPC"] = "Dojo Trainer",
+                        ["Command"] = "ClaimQuest"
+                    }
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(claimQuestTable)
+                    wait(1)
+                    local requestQuestTable = {
+                        ["NPC"] = "Dojo Trainer",
+                        ["Command"] = "RequestQuest"
+                    }
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(requestQuestTable)
+                end
+            end)
+        end
+    end
+end)
+
+local UpdTalon = Tabs.Volcanic:AddToggle("UpdTalon", {Title = "Auto Upgrade Dragon Talon", Default = false })
+UpdTalon:OnChanged(function(Value)
+    getgenv().DragonTalonUpgrade = Value
+	end)	
+Options.UpdTalon:SetValue(false)
+
+spawn(function()
+    while wait(0.2) do
+        if getgenv().DragonTalonUpgrade and Third_Sea then
+            local UzothNPC = CFrame.new(5661.89014, 1211.31909, 864.836731, 0.811413169, -1.36805838e-08, -0.584473014, 4.75227395e-08, 1, 4.25682458e-08, 0.584473014, -6.23161966e-08, 0.811413169)
+            local distance = (UzothNPC.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if distance > 5 then
+                Tween2(UzothNPC)
+            else
+                local ohTable1 = {
+                    ["NPC"] = "Uzoth",
+                    ["Command"] = "Upgrade"
+                }                
+                game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(ohTable1)
+            end
+        end
+    end
+end)
+
+local Toggle = Tabs.Volcanic:AddToggle("Toggle", {Title = "Auto Attack Hydra Mob And Collect Ember", Default = false })
+Toggle:OnChanged(function(Value)
+    getgenv().BlazeEmberFarm = Value	
+	end)
+Options.Toggle:SetValue(false)
+
+spawn(function()
+    while wait(0.2) do
+        if getgenv().BlazeEmberFarm and Third_Sea then
+            pcall(function()
+                local workspaceEnemies = game:GetService('Workspace').Enemies
+                local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                local ghost = workspaceEnemies:FindFirstChild('Ghost')
+                local hydraEnforcer = workspaceEnemies:FindFirstChild('Hydra Enforcer')
+                local venomousAssailant = workspaceEnemies:FindFirstChild('Venomous Assailant')
+                if ghost or hydraEnforcer or venomousAssailant then
+                    for _, v in pairs(workspaceEnemies:GetChildren()) do
+                        if v.Name == 'Hydra Enforcer' or v.Name == 'Venomous Assailant' then
+                            if v:FindFirstChild('Humanoid') and v:FindFirstChild('HumanoidRootPart') and v.Humanoid.Health > 0 then
+                                repeat 
+                                    game:GetService("RunService").Heartbeat:wait()
+                                    AutoHaki()
+                                    EquipWeapon(getgenv().SelectWeapon)
+                                    Tween(v.HumanoidRootPart.CFrame * Pos)
+                                    if v.HumanoidRootPart.CanCollide then
+                                        v.HumanoidRootPart.CanCollide = false
+                                    end
+                                    if v.HumanoidRootPart.Size ~= Vector3.new(60, 60, 60) then
+                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                    end
+                                    if v.HumanoidRootPart.Transparency ~= 1 then
+                                        v.HumanoidRootPart.Transparency = 1
+                                    end
+                                    MonFarm = v.Name
+                                    PosMon = v.HumanoidRootPart.CFrame
+                                until not getgenv().BlazeEmberFarm or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                    Tween(CFrame.new(5394.36475, 1082.71057, 561.993958, -0.62453711, 3.17826405e-08, -0.780995131, 6.77530991e-08, 1, -1.34849545e-08, 0.780995131, -6.13366922e-08, -0.62453711))
+                end
+            end)
+        end
+    end
+end)
