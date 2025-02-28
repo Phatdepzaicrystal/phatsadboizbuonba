@@ -12130,5 +12130,3 @@ function UpdateRealFruitEsp()
         end
     end
 end
---------------------
-local NuiLua = Tabs.Vocanic:AddSection("Dojo Quest")
