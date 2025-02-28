@@ -3873,18 +3873,18 @@ do
     end
 
     ---Method Farm
-    Type1 = 1
+    Type = 1
     spawn(
         function()
             while wait(.1) do
                 if Type == 1 then
-                    Pos = CFrame.new(10, 40, 10)
+                    Pos = CFrame.new(0, PosY, -19)
                 elseif Type == 2 then
-                    Pos = CFrame.new(-30, 10, -30)
+                    Pos = CFrame.new(19, PosY, 0)
                 elseif Type == 3 then
-                    Pos = CFrame.new(10, 10, -40)
+                    Pos = CFrame.new(0, PosY, 19)
                 elseif Type == 4 then
-                    Pos = CFrame.new(-40, 10, 10)
+                    Pos = CFrame.new(-19, PosY, 0)
                 end
             end
         end
@@ -3894,13 +3894,13 @@ do
         function()
             while wait(.1) do
                 Type = 1
-                wait(1)
+                wait(0.2)
                 Type = 2
-                wait(1)
+                wait(0.2)
                 Type = 3
-                wait(1)
+                wait(0.2)
                 Type = 4
-                wait(1)
+                wait(0.2)
             end
         end
     )
@@ -4085,7 +4085,7 @@ do
             end
 
             local FastAttack = {
-                Distance = 100,
+                Distance = 200,
                 attackMobs = true,
                 attackPlayers = true,
                 Equipped = nil
