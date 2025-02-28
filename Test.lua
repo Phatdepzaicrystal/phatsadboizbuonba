@@ -4790,7 +4790,7 @@ do
                                             (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >=
                                                 10
                                          then
-                                            Tween(v.CFrame * CFrame.new(posX, posY, posZ))
+                                            Tween(v.CFrame * CFrame.new(15, 10, 2))
                                         end
                                     end
                                 end
