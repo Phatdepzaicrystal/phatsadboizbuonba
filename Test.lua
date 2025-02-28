@@ -39,7 +39,7 @@ local Tabs = {
     Player = Window:AddTab({Title = "PvP", Icon = "shield"}),
     Item = Window:AddTab({Title = "Get Item", Icon = "sword"}),
     Fish = Window:AddTab({Title = "Sea Event", Icon = "anchor"}),
-    Vocanic = Window:AddTab({Title = "Vocano Event", Icon = "rock"}),	
+    Vocanic = Window:AddTab({Title = "Vocano Event", Icon = "smoke"}),	
     Teleport = Window:AddTab({Title = "Teleport", Icon = "map"}),
     Fruit = Window:AddTab({Title = "Fruit", Icon = "apple"}),
     Raid = Window:AddTab({Title = "Raid", Icon = "target"}),
