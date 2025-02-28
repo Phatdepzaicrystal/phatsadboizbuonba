@@ -10385,6 +10385,16 @@ Tabs.Race:AddButton(
     }
 )
 
+Tabs.Race:AddButton(
+    {
+        Title = "Tele To Clock",
+        Description = "",
+        Callback = function()
+		    Tween2(CFrame.new(29551.9941, 15069.002, -85.5179291));
+        end
+    }
+)
+
 local Mastery = Tabs.Race:AddSection("Auto Race")
 
 Tabs.Race:AddButton(
