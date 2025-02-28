@@ -12157,9 +12157,9 @@ function UpdateRealFruitEsp()
     end
 end
 -------------------------------------------------------------
-local Vocano = Tabs.Vocanic:AddSection("Dojo Quest")
+local Vocano = Tabs.Fish:AddSection("Dojo Quest")
 
-local DojoQ = Tabs.Vocanic:AddToggle("DojoQ", {Title = "Auto Quest Dojo Trainer", Default = false })
+local DojoQ = Tabs.Fish:AddToggle("DojoQ", {Title = "Auto Quest Dojo Trainer", Default = false })
 DojoQ:OnChanged(function(Value)
     getgenv().DojoClaimQuest = Value
 	end)
@@ -12194,7 +12194,7 @@ spawn(function()
     end
 end)
 
-local UpdTalon = Tabs.Vocanic:AddToggle("UpdTalon", {Title = "Auto Upgrade Dragon Talon", Default = false })
+local UpdTalon = Tabs.Fish:AddToggle("UpdTalon", {Title = "Auto Upgrade Dragon Talon", Default = false })
 UpdTalon:OnChanged(function(Value)
     getgenv().DragonTalonUpgrade = Value
 	end)	
@@ -12218,7 +12218,7 @@ spawn(function()
     end
 end)
 
-local Toggle = Tabs.Vocanic:AddToggle("Toggle", {Title = "Auto Attack Hydra Mob And Collect Ember", Default = false })
+local Toggle = Tabs.Fish:AddToggle("Toggle", {Title = "Auto Attack Hydra Mob And Collect Ember", Default = false })
 Toggle:OnChanged(function(Value)
     getgenv().BlazeEmberFarm = Value	
 	end)
