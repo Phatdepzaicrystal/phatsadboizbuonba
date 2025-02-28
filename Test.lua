@@ -12132,7 +12132,7 @@ function UpdateRealFruitEsp()
 end
 
 -------------------------------------------------
-local Volcano = Tabs.Volcanic.AddAddSection("Volcano")
+local Volcano = Tabs.Volcanic.AddSection("Volcano")
 
 local DojoQ = Tabs.Volcanic:AddToggle("DojoQ", {Title = "Auto Quest Dojo Trainer", Default = false })
 DojoQ:OnChanged(function(Value)
