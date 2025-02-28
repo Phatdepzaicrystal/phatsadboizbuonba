@@ -12170,8 +12170,9 @@ Tabs.Vocanic:AddButton({
 local DojoQ = Tabs.Vocanic:AddToggle("DojoQ", {Title = "Auto Quest Dojo Trainer", Default = false })
 DojoQ:OnChanged(function(Value)
     getgenv().DojoClaimQuest = Value
-    StopTween(getgenv().DojoClaimQuest)
-end)
+	end)
+Options.DojoQ:SetValue(false)
+
 local DojoQuestNpc = CFrame.new(5855.19629, 1208.32178, 872.713501, 0.606994748, -1.81058823e-09, -0.794705868, 5.72712722e-09, 1, 2.09605577e-09, 0.794705868, -5.82367621e-09, 0.606994748)
 spawn(function()
     while wait(0.2) do
@@ -12204,8 +12205,9 @@ end)
 local UpdTalon = Tabs.Vocanic:AddToggle("UpdTalon", {Title = "Auto Upgrade Dragon Talon", Default = false })
 UpdTalon:OnChanged(function(Value)
     getgenv().DragonTalonUpgrade = Value
-    StopTween(getgenv().DragonTalonUpgrade)
-end)
+	end)	
+Options.UpdTalon:SetValue(false)
+
 spawn(function()
     while wait(0.2) do
         if getgenv().DragonTalonUpgrade and Third_Sea then
@@ -12223,11 +12225,13 @@ spawn(function()
         end
     end
 end)
+
 local Toggle = Tabs.Vocanic:AddToggle("Toggle", {Title = "Auto Attack Hydra Mob And Collect Ember", Default = false })
 Toggle:OnChanged(function(Value)
-    getgenv().BlazeEmberFarm = Value
-    StopTween(getgenv().BlazeEmberFarm)
-end)
+    getgenv().BlazeEmberFarm = Value	
+	end)
+Options.Toggle:SetValue(false)
+
 spawn(function()
     while wait(0.2) do
         if getgenv().BlazeEmberFarm and Third_Sea then
@@ -12246,7 +12250,6 @@ spawn(function()
                                     AutoHaki()
                                     EquipWeapon(getgenv().SelectWeapon)
                                     Tween(v.HumanoidRootPart.CFrame * Pos)
-                                    getgenv().StartMagnet = true
                                     if v.HumanoidRootPart.CanCollide then
                                         v.HumanoidRootPart.CanCollide = false
                                     end
@@ -12263,7 +12266,7 @@ spawn(function()
                         end
                     end
                 else
-                    Tween2(CFrame.new(5394.36475, 1082.71057, 561.993958, -0.62453711, 3.17826405e-08, -0.780995131, 6.77530991e-08, 1, -1.34849545e-08, 0.780995131, -6.13366922e-08, -0.62453711))
+                    Tween(CFrame.new(5394.36475, 1082.71057, 561.993958, -0.62453711, 3.17826405e-08, -0.780995131, 6.77530991e-08, 1, -1.34849545e-08, 0.780995131, -6.13366922e-08, -0.62453711))
                 end
             end)
         end
