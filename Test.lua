@@ -6798,27 +6798,6 @@ spawn(
     end
 )
 
-local ToggleInfOb = Tabs.Setting:AddToggle("ToggleInfOb", {Title = "Inf Ob", Default = false})
-ToggleInfOb:OnChanged(
-    function(zzz)
-        _G.InfiOb = zzz
-	local v666 = game:GetService("Players").LocalPlayer.VisionRadius.Value;
-	while _G.InfiOb do
-		wait();
-		local v1010 = game:GetService("Players").LocalPlayer;
-		local v1011 = v1010.Character;
-		local v1012 = v1010.VisionRadius;
-		if v1010 then
-			if (v1011.Humanoid.Health <= 0) then
-				wait(5);
-			end
-			v1012.Value = math.huge;
-		elseif ((_G.InfiOb == false) and v1010) then
-			v1012.Value = v666;
-		end
-	end
-end);
-
 local AutoV3 =
     Tabs.Setting:AddToggle(
     "ToggleAutoT",
@@ -9545,7 +9524,7 @@ end
 
 local Chestt = Tabs.Item:AddSection("Chest Farm")
 
-local ToggleFarmChest = Tabs.Item:AddToggle("ToggleFarmChest", {Title = "Auto Farm Chest", Default = false})
+local ToggleFarmChest = Tabs.Item:AddToggle("ToggleFarmChest", {Title = "Auto Farm Chest[Tween]", Default = false})
 ToggleFarmChest:OnChanged(
     function(Value)
         _G.AutoCollectChest = Value
@@ -9580,6 +9559,44 @@ spawn(
     end
 )
 
+local ToggleFarmChestBP = Tabs.Item:AddToggle("ToggleFarmChestBP", {Title = "Auto Farm Chest[Bypass]", Default = false})
+	_G.ChestBypass = v488;
+end);
+spawn(function()
+	while wait() do
+		if _G.ChestBypass then
+			local v1996 = game:GetService("Players");
+			local v1997 = v1996.LocalPlayer;
+			local v1998 = game:GetService("CollectionService");
+			local v1999 = v1997.Character or v1997.CharacterAdded:Wait() ;
+			local v2000 = tick();
+			while (tick() - v2000) < 4  do
+				v1999 = v1997.Character or v1997.CharacterAdded:Wait() ;
+				local v2090 = v1999:GetPivot().Position;
+				local v2091 = v1998:GetTagged("_ChestTagged");
+				local v2092, v2093 = math.huge;
+				for v2150 = 1, #v2091 do
+					local v2151 = v2091[v2150];
+					local v2152 = (v2151:GetPivot().Position - v2090).Magnitude;
+					if ( not v2151:GetAttribute("IsDisabled") and (v2152 < v2092)) then
+						v2092, v2093 = v2152, v2151;
+					end
+				end
+				if v2093 then
+					local v2220 = v2093:GetPivot().Position;
+					v1999:PivotTo(CFrame.new(v2220));
+					task.wait(0.2);
+				else
+					break;
+				end
+			end
+			if v1997.Character then
+				v1997.Character:BreakJoints();
+				v1997.CharacterAdded:Wait();
+			end
+		end
+	end
+end);
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
