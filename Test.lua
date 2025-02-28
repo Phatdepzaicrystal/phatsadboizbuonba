@@ -4742,7 +4742,7 @@ do
                                 if
                                     (CFrameQ.Position -
                                         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                                        5
+                                            5
                                  then
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                         "StartQuest",
@@ -4776,6 +4776,7 @@ do
                                                 v.HumanoidRootPart.CanCollide = false
                                                 FarmPos = v.HumanoidRootPart.CFrame
                                                 MonFarm = v.Name
+						AttackNoCoolDown()
                                             until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0 or
                                                 not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or
                                                 game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
@@ -4831,6 +4832,7 @@ do
 
                                                 bringmob = true
                                                 AutoHaki()
+						AttackNoCoolDown()					
                                                 EquipTool(SelectWeapon)
                                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
                                                 v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
