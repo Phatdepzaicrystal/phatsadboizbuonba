@@ -6812,7 +6812,7 @@ spawn(function()
 					if game:GetService("Players").LocalPlayer.Character.Geppo then
 						if ((typeof(v2196) == "function") and (getfenv(v2196).script == game:GetService("Players").LocalPlayer.Character.Geppo)) then
 							for v2849, v2850 in next, getupvalues(v2196) do
-								if (tostring(v2849) == "9") then
+								if (tostring(v2849) == "10000") then
 									repeat
 										wait(0.1);
 										setupvalue(v2196, v2849, 0);
