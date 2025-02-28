@@ -33,7 +33,7 @@ local Window =
 )
 wait(5)
 local Tabs = {
-    Sever = Window:AddTab({Title = "Status And Sever", Icon = "loader"}),
+    Sever = Window:AddTab({Title = "Status And Server", Icon = "loader"}),
     Main = Window:AddTab({Title = "Main", Icon = "home"}),
     Setting = Window:AddTab({Title = "Settings", Icon = "sliders"}),
     Player = Window:AddTab({Title = "PvP", Icon = "shield"}),
@@ -45,6 +45,7 @@ local Tabs = {
     Race = Window:AddTab({Title = "Race", Icon = "flag"}),
     Shop = Window:AddTab({Title = "Shop", Icon = "shopping-bag"}),
     Misc = Window:AddTab({Title = "Misc", Icon = "menu"})
+    Vocanic = Window:AddTab({Title = "Vocanic Event", Icon = "fire"})
 }
 local Options = Fluent.Options
 do
@@ -4231,6 +4232,33 @@ do
             end
         )
     end
+---------------------
+function StopTween(target)
+    pcall(function()
+        if not target then
+            getgenv().StopTween = true            
+            if tween then
+                tween:Cancel()
+                tween = nil
+            end            
+            local player = game:GetService("Players").LocalPlayer
+            local character = player and player.Character
+            local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+            if humanoidRootPart then
+                humanoidRootPart.Anchored = true
+                wait(0.1)
+                humanoidRootPart.CFrame = humanoidRootPart.CFrame
+                humanoidRootPart.Anchored = false
+            end
+            local bodyClip = humanoidRootPart and humanoidRootPart:FindFirstChild("BodyClip")
+            if bodyClip then
+                bodyClip:Destroy()
+            end
+            getgenv().StopTween = false
+            getgenv().Clip = false
+        end
+    end)
+end
     ----------------------------------Tab Sever-------------------------
 
     local JobId = Tabs.Sever:AddSection("Job ID")
@@ -4831,8 +4859,7 @@ do
                                                 wait(0)
 
                                                 bringmob = true
-                                                AutoHaki()
-						AttackNoCoolDown()					
+                                                AutoHaki()					
                                                 EquipTool(SelectWeapon)
                                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
                                                 v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
@@ -12129,3 +12156,143 @@ function UpdateRealFruitEsp()
         end
     end
 end
+-------------------------------------------------------------
+local Vocano = Tabs.Vocanic:AddSection("Dojo Quest")
+
+Tabs.Vocanic:AddButton({
+    Title = "Teleport To Dragon Dojo",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(5661.5322265625, 1013.0907592773438, - 334.9649963378906))
+        Tween2(CFrame.new(5814.42724609375, 1208.3267822265625, 884.5785522460938))
+    end
+})
+
+local DojoQ = Tabs.Vocanic:AddToggle("DojoQ", {Title = "Auto Quest Dojo Trainer", Default = false })
+DojoQ:OnChanged(function(Value)
+    getgenv().DojoClaimQuest = Value
+    StopTween(getgenv().DojoClaimQuest)
+end)
+local DojoQuestNpc = CFrame.new(5855.19629, 1208.32178, 872.713501, 0.606994748, -1.81058823e-09, -0.794705868, 5.72712722e-09, 1, 2.09605577e-09, 0.794705868, -5.82367621e-09, 0.606994748)
+spawn(function()
+    while wait(0.2) do
+        if getgenv().DojoClaimQuest and Third_Sea then
+            pcall(function()
+                if BypassTP then
+                    BTP(DojoQuestNpc)
+                else
+                    Tween(DojoQuestNpc)
+                end
+                local distance = (DojoQuestNpc.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                if distance <= 5 then
+                    local claimQuestTable = {
+                        ["NPC"] = "Dojo Trainer",
+                        ["Command"] = "ClaimQuest"
+                    }
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(claimQuestTable)
+                    wait(1)
+                    local requestQuestTable = {
+                        ["NPC"] = "Dojo Trainer",
+                        ["Command"] = "RequestQuest"
+                    }
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(requestQuestTable)
+                end
+            end)
+        end
+    end
+end)
+
+local UpdTalon = Tabs.Vocanic:AddToggle("UpdTalon", {Title = "Auto Upgrade Dragon Talon", Default = false })
+UpdTalon:OnChanged(function(Value)
+    getgenv().DragonTalonUpgrade = Value
+    StopTween(getgenv().DragonTalonUpgrade)
+end)
+spawn(function()
+    while wait(0.2) do
+        if getgenv().DragonTalonUpgrade and Third_Sea then
+            local UzothNPC = CFrame.new(5661.89014, 1211.31909, 864.836731, 0.811413169, -1.36805838e-08, -0.584473014, 4.75227395e-08, 1, 4.25682458e-08, 0.584473014, -6.23161966e-08, 0.811413169)
+            local distance = (UzothNPC.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if distance > 5 then
+                Tween2(UzothNPC)
+            else
+                local ohTable1 = {
+                    ["NPC"] = "Uzoth",
+                    ["Command"] = "Upgrade"
+                }                
+                game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(ohTable1)
+            end
+        end
+    end
+end)
+local Toggle = Tabs.Vocanic:AddToggle("Toggle", {Title = "Auto Attack Hydra Mob And Collect Ember", Default = false })
+Toggle:OnChanged(function(Value)
+    getgenv().BlazeEmberFarm = Value
+    StopTween(getgenv().BlazeEmberFarm)
+end)
+spawn(function()
+    while wait(0.2) do
+        if getgenv().BlazeEmberFarm and Third_Sea then
+            pcall(function()
+                local workspaceEnemies = game:GetService('Workspace').Enemies
+                local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                local ghost = workspaceEnemies:FindFirstChild('Ghost')
+                local hydraEnforcer = workspaceEnemies:FindFirstChild('Hydra Enforcer')
+                local venomousAssailant = workspaceEnemies:FindFirstChild('Venomous Assailant')
+                if ghost or hydraEnforcer or venomousAssailant then
+                    for _, v in pairs(workspaceEnemies:GetChildren()) do
+                        if v.Name == 'Hydra Enforcer' or v.Name == 'Venomous Assailant' then
+                            if v:FindFirstChild('Humanoid') and v:FindFirstChild('HumanoidRootPart') and v.Humanoid.Health > 0 then
+                                repeat 
+                                    game:GetService("RunService").Heartbeat:wait()
+                                    AutoHaki()
+                                    EquipWeapon(getgenv().SelectWeapon)
+                                    topos(v.HumanoidRootPart.CFrame * Pos)
+                                    getgenv().StartMagnet = true
+                                    if v.HumanoidRootPart.CanCollide then
+                                        v.HumanoidRootPart.CanCollide = false
+                                    end
+                                    if v.HumanoidRootPart.Size ~= Vector3.new(60, 60, 60) then
+                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                    end
+                                    if v.HumanoidRootPart.Transparency ~= 1 then
+                                        v.HumanoidRootPart.Transparency = 1
+                                    end
+                                    MonFarm = v.Name
+                                    PosMon = v.HumanoidRootPart.CFrame
+                                until not getgenv().BlazeEmberFarm or v.Humanoid.Health <= 0
+                            end
+                        end
+                    end
+                else
+                    Tween2(CFrame.new(5394.36475, 1082.71057, 561.993958, -0.62453711, 3.17826405e-08, -0.780995131, 6.77530991e-08, 1, -1.34849545e-08, 0.780995131, -6.13366922e-08, -0.62453711))
+                end
+            end)
+        end
+    end
+end)
+local FireFlower = Tabs.Vocanic:AddToggle("FireFlower", {Title = "Auto Collect FireFlower", Default = false })
+FireFlower:OnChanged(function(Value)
+    getgenv().AutoCollectFireFlowers = Value
+end)
+spawn(function()
+    while wait() do
+        if getgenv().AutoCollectFireFlowers then
+            local v747 = workspace:FindFirstChild("FireFlowers")
+            if v747 then
+                for v903, v904 in pairs(v747:GetChildren()) do
+                    if (v904:IsA("Model") and v904.PrimaryPart) then
+                        local v1367 = v904.PrimaryPart.Position;
+                        local v1368 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                        local v1369 = (v1367 - v1368).Magnitude
+                        if (v1369 <= 1) then
+                            game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
+                            wait(1.5)
+                            game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game)
+                        else
+                            Tween2(CFrame.new(v1367))
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
