@@ -12245,7 +12245,7 @@ spawn(function()
                                     game:GetService("RunService").Heartbeat:wait()
                                     AutoHaki()
                                     EquipWeapon(getgenv().SelectWeapon)
-                                    topos(v.HumanoidRootPart.CFrame * Pos)
+                                    Tween(v.HumanoidRootPart.CFrame * Pos)
                                     getgenv().StartMagnet = true
                                     if v.HumanoidRootPart.CanCollide then
                                         v.HumanoidRootPart.CanCollide = false
@@ -12266,33 +12266,6 @@ spawn(function()
                     Tween2(CFrame.new(5394.36475, 1082.71057, 561.993958, -0.62453711, 3.17826405e-08, -0.780995131, 6.77530991e-08, 1, -1.34849545e-08, 0.780995131, -6.13366922e-08, -0.62453711))
                 end
             end)
-        end
-    end
-end)
-local FireFlower = Tabs.Vocanic:AddToggle("FireFlower", {Title = "Auto Collect FireFlower", Default = false })
-FireFlower:OnChanged(function(Value)
-    getgenv().AutoCollectFireFlowers = Value
-end)
-spawn(function()
-    while wait() do
-        if getgenv().AutoCollectFireFlowers then
-            local v747 = workspace:FindFirstChild("FireFlowers")
-            if v747 then
-                for v903, v904 in pairs(v747:GetChildren()) do
-                    if (v904:IsA("Model") and v904.PrimaryPart) then
-                        local v1367 = v904.PrimaryPart.Position;
-                        local v1368 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-                        local v1369 = (v1367 - v1368).Magnitude
-                        if (v1369 <= 1) then
-                            game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
-                            wait(1.5)
-                            game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game)
-                        else
-                            Tween2(CFrame.new(v1367))
-                        end
-                    end
-                end
-            end
         end
     end
 end)
