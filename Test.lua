@@ -45,7 +45,7 @@ local Tabs = {
     Race = Window:AddTab({Title = "Race", Icon = "flag"}),
     Shop = Window:AddTab({Title = "Shop", Icon = "shopping-bag"}),
     Misc = Window:AddTab({Title = "Misc", Icon = "menu"})
-    Vocanic = Window:AddTab({Title = "Vocano Event", Icon = "fire"})
+    Vocanic = Window:AddTab({Title = "Vocano Event", Icon = "flame"})
 }
 local Options = Fluent.Options
 do
