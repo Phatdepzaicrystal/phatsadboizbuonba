@@ -4517,6 +4517,29 @@ do
         end
     )
 
+    local Swordd =
+        Tabs.Sever:AddParagraph(
+        {
+            Title = "Legendary Sword",
+            Content = "Status Legendary Sword"
+        }
+    )
+    spawn(function()
+        local previousStatus = ""
+        while wait(1) do
+            local swordStatus = "Not Found Legend Swords"
+            if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "1") then
+                swordStatus = "Shisui"
+            elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "2") then
+                swordStatus = "Wando"
+            elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "3") then
+                swordStatus = "Saddi"
+            end
+            Swordd:SetDesc(swordStatus)
+        end
+    end)
+
+	
     local v104 =
         Tabs.Sever:AddParagraph(
         {
@@ -9606,7 +9629,7 @@ spawn(function()
 	end
 end);
 -------------------------------------------------Tab Volcano-----------------
-local Volcano = Tabs.Volcanic.AddSection("Volcano")
+local Gojo = Tabs.Volcanic.AddSection("Quest Dojo")
 
 local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
 ToogleDojoQ:OnChanged(function(Value)
@@ -9668,52 +9691,46 @@ spawn(function()
     end
 end)
 
-local Toggle = Tabs.Volcanic:AddToggle("Toggle", {Title = "Auto Attack Hydra Mob And Collect Ember", Default = false })
-Toggle:OnChanged(function(Value)
-    getgenv().BlazeEmberFarm = Value	
-	end)
-Options.Toggle:SetValue(false)
+local Volcano = Tabs.Volcanic.AddSection("Volcano Event")
 
+Tabs.Volcanic:AddButton({
+    Title = "Crafting Volcanic Magnet",
+    Callback = function()
+        local craftvol = {
+            [1] = "CraftItem",
+            [2] = "Craft",
+            [3] = "Volcanic Magnet"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(craftvol))
+    end
+})
+
+local PrehisIsl = Tabs.Volcanic:AddToggle("PrehisIsl", {Title = "Teleport Prehistoric Island", Default = false })
+PrehisIsl:OnChanged(function(Value)
+    getgenv().TweenPrehistoric = Value
+end)
 spawn(function()
-    while wait(0.2) do
-        if getgenv().BlazeEmberFarm and Third_Sea then
-            pcall(function()
-                local workspaceEnemies = game:GetService('Workspace').Enemies
-                local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                local ghost = workspaceEnemies:FindFirstChild('Ghost')
-                local hydraEnforcer = workspaceEnemies:FindFirstChild('Hydra Enforcer')
-                local venomousAssailant = workspaceEnemies:FindFirstChild('Venomous Assailant')
-                if ghost or hydraEnforcer or venomousAssailant then
-                    for _, v in pairs(workspaceEnemies:GetChildren()) do
-                        if v.Name == 'Hydra Enforcer' or v.Name == 'Venomous Assailant' then
-                            if v:FindFirstChild('Humanoid') and v:FindFirstChild('HumanoidRootPart') and v.Humanoid.Health > 0 then
-                                repeat 
-                                    game:GetService("RunService").Heartbeat:wait()
-                                    AutoHaki()
-                                    EquipWeapon(getgenv().SelectWeapon)
-                                    Tween(v.HumanoidRootPart.CFrame * Pos)
-                                    if v.HumanoidRootPart.CanCollide then
-                                        v.HumanoidRootPart.CanCollide = false
-                                    end
-                                    if v.HumanoidRootPart.Size ~= Vector3.new(60, 60, 60) then
-                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                    end
-                                    if v.HumanoidRootPart.Transparency ~= 1 then
-                                        v.HumanoidRootPart.Transparency = 1
-                                    end
-                                    MonFarm = v.Name
-                                    PosMon = v.HumanoidRootPart.CFrame
-                                until not getgenv().BlazeEmberFarm or v.Humanoid.Health <= 0
-                            end
-                        end
-                    end
-                else
-                    Tween2(CFrame.new(5394.36475, 1082.71057, 561.993958, -0.62453711, 3.17826405e-08, -0.780995131, 6.77530991e-08, 1, -1.34849545e-08, 0.780995131, -6.13366922e-08, -0.62453711))
+    local island
+    while not island do
+        island = game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland")
+        wait()
+    end
+    while wait() do
+        if getgenv().TweenPrehistoric and World3 then
+            local prehistoricIslandCore = game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland")
+            if prehistoricIslandCore then
+                local relic = prehistoricIslandCore:FindFirstChild("Core") and prehistoricIslandCore.Core:FindFirstChild("PrehistoricRelic")
+                local skull = relic and relic:FindFirstChild("Skull")
+                if skull then
+                    Tween(CFrame.new(skull.Position))
+                    getgenv().TweenPrehistoric = false
                 end
-            end)
+            end
         end
     end
 end)
+
+
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
