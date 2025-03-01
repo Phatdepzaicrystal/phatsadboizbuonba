@@ -9716,7 +9716,7 @@ spawn(function()
         wait()
     end
     while wait() do
-        if getgenv().TweenPrehistoric and World3 then
+        if getgenv().TweenPrehistoric and Third_Sea then
             local prehistoricIslandCore = game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland")
             if prehistoricIslandCore then
                 local relic = prehistoricIslandCore:FindFirstChild("Core") and prehistoricIslandCore.Core:FindFirstChild("PrehistoricRelic")
@@ -9730,7 +9730,208 @@ spawn(function()
     end
 end)
 
+local DefEvent = Tabs.Volcanic:AddToggle("DefEvent", {
+    Title = "Auto Start Event Volcano Island",
+    Default = false
+})
+DefEvent:OnChanged(function(value)
+    getgenv().AutoDefendVolcano = value
+end)
+local function pressKey(key)
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, key, false, game)
+    wait(0.1)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false, key, false, game)
+end
+local function removeLava()
+    pcall(function()
+        local lavaModel = game.Workspace.Map.PrehistoricIsland.Core:FindFirstChild("InteriorLava")
+        if lavaModel and lavaModel:IsA("Model") then
+            lavaModel:Destroy()
+        end
+        local prehistoricIsland = game.Workspace.Map:FindFirstChild("PrehistoricIsland")
+        if prehistoricIsland then
+            for _, obj in pairs(prehistoricIsland:GetDescendants()) do
+                if obj:IsA("Part") and obj.Name:lower():find("lava") then
+                    obj:Destroy()
+                end
+                if obj:IsA("MeshPart") and obj.Name:lower():find("lava") then
+                    obj:Destroy()
+                end
+            end
+        end
+    end)
+end
+local function findVolcanoRock()
+    local volcanoRocks = game.Workspace.Map.PrehistoricIsland.Core:FindFirstChild("VolcanoRocks")
+    if not volcanoRocks then return nil end
+    for _, model in pairs(volcanoRocks:GetChildren()) do
+        if model:IsA("Model") then
+            local rock = model:FindFirstChild("volcanorock")
+            if rock and rock:IsA("MeshPart") then
+                local rockColor = rock.Color
+                if rockColor == Color3.fromRGB(185, 53, 56) or rockColor == Color3.fromRGB(185, 53, 57) then
+                    return rock
+                end
+            end
+        end
+    end
+    return nil
+end
+local function equipAndUseWeapon(weaponType)
+    local player = game.Players.LocalPlayer
+    local backpack = player:FindFirstChild("Backpack")
+    if not backpack then return end
+    for _, tool in pairs(backpack:GetChildren()) do
+        if tool:IsA("Tool") and tool.ToolTip == weaponType then
+            tool.Parent = player.Character
+            for _, key in ipairs({"Z", "X", "C", "V", "F"}) do
+                wait(0.1)
+                pcall(function()
+                    pressKey(key)
+                end)
+            end
+            tool.Parent = backpack
+            break
+        end
+    end
+end
+spawn(function()
+    while wait(0.1) do
+        if getgenv().AutoDefendVolcano then
+            if typeof(AutoHaki) == "function" then AutoHaki() end
+            removeLava()
+            local rock = findVolcanoRock()
+            if rock then
+                local targetPosition = CFrame.new(rock.Position)
+                if typeof(topos) == "function" then topos(targetPosition) end
+                if rock.Color == Color3.fromRGB(185, 53, 56) or rock.Color == Color3.fromRGB(185, 53, 57) then
+                    local player = game.Players.LocalPlayer.Character
+                    local rootPart = player and player:FindFirstChild("HumanoidRootPart")
+                    if rootPart then
+                        local distance = (rootPart.Position - rock.Position).Magnitude
+                        if distance <= 1 then
+                            if getgenv().UseMelee then equipAndUseWeapon("Melee") end
+                            if getgenv().UseSword then equipAndUseWeapon("Sword") end
+                            if getgenv().UseGun then equipAndUseWeapon("Gun") end
+                        end
+                    end
+                    getgenv().TweenToPrehistoric = false
+                else
+                    rock = findVolcanoRock()
+                end
+            else
+                getgenv().TweenToPrehistoric = true
+            end
+        end
+    end
+end)
+local KillGolem = Volcanic:AddToggle("KillGolem", {
+    Title = "Auto Kill Golems",
+    Default = false
+})
+KillGolem:OnChanged(function(v413)
+    getgenv().KillAura = v413
+end)
+spawn(function()
+    while wait(0.1) do
+        if getgenv().KillAura then
+            pcall(function()
+                sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                for _, enemy in pairs(game.Workspace.Enemies:GetChildren()) do
+                    local humanoid = enemy:FindFirstChild("Humanoid")
+                    local rootPart = enemy:FindFirstChild("HumanoidRootPart")
+                    if humanoid and rootPart and humanoid.Health > 0 then
+                        humanoid.Health = 0
+                        rootPart.CanCollide = false
+                    end
+                end
+            end)
+        end
+    end
+end)
 
+local CollectBone = Tabs.Volcanic:AddToggle("CollectBone", {Title = "Auto Collect Bone", Default = false })
+CollectBone:OnChanged(function(Value)
+    getgenv().CollectBone = Value
+end)
+spawn(function()
+    while wait(0.1) do
+        if getgenv().AutoCollectBone and World3 then
+            local bones = {}
+            for _, obj in ipairs(workspace:GetDescendants()) do
+                if obj:IsA("BasePart") and obj.Name == "DinoBone" then
+                    table.insert(bones, obj)
+                end
+            end
+            for _, bone in ipairs(bones) do
+                if typeof(topos) == "function" then
+                    topos(CFrame.new(bone.Position))
+                    repeat
+                        wait(0.2)
+                        local playerPos = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                        if not playerPos then break end
+                        local bonePos = bone.Position
+                        local distance = (playerPos - bonePos).Magnitude
+                    until distance <= 1
+                end
+            end
+        end
+    end
+end)
+
+local CollectEgg = Tabs.Volcanic:AddToggle("CollectEgg", {Title = "Auto Collect Egg", Default = false })
+CollectEgg:OnChanged(function(Value)
+    getgenv().CollectEgg = Value
+end)
+spawn(function()
+    while wait(0.1) do
+        if getgenv().CollectEgg and World3 and workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("PrehistoricIsland") and workspace.Map.PrehistoricIsland.Core:FindFirstChild("SpawnedDragonEggs") then
+            local eggs = workspace.Map.PrehistoricIsland.Core.SpawnedDragonEggs:GetChildren()
+            if #eggs > 0 then
+                local targetEgg = eggs[math.random(1, #eggs)]
+                if targetEgg:IsA("Model") and targetEgg.PrimaryPart and typeof(topos) == "function" then
+                    topos(targetEgg.PrimaryPart.CFrame)
+                    repeat
+                        wait(0.2)
+                        local playerPos = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                        if not playerPos then break end
+                        local eggPos = targetEgg.PrimaryPart.Position
+                        local distance = (playerPos - eggPos).Magnitude
+                    until distance <= 1                    
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
+                    wait(1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game)
+                end
+            end
+        end
+    end
+end)
+
+Tabs.Volcanic:AddParagraph({
+    Title = "Setting Skill Volcano Island",
+    Content = string.rep("-", 21)
+})
+Toggle = Volcanic:AddToggle("Toggle", {
+    Title = "Auto Use Skill Melee",
+    Default = false
+})
+Toggle:OnChanged(function(v402)
+    getgenv().UseMelee = v402
+end)
+Toggle = Volcanic:AddToggle("Toggle", {
+    Title = "Auto Use Skill Sword",
+    Default = false
+})
+Toggle:OnChanged(function(v403)
+    getgenv().UseSword = v403
+end)
+Toggle = Volcanic:AddToggle("Toggle", {
+    Title = "Auto Use Skill Gun",
+    Default = false
+})
+Toggle:OnChanged(function(v404)
+    getgenv().UseGun = v404
+end)
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
