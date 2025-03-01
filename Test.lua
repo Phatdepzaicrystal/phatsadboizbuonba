@@ -6912,70 +6912,6 @@ NoClipz:OnChanged(function(v)
     end
 end)
 
-local Players = game:GetService("Players")
-local Player = Players.LocalPlayer
-getgenv().WalkSpeed = 16
-local SpeedPlayer =
-    Tabs.Setting:AddToggle(
-    "SpeedPlayer",
-    {
-        Title = "Change Speed",
-        Description = "",
-        Default = false
-    }
-)
-local SpeedConnection
-local function ApplySpeed()
-    if not Toggle.Value then return end
-    local Character = Player.Character
-    if Character then
-        local Humanoid = Character:FindFirstChildOfClass("Humanoid")
-        if Humanoid then
-            Humanoid.WalkSpeed = getgenv().WalkSpeed
-            if SpeedConnection then
-                SpeedConnection:Disconnect()
-            end
-            SpeedConnection = Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
-                if SpeedPlayer.Value then
-                    Humanoid.WalkSpeed = getgenv().WalkSpeed
-                end
-            end)
-        end
-    end
-end
-SpeedPlayer:OnChanged(function(Value)
-    if Value then
-        ApplySpeed()
-        Player.CharacterAdded:Connect(ApplySpeed)
-    else
-        if SpeedConnection then
-            SpeedConnection:Disconnect()
-            SpeedConnection = nil
-        end
-        local Character = Player.Character
-        if Character then
-            local Humanoid = Character:FindFirstChildOfClass("Humanoid")
-            if Humanoid then
-                Humanoid.WalkSpeed = 16
-            end
-        end
-    end
-end)
-
-    local Speeddd =
-        Tabs.Setting:AddSlider(
-        "Speeddd",
-        {
-            Title = "Speed",
-            Description = "",
-            Default = 100,
-            Min = 0,
-            Max = 500,
-            Callback = function(Value)
-                getgenv().WalkSpeed = Value
-            end
-        }
-    )	
 
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
@@ -10583,44 +10519,6 @@ spawn(
     end
 )
 
-local ToggleStart = Tabs.Raid:AddToggle("ToggleStart", {Title = "Auto Start Raid [BETA]", Default = false})
-ToggleStart:OnChanged(
-    function(Value)
-        _G.Auto_StartRaid = Value
-    end
-)
-Options.ToggleStart:SetValue(false)
-
-spawn(
-    function()
-        while wait(.1) do
-            pcall(
-                function()
-                    if _G.Auto_StartRaid then
-                        if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
-                            if
-                                not game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and
-                                    game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or
-                                    game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip")
-                             then
-                                if Second_Sea then
-                                    fireclickdetector(
-                                        game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector
-                                    )
-                                elseif Third_Sea then
-                                    fireclickdetector(
-                                        game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector
-                                    )
-                                end
-                            end
-                        end
-                    end
-                end
-            )
-        end
-    end
-)
-
 local ToggleKillAura = Tabs.Raid:AddToggle("ToggleKillAura", {Title = "Kill Aura", Default = false})
 ToggleKillAura:OnChanged(
     function(Value)
@@ -10662,72 +10560,88 @@ local v140 =
     Tabs.Raid:AddToggle(
     "ToggleNextIsland",
     {
-        Title = "Auto Kill&Tween To Next Island",
+        Title = "Auto Start Raid ",
         Description = "",
         Default = false
     }
 )
 v140:OnChanged(
     function(v356)
-        AutoNextIsland = v356
-        if not v356 then
-            _G.AutoNear = false
-        end
+        getgenv().Auto_Dungeon = v356
     end
 )
 Options.ToggleNextIsland:SetValue(false)
-spawn(
-    function()
-        local v357 = {}
-        while wait() do
-            if AutoNextIsland then
-                pcall(
-                    function()
-                        local v806 = game.Players.LocalPlayer.Character
-                        if (v806 and v806:FindFirstChild("HumanoidRootPart")) then
-                            local v900 = game:GetService("Workspace")["_WorldOrigin"].Locations
-                            local v901 = v806.HumanoidRootPart.Position
-                            if
-                                (((v901 - Vector3.new(-6438.73535, 250.645355, -4501.50684)).Magnitude < 1) or
-                                    ((v901 - Vector3.new(-5017.40869, 314.844055, -2823.0127)).Magnitude < 1))
-                             then
-                                v357 = {}
-                            end
-                            if v900:FindFirstChild("Island 1") then
-                                _G.AutoNear = true
-                            end
-                            if (v900:FindFirstChild("Island 2") and not v357["Island 2"]) then
-                                Tween(v900:FindFirstChild("Island 2").CFrame)
-                                v357["Island 2"] = true
-                                AutoNextIsland = false
-                                wait()
-                                AutoNextIsland = true
-                            elseif (v900:FindFirstChild("Island 3") and not v357["Island 3"]) then
-                                Tween(v900:FindFirstChild("Island 3").CFrame)
-                                v357["Island 3"] = true
-                                AutoNextIsland = false
-                                wait()
-                                AutoNextIsland = true
-                            elseif (v900:FindFirstChild("Island 4") and not v357["Island 4"]) then
-                                Tween(v900:FindFirstChild("Island 4").CFrame)
-                                v357["Island 4"] = true
-                                AutoNextIsland = false
-                                wait()
-                                AutoNextIsland = true
-                            elseif (v900:FindFirstChild("Island 5") and not v357["Island 5"]) then
-                                Tween(v900:FindFirstChild("Island 5").CFrame)
-                                v357["Island 5"] = true
-                                AutoNextIsland = false
-                                wait()
-                                AutoNextIsland = true
-                            end
-                        end
+spawn(function()
+    while wait(1) do
+        if getgenv().Auto_Dungeon then
+            if not game.Players.LocalPlayer.PlayerGui.Main.TopHUDList.RaidTimer.Visible == false then
+                local islands = {"Island 5", "Island 4", "Island 3", "Island 2", "Island 1"}
+                for _, island in ipairs(islands) do
+                    local location = game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild(island)
+                    if location then
+                        Tween(location.CFrame * CFrame.new(0, 70, 100))
+                        break
                     end
-                )
+                end
             end
         end
     end
-)
+end)
+spawn(function()
+    while wait(1) do
+        pcall(function()
+            if getgenv().Auto_Dungeon then
+                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
+                    local specialMicrochip = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") 
+                                            or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip")
+                    if specialMicrochip then
+                        if Second_Sea then
+                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
+                        elseif Third_Sea then
+                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while wait(1) do
+        if getgenv().Auto_Dungeon then
+            for i, v in pairs(game.Workspace.Enemies:GetDescendants()) do
+                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                    pcall(function()
+                        repeat wait(.001)
+                            v.Humanoid.Health = 0
+                            v.HumanoidRootPart.CanCollide = false
+                            string.find(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                        until not getgenv().Auto_Dungeon or not v.Parent or v.Humanoid.Health <= 0
+                    end)
+                end
+            end
+        end
+    end
+end)
+spawn(function()
+    while wait(1) do
+        pcall(function()
+            if getgenv().Auto_Dungeon then
+                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
+                    local specialMicrochip = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") 
+                                            or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip")
+                    if specialMicrochip then
+                        if Second_Sea then
+                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
+                        elseif Third_Sea then
+                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
 
 local ToggleAwake = Tabs.Raid:AddToggle("ToggleAwake", {Title = "Auto Awake", Default = false})
 ToggleAwake:OnChanged(
