@@ -4532,7 +4532,7 @@ do
             elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "3") then
                 swordStatus = "Saddi"
             end
-            LegendarySword:SetDesc(swordStatus)
+            Swordd:SetDesc(swordStatus)
         end
     end)
 
