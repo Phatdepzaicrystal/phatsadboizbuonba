@@ -4514,6 +4514,28 @@ do
         end
     )
 
+    local Swordd =
+        Tabs.Sever:AddParagraph(
+        {
+            Title = "Legendary Sword",
+            Content = "Status Legendary Sword"
+        }
+    )
+    spawn(function()
+        local previousStatus = ""
+        while wait(1) do
+            local swordStatus = "Not Found Legend Swords"
+            if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "1") then
+                swordStatus = "Shisui"
+            elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "2") then
+                swordStatus = "Wando"
+            elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "3") then
+                swordStatus = "Saddi"
+            end
+            LegendarySword:SetDesc(swordStatus)
+        end
+    end)
+
     local v104 =
         Tabs.Sever:AddParagraph(
         {
