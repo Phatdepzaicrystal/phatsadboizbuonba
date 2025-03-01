@@ -6887,6 +6887,97 @@ spawn(
     end
 )
 
+local NoClipz =
+    Tabs.Setting:AddToggle(
+    "NoClipz",
+    {
+        Title = "No Clip",
+        Description = "",
+        Default = false
+    }
+)
+NoClipz:OnChanged(function(v)
+    getgenv().NoClip = v
+    if getgenv().NoClipConnection then getgenv().NoClipConnection:Disconnect() end
+    if v then
+        getgenv().NoClipConnection = game:GetService("RunService").Stepped:Connect(function()
+            for _, p in ipairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if p:IsA("BasePart") then p.CanCollide = false end
+            end
+        end)
+    else
+        for _, p in ipairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if p:IsA("BasePart") then p.CanCollide = true end
+        end
+    end
+end)
+
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+getgenv().WalkSpeed = 16
+local SpeedPlayer =
+    Tabs.Setting:AddToggle(
+    "SpeedPlayer",
+    {
+        Title = "Change Speed",
+        Description = "",
+        Default = false
+    }
+)
+local SpeedConnection
+local function ApplySpeed()
+    if not Toggle.Value then return end
+    local Character = Player.Character
+    if Character then
+        local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+        if Humanoid then
+            Humanoid.WalkSpeed = getgenv().WalkSpeed
+            if SpeedConnection then
+                SpeedConnection:Disconnect()
+            end
+            SpeedConnection = Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+                if Toggle.Value then
+                    Humanoid.WalkSpeed = getgenv().WalkSpeed
+                end
+            end)
+        end
+    end
+end
+SpeedPlayer:OnChanged(function(Value)
+    if Value then
+        ApplySpeed()
+        Player.CharacterAdded:Connect(ApplySpeed)
+    else
+        if SpeedConnection then
+            SpeedConnection:Disconnect()
+            SpeedConnection = nil
+        end
+        local Character = Player.Character
+        if Character then
+            local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+            if Humanoid then
+                Humanoid.WalkSpeed = 16
+            end
+        end
+    end
+end)
+
+    local Speeddd =
+        Tabs.Main:AddSlider(
+        "Speeddd",
+        {
+            Title = "Speed",
+            Description = "",
+            Default = 100,
+            Min = 0,
+            Max = 500,
+            Rounding = 1,
+            Callback = function(Value)
+                getgenv().WalkSpeed = Value
+            end
+        }
+    )	
+
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
 local v153 =
@@ -9768,62 +9859,6 @@ spawn(function()
     end
 end)
 
-local CollectBone = Tabs.Volcanic:AddToggle("CollectBone", {Title = "Auto Collect Bone", Default = false })
-CollectBone:OnChanged(function(Value)
-    getgenv().CollectBone = Value
-end)
-spawn(function()
-    while wait(0.1) do
-        if getgenv().AutoCollectBone and Third_Sea then
-            local bones = {}
-            for _, obj in ipairs(workspace:GetDescendants()) do
-                if obj:IsA("BasePart") and obj.Name == "DinoBone" then
-                    table.insert(bones, obj)
-                end
-            end
-            for _, bone in ipairs(bones) do
-                if typeof(topos) == "function" then
-                    Tween(CFrame.new(bone.Position))
-                    repeat
-                        wait(0.2)
-                        local playerPos = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-                        if not playerPos then break end
-                        local bonePos = bone.Position
-                        local distance = (playerPos - bonePos).Magnitude
-                    until distance <= 1
-                end
-            end
-        end
-    end
-end)
-
-local CollectEgg = Tabs.Volcanic:AddToggle("CollectEgg", {Title = "Auto Collect Egg", Default = false })
-CollectEgg:OnChanged(function(Value)
-    getgenv().CollectEgg = Value
-end)
-spawn(function()
-    while wait(0.1) do
-        if getgenv().CollectEgg and Third_Sea and workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("PrehistoricIsland") and workspace.Map.PrehistoricIsland.Core:FindFirstChild("SpawnedDragonEggs") then
-            local eggs = workspace.Map.PrehistoricIsland.Core.SpawnedDragonEggs:GetChildren()
-            if #eggs > 0 then
-                local targetEgg = eggs[math.random(1, #eggs)]
-                if targetEgg:IsA("Model") and targetEgg.PrimaryPart and typeof(topos) == "function" then
-                    topos(targetEgg.PrimaryPart.CFrame)
-                    repeat
-                        wait(0.2)
-                        local playerPos = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-                        if not playerPos then break end
-                        local eggPos = targetEgg.PrimaryPart.Position
-                        local distance = (playerPos - eggPos).Magnitude
-                    until distance <= 1                    
-                    game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
-                    wait(1)
-                    game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game)
-                end
-            end
-        end
-    end
-end)
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
