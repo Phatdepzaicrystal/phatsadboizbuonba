@@ -9754,12 +9754,12 @@ spawn(function()
     while wait(0.1) do
         if getgenv().KillAura then
             pcall(function()
-                sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                string.find(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                 for _, enemy in pairs(game.Workspace.Enemies:GetChildren()) do
-                    local humanoid = enemy:FindFirstChild("Humanoid")
+                    local Humanoid = enemy:FindFirstChild("Humanoid")
                     local rootPart = enemy:FindFirstChild("HumanoidRootPart")
-                    if humanoid and rootPart and humanoid.Health > 0 then
-                        humanoid.Health = 0
+                    if Humanoid and rootPart and Humanoid.Health > 0 then
+                        Humanoid.Health = 0
                         rootPart.CanCollide = false
                     end
                 end
@@ -9783,7 +9783,7 @@ spawn(function()
             end
             for _, bone in ipairs(bones) do
                 if typeof(topos) == "function" then
-                    topos(CFrame.new(bone.Position))
+                    Tween(CFrame.new(bone.Position))
                     repeat
                         wait(0.2)
                         local playerPos = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position
