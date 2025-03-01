@@ -9856,7 +9856,7 @@ CollectBone:OnChanged(function(Value)
 end)
 spawn(function()
     while wait(0.1) do
-        if getgenv().AutoCollectBone and World3 then
+        if getgenv().AutoCollectBone and Third_Sea then
             local bones = {}
             for _, obj in ipairs(workspace:GetDescendants()) do
                 if obj:IsA("BasePart") and obj.Name == "DinoBone" then
@@ -9885,7 +9885,7 @@ CollectEgg:OnChanged(function(Value)
 end)
 spawn(function()
     while wait(0.1) do
-        if getgenv().CollectEgg and World3 and workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("PrehistoricIsland") and workspace.Map.PrehistoricIsland.Core:FindFirstChild("SpawnedDragonEggs") then
+        if getgenv().CollectEgg and Third_Sea and workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("PrehistoricIsland") and workspace.Map.PrehistoricIsland.Core:FindFirstChild("SpawnedDragonEggs") then
             local eggs = workspace.Map.PrehistoricIsland.Core.SpawnedDragonEggs:GetChildren()
             if #eggs > 0 then
                 local targetEgg = eggs[math.random(1, #eggs)]
