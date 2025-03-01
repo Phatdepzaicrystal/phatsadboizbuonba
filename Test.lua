@@ -9911,25 +9911,25 @@ Tabs.Volcanic:AddParagraph({
     Title = "Setting Skill Volcano Island",
     Content = string.rep("-", 21)
 })
-Toggle = Volcanic:AddToggle("Toggle", {
+local melee = Tabs.Volcanic:AddToggle("Toggle", {
     Title = "Auto Use Skill Melee",
     Default = false
 })
-Toggle:OnChanged(function(v402)
+melee:OnChanged(function(v402)
     getgenv().UseMelee = v402
 end)
-Toggle = Volcanic:AddToggle("Toggle", {
+local sword = Tabs.Volcanic:AddToggle("Toggle", {
     Title = "Auto Use Skill Sword",
     Default = false
 })
-Toggle:OnChanged(function(v403)
+sword:OnChanged(function(v403)
     getgenv().UseSword = v403
 end)
-Toggle = Volcanic:AddToggle("Toggle", {
+local gun = Tabs.Volcanic:AddToggle("Toggle", {
     Title = "Auto Use Skill Gun",
     Default = false
 })
-Toggle:OnChanged(function(v404)
+gun:OnChanged(function(v404)
     getgenv().UseGun = v404
 end)
 ---------------------------------Tab Teleport----------------------------------
