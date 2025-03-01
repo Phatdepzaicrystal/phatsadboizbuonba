@@ -6936,7 +6936,7 @@ local function ApplySpeed()
                 SpeedConnection:Disconnect()
             end
             SpeedConnection = Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
-                if Toggle.Value then
+                if SpeedPlayer.Value then
                     Humanoid.WalkSpeed = getgenv().WalkSpeed
                 end
             end)
@@ -6971,7 +6971,6 @@ end)
             Default = 100,
             Min = 0,
             Max = 500,
-            Rounding = 1,
             Callback = function(Value)
                 getgenv().WalkSpeed = Value
             end
