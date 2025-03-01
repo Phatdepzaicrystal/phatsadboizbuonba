@@ -9796,7 +9796,7 @@ Tabs.Volcanic:AddButton({
     end
 })
 
-local PrehisIsl = Tabs.Volcanic:AddToggle("PrehisIsl", {Title = "Teleport Prehistoric Island", Default = false })
+local PrehisIsl = Tabs.Volcanic:AddToggle("PrehisIsl", {Title = "Tween To Prehistoric Island", Default = false })
 PrehisIsl:OnChanged(function(Value)
     getgenv().TweenPrehistoric = Value
 end)
@@ -9820,19 +9820,6 @@ spawn(function()
         end
     end
 end)
-
-local DefEvent = Tabs.Volcanic:AddToggle("DefEvent", {
-    Title = "Auto Start Event Volcano Island",
-    Default = false
-})
-DefEvent:OnChanged(function(value)
-    getgenv().AutoDefendVolcano = value
-end)
-local function pressKey(key)
-    game:GetService("VirtualInputManager"):SendKeyEvent(true, key, false, game)
-    wait(0.1)
-    game:GetService("VirtualInputManager"):SendKeyEvent(false, key, false, game)
-end
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
