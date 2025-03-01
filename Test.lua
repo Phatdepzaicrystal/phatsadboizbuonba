@@ -9608,7 +9608,7 @@ end);
 -------------------------------------------------Tab Volcano-----------------
 local Volcano = Tabs.Volcanic.AddSection("Volcano")
 
-local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Auto Quest Dojo Trainer", Default = false })
+local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
 ToogleDojoQ:OnChanged(function(Value)
     getgenv().DojoClaimQuest = Value
 	end
@@ -9644,7 +9644,7 @@ spawn(function()
     end
 end)
 
-local UpdTalon = Tabs.Volcanic:AddToggle("UpdTalon", {Title = "Auto Upgrade Dragon Talon", Default = false })
+local UpdTalon = Tabs.Volcanic:AddToggle("UpdTalon", {Title = "Tele To Uzoth", Default = false })
 UpdTalon:OnChanged(function(Value)
     getgenv().DragonTalonUpgrade = Value
 	end)	
@@ -9708,7 +9708,7 @@ spawn(function()
                         end
                     end
                 else
-                    Tween(CFrame.new(5394.36475, 1082.71057, 561.993958, -0.62453711, 3.17826405e-08, -0.780995131, 6.77530991e-08, 1, -1.34849545e-08, 0.780995131, -6.13366922e-08, -0.62453711))
+                    Tween2(CFrame.new(5394.36475, 1082.71057, 561.993958, -0.62453711, 3.17826405e-08, -0.780995131, 6.77530991e-08, 1, -1.34849545e-08, 0.780995131, -6.13366922e-08, -0.62453711))
                 end
             end)
         end
