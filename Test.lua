@@ -6963,7 +6963,7 @@ SpeedPlayer:OnChanged(function(Value)
 end)
 
     local Speeddd =
-        Tabs.Main:AddSlider(
+        Tabs.Setting:AddSlider(
         "Speeddd",
         {
             Title = "Speed",
@@ -9833,32 +9833,6 @@ local function pressKey(key)
     wait(0.1)
     game:GetService("VirtualInputManager"):SendKeyEvent(false, key, false, game)
 end
-
-local KillGolem = Volcanic:AddToggle("KillGolem", {
-    Title = "Auto Kill Golems",
-    Default = false
-})
-KillGolem:OnChanged(function(v413)
-    getgenv().KillAura = v413
-end)
-spawn(function()
-    while wait(0.1) do
-        if getgenv().KillAura then
-            pcall(function()
-                string.find(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                for _, enemy in pairs(game.Workspace.Enemies:GetChildren()) do
-                    local Humanoid = enemy:FindFirstChild("Humanoid")
-                    local rootPart = enemy:FindFirstChild("HumanoidRootPart")
-                    if Humanoid and rootPart and Humanoid.Health > 0 then
-                        Humanoid.Health = 0
-                        rootPart.CanCollide = false
-                    end
-                end
-            end)
-        end
-    end
-end)
-
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
