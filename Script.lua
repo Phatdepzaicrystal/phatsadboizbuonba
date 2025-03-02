@@ -10061,18 +10061,99 @@ if Third_Sea then
     local vnamk5 = game:GetService("RunService");
     local vnamk6 = game:GetService("VirtualInputManager");
     local vnamk7 = game:GetService("Workspace");
-    local vnamk8 = 350;
-    local vnamk9 = Tabs.Volcanic:AddSlider("SliderSpeedBoat", {
-        Title = "Change Speed Boat",
+    local vnam10 = Tabs.Volcanic:AddToggle("AutoFindPrehistoric", {
+        Title = "Auto Find Prehistoric",
         Description = "",
-        Default = vnamk8,
-        Min = 0,
-        Max = 350,
-        Rounding = 1,
-        Callback = function(v583)
-            vnamk8 = v583;
-        end
+        Default = false
     });
+    Options.AutoFindPrehistoric:SetValue(false);
+    vnam10:OnChanged(function(v584)
+        _G.AutoFindPrehistoric = v584;
+    end);
+    local v5mot1 = {};
+    local v5mot2 = false;
+    local v5mot3 = false;
+        if not _G.AutoFindPrehistoric then
+            v5mot3 = false;
+            return;
+        end
+        local v5tam5 = vnamk4.LocalPlayer;
+        local v5tam6 = v5tam5.Character;
+        if (not v5tam6 or not v5tam6:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local function v587()
+            if v5mot2 then
+                return;
+            end
+            v5mot2 = true;
+            for v769, v770 in pairs(v5mot1) do
+                if (v770 and v770.Parent and (v770.Name == "VehicleSeat") and not v770.Occupant) then
+                    Tween2(v770.CFrame);
+                    break;
+                end
+            end
+            v5mot2 = false;
+        end
+        local v588 = v586.Humanoid;
+        local v589 = false;
+        local v590 = nil;
+        for v684, v685 in pairs(vnamk7.Boats:GetChildren()) do
+            local v686 = v685:FindFirstChild("VehicleSeat");
+            if (v686 and (v686.Occupant == v588)) then
+                v589 = true;
+                v590 = v686;
+                v5mot1[v685.Name] = v686;
+            elseif (v686 and (v686.Occupant == nil)) then
+                v587();
+            end
+        end
+        if not v589 then
+            return;
+        end
+        v590.MaxSpeed = vnamk8;
+        v590.CFrame = CFrame.new(Vector3.new(v590.Position.X, v590.Position.Y, v590.Position.Z)) * v590.CFrame.Rotation ;
+        vvnamk6:SendKeyEvent(true, "W", false, game);
+        for v687, v688 in pairs(vnamk7.Boats:GetDescendants()) do
+            if v688:IsA("BasePart") then
+                v688.CanCollide = false;
+            end
+        end
+        for v689, v690 in pairs(v586:GetDescendants()) do
+            if v690:IsA("BasePart") then
+                v690.CanCollide = false;
+            end
+        end
+        local Ship = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "MysticIsland",
+            "KitsuneIsland",
+            "FrozenDimension"
+        };
+        for v691, v692 in ipairs(Ship) do
+            local v693 = vnamk7.Map:FindFirstChild(v692);
+            if (v693 and v693:IsA("Model")) then
+                v693:Destroy();
+            end
+        end
+        local v594 = vnamk7.Map:FindFirstChild("PrehistoricIsland");
+        if v594 then
+            v506:SendKeyEvent(false, "W", false, game);
+            _G.AutoFindPrehistoric = false;
+            if not v513 then
+                Fluent:Notify({
+                    Title = "Prehistoric Island Spawn",
+                    Content = "| Lời nhắn của Phat |",
+                    Duration = 10
+                });
+                v513 = true;
+            end
+            return;
+        end
+    end);
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
