@@ -5372,20 +5372,51 @@ do
 
     local boss = Tabs.Main:AddSection("Boss Farm")
 
-    local BossNameStorage = {
-        "The Gorrila King", "Bobby", "The Saw", "Yeti", "Mob Leader", "Vice Admiral", "Saber Expert", "Warden", "Chief Warden", "Swan", "Magma Admiral", "Fishman Lord", "Wysper", "Thunder God", "Cyborg", "Ice Admiral", "Greybeard",
-        "Diamond", "Jeremy", "Fajita", "Don Swan", "Smoke Admiral", "Awakened Ice Admiral", "Tide Keeper", "Darkbeard", "Cursed Captain", "Order",
-        "Stone", "Island Empress", "Kilo Admiral", "Captain Elephant", "Beautiful Pirate", "Cake Queen", "Longma", "Soul Reaper", "rip_indra True Form"
-    }
-    local BossList = {}
-    for i,v in pairs(game.ReplicatedStorage:GetChildren()) do
-        if table.find(BossNameStorage, v.Name) then
-            table.insert(BossList, v.Name)
-        end
-    end
-
-
-
+    if First_Sea then
+        tableBoss = {
+            "Raid Boss First Sea |",
+            "The Gorilla King",
+            "Bobby",
+            "Yeti",
+            "Mob Leader",
+            "Vice Admiral",
+            "Warden",
+            "Chief Warden",
+            "Swan",
+            "Magma Admiral",
+            "Fishman Lord",
+            "Wysper",
+            "Thunder God",
+            "Cyborg",
+            "Saber Expert"
+        }
+    elseif Second_Sea then
+        tableBoss = {
+            "Raid Boss Second Sea |",
+            "Diamond",
+            "Jeremy",
+            "Fajita",
+            "Don Swan",
+            "Smoke Admiral",
+            "Cursed Captain",
+            "Darkbeard",
+            "Order",
+            "Awakened Ice Admiral",
+            "Tide Keeper"
+        }
+    elseif Third_Sea then
+        tableBoss = {
+            "Raid Boss Third Sea |",
+            "Stone",
+            "Island Empress",
+            "Kilo Admiral",
+            "Captain Elephant",
+            "Beautiful Pirate",
+            "rip_indra True Form",
+            "Longma",
+            "Soul Reaper",
+            "Cake Queen"
+        }
     local DropdownBoss =
         Tabs.Main:AddDropdown(
         "DropdownBoss",
@@ -5404,21 +5435,6 @@ do
         end
     )
 
-    Tabs.Main:AddButton(
-    {
-            Title = "Refresh Boss",
-            Description = "",
-        local NewBossList = {} 
-	for i,v in pairs(game.ReplicatedStorage:GetChildren()) do
-		if table.find(BossNameStorage, v.Name) then
-			table.insert(NewBossList, v.Name)
-		end
-	end
-	Refresh_Boss:Clear()
-	Refresh_Boss:Refresh(NewBossList)
-        end
-        }
-    )
     local ToggleAutoFarmBoss = Tabs.Main:AddToggle("ToggleAutoFarmBoss", {Title = "Kill Boss", Default = false})
 
     ToggleAutoFarmBoss:OnChanged(
