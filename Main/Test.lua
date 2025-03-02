@@ -5384,25 +5384,6 @@ do
         end
     end
 
-    local Refresh_Boss = Tabs.Main:AddDropdown('Select Boss', SelectBoss, BossList, function(Value)
-        SelectBoss = Value
-    end)
-
-    Tabs.Main:AddButton(
-    {
-            Title = "Refresh Boss",
-            Description = "",
-        local NewBossList = {} 
-	for i,v in pairs(game.ReplicatedStorage:GetChildren()) do
-		if table.find(BossNameStorage, v.Name) then
-			table.insert(NewBossList, v.Name)
-		end
-	end
-	Refresh_Boss:Clear()
-	Refresh_Boss:Refresh(NewBossList)
-end
-        }
-    )
 
 
     local DropdownBoss =
@@ -5423,6 +5404,21 @@ end
         end
     )
 
+    Tabs.Main:AddButton(
+    {
+            Title = "Refresh Boss",
+            Description = "",
+        local NewBossList = {} 
+	for i,v in pairs(game.ReplicatedStorage:GetChildren()) do
+		if table.find(BossNameStorage, v.Name) then
+			table.insert(NewBossList, v.Name)
+		end
+	end
+	Refresh_Boss:Clear()
+	Refresh_Boss:Refresh(NewBossList)
+        end
+        }
+    )
     local ToggleAutoFarmBoss = Tabs.Main:AddToggle("ToggleAutoFarmBoss", {Title = "Kill Boss", Default = false})
 
     ToggleAutoFarmBoss:OnChanged(
