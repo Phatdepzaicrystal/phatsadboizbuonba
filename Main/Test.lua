@@ -1,6 +1,6 @@
 --[[
 getgenv().Team = "Marines"          -- Pirates or Marines
-loadstring(game:HttpGet("gihttps://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/Main/Test.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/Script.lua"))()
 ]] --
 if getgenv().Team == "Pirates" then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
@@ -39,7 +39,7 @@ local Tabs = {
     Player = Window:AddTab({Title = "PvP", Icon = "shield"}),
     Item = Window:AddTab({Title = "Get Item", Icon = "sword"}),
     Fish = Window:AddTab({Title = "Sea Event", Icon = "anchor"}),
-    Volcanic = Window:AddTab({Title = "Volcano Event", Icon = "tornado"}),	
+    Volcanic = Window:AddTab({Title = "Volcano Event", Icon = "box"}),	
     Teleport = Window:AddTab({Title = "Teleport", Icon = "map"}),
     Fruit = Window:AddTab({Title = "Fruit", Icon = "apple"}),
     Raid = Window:AddTab({Title = "Raid", Icon = "target"}),
@@ -3874,38 +3874,59 @@ do
         return false
     end
 
-    ---Method Farm
-    Type = 1
-    spawn(
-        function()
-            while wait(.1) do
-                if Type == 1 then
-                    Pos = CFrame.new(0, 25, -19)
-                elseif Type == 2 then
-                    Pos = CFrame.new(19, 25, 0)
-                elseif Type == 3 then
-                    Pos = CFrame.new(0, 25, 19)
-                elseif Type == 4 then
-                    Pos = CFrame.new(-19, 25, 0)
-                end
+    function AttackNoCoolDown()
+        local v228 = {};
+        local v229 = game:GetService("Workspace").Enemies:GetChildren();
+        local v230 = FindEnemiesInRange(v228, v229);
+        if not v230 then
+            return;
+        end
+        local v231 = GetEquippedTool();
+        if not v231 then
+            return;
+        end
+        pcall(function()
+            local v477 = game:GetService("ReplicatedStorage");
+            local v478 = v477:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack");
+            local v479 = v477:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit");
+            if (# v228 > 0) then
+                v478:FireServer(1e-9);
+                v479:FireServer(v230, v228);
+            else
+                task.wait(1e-9);
+            end
+        end);
+    end
+    Type = 1;
+    spawn(function()
+        while wait() do
+            if (Type == 1) then
+                Pos = CFrame.new(0, 40, 0);
+            elseif (Type == 2) then
+                Pos = CFrame.new(- 40, 40, 0);
+           elseif (Type == 3) then
+                Pos = CFrame.new(40, 40, 0);
+            elseif (Type == 4) then
+                Pos = CFrame.new(0, 40, 40);
+            elseif (Type == 5) then
+                Pos = CFrame.new(0, 40, - 40);
             end
         end
-    )
-
-    spawn(
-        function()
-            while wait(.1) do
-                Type = 1
-                wait(0.2)
-                Type = 2
-                wait(0.2)
-                Type = 3
-                wait(0.2)
-                Type = 4
-                wait(0.2)
-            end
+    end);
+    spawn(function()
+        while wait() do
+            Type = 1;
+            wait(0.2);
+            Type = 2;
+            wait(0.2);
+            Type = 3;
+            wait(0.2);
+            Type = 4;
+            wait(0.2);
+            Type = 5;
+            wait(0.2);
         end
-    )
+    end);
     --auto turn haki
     function AutoHaki()
         if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
@@ -5675,265 +5696,532 @@ do
     )
     ---------------------------Tab Sea---------------------------------------
 
-    if Second_Sea or Third_Sea then
-        local RoughSea = Tabs.Fish:AddSection("Kitsune")
-
-        local ToggleEspKitsune =
-            Tabs.Fish:AddToggle("ToggleEspKitsune", {Title = "Esp Kitsune Island", Default = false})
-        ToggleEspKitsune:OnChanged(
-            function(Value)
-                KitsuneEsp = Value
-                while IslandESP do
-                    wait()
-                    UpdateKitsune()
-                end
+if Third_Sea then
+    local v498 = Tabs.Fish:AddSection("Đảo Cáo");
+    local v499 = Tabs.Fish:AddParagraph({
+        Title = "Trạng Thái Đảo Cáo",
+        Content = ""
+    });
+    function UpdateKitsune()
+        if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
+            v499:SetDesc("Đảo Cáo : ✅️");
+        else
+            v499:SetDesc("Đảo Cáo : ❌️");
+        end
+    end
+    spawn(function()
+        pcall(function()
+            while wait() do
+                UpdateKitsune();
             end
-        )
-        Options.ToggleEspKitsune:SetValue(false)
-
-        function UpdateKitsune()
-            for i, v in pairs(game:GetService("Workspace").Map.KitsuneIsalnd.ShrineActive:GetChildren()) do
-                pcall(
-                    function()
-                        if KitsuneEsp then
-                            if v.Name ~= "NeonShrinePart" then
-                                if not v:FindFirstChild("IslandESP") then
-                                    local bill = Instance.new("BillboardGui", v)
-                                    bill.Name = "IslandESP"
-                                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
-                                    bill.Size = UDim2.new(1, 200, 1, 30)
-                                    bill.Adornee = v
-                                    bill.AlwaysOnTop = true
-                                    local name = Instance.new("TextLabel", bill)
-                                    name.Font = "Code"
-                                    name.FontSize = "Size14"
-                                    name.TextWrapped = true
-                                    name.Size = UDim2.new(1, 0, 1, 0)
-                                    name.TextYAlignment = "Top"
-                                    name.BackgroundTransparency = 1
-                                    name.TextStrokeTransparency = 0.5
-                                    name.TextColor3 = Color3.fromRGB(80, 245, 245)
-                                    name.Text = "Kitsune Island"
-                                else
-                                    v["IslandESP"].TextLabel.Text = "Kitsune Island"
-                                end
-                            end
-                        else
-                            if v:FindFirstChild("IslandESP") then
-                                v:FindFirstChild("IslandESP"):Destroy()
-                            end
+        end);
+    end);
+    local v501 = Tabs.Fish:AddToggle("ToggleTPKitsune", {
+        Title = "Bay Vô Đảo Cáo",
+        Description = "",
+        Default = false
+    });
+    v501:OnChanged(function(v580)
+        _G.TweenToKitsune = v580;
+    end);
+    Options.ToggleTPKitsune:SetValue(false);
+    spawn(function()
+        local v581;
+        while not v581 do
+            v581 = game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland");
+            wait();
+        end
+        while wait() do
+            if _G.TweenToKitsune then
+                local v845 = v581:FindFirstChild("ShrineActive");
+                if v845 then
+                    for v1335, v1336 in pairs(v845:GetDescendants()) do
+                        if (v1336:IsA("BasePart") and v1336.Name:find("NeonShrinePart")) then
+                            Tween(v1336.CFrame);
                         end
                     end
-                )
+                end
             end
         end
-
-        local ToggleTPKitsune =
-            Tabs.Fish:AddToggle("ToggleTPKitsune", {Title = "Tween To Kitsune Island", Default = false})
-        ToggleTPKitsune:OnChanged(
-            function(Value)
-                _G.TweenToKitsune = Value
-            end
-        )
-        Options.ToggleTPKitsune:SetValue(false)
-        spawn(
-            function()
-                local kitsuneIsland
-                while not kitsuneIsland do
-                    kitsuneIsland = game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland")
-                    wait(1)
-                end
-                while wait() do
-                    if _G.TweenToKitsune then
-                        local shrineActive = kitsuneIsland:FindFirstChild("ShrineActive")
-                        if shrineActive then
-                            for _, v in pairs(shrineActive:GetDescendants()) do
-                                if v:IsA("BasePart") and v.Name:find("NeonShrinePart") then
-                                    Tween(v.CFrame)
-                                end
-                            end
-                        end
+    end);
+    local v502 = Tabs.Fish:AddToggle("ToggleCollectAzure", {
+        Title = "Lụm Linh Hồn Xanh",
+        Description = "",
+        Default = false
+    });
+    v502:OnChanged(function(v582)
+        _G.CollectAzure = v582;
+    end);
+    Options.ToggleCollectAzure:SetValue(false);
+    spawn(function()
+        while wait() do
+            if _G.CollectAzure then
+                pcall(function()
+                    if game:GetService("Workspace"):FindFirstChild("AttachedAzureEmber") then
+                        Tween(game:GetService("Workspace"):WaitForChild("EmberTemplate"):FindFirstChild("Part").CFrame);
                     end
-                end
+                end);
             end
-        )
-
-        local ToggleCollectAzure =
-            Tabs.Fish:AddToggle("ToggleCollectAzure", {Title = "Collect Azure Ambers", Default = false})
-        ToggleCollectAzure:OnChanged(
-            function(Value)
-                _G.CollectAzure = Value
-            end
-        )
-        Options.ToggleCollectAzure:SetValue(false)
-        spawn(
-            function()
-                while wait() do
-                    if _G.CollectAzure then
-                        pcall(
-                            function()
-                                if game:GetService("Workspace"):FindFirstChild("AttachedAzureEmber") then
-                                    Tween(
-                                        game:GetService("Workspace"):WaitForChild("EmberTemplate"):FindFirstChild(
-                                            "Part"
-                                        ).CFrame
-                                    )
-                                    print("Azure")
-                                end
-                            end
-                        )
-                    end
-                end
-            end
-        )
+        end
+    end);
+end
+Tabs.Fish:AddButton({
+    Title = "Đổi Linh Hồn Xanh",
+    Description = "",
+    Callback = function()
+        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RF/KitsuneStatuePray"):InvokeServer();
     end
-
-
-    if Second_Sea or Third_Sea then
-        local RoughSea = Tabs.Fish:AddSection("Rough Sea")
-
-        local ToggleSailBoat = Tabs.Fish:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false})
-        ToggleSailBoat:OnChanged(
-            function(Value)
-                _G.SailBoat = Value
+});
+if Third_Sea then
+    local v503 = Tabs.Fish:AddSection("Biển");
+    local v504 = game:GetService("Players");
+    local v505 = game:GetService("RunService");
+    local v506 = game:GetService("VirtualInputManager");
+    local v507 = game:GetService("Workspace");
+    local v508 = 350;
+    local v509 = Tabs.Fish:AddSlider("SliderSpeedBoat", {
+        Title = "Tốc Độ Thuyền",
+        Description = "",
+        Default = v508,
+        Min = 0,
+        Max = 350,
+        Rounding = 1,
+        Callback = function(v583)
+            v508 = v583;
+        end
+    });
+    v509:SetValue(v508);
+    local v510 = Tabs.Fish:AddToggle("AutoFindPrehistoric", {
+        Title = "Tìm Đảo Dung Nham",
+        Description = "",
+        Default = false
+    });
+    Options.AutoFindPrehistoric:SetValue(false);
+    v510:OnChanged(function(v584)
+        _G.AutoFindPrehistoric = v584;
+    end);
+    local v511 = {};
+    local v512 = false;
+    local v513 = false;
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoFindPrehistoric then
+            v513 = false;
+            return;
+        end
+        local v585 = v504.LocalPlayer;
+        local v586 = v585.Character;
+        if (not v586 or not v586:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local function v587()
+            if v512 then
+                return;
             end
-        )
-        Options.ToggleSailBoat:SetValue(false)
-
-        spawn(
-            function()
-                while wait() do
-                    pcall(
-                        function()
-                            if _G.SailBoat then
-                                if
-                                    not game:GetService("Workspace").Enemies:FindFirstChild("Shark") or
-                                        not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or
-                                        not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or
-                                        not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member")
-                                 then
-                                    if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
-                                        buyb =
-                                            TweenBoat(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
-                                        if
-                                            (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position -
-                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
-                                                10
-                                         then
-                                            if buyb then
-                                                buyb:Stop()
-                                            end
-                                            local args = {
-                                                [1] = "BuyBoat",
-                                                [2] = "PirateGrandBrigade"
-                                            }
-
-                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
-                                                unpack(args)
-                                            )
-                                        end
-                                    elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
-                                        if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
-                                            TweenBoat(
-                                                game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame *
-                                                    CFrame.new(0, 1, 0)
-                                            )
-                                        else
-                                            for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
-                                                if v.Name == "PirateGrandBrigade" then
-                                                    repeat
-                                                        wait()
-                                                        if
-                                                            (CFrame.new(
-                                                                -17013.80078125,
-                                                                10.962434768676758,
-                                                                438.0169982910156
-                                                            ).Position -
-                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
-                                                                10
-                                                         then
-                                                            TweenShip(
-                                                                CFrame.new(
-                                                                    -33163.1875,
-                                                                    10.964323997497559,
-                                                                    -324.4842224121094
-                                                                )
-                                                            )
-                                                        elseif
-                                                            (CFrame.new(
-                                                                -33163.1875,
-                                                                10.964323997497559,
-                                                                -324.4842224121094
-                                                            ).Position -
-                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
-                                                                10
-                                                         then
-                                                            TweenShip(
-                                                                CFrame.new(
-                                                                    -37952.49609375,
-                                                                    10.96342945098877,
-                                                                    -1324.12109375
-                                                                )
-                                                            )
-                                                        elseif
-                                                            (CFrame.new(
-                                                                -37952.49609375,
-                                                                10.96342945098877,
-                                                                -1324.12109375
-                                                            ).Position -
-                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
-                                                                10
-                                                         then
-                                                            TweenShip(
-                                                                CFrame.new(
-                                                                    -33163.1875,
-                                                                    10.964323997497559,
-                                                                    -324.4842224121094
-                                                                )
-                                                            )
-                                                        end
-                                                    until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or
-                                                        game:GetService("Workspace").Enemies:FindFirstChild(
-                                                            "Terrorshark"
-                                                        ) or
-                                                        game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or
-                                                        game:GetService("Workspace").Enemies:FindFirstChild(
-                                                            "Fish Crew Member"
-                                                        ) or
-                                                        _G.SailBoat == false
-                                                end
-                                            end
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    )
+            v512 = true;
+            for v769, v770 in pairs(v511) do
+                if (v770 and v770.Parent and (v770.Name == "VehicleSeat") and not v770.Occupant) then
+                    Tween2(v770.CFrame);
+                    break;
                 end
             end
-        )
-
-        spawn(
-            function()
-                pcall(
-                    function()
-                        while wait() do
-                            if _G.SailBoat then
-                                if
-                                    game:GetService("Workspace").Enemies:FindFirstChild("Shark") or
-                                        game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or
-                                        game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or
-                                        game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member")
-                                 then
-                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                                end
-                            end
-                        end
-                    end
-                )
+            v512 = false;
+        end
+        local v588 = v586.Humanoid;
+        local v589 = false;
+        local v590 = nil;
+        for v684, v685 in pairs(v507.Boats:GetChildren()) do
+            local v686 = v685:FindFirstChild("VehicleSeat");
+            if (v686 and (v686.Occupant == v588)) then
+                v589 = true;
+                v590 = v686;
+                v511[v685.Name] = v686;
+            elseif (v686 and (v686.Occupant == nil)) then
+                v587();
             end
-        )
-
+        end
+        if not v589 then
+            return;
+        end
+        v590.MaxSpeed = v508;
+        v590.CFrame = CFrame.new(Vector3.new(v590.Position.X, v590.Position.Y, v590.Position.Z)) * v590.CFrame.Rotation ;
+        v506:SendKeyEvent(true, "W", false, game);
+        for v687, v688 in pairs(v507.Boats:GetDescendants()) do
+            if v688:IsA("BasePart") then
+                v688.CanCollide = false;
+            end
+        end
+        for v689, v690 in pairs(v586:GetDescendants()) do
+            if v690:IsA("BasePart") then
+                v690.CanCollide = false;
+            end
+        end
+        local v593 = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "MysticIsland",
+            "KitsuneIsland",
+            "FrozenDimension"
+        };
+        for v691, v692 in ipairs(v593) do
+            local v693 = v507.Map:FindFirstChild(v692);
+            if (v693 and v693:IsA("Model")) then
+                v693:Destroy();
+            end
+        end
+        local v594 = v507.Map:FindFirstChild("PrehistoricIsland");
+        if v594 then
+            v506:SendKeyEvent(false, "W", false, game);
+            _G.AutoFindPrehistoric = false;
+            end
+            return;
+        end
+    end);
+    local v514 = Tabs.Fish:AddToggle("AutoFindMirage", {
+        Title = "Tìm Đảo Bí Ẩn",
+        Description = "",
+        Default = false
+    });
+    Options.AutoFindMirage:SetValue(false);
+    v514:OnChanged(function(v595)
+        _G.AutoFindMirage = v595;
+    end);
+    local v511 = {};
+    local v512 = false;
+    local v513 = false;
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoFindMirage then
+            v513 = false;
+            return;
+        end
+        local v596 = v504.LocalPlayer;
+        local v597 = v596.Character;
+        if (not v597 or not v597:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local function v598()
+            if v512 then
+                return;
+            end
+            v512 = true;
+            for v771, v772 in pairs(v511) do
+                if (v772 and v772.Parent and (v772.Name == "VehicleSeat") and not v772.Occupant) then
+                    Tween2(v772.CFrame);
+                    break;
+                end
+            end
+            v512 = false;
+        end
+        local v599 = v597.Humanoid;
+        local v600 = false;
+        local v601 = nil;
+        for v694, v695 in pairs(v507.Boats:GetChildren()) do
+            local v696 = v695:FindFirstChild("VehicleSeat");
+            if (v696 and (v696.Occupant == v599)) then
+                v600 = true;
+                v601 = v696;
+                v511[v695.Name] = v696;
+            elseif (v696 and (v696.Occupant == nil)) then
+                v598();
+            end
+        end
+        if not v600 then
+            return;
+        end
+        v601.MaxSpeed = v508;
+        v601.CFrame = CFrame.new(Vector3.new(v601.Position.X, v601.Position.Y, v601.Position.Z)) * v601.CFrame.Rotation ;
+        v506:SendKeyEvent(true, "W", false, game);
+        for v697, v698 in pairs(v507.Boats:GetDescendants()) do
+            if v698:IsA("BasePart") then
+                v698.CanCollide = false;
+            end
+        end
+        for v699, v700 in pairs(v597:GetDescendants()) do
+            if v700:IsA("BasePart") then
+                v700.CanCollide = false;
+            end
+        end
+        local v604 = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "PrehistoricIsland",
+            "KitsuneIsland",
+            "FrozenDimension"
+        };
+        for v701, v702 in ipairs(v604) do
+            local v703 = v507.Map:FindFirstChild(v702);
+            if (v703 and v703:IsA("Model")) then
+                v703:Destroy();
+            end
+        end
+        local v605 = v507.Map:FindFirstChild("MysticIsland");
+        if v605 then
+            v506:SendKeyEvent(false, "W", false, game);
+            _G.AutoFindMirage = false;
+            if not v513 then
+                v14:Notify({
+                    Title = "Min Gaming",
+                    Content = "Đảo Bí Ẩn Tìm Thấy",
+                    Duration = 10
+                });
+                v513 = true;
+            end
+            return;
+        end
+    end);
+    local v515 = Tabs.Fish:AddToggle("AutoFindFrozen", {
+        Title = "Tìm Đảo Leviathan",
+        Description = "",
+        Default = false
+    });
+    Options.AutoFindFrozen:SetValue(false);
+    v515:OnChanged(function(v606)
+        _G.AutoFindFrozen = v606;
+    end);
+    local v511 = {};
+    local v512 = false;
+    local v513 = false;
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoFindFrozen then
+            v513 = false;
+            return;
+        end
+        local v607 = v504.LocalPlayer;
+        local v608 = v607.Character;
+        if (not v608 or not v608:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local function v609()
+            if v512 then
+                return;
+            end
+            v512 = true;
+            for v773, v774 in pairs(v511) do
+                if (v774 and v774.Parent and (v774.Name == "VehicleSeat") and not v774.Occupant) then
+                    Tween2(v774.CFrame);
+                    break;
+                end
+            end
+            v512 = false;
+        end
+        local v610 = v608.Humanoid;
+        local v611 = false;
+        local v612 = nil;
+        for v704, v705 in pairs(v507.Boats:GetChildren()) do
+            local v706 = v705:FindFirstChild("VehicleSeat");
+            if (v706 and (v706.Occupant == v610)) then
+                v611 = true;
+                v612 = v706;
+                v511[v705.Name] = v706;
+            elseif (v706 and (v706.Occupant == nil)) then
+                v609();
+            end
+        end
+        if not v611 then
+            return;
+        end
+        v612.MaxSpeed = v508;
+        v612.CFrame = CFrame.new(Vector3.new(v612.Position.X, v612.Position.Y, v612.Position.Z)) * v612.CFrame.Rotation ;
+        v506:SendKeyEvent(true, "W", false, game);
+        for v707, v708 in pairs(v507.Boats:GetDescendants()) do
+            if v708:IsA("BasePart") then
+                v708.CanCollide = false;
+            end
+        end
+        for v709, v710 in pairs(v608:GetDescendants()) do
+            if v710:IsA("BasePart") then
+                v710.CanCollide = false;
+            end
+        end
+        local v615 = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "MysticIsland",
+            "KitsuneIsland",
+            "PrehistoricIsland"
+        };
+        for v711, v712 in ipairs(v615) do
+            local v713 = v507.Map:FindFirstChild(v712);
+            if (v713 and v713:IsA("Model")) then
+                v713:Destroy();
+            end
+        end
+        local v616 = v507.Map:FindFirstChild("FrozenDimension");
+        if v616 then
+            v506:SendKeyEvent(false, "W", false, game);
+            _G.AutoFindFrozen = false;
+            end
+            return;
+        end
+    end);
+    local v516 = Tabs.Fish:AddToggle("AutoComeTiki", {
+        Title = "Lái Thuyền Về Đảo Tiki",
+        Description = "",
+        Default = false
+    });
+    v516:OnChanged(function(v617)
+        _G.AutoComeTiki = v617;
+    end);
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoComeTiki then
+            return;
+        end
+        local v618 = v504.LocalPlayer;
+        local v619 = v618.Character;
+        if (not v619 or not v619:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local v620 = v619.Humanoid;
+        local v621 = nil;
+        for v714, v715 in pairs(v507.Boats:GetChildren()) do
+            local v716 = v715:FindFirstChild("VehicleSeat");
+            if (v716 and (v716.Occupant == v620)) then
+                v621 = v716;
+                break;
+            end
+        end
+        if v621 then
+            v621.MaxSpeed = v508;
+            local v776 = CFrame.new(- 16217.7568359375, 9.126761436462402, 446.06536865234375);
+            local v777 = v621.Position;
+            local v778 = v776.Position;
+            local v779 = (v778 - v777).unit;
+            local v780 = v779 * v621.MaxSpeed * v505.RenderStepped:Wait() ;
+            v621.CFrame = v621.CFrame + v780 ;
+            local v782 = CFrame.new(v777, v778);
+            v621.CFrame = CFrame.new(v621.Position, v778);
+            if ((v621.Position - v778).magnitude < 120) then
+                _G.AutoComeTiki = false;
+                v506:SendKeyEvent(false, "W", false, game);
+            end
+        end
+    end);
+    local v517 = Tabs.Fish:AddToggle("AutoComeHydra", {
+        Title = "Lái Thuyền Về Đảo Hydra",
+        Description = "",
+        Default = false
+    });
+    v517:OnChanged(function(v622)
+        _G.AutoComeHydra = v622;
+    end);
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoComeHydra then
+            return;
+        end
+        local v623 = v504.LocalPlayer;
+        local v624 = v623.Character;
+        if (not v624 or not v624:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local v625 = v624.Humanoid;
+        local v626 = nil;
+        for v717, v718 in pairs(v507.Boats:GetChildren()) do
+            local v719 = v718:FindFirstChild("VehicleSeat");
+            if (v719 and (v719.Occupant == v625)) then
+                v626 = v719;
+                break;
+            end
+        end
+        if v626 then
+            v626.MaxSpeed = v508;
+            local v784 = CFrame.new(5193.9375, - 0.04690289497375488, 1631.578369140625);
+            local v785 = v626.Position;
+            local v786 = v784.Position;
+            local v787 = (v786 - v785).unit;
+            local v788 = v787 * v626.MaxSpeed * v505.RenderStepped:Wait() ;
+            v626.CFrame = v626.CFrame + v788 ;
+            local v790 = CFrame.new(v785, v786);
+            v626.CFrame = CFrame.new(v626.Position, v786);
+            if ((v626.Position - v786).magnitude < 120) then
+                _G.AutoComeHydra = false;
+                v506:SendKeyEvent(false, "W", false, game);
+            end
+        end
+    end);
+    Tabs.Fish:AddButton({
+        Title = "Bay Đến Khu Vực Săn",
+        Description = "",
+        Callback = function()
+            Tween2(CFrame.new(- 16917.154296875, 7.757596015930176, 511.8203125));
+        end
+    });
+    local v511 = {};
+    local v518 = {
+        "Beast Hunter",
+        "Sleigh",
+        "Miracle",
+        "The Sentinel",
+        "Guardian",
+        "Lantern",
+        "Dinghy",
+        "PirateSloop",
+        "PirateBrigade",
+        "PirateGrandBrigade",
+        "MarineGrandBrigade",
+        "MarineBrigade",
+        "MarineSloop"
+    };
+    local v519 = Tabs.Fish:AddDropdown("DropdownBoat", {
+        Title = "Chọn Thuyền",
+        Description = "",
+        Values = v518,
+        Multi = false,
+        Default = 1
+    });
+    v519:SetValue(selectedBoat);
+    v519:OnChanged(function(v627)
+        selectedBoat = v627;
+    end);
+    local function v520(v628)
+        local v629 = {
+            [1] = "BuyBoat",
+            [2] = v628
+        };
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v629));
+        delay(2), function()
+            for v791, v792 in pairs(v507.Boats:GetChildren()) do
+                if (v792:IsA("Model") and (v792.Name == v628)) then
+                    local v896 = v792:FindFirstChild("VehicleSeat");
+                    if (v896 and not v896.Occupant) then
+                        v511[v628] = v896;
+                    end
+                end
+            end
+        end);
+    end
+    local function v521()
+        for v720, v721 in pairs(v511) do
+            if (v721 and v721.Parent and (v721.Name == "VehicleSeat") and not v721.Occupant) then
+                Tween2(v721.CFrame);
+            end
+        end
+    end
+    game:GetService("RunService").RenderStepped:Connect(function()
+        for v722, v723 in pairs(v511) do
+            if (v723 and v723.Parent and (v723.Name == "VehicleSeat") and not v723.Occupant) then
+                v511[v722] = v723;
+            end
+        end
+    end);
+    Tabs.Fish:AddButton({
+        Title = "Mua Thuyền",
+        Description = "",
+        Callback = function()
+            v520(selectedBoat);
+        end
+    });
+    Tabs.Fish:AddButton({
+        Title = "Bay Đến Thuyền",
+        Description = "Duy Nhất Thuyền Bạn Mua Ở Chỗ Chọn",
+        Callback = function()
+            v521();
+        end
+    });
         local ToggleTerrorshark =
             Tabs.Fish:AddToggle("ToggleTerrorshark", {Title = " Kill Terrorshark", Default = false})
 
@@ -6912,6 +7200,26 @@ NoClipz:OnChanged(function(v)
     end
 end)
 
+local v117 = Tabs.Setting:AddToggle("ToggleEnablePvp", {
+    Title = "Turn On PVP",
+    Description = "",
+    Default = false
+});
+v117:OnChanged(function(v314)
+    _G.EnabledPvP = v314;
+end);
+Options.ToggleEnablePvp:SetValue(false);
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.EnabledPvP then
+                if (game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true) then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp");
+                end
+            end
+        end
+    end);
+end);
 
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
@@ -8604,6 +8912,173 @@ spawn(
     end
 end
 
+local v79 = Tabs.Item:AddToggle("ToggleAutoSkullGuitar", {
+    Title = "Skull Guitar",
+    Description = "Sea 3",
+    Default = false
+});
+v79:OnChanged(function(v268)
+    _G.Auto_SkullGuitar = v268;
+end);
+Options.ToggleAutoSkullGuitar:SetValue(false);
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Auto_SkullGuitar then
+                if (GetWeaponInventory("Skull Guitar") == false) then
+                    if ((CFrame.new(- 9681.458984375, 6.139880657196045, 6341.3720703125).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000) then
+                        if game:GetService("Workspace").NPCs:FindFirstChild("Skeleton Machine") then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("soulGuitarBuy", true);
+                        elseif (game:GetService("Workspace").Map["Haunted Castle"].Candle1.Transparency == 0) then
+                            if (game:GetService("Workspace").Map["Haunted Castle"].Placard1.Left.Part.Transparency == 0) then
+                                Quest2 = true;
+                                repeat
+                                    wait();
+                                    Tween(CFrame.new(- 8762.69140625, 176.84783935546875, 6171.3076171875));
+                                until ((CFrame.new(- 8762.69140625, 176.84783935546875, 6171.3076171875).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) or not _G.Auto_SkullGuitar
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard7.Left.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard6.Left.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard5.Left.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard4.Right.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard3.Left.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard2.Right.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard1.Right.ClickDetector);
+                                wait(1);
+                            elseif game:GetService("Workspace").Map["Haunted Castle"].Tablet.Segment1:FindFirstChild("ClickDetector") then
+                                if game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part1:FindFirstChild("ClickDetector") then
+                                    Quest4 = true;
+                                    repeat
+                                        wait();
+                                        Tween(CFrame.new(- 9553.5986328125, 65.62338256835938, 6041.58837890625));
+                                    until ((CFrame.new(- 9553.5986328125, 65.62338256835938, 6041.58837890625).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) or not _G.Auto_SkullGuitar
+                                    wait(1);
+                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part3.CFrame);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part3.ClickDetector);
+                                    wait(1);
+                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.CFrame);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector);
+                                    wait(1);
+                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.CFrame);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.ClickDetector);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.ClickDetector);
+                                    wait(1);
+                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part8.CFrame);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part8.ClickDetector);
+                                    wait(1);
+                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.CFrame);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector);
+                                else
+                                    Quest3 = true;
+                                end
+                            else
+                                if game:GetService("Workspace").NPCs:FindFirstChild("Ghost") then
+                                    local v1798 = {
+                                        [1] = "GuitarPuzzleProgress",
+                                        [2] = "Ghost"
+                                    };
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1798));
+                                end
+                                if game.Workspace.Enemies:FindFirstChild("Living Zombie") then
+                                    for v1804, v1805 in pairs(game.Workspace.Enemies:GetChildren()) do
+                                        if (v1805:FindFirstChild("HumanoidRootPart") and v1805:FindFirstChild("Humanoid") and (v1805.Humanoid.Health > 0)) then
+                                            if (v1805.Name == "Living Zombie") then
+                                                EquipTool(SelectWeapon);
+                                                v1805.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
+                                                v1805.HumanoidRootPart.Transparency = 1;
+                                                v1805.Humanoid.JumpPower = 0;
+                                                v1805.Humanoid.WalkSpeed = 0;
+                                                v1805.HumanoidRootPart.CanCollide = false;
+                                                v1805.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0) ;
+                                                Tween(CFrame.new(- 10160.787109375, 138.6616973876953, 5955.03076171875));
+                                                game:GetService("VirtualUser"):CaptureController();
+                                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672));
+                                            end
+                                        end
+                                    end
+                                else
+                                    Tween2(CFrame.new(- 10160.787109375, 138.6616973876953, 5955.03076171875));
+                                end
+                            end
+                        elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2), "Error") then
+                            Tween2(CFrame.new(- 8653.2060546875, 140.98487854003906, 6160.033203125));
+                        elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2), "Nothing") then
+                            Tween("Wait Full Moon");
+                        else
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2, true);
+                        end
+                    else
+                        Tween2(CFrame.new(- 9681.458984375, 6.139880657196045, 6341.3720703125));
+                    end
+                end
+            end
+        end);
+    end
+end);
+
+local v80 = Tabs.Item:AddToggle("ToggleAutoBuddy", {
+    Title = "Auto Buddy",
+    Description = "Sea 3",
+    Default = false
+});
+v80:OnChanged(function(v269)
+    _G.Auto_Buddy = v269;
+end);
+Options.ToggleAutoBuddy:SetValue(false);
+local v81 = CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875);
+spawn(function()
+    while wait() do
+        if _G.Auto_Buddy then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen") then
+                    for v1050, v1051 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if (v1051.Name == "Cake Queen") then
+                            if (v1051:FindFirstChild("Humanoid") and v1051:FindFirstChild("HumanoidRootPart") and (v1051.Humanoid.Health > 0)) then
+                                repeat
+                                    task.wait(_G.Fast_Delay);
+                                    AutoHaki();
+                                    EquipTool(SelectWeapon);
+                                    v1051.HumanoidRootPart.CanCollide = false;
+                                    v1051.Humanoid.WalkSpeed = 0;
+                                    v1051.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                    Tween(v1051.HumanoidRootPart.CFrame * Pos);
+                                    AttackNoCoolDown();
+                                until not _G.Auto_Buddy or not v1051.Parent or (v1051.Humanoid.Health <= 0)
+                            end
+                        end
+                    end
+                elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v81.Position).Magnitude < 1500) then
+                    Tween2(v81);
+                end
+                Tween2(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen") then
+                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
+                end
+            end);
+        end
+    end
+end);
+
 local v82 =
     Tabs.Item:AddToggle(
     "ToggleAutoDualKatana",
@@ -9236,6 +9711,7 @@ spawn(
         end
     end
 )
+
 local v78 =
     Tabs.Item:AddToggle(
     "ToggleAutoRainbowHaki",
@@ -9543,6 +10019,38 @@ if Second_Sea or Third_Sea then
     )
 end
 
+if Second_Sea then
+    local ToggleSwordLengend =
+        Tabs.Item:AddToggle("ToggleSwordLengend", {Title = "Buy Sword Lengendary", Default = false})
+    ToggleSwordLengend:OnChanged(
+        function(Value)
+            _G.BuyLengendSword = Value
+        end
+    )
+    Options.ToggleSwordLengend:SetValue(false)
+
+    spawn(
+        function()
+            while wait(.1) do
+                pcall(
+                    function()
+                        if _G.BuyLengendSword or Triple_A then
+                            local args = {
+                                [1] = "LegendarySwordDealer",
+                                [2] = "2"
+                            }
+                            -- Triple_A
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        else
+                            wait(2)
+                        end
+                    end
+                )
+            end
+        end
+    )
+end
+
 local Chestt = Tabs.Item:AddSection("Chest Farm")
 
 local ToggleFarmChest = Tabs.Item:AddToggle("ToggleFarmChest", {Title = "Auto Farm Chest[Tween]", Default = false})
@@ -9622,8 +10130,7 @@ spawn(function()
 		end
 	end
 end);
--------------------------------------------------Tab Volcano-----------------
-local Gojo = Tabs.Volcanic.AddSection("Quest Dojo")
+-------------------------------------------------Tab Volcano----------------------------------------------------------------------------------
 
 local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
 ToogleDojoQ:OnChanged(function(Value)
@@ -9638,7 +10145,7 @@ spawn(function()
         if getgenv().DojoClaimQuest and Third_Sea then
             pcall(function()
                 if BypassTP then
-                    BTPZ(DojoQuestNpc)
+                    BTP(DojoQuestNpc)
                 else
                     Tween(DojoQuestNpc)
                 end
@@ -9724,167 +10231,56 @@ spawn(function()
     end
 end)
 
-local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
-    Title = "Phòng Thủ",
+local v176 = Tabs.Volcanic:AddToggle("ToggleCollectBone", {
+    Title = "Collect Bone",
     Description = "",
     Default = false
 });
-v171:OnChanged(function(v401)
-    _G.AutoDefendVolcano = v401;
+v176:OnChanged(function(v414)
+    _G.AutoCollectBone = v414;
 end);
-local v107 = Tabs.Volcanic:AddToggle("ToggleMelee", {
-    Title = "Dùng Melee",
-    Description = "",
-    Default = false
-});
-v107:OnChanged(function(v402)
-    _G.UseMelee = v402;
-end);
-local v109 = Tabs.Volcanic:AddToggle("ToggleSword", {
-    Title = "Dùng Sword",
-    Description = "",
-    Default = false
-});
-v109:OnChanged(function(v403)
-    _G.UseSword = v403;
-end);
-local v110 = Tabs.Volcanic:AddToggle("ToggleGun", {
-    Title = "Dùng Gun",
-    Description = "",
-    Default = false
-});
-v110:OnChanged(function(v404)
-    _G.UseGun = v404;
-end);
-local function v172(v405)
-    game:GetService("VirtualInputManager"):SendKeyEvent(true, v405, false, game);
-    game:GetService("VirtualInputManager"):SendKeyEvent(false, v405, false, game);
-end
-local function v173()
-    local v406 = game.Workspace.Map.PrehistoricIsland.Core:FindFirstChild("InteriorLava");
-    if (v406 and v406:IsA("Model")) then
-        v406:Destroy();
-    end
-    local v407 = game.Workspace.Map:FindFirstChild("PrehistoricIsland");
-    if v407 then
-        for v750, v751 in pairs(v407:GetDescendants()) do
-            if (v751:IsA("Part") and v751.Name:lower():find("lava")) then
-                v751:Destroy();
-            end
-        end
-    end
-    local v408 = game.Workspace.Map:FindFirstChild("PrehistoricIsland");
-    if v408 then
-        for v752, v753 in pairs(v408:GetDescendants()) do
-            if v753:IsA("Model") then
-                for v905, v906 in pairs(v753:GetDescendants()) do
-                    if (v906:IsA("MeshPart") and v906.Name:lower():find("lava")) then
-                        v906:Destroy();
-                    end
-                end
-            end
-        end
-    end
-end
-local function v174()
-    local v409 = game.Workspace.Map.PrehistoricIsland.Core.VolcanoRocks;
-    for v564, v565 in pairs(v409:GetChildren()) do
-        if v565:IsA("Model") then
-            local v754 = v565:FindFirstChild("volcanorock");
-            if (v754 and v754:IsA("MeshPart")) then
-                local v881 = v754.Color;
-                if ((v881 == Color3.fromRGB(185, 53, 56)) or (v881 == Color3.fromRGB(185, 53, 57))) then
-                    return v754;
-                end
-            end
-        end
-    end
-    return nil;
-end
-local function v162(v410)
-    local v411 = game.Players.LocalPlayer;
-    local v412 = v411.Backpack;
-    for v566, v567 in pairs(v412:GetChildren()) do
-        if (v567:IsA("Tool") and (v567.ToolTip == v410)) then
-            v567.Parent = v411.Character;
-            for v818, v819 in ipairs({
-                "Z",
-                "X",
-                "C",
-                "V",
-                "F"
-            }) do
-                wait();
-                pcall(function()
-                    v172(v819);
-                end);
-            end
-            v567.Parent = v412;
-            break;
-        end
-    end
-end
 spawn(function()
     while wait() do
-        if _G.AutoDefendVolcano then
-            AutoHaki();
-            pcall(v173);
-            local v757 = v174();
-            if v757 then
-                local v882 = CFrame.new(v757.Position + Vector3.new(0, 0, 0));
-                Tween2(v882);
-                local v883 = v757.Color;
-                if ((v883 ~= Color3.fromRGB(185, 53, 56)) and (v883 ~= Color3.fromRGB(185, 53, 57))) then
-                    v757 = v174();
-                else
-                    local v1125 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
-                    local v1126 = ((v1125 - v757.Position) - Vector3.new(0, 0, 0)).Magnitude;
-                    if (v1126 <= 1) then
-                        if _G.UseMelee then
-                            v162("Melee");
-                        end
-                        if _G.UseSword then
-                            v162("Sword");
-                        end
-                        if _G.UseGun then
-                            v162("Gun");
-                        end
-                    end
-                    _G.TweenToPrehistoric = false;
+        if _G.AutoCollectBone then
+            for v820, v821 in pairs(workspace:GetDescendants()) do
+                if (v821:IsA("BasePart") and (v821.Name == "DinoBone")) then
+                    Tween2(CFrame.new(v821.Position));
                 end
-            else
-                _G.TweenToPrehistoric = true;
             end
         end
     end
 end);
-local v175 = Tabs.Volcanic:AddToggle("ToggleKillAura", {
-    Title = "Kill Golem",
+
+local v177 = Tabs.Volcanic:AddToggle("ToggleCollectEgg", {
+    Title = "Collect Egg",
     Description = "",
     Default = false
 });
-v175:OnChanged(function(v413)
-    KillAura = v413;
+v177:OnChanged(function(v415)
+    _G.AutoCollectEgg = v415;
 end);
-v17.ToggleKillAura:SetValue(false);
 spawn(function()
     while wait() do
-        if KillAura then
-            pcall(function()
-                for v884, v885 in pairs(game.Workspace.Enemies:GetDescendants()) do
-                    if (v885:FindFirstChild("Humanoid") and v885:FindFirstChild("HumanoidRootPart") and (v885.Humanoid.Health > 0)) then
-                        repeat
-                            wait();
-                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge);
-                            v885.Humanoid.Health = 0;
-                            v885.HumanoidRootPart.CanCollide = false;
-                        until not KillAura or not v885.Parent or (v885.Humanoid.Health <= 0)
+        if _G.AutoCollectEgg then
+            local v758 = workspace.Map.PrehistoricIsland.Core.SpawnedDragonEggs:GetChildren();
+            if (# v758 > 0) then
+                local v886 = v758[math.random(1, # v758)];
+                if (v886:IsA("Model") and v886.PrimaryPart) then
+                    Tween2(v886.PrimaryPart.CFrame);
+                    local v1127 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
+                    local v1128 = v886.PrimaryPart.Position;
+                    local v1129 = (v1127 - v1128).Magnitude;
+                    if (v1129 <= 1) then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game);
+                        wait(1.5);
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game);
                     end
                 end
-            end);
+            end
         end
     end
 end);
+
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
@@ -10707,92 +11103,100 @@ spawn(
     end
 )
 
-local v140 =
-    Tabs.Raid:AddToggle(
-    "ToggleNextIsland",
-    {
-        Title = "Auto Start Raid ",
-        Description = "",
-        Default = false
-    }
-)
-v140:OnChanged(
-    function(v356)
-        getgenv().Auto_Dungeon = v356
-    end
-)
-Options.ToggleNextIsland:SetValue(false)
+local v139 = Tabs.Raid:AddToggle("ToggleStart", {
+    Title = "Start Raid",
+    Description = "",
+    Default = false
+});
+v139:OnChanged(function(v355)
+    _G.Auto_StartRaid = v355;
+end);
+Options.ToggleStart:SetValue(false);
 spawn(function()
-    while wait(1) do
-        if getgenv().Auto_Dungeon then
-            if not game.Players.LocalPlayer.PlayerGui.Main.TopHUDList.RaidTimer.Visible == false then
-                local islands = {"Island 5", "Island 4", "Island 3", "Island 2", "Island 1"}
-                for _, island in ipairs(islands) do
-                    local location = game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild(island)
-                    if location then
-                        Tween(location.CFrame * CFrame.new(0, 70, 100))
-                        break
-                    end
-                end
-            end
-        end
-    end
-end)
-spawn(function()
-    while wait(1) do
+    while wait() do
         pcall(function()
-            if getgenv().Auto_Dungeon then
-                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
-                    local specialMicrochip = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") 
-                                            or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip")
-                    if specialMicrochip then
-                        if Second_Sea then
-                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
-                        elseif Third_Sea then
-                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
+            if _G.Auto_StartRaid then
+                if (game:GetService("Players")['LocalPlayer'].PlayerGui.Main.Timer.Visible == false) then
+                    if (not game:GetService("Workspace")['_WorldOrigin'].Locations:FindFirstChild("Island 1") and (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip"))) then
+                        if Sea2 then
+                            Tween2(CFrame.new(- 6438.73535, 250.645355, - 4501.50684));
+                            local v1547 = {
+                                [1] = "SetSpawnPoint"
+                            };
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1547));
+                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector);
+                        elseif Sea3 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 5075.50927734375, 314.5155029296875, - 3150.0224609375));
+                            Tween2(CFrame.new(- 5017.40869, 314.844055, - 2823.0127, - 0.925743818, 4.482175e-8, - 0.378151238, 4.5550315e-9, 1, 1.0737756e-7, 0.378151238, 9.768162e-8, - 0.925743818));
+                            local v1656 = {
+                                [1] = "SetSpawnPoint"
+                            };
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1656));
+                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector);
                         end
                     end
                 end
             end
-        end)
+        end);
     end
-end)
-spawn(function()
-    while wait(1) do
-        if getgenv().Auto_Dungeon then
-            for i, v in pairs(game.Workspace.Enemies:GetDescendants()) do
-                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                    pcall(function()
-                        repeat wait(.001)
-                            v.Humanoid.Health = 0
-                            v.HumanoidRootPart.CanCollide = false
-                            string.find(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                        until not getgenv().Auto_Dungeon or not v.Parent or v.Humanoid.Health <= 0
-                    end)
-                end
-            end
-        end
+end);
+local v140 = Tabs.Raid:AddToggle("ToggleNextIsland", {
+    Title = "Auto Finish Raid",
+    Description = "",
+    Default = false
+});
+v140:OnChanged(function(v356)
+    AutoNextIsland = v356;
+    if not v356 then
+        _G.AutoNear = false;
     end
-end)
+end);
+Options.ToggleNextIsland:SetValue(false);
 spawn(function()
-    while wait(1) do
-        pcall(function()
-            if getgenv().Auto_Dungeon then
-                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
-                    local specialMicrochip = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") 
-                                            or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip")
-                    if specialMicrochip then
-                        if Second_Sea then
-                            fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
-                        elseif Third_Sea then
-                            fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
-                        end
+    local v357 = {};
+    while wait() do
+        if AutoNextIsland then
+            pcall(function()
+                local v806 = game.Players.LocalPlayer.Character;
+                if (v806 and v806:FindFirstChild("HumanoidRootPart")) then
+                    local v900 = game:GetService("Workspace")['_WorldOrigin'].Locations;
+                    local v901 = v806.HumanoidRootPart.Position;
+                    if (((v901 - Vector3.new(- 6438.73535, 250.645355, - 4501.50684)).Magnitude < 1) or ((v901 - Vector3.new(- 5017.40869, 314.844055, - 2823.0127)).Magnitude < 1)) then
+                        v357 = {};
+                    end
+                    if v900:FindFirstChild("Island 1") then
+                        _G.AutoNear = true;
+                    end
+                    if (v900:FindFirstChild("Island 2") and not v357["Island 2"]) then
+                        Tween(v900:FindFirstChild("Island 2").CFrame);
+                        v357["Island 2"] = true;
+                        AutoNextIsland = false;
+                        wait();
+                        AutoNextIsland = true;
+                    elseif (v900:FindFirstChild("Island 3") and not v357["Island 3"]) then
+                        Tween(v900:FindFirstChild("Island 3").CFrame);
+                        v357["Island 3"] = true;
+                        AutoNextIsland = false;
+                        wait();
+                        AutoNextIsland = true;
+                    elseif (v900:FindFirstChild("Island 4") and not v357["Island 4"]) then
+                        Tween(v900:FindFirstChild("Island 4").CFrame);
+                        v357["Island 4"] = true;
+                        AutoNextIsland = false;
+                        wait();
+                        AutoNextIsland = true;
+                    elseif (v900:FindFirstChild("Island 5") and not v357["Island 5"]) then
+                        Tween(v900:FindFirstChild("Island 5").CFrame);
+                        v357["Island 5"] = true;
+                        AutoNextIsland = false;
+                        wait();
+                        AutoNextIsland = true;
                     end
                 end
-            end
-        end)
+            end);
+        end
     end
-end)
+end);
 
 local ToggleAwake = Tabs.Raid:AddToggle("ToggleAwake", {Title = "Auto Awake", Default = false})
 ToggleAwake:OnChanged(
@@ -10803,7 +11207,7 @@ ToggleAwake:OnChanged(
 Options.ToggleAwake:SetValue(false)
 spawn(
     function()
-        while task.wait() do
+        while wait() do
             if AutoAwakenAbilities then
                 pcall(
                     function()
@@ -11724,6 +12128,34 @@ spawn(
 
 Tabs.Shop:AddButton(
     {
+        Title = "Pray",
+        Description = "",
+        Callback = function()
+            local v573 = {
+                [1] = "gravestoneEvent",
+                [2] = 2
+            };
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v573));
+        end
+    }
+)
+
+Tabs.Shop:AddButton(
+    {
+        Title = "Try Luck",
+        Description = "",
+        Callback = function()
+            local v572 = {
+                [1] = "gravestoneEvent",
+                [2] = 1
+            };
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v572));
+        end
+    }
+)
+
+Tabs.Shop:AddButton(
+    {
         Title = "Geppo",
         Description = "",
         Callback = function()
@@ -12261,150 +12693,3 @@ spawn(
         end
     end
 )
-local v134 =
-    Tabs.Misc:AddToggle(
-    "ToggleEspRealFruit",
-    {
-        Title = "Esp Apple,Banana,Pineapple",
-        Description = "Getting Ob V2",
-        Default = false
-    }
-)
-ToggleEspRealFruit:OnChanged(
-    function(v349)
-        RealFruitEsp = v349
-        while RealFruitEsp do
-            wait()
-            UpdateRealFruitEsp()
-        end
-    end
-)
-Options.ToggleEspRealFruit:SetValue(false)
-function UpdateRealFruitEsp()
-    for v548, v549 in pairs(game.Workspace.AppleSpawner:GetChildren()) do
-        if v549:IsA("Tool") then
-            if RealFruitEsp then
-                if not v549.Handle:FindFirstChild("NameEsp" .. Number) then
-                    local v1066 = Instance.new("BillboardGui", v549.Handle)
-                    v1066.Name = "NameEsp" .. Number
-                    v1066.ExtentsOffset = Vector3.new(0, 1, 0)
-                    v1066.Size = UDim2.new(1, 200, 1, 30)
-                    v1066.Adornee = v549.Handle
-                    v1066.AlwaysOnTop = true
-                    local v1073 = Instance.new("TextLabel", v1066)
-                    v1073.Font = Enum.Font.GothamSemibold
-                    v1073.FontSize = "Size14"
-                    v1073.TextWrapped = true
-                    v1073.Size = UDim2.new(1, 0, 1, 0)
-                    v1073.TextYAlignment = "Top"
-                    v1073.BackgroundTransparency = 1
-                    v1073.TextStrokeTransparency = 0.5
-                    v1073.TextColor3 = Color3.fromRGB(255, 0, 0)
-                    v1073.Text =
-                        v549.Name ..
-                        " \n" ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v549.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                else
-                    v549.Handle["NameEsp" .. Number].TextLabel.Text =
-                        v549.Name ..
-                        " " ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v549.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                end
-            elseif v549.Handle:FindFirstChild("NameEsp" .. Number) then
-                v549.Handle:FindFirstChild("NameEsp" .. Number):Destroy()
-            end
-        end
-    end
-    for v550, v551 in pairs(game.Workspace.PineappleSpawner:GetChildren()) do
-        if v551:IsA("Tool") then
-            if RealFruitEsp then
-                if not v551.Handle:FindFirstChild("NameEsp" .. Number) then
-                    local v1085 = Instance.new("BillboardGui", v551.Handle)
-                    v1085.Name = "NameEsp" .. Number
-                    v1085.ExtentsOffset = Vector3.new(0, 1, 0)
-                    v1085.Size = UDim2.new(1, 200, 1, 30)
-                    v1085.Adornee = v551.Handle
-                    v1085.AlwaysOnTop = true
-                    local v1092 = Instance.new("TextLabel", v1085)
-                    v1092.Font = Enum.Font.GothamSemibold
-                    v1092.FontSize = "Size14"
-                    v1092.TextWrapped = true
-                    v1092.Size = UDim2.new(1, 0, 1, 0)
-                    v1092.TextYAlignment = "Top"
-                    v1092.BackgroundTransparency = 1
-                    v1092.TextStrokeTransparency = 0.5
-                    v1092.TextColor3 = Color3.fromRGB(255, 174, 0)
-                    v1092.Text =
-                        v551.Name ..
-                        " \n" ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v551.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                else
-                    v551.Handle["NameEsp" .. Number].TextLabel.Text =
-                        v551.Name ..
-                        " " ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v551.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                end
-            elseif v551.Handle:FindFirstChild("NameEsp" .. Number) then
-                v551.Handle:FindFirstChild("NameEsp" .. Number):Destroy()
-            end
-        end
-    end
-    for v552, v553 in pairs(game.Workspace.BananaSpawner:GetChildren()) do
-        if v553:IsA("Tool") then
-            if RealFruitEsp then
-                if not v553.Handle:FindFirstChild("NameEsp" .. Number) then
-                    local v1104 = Instance.new("BillboardGui", v553.Handle)
-                    v1104.Name = "NameEsp" .. Number
-                    v1104.ExtentsOffset = Vector3.new(0, 1, 0)
-                    v1104.Size = UDim2.new(1, 200, 1, 30)
-                    v1104.Adornee = v553.Handle
-                    v1104.AlwaysOnTop = true
-                    local v1111 = Instance.new("TextLabel", v1104)
-                    v1111.Font = Enum.Font.GothamSemibold
-                    v1111.FontSize = "Size14"
-                    v1111.TextWrapped = true
-                    v1111.Size = UDim2.new(1, 0, 1, 0)
-                    v1111.TextYAlignment = "Top"
-                    v1111.BackgroundTransparency = 1
-                    v1111.TextStrokeTransparency = 0.5
-                    v1111.TextColor3 = Color3.fromRGB(251, 255, 0)
-                    v1111.Text =
-                        v553.Name ..
-                        " \n" ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v553.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                else
-                    v553.Handle["NameEsp" .. Number].TextLabel.Text =
-                        v553.Name ..
-                        " " ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v553.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                end
-            elseif v553.Handle:FindFirstChild("NameEsp" .. Number) then
-                v553.Handle:FindFirstChild("NameEsp" .. Number):Destroy()
-            end
-        end
-    end
-end
