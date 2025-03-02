@@ -1,6 +1,6 @@
 --[[
 getgenv().Team = "Marines"          -- Pirates or Marines
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/Main/Test.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/phatsuytinh/refs/heads/main/Test.lua"))()
 ]] --
 if getgenv().Team == "Pirates" then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
@@ -5417,6 +5417,8 @@ do
             "Soul Reaper",
             "Cake Queen"
         }
+    end
+
     local DropdownBoss =
         Tabs.Main:AddDropdown(
         "DropdownBoss",
@@ -9731,7 +9733,7 @@ Tabs.Volcanic:AddButton({
 
 local PrehisIsl = Tabs.Volcanic:AddToggle("PrehisIsl", {Title = "Tween To Prehistoric Island", Default = false })
 PrehisIsl:OnChanged(function(Value)
-    getgenv().TweenPrehistoric = Value
+    _G.TweenToPrehistoric = Value
 end)
 spawn(function()
     local island
@@ -9740,22 +9742,156 @@ spawn(function()
         wait()
     end
     while wait() do
-        if getgenv().TweenPrehistoric and Third_Sea then
+        if _G.TweenToPrehistoric and Third_Sea then
             local prehistoricIslandCore = game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland")
             if prehistoricIslandCore then
                 local relic = prehistoricIslandCore:FindFirstChild("Core") and prehistoricIslandCore.Core:FindFirstChild("PrehistoricRelic")
                 local skull = relic and relic:FindFirstChild("Skull")
                 if skull then
                     Tween(CFrame.new(skull.Position))
-                    getgenv().TweenPrehistoric = false
+                    _G.TweenToPrehistoric = false
                 end
             end
         end
     end
 end)
 
-local v175 = v16.Sea:AddToggle("ToggleKillAura", {
-    Title = "Auto Kill Gollem",
+local v171 = v16.Sea:AddToggle("ToggleDefendVolcano", {
+    Title = "Phòng Thủ",
+    Description = "",
+    Default = false
+});
+v171:OnChanged(function(v401)
+    _G.AutoDefendVolcano = v401;
+end);
+local v107 = v16.Sea:AddToggle("ToggleMelee", {
+    Title = "Dùng Melee",
+    Description = "",
+    Default = false
+});
+v107:OnChanged(function(v402)
+    _G.UseMelee = v402;
+end);
+local v109 = v16.Sea:AddToggle("ToggleSword", {
+    Title = "Dùng Sword",
+    Description = "",
+    Default = false
+});
+v109:OnChanged(function(v403)
+    _G.UseSword = v403;
+end);
+local v110 = v16.Sea:AddToggle("ToggleGun", {
+    Title = "Dùng Gun",
+    Description = "",
+    Default = false
+});
+v110:OnChanged(function(v404)
+    _G.UseGun = v404;
+end);
+local function v172(v405)
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, v405, false, game);
+    game:GetService("VirtualInputManager"):SendKeyEvent(false, v405, false, game);
+end
+local function v173()
+    local v406 = game.Workspace.Map.PrehistoricIsland.Core:FindFirstChild("InteriorLava");
+    if (v406 and v406:IsA("Model")) then
+        v406:Destroy();
+    end
+    local v407 = game.Workspace.Map:FindFirstChild("PrehistoricIsland");
+    if v407 then
+        for v750, v751 in pairs(v407:GetDescendants()) do
+            if (v751:IsA("Part") and v751.Name:lower():find("lava")) then
+                v751:Destroy();
+            end
+        end
+    end
+    local v408 = game.Workspace.Map:FindFirstChild("PrehistoricIsland");
+    if v408 then
+        for v752, v753 in pairs(v408:GetDescendants()) do
+            if v753:IsA("Model") then
+                for v905, v906 in pairs(v753:GetDescendants()) do
+                    if (v906:IsA("MeshPart") and v906.Name:lower():find("lava")) then
+                        v906:Destroy();
+                    end
+                end
+            end
+        end
+    end
+end
+local function v174()
+    local v409 = game.Workspace.Map.PrehistoricIsland.Core.VolcanoRocks;
+    for v564, v565 in pairs(v409:GetChildren()) do
+        if v565:IsA("Model") then
+            local v754 = v565:FindFirstChild("volcanorock");
+            if (v754 and v754:IsA("MeshPart")) then
+                local v881 = v754.Color;
+                if ((v881 == Color3.fromRGB(185, 53, 56)) or (v881 == Color3.fromRGB(185, 53, 57))) then
+                    return v754;
+                end
+            end
+        end
+    end
+    return nil;
+end
+local function v162(v410)
+    local v411 = game.Players.LocalPlayer;
+    local v412 = v411.Backpack;
+    for v566, v567 in pairs(v412:GetChildren()) do
+        if (v567:IsA("Tool") and (v567.ToolTip == v410)) then
+            v567.Parent = v411.Character;
+            for v818, v819 in ipairs({
+                "Z",
+                "X",
+                "C",
+                "V",
+                "F"
+            }) do
+                wait();
+                pcall(function()
+                    v172(v819);
+                end);
+            end
+            v567.Parent = v412;
+            break;
+        end
+    end
+end
+spawn(function()
+    while wait() do
+        if _G.AutoDefendVolcano then
+            AutoHaki();
+            pcall(v173);
+            local v757 = v174();
+            if v757 then
+                local v882 = CFrame.new(v757.Position + Vector3.new(0, 0, 0));
+                Tween2(v882);
+                local v883 = v757.Color;
+                if ((v883 ~= Color3.fromRGB(185, 53, 56)) and (v883 ~= Color3.fromRGB(185, 53, 57))) then
+                    v757 = v174();
+                else
+                    local v1125 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
+                    local v1126 = ((v1125 - v757.Position) - Vector3.new(0, 0, 0)).Magnitude;
+                    if (v1126 <= 1) then
+                        if _G.UseMelee then
+                            v162("Melee");
+                        end
+                        if _G.UseSword then
+                            v162("Sword");
+                        end
+                        if _G.UseGun then
+                            v162("Gun");
+                        end
+                    end
+                    _G.TweenToPrehistoric = false;
+                end
+            else
+                _G.TweenToPrehistoric = true;
+            end
+        end
+    end
+end);
+local v175 = Tabs.Fish:AddToggle("ToggleKillAura", {
+    Title = "Kill Golem",
     Description = "",
     Default = false
 });
@@ -9770,7 +9906,7 @@ spawn(function()
                 for v884, v885 in pairs(game.Workspace.Enemies:GetDescendants()) do
                     if (v885:FindFirstChild("Humanoid") and v885:FindFirstChild("HumanoidRootPart") and (v885.Humanoid.Health > 0)) then
                         repeat
-                            task.wait();
+                            wait();
                             sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge);
                             v885.Humanoid.Health = 0;
                             v885.HumanoidRootPart.CanCollide = false;
@@ -9778,56 +9914,6 @@ spawn(function()
                     end
                 end
             end);
-        end
-    end
-end);
-
-local v176 = Tabs.Fish:AddToggle("ToggleCollectBone", {
-    Title = "Collect Bone",
-    Description = "",
-    Default = false
-});
-v176:OnChanged(function(v414)
-    _G.AutoCollectBone = v414;
-end);
-spawn(function()
-    while wait() do
-        if _G.AutoCollectBone then
-            for v820, v821 in pairs(workspace:GetDescendants()) do
-                if (v821:IsA("BasePart") and (v821.Name == "DinoBone")) then
-                    Tween2(CFrame.new(v821.Position));
-                end
-            end
-        end
-    end
-end);
-
-local v177 = Tabs.Fish:AddToggle("ToggleCollectEgg", {
-    Title = "Collect Egg",
-    Description = "",
-    Default = false
-});
-v177:OnChanged(function(v415)
-    _G.AutoCollectEgg = v415;
-end);
-spawn(function()
-    while wait() do
-        if _G.AutoCollectEgg then
-            local v758 = workspace.Map.PrehistoricIsland.Core.SpawnedDragonEggs:GetChildren();
-            if (# v758 > 0) then
-                local v886 = v758[math.random(1, # v758)];
-                if (v886:IsA("Model") and v886.PrimaryPart) then
-                    Tween2(v886.PrimaryPart.CFrame);
-                    local v1127 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
-                    local v1128 = v886.PrimaryPart.Position;
-                    local v1129 = (v1127 - v1128).Magnitude;
-                    if (v1129 <= 1) then
-                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game);
-                        wait(1.5);
-                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game);
-                    end
-                end
-            end
         end
     end
 end);
