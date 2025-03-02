@@ -9543,38 +9543,6 @@ if Second_Sea or Third_Sea then
     )
 end
 
-if Second_Sea then
-    local ToggleSwordLengend =
-        Tabs.Item:AddToggle("ToggleSwordLengend", {Title = "Buy Sword Lengendary", Default = false})
-    ToggleSwordLengend:OnChanged(
-        function(Value)
-            _G.BuyLengendSword = Value
-        end
-    )
-    Options.ToggleSwordLengend:SetValue(false)
-
-    spawn(
-        function()
-            while wait(.1) do
-                pcall(
-                    function()
-                        if _G.BuyLengendSword or Triple_A then
-                            local args = {
-                                [1] = "LegendarySwordDealer",
-                                [2] = "2"
-                            }
-                            -- Triple_A
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                        else
-                            wait(2)
-                        end
-                    end
-                )
-            end
-        end
-    )
-end
-
 local Chestt = Tabs.Item:AddSection("Chest Farm")
 
 local ToggleFarmChest = Tabs.Item:AddToggle("ToggleFarmChest", {Title = "Auto Farm Chest[Tween]", Default = false})
