@@ -9940,7 +9940,7 @@ Tabs.Volcanic:AddButton({
     end
 })
 
-sIsl", {Title = "Tween To Prehistoric Island", Default = false })
+local PrehisIsl = Tabs.Volcanic:AddToggle("PrehisIsl", {Title = "Tween To Prehistoric Island", Default = false })
 PrehisIsl:OnChanged(function(Value)
     _G.TweenToPrehistoric = Value
 end)
