@@ -8646,7 +8646,7 @@ spawn(
 end
 
 if Second_Sea then
-    local v539 = v16.Main:AddToggle("ToggleSwordLengend", {
+    local v539 = Tabs.Main:AddToggle("ToggleSwordLengend", {
         Title = "Buy Legend Sword",
         Description = "",
         Default = false
@@ -8671,6 +8671,49 @@ if Second_Sea then
         end
     end);
 end
+
+local v84 = Tabs.Main:AddToggle("ToggleAutoRengoku", {
+    Title = "Rengoku",
+    Description = "",
+    Default = false
+});
+v84:OnChanged(function(v272)
+    _G.Auto_Regoku = v272;
+end);
+Options.ToggleAutoRengoku:SetValue(false);
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.Auto_Regoku then
+                if (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hidden Key")) then
+                    EquipTool("Hidden Key");
+                    Tween(CFrame.new(6571.1201171875, 299.23028564453, - 6967.841796875));
+                elseif (game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker") or game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior")) then
+                    for v1466, v1467 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if (((v1467.Name == "Snow Lurker") or (v1467.Name == "Arctic Warrior")) and (v1467.Humanoid.Health > 0)) then
+                            repeat
+                                wait(_G.Fast_Delay);
+                                EquipTool(SelectWeapon);
+                                AutoHaki();
+                                v1467.HumanoidRootPart.CanCollide = false;
+                                v1467.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                FarmPos = v1467.HumanoidRootPart.CFrame;
+                                MonFarm = v1467.Name;
+                                Tween(v1467.HumanoidRootPart.CFrame * Pos);
+                                AttackNoCoolDown();
+                                bringmob = true;
+                            until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or (_G.Auto_Regoku == false) or not v1467.Parent or (v1467.Humanoid.Health <= 0)
+                            bringmob = false;
+                        end
+                    end
+                else
+                    bringmob = false;
+                    Tween(CFrame.new(5439.716796875, 84.420944213867, - 6715.1635742188));
+                end
+            end
+        end
+    end);
+end);
 
 local v82 =
     Tabs.Item:AddToggle(
