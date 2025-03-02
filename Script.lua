@@ -9939,7 +9939,7 @@ Tabs.Volcanic:AddButton({
     end
 })
 
-local v510 = v16.Sea:AddToggle("AutoFindPrehistoric", {
+local v510 = Tabs.Volcanic:AddToggle("AutoFindPrehistoric", {
         Title = "Tìm Đảo Dung Nham",
         Description = "",
         Default = false
