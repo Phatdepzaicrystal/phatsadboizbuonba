@@ -6862,21 +6862,15 @@ AutoV3:OnChanged(
     end
 )
 Options.ToggleAutoT:SetValue(false)
-spawn(
-    function()
-        while wait() do
-            pcall(
-                function()
-                    if _G.AutoT then
-                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "T", false, game)
-                        wait()
-                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "T", false, game)
-                    end
-                end
-            )
-        end
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoT then
+                game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("ActivateAbility");
+            end
+        end);
     end
-)
+end);
 
 local v86 =
     Tabs.Setting:AddToggle(
@@ -6989,6 +6983,53 @@ spawn(
         end
     end
 )
+
+local RemoveNotify = Tabs.Setting:AddToggle("ToggleRemoveNotify", {
+    Title = "Remove Notifications",
+    Description = "",
+    Default = false
+});
+RemoveNotify:OnChanged(function(v278)
+    RemoveNotify = v278;
+end);
+Options.ToggleRemoveNotify:SetValue(false);
+spawn(function()
+    while wait() do
+        if RemoveNotify then
+            game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false;
+        else
+            game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true;
+        end
+    end
+end);
+
+local SetSpawn = Tabs.Setting:AddToggle("ToggleSaveSpawn", {
+    Title = "Auto Set Spawn",
+    Description = "",
+    Default = false
+});
+SetSpawn:OnChanged(function(v276)
+    _G.SaveSpawn = v276;
+    if v276 then
+        local v648 = {
+            [1] = "SetSpawnPoint"
+        };
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v648));
+    end
+end);
+Options.ToggleSaveSpawn:SetValue(false);
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.SaveSpawn then
+                local v797 = {
+                    [1] = "SetSpawnPoint"
+                };
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v797));
+            end
+        end);
+    end
+end);
 
 local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
 ToggleWhite:OnChanged(
