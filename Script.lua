@@ -9966,8 +9966,10 @@ spawn(function()
     end
 end)
 
+local Vocaniga = Tabs.Volcanic:AddSection("Volcano Event")
+
 Tabs.Volcanic:AddButton({
-    Title = "Crafting Volcanic Magnet",
+    Title = "Auto Craft Volcanic Magnet",
     Callback = function()
         local craftvol = {
             [1] = "CraftItem",
@@ -12623,6 +12625,33 @@ spawn(function()
             else
                 _G.TweenToPrehistoric = true;
             end
+        end
+    end
+end);
+local v175 = Tabs.Volcanic:AddToggle("ToggleKillAura", {
+    Title = "Auto Kill Golems",
+    Description = "",
+    Default = false
+});
+v175:OnChanged(function(v413)
+    KillAura = v413;
+end);
+Options.ToggleKillAura:SetValue(false);
+spawn(function()
+    while wait() do
+        if KillAura then
+            pcall(function()
+                for v884, v885 in pairs(game.Workspace.Enemies:GetDescendants()) do
+                    if (v885:FindFirstChild("Humanoid") and v885:FindFirstChild("HumanoidRootPart") and (v885.Humanoid.Health > 0)) then
+                        repeat
+                            task.wait();
+                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge);
+                            v885.Humanoid.Health = 0;
+                            v885.HumanoidRootPart.CanCollide = false;
+                        until not KillAura or not v885.Parent or (v885.Humanoid.Health <= 0)
+                    end
+                end
+            end);
         end
     end
 end);
