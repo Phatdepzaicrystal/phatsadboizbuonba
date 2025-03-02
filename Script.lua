@@ -1,6 +1,6 @@
 --[[
 getgenv().Team = "Marines"          -- Pirates or Marines
-loadstring(game:HttpGet("gihttps://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/Main/Test.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/Script.lua"))()
 ]] --
 if getgenv().Team == "Pirates" then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
