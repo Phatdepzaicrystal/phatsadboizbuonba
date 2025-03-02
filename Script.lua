@@ -9670,7 +9670,7 @@ spawn(function()
         if getgenv().DojoClaimQuest and Third_Sea then
             pcall(function()
                 if BypassTP then
-                    BTPZ(DojoQuestNpc)
+                    BTP(DojoQuestNpc)
                 else
                     Tween(DojoQuestNpc)
                 end
@@ -9755,137 +9755,6 @@ spawn(function()
         end
     end
 end)
-
-local function v172(v405)
-    game:GetService("VirtualInputManager"):SendKeyEvent(true, v405, false, game);
-    game:GetService("VirtualInputManager"):SendKeyEvent(false, v405, false, game);
-end
-local function v173()
-    local v406 = game.Workspace.Map.PrehistoricIsland.Core:FindFirstChild("InteriorLava");
-    if (v406 and v406:IsA("Model")) then
-        v406:Destroy();
-    end
-    local v407 = game.Workspace.Map:FindFirstChild("PrehistoricIsland");
-    if v407 then
-        for v750, v751 in pairs(v407:GetDescendants()) do
-            if (v751:IsA("Part") and v751.Name:lower():find("lava")) then
-                v751:Destroy();
-            end
-        end
-    end
-    local v408 = game.Workspace.Map:FindFirstChild("PrehistoricIsland");
-    if v408 then
-        for v752, v753 in pairs(v408:GetDescendants()) do
-            if v753:IsA("Model") then
-                for v905, v906 in pairs(v753:GetDescendants()) do
-                    if (v906:IsA("MeshPart") and v906.Name:lower():find("lava")) then
-                        v906:Destroy();
-                    end
-                end
-            end
-        end
-    end
-end
-local function v174()
-    local v409 = game.Workspace.Map.PrehistoricIsland.Core.VolcanoRocks;
-    for v564, v565 in pairs(v409:GetChildren()) do
-        if v565:IsA("Model") then
-            local v754 = v565:FindFirstChild("volcanorock");
-            if (v754 and v754:IsA("MeshPart")) then
-                local v881 = v754.Color;
-                if ((v881 == Color3.fromRGB(185, 53, 56)) or (v881 == Color3.fromRGB(185, 53, 57))) then
-                    return v754;
-                end
-            end
-        end
-    end
-    return nil;
-end
-local function v162(v410)
-    local v411 = game.Players.LocalPlayer;
-    local v412 = v411.Backpack;
-    for v566, v567 in pairs(v412:GetChildren()) do
-        if (v567:IsA("Tool") and (v567.ToolTip == v410)) then
-            v567.Parent = v411.Character;
-            for v818, v819 in ipairs({
-                "Z",
-                "X",
-                "C",
-                "V",
-                "F"
-            }) do
-                wait();
-                pcall(function()
-                    v172(v819);
-                end);
-            end
-            v567.Parent = v412;
-            break;
-        end
-    end
-end
-spawn(function()
-    while wait() do
-        if _G.AutoDefendVolcano then
-            AutoHaki();
-            pcall(v173);
-            local v757 = v174();
-            if v757 then
-                local v882 = CFrame.new(v757.Position + Vector3.new(0, 0, 0));
-                Tween2(v882);
-                local v883 = v757.Color;
-                if ((v883 ~= Color3.fromRGB(185, 53, 56)) and (v883 ~= Color3.fromRGB(185, 53, 57))) then
-                    v757 = v174();
-                else
-                    local v1125 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
-                    local v1126 = ((v1125 - v757.Position) - Vector3.new(0, 0, 0)).Magnitude;
-                    if (v1126 <= 1) then
-                        if _G.UseMelee then
-                            v162("Melee");
-                        end
-                        if _G.UseSword then
-                            v162("Sword");
-                        end
-                        if _G.UseGun then
-                            v162("Gun");
-                        end
-                    end
-                    _G.TweenToPrehistoric = false;
-                end
-            else
-                _G.TweenToPrehistoric = true;
-            end
-        end
-    end
-end);
-
-local v175 = Tabs.Volcanic:AddToggle("ToggleKillAura", {
-    Title = "Đấm Golems Aura",
-    Description = "",
-    Default = false
-});
-v175:OnChanged(function(v413)
-    KillAura = v413;
-end);
-Options.ToggleKillAura:SetValue(false);
-spawn(function()
-    while wait() do
-        if KillAura then
-            pcall(function()
-                for v884, v885 in pairs(game.Workspace.Enemies:GetDescendants()) do
-                    if (v885:FindFirstChild("Humanoid") and v885:FindFirstChild("HumanoidRootPart") and (v885.Humanoid.Health > 0)) then
-                        repeat
-                            task.wait();
-                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge);
-                            v885.Humanoid.Health = 0;
-                            v885.HumanoidRootPart.CanCollide = false;
-                        until not KillAura or not v885.Parent or (v885.Humanoid.Health <= 0)
-                    end
-                end
-            end);
-        end
-    end
-end);
 
 local v176 = Tabs.Volcanic:AddToggle("ToggleCollectBone", {
     Title = "Lụm Xương",
