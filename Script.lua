@@ -9771,32 +9771,6 @@ spawn(
     end
 )
 
-local v539 = Tabs.Item:AddToggle("ToggleSwordLengend", {
-    Title = "Buy Legend Sword",
-    Description = "",
-    Default = false
-});
-v539:OnChanged(function(v646)  
-    _G.BuyLengendSword = v646;
-end);
-Options.ToggleSwordLengend:SetValue(false);
-    spawn(function()
-        while wait() do
-            pcall(function()
-                if (_G.BuyLengendSword or Triple_A) then
-                    local v897 = {
-                        [1] = "LegendarySwordDealer",
-                        [2] = "2"
-                    };
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v897));
-                else
-                    wait();
-                end
-            end);
-        end
-    end);
-end
-
 if Second_Sea or Third_Sea then
     local ToggleHakiColor = Tabs.Item:AddToggle("ToggleHakiColor", {Title = "Buy Haki Color", Default = false})
     ToggleHakiColor:OnChanged(
