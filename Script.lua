@@ -11720,6 +11720,34 @@ spawn(
 
 Tabs.Shop:AddButton(
     {
+        Title = "Pray",
+        Description = "",
+        Callback = function()
+            local v573 = {
+                [1] = "gravestoneEvent",
+                [2] = 2
+            };
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v573));
+        end
+    }
+)
+
+Tabs.Shop:AddButton(
+    {
+        Title = "Try Luck",
+        Description = "",
+        Callback = function()
+            local v572 = {
+                [1] = "gravestoneEvent",
+                [2] = 1
+            };
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v572));
+        end
+    }
+)
+
+Tabs.Shop:AddButton(
+    {
         Title = "Geppo",
         Description = "",
         Callback = function()
