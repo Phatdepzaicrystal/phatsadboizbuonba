@@ -5809,78 +5809,151 @@ do
         )
     end
 
-local v518 = {
-     "Beast Hunter",
-     "Sleigh",
-     "Miracle",
-     "The Sentinel",
-     "Guardian",
-     "Lantern",
-     "Dinghy",
-     "PirateSloop",
-     "PirateBrigade",
-     "PirateGrandBrigade",
-     "MarineGrandBrigade",
-     "MarineBrigade",
-     "MarineSloop"
-};
-    
-local v519 = Tabs.Fish:AddDropdown("DropdownBoat", {
-        Title = "Chọn Thuyền",
-        Description = "",
-        Values = v518,
-        Multi = false,
-        Default = 1
-    });
-    v519:SetValue(selectedBoat);
-    v519:OnChanged(function(v627)
-        selectedBoat = v627;
-    end);
-    local function v520(v628)
-        local v629 = {
-            [1] = "BuyBoat",
-            [2] = v628
-        };
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v629));
-        delay(2), function()
-            for v791, v792 in pairs(v507.Boats:GetChildren()) do
-                if (v792:IsA("Model") and (v792.Name == v628)) then
-                    local v896 = v792:FindFirstChild("VehicleSeat");
-                    if (v896 and not v896.Occupant) then
-                        v511[v628] = v896;
-                    end
+
+    if Second_Sea or Third_Sea then
+        local RoughSea = Tabs.Fish:AddSection("Rough Sea")
+
+        local ToggleSailBoat = Tabs.Fish:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false})
+        ToggleSailBoat:OnChanged(
+            function(Value)
+                _G.SailBoat = Value
+            end
+        )
+        Options.ToggleSailBoat:SetValue(false)
+
+        spawn(
+            function()
+                while wait() do
+                    pcall(
+                        function()
+                            if _G.SailBoat then
+                                if
+                                    not game:GetService("Workspace").Enemies:FindFirstChild("Shark") or
+                                        not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or
+                                        not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or
+                                        not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member")
+                                 then
+                                    if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                        buyb =
+                                            TweenBoat(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
+                                        if
+                                            (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position -
+                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
+                                                10
+                                         then
+                                            if buyb then
+                                                buyb:Stop()
+                                            end
+                                            local args = {
+                                                [1] = "BuyBoat",
+                                                [2] = "PirateGrandBrigade"
+                                            }
+
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
+                                                unpack(args)
+                                            )
+                                        end
+                                    elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
+                                        if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+                                            TweenBoat(
+                                                game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame *
+                                                    CFrame.new(0, 1, 0)
+                                            )
+                                        else
+                                            for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                                if v.Name == "PirateGrandBrigade" then
+                                                    repeat
+                                                        wait()
+                                                        if
+                                                            (CFrame.new(
+                                                                -17013.80078125,
+                                                                10.962434768676758,
+                                                                438.0169982910156
+                                                            ).Position -
+                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
+                                                                10
+                                                         then
+                                                            TweenShip(
+                                                                CFrame.new(
+                                                                    -33163.1875,
+                                                                    10.964323997497559,
+                                                                    -324.4842224121094
+                                                                )
+                                                            )
+                                                        elseif
+                                                            (CFrame.new(
+                                                                -33163.1875,
+                                                                10.964323997497559,
+                                                                -324.4842224121094
+                                                            ).Position -
+                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
+                                                                10
+                                                         then
+                                                            TweenShip(
+                                                                CFrame.new(
+                                                                    -37952.49609375,
+                                                                    10.96342945098877,
+                                                                    -1324.12109375
+                                                                )
+                                                            )
+                                                        elseif
+                                                            (CFrame.new(
+                                                                -37952.49609375,
+                                                                10.96342945098877,
+                                                                -1324.12109375
+                                                            ).Position -
+                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
+                                                                10
+                                                         then
+                                                            TweenShip(
+                                                                CFrame.new(
+                                                                    -33163.1875,
+                                                                    10.964323997497559,
+                                                                    -324.4842224121094
+                                                                )
+                                                            )
+                                                        end
+                                                    until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or
+                                                        game:GetService("Workspace").Enemies:FindFirstChild(
+                                                            "Terrorshark"
+                                                        ) or
+                                                        game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or
+                                                        game:GetService("Workspace").Enemies:FindFirstChild(
+                                                            "Fish Crew Member"
+                                                        ) or
+                                                        _G.SailBoat == false
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    )
                 end
             end
-        end);
-    end
-    local function v521()
-        for v720, v721 in pairs(v511) do
-            if (v721 and v721.Parent and (v721.Name == "VehicleSeat") and not v721.Occupant) then
-                Tween2(v721.CFrame);
+        )
+
+        spawn(
+            function()
+                pcall(
+                    function()
+                        while wait() do
+                            if _G.SailBoat then
+                                if
+                                    game:GetService("Workspace").Enemies:FindFirstChild("Shark") or
+                                        game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or
+                                        game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or
+                                        game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member")
+                                 then
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                end
+                            end
+                        end
+                    end
+                )
             end
-        end
-    end
-    game:GetService("RunService").RenderStepped:Connect(function()
-        for v722, v723 in pairs(v511) do
-            if (v723 and v723.Parent and (v723.Name == "VehicleSeat") and not v723.Occupant) then
-                v511[v722] = v723;
-            end
-        end
-    end);
-Tabs.Fish:AddButton({
-        Title = "Mua Thuyền",
-        Description = "",
-        Callback = function()
-            v520(selectedBoat);
-        end
-    });
-Tabs.Fish:AddButton({
-     Title = "Bay Đến Thuyền",
-     Description = "Duy Nhất Thuyền Bạn Mua Ở Chỗ Chọn",
-     Callback = function()
-           v521();
-        end
-    });
+        )
 
         local ToggleTerrorshark =
             Tabs.Fish:AddToggle("ToggleTerrorshark", {Title = " Kill Terrorshark", Default = false})
@@ -9833,7 +9906,6 @@ spawn(function()
 	end
 end);
 -------------------------------------------------Tab Volcano----------------------------------------------------------------------------------
-local Gojo = Tabs.Volcanic:AddSection("Dojo Quest")
 local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
 ToogleDojoQ:OnChanged(function(Value)
     getgenv().DojoClaimQuest = Value
@@ -9894,8 +9966,6 @@ spawn(function()
     end
 end)
 
-local Volcano = Tabs.Volcanic.AddSection("Volcano Event")
-
 Tabs.Volcanic:AddButton({
     Title = "Crafting Volcanic Magnet",
     Callback = function()
@@ -9932,6 +10002,8 @@ spawn(function()
         end
     end
 end)
+
+
 
 local v176 = Tabs.Volcanic:AddToggle("ToggleCollectBone", {
     Title = "Collect Bone",
