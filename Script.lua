@@ -10056,20 +10056,19 @@ spawn(function()
     end
 end);
 
-if Third_Sea then
-    local vnamk4 = game:GetService("Players");
-    local vnamk5 = game:GetService("RunService");
-    local vnamk6 = game:GetService("VirtualInputManager");
-    local vnamk7 = game:GetService("Workspace");
-    local vnam10 = Tabs.Volcanic:AddToggle("AutoFindPrehistoric", {
-        Title = "Auto Find Prehistoric",
-        Description = "",
-        Default = false
-    });
-    Options.AutoFindPrehistoric:SetValue(false);
-    vnam10:OnChanged(function(v584)
-        _G.AutoFindPrehistoric = v584;
-    end);
+local vnamk4 = game:GetService("Players");
+local vnamk5 = game:GetService("RunService");
+local vnamk6 = game:GetService("VirtualInputManager");
+local vnamk7 = game:GetService("Workspace");
+local vnam10 = Tabs.Volcanic:AddToggle("AutoFindPrehistoric", {
+      Title = "Auto Find Prehistoric",  
+      Description = "",
+      Default = false
+});
+Options.AutoFindPrehistoric:SetValue(false);
+vnam10:OnChanged(function(v584)
+     _G.AutoFindPrehistoric = v584;
+end);
     local v5mot1 = {};
     local v5mot2 = false;
     local v5mot3 = false;
@@ -10122,21 +10121,6 @@ if Third_Sea then
         for v689, v690 in pairs(v586:GetDescendants()) do
             if v690:IsA("BasePart") then
                 v690.CanCollide = false;
-            end
-        end
-        local Ship = {
-            "ShipwreckIsland",
-            "SandIsland",
-            "TreeIsland",
-            "TinyIsland",
-            "MysticIsland",
-            "KitsuneIsland",
-            "FrozenDimension"
-        };
-        for v691, v692 in ipairs(Ship) do
-            local v693 = vnamk7.Map:FindFirstChild(v692);
-            if (v693 and v693:IsA("Model")) then
-                v693:Destroy();
             end
         end
         local v594 = vnamk7.Map:FindFirstChild("PrehistoricIsland");
