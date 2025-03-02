@@ -8646,7 +8646,7 @@ spawn(
 end
 
 if Second_Sea then
-    local v539 = Tabs.Main:AddToggle("ToggleSwordLengend", {
+    local v539 = Tabs.Item:AddToggle("ToggleSwordLengend", {
         Title = "Buy Legend Sword",
         Description = "",
         Default = false
@@ -8672,7 +8672,7 @@ if Second_Sea then
     end);
 end
 
-local v84 = Tabs.Main:AddToggle("ToggleAutoRengoku", {
+local v84 = Tabs.Item:AddToggle("ToggleAutoRengoku", {
     Title = "Auto Rengoku",
     Description = "",
     Default = false
@@ -8715,7 +8715,7 @@ spawn(function()
     end);
 end);
 
-local v79 = Tabs.Main:AddToggle("ToggleAutoSkullGuitar", {
+local v79 = Tabs.Item:AddToggle("ToggleAutoSkullGuitar", {
     Title = "Skull Guitar",
     Description = "",
     Default = false
@@ -8836,6 +8836,49 @@ spawn(function()
                 end
             end
         end);
+    end
+end);
+
+local v80 = Tabs.Item:AddToggle("ToggleAutoBuddy", {
+    Title = "Auto Buddy",
+    Description = "",
+    Default = false
+});
+v80:OnChanged(function(v269)
+    _G.Auto_Buddy = v269;
+end);
+Options.ToggleAutoBuddy:SetValue(false);
+local v81 = CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875);
+spawn(function()
+    while wait() do
+        if _G.Auto_Buddy then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen") then
+                    for v1050, v1051 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if (v1051.Name == "Cake Queen") then
+                            if (v1051:FindFirstChild("Humanoid") and v1051:FindFirstChild("HumanoidRootPart") and (v1051.Humanoid.Health > 0)) then
+                                repeat
+                                    task.wait(_G.Fast_Delay);
+                                    AutoHaki();
+                                    EquipTool(SelectWeapon);
+                                    v1051.HumanoidRootPart.CanCollide = false;
+                                    v1051.Humanoid.WalkSpeed = 0;
+                                    v1051.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                    Tween(v1051.HumanoidRootPart.CFrame * Pos);
+                                    AttackNoCoolDown();
+                                until not _G.Auto_Buddy or not v1051.Parent or (v1051.Humanoid.Health <= 0)
+                            end
+                        end
+                    end
+                elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v81.Position).Magnitude < 1500) then
+                    Tween(v81);
+                end
+                Tween(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen") then
+                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
+                end
+            end);
+        end
     end
 end);
 
