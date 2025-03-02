@@ -9756,7 +9756,7 @@ spawn(function()
     end
 end)
 
-local v171 = v16.Sea:AddToggle("ToggleDefendVolcano", {
+local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
     Title = "Phòng Thủ",
     Description = "",
     Default = false
@@ -9764,7 +9764,7 @@ local v171 = v16.Sea:AddToggle("ToggleDefendVolcano", {
 v171:OnChanged(function(v401)
     _G.AutoDefendVolcano = v401;
 end);
-local v107 = v16.Sea:AddToggle("ToggleMelee", {
+local v107 = Tabs.Volcanic:AddToggle("ToggleMelee", {
     Title = "Dùng Melee",
     Description = "",
     Default = false
@@ -9772,7 +9772,7 @@ local v107 = v16.Sea:AddToggle("ToggleMelee", {
 v107:OnChanged(function(v402)
     _G.UseMelee = v402;
 end);
-local v109 = v16.Sea:AddToggle("ToggleSword", {
+local v109 = Tabs.Volcanic:AddToggle("ToggleSword", {
     Title = "Dùng Sword",
     Description = "",
     Default = false
@@ -9780,7 +9780,7 @@ local v109 = v16.Sea:AddToggle("ToggleSword", {
 v109:OnChanged(function(v403)
     _G.UseSword = v403;
 end);
-local v110 = v16.Sea:AddToggle("ToggleGun", {
+local v110 = Tabs.Volcanic:AddToggle("ToggleGun", {
     Title = "Dùng Gun",
     Description = "",
     Default = false
@@ -9890,7 +9890,7 @@ spawn(function()
         end
     end
 end);
-local v175 = Tabs.Fish:AddToggle("ToggleKillAura", {
+local v175 = Tabs.Volcanic:AddToggle("ToggleKillAura", {
     Title = "Kill Golem",
     Description = "",
     Default = false
