@@ -3134,162 +3134,532 @@ local boss = Tabs.Main:AddSection("Boss Farm")
         end
       end)
 
-      if Third_Sea then
-      local RoughSea = Tabs.Main:AddSection("🦊 Kitsune 🦊")
-
-
-      local ToggleEspKitsune = Tabs.Main:AddToggle("ToggleEspKitsune", {Title = "Esp Kitsune Island", Default = false })
-      ToggleEspKitsune:OnChanged(function(Value)
-        KitsuneEsp = Value
-        while IslandESP do wait()
-            UpdateKitsune() 
-        end
-    end)
-      Options.ToggleEspKitsune:SetValue(false)
-
-      function UpdateKitsune()
-        for i, v in pairs(game:GetService("Workspace").Map.KitsuneIsalnd.ShrineActive:GetChildren()) do
-            pcall(function()
-                if KitsuneEsp then
-                    if v.Name ~= "NeonShrinePart" then
-                        if not v:FindFirstChild('IslandESP') then
-                            local bill = Instance.new('BillboardGui', v)
-                            bill.Name = 'IslandESP'
-                            bill.ExtentsOffset = Vector3.new(0, 1, 0)
-                            bill.Size = UDim2.new(1, 200, 1, 30)
-                            bill.Adornee = v
-                            bill.AlwaysOnTop = true
-                            local name = Instance.new('TextLabel', bill)
-                            name.Font = "Code"
-                            name.FontSize = "Size14"
-                            name.TextWrapped = true
-                            name.Size = UDim2.new(1, 0, 1, 0)
-                            name.TextYAlignment = 'Top'
-                            name.BackgroundTransparency = 1
-                            name.TextStrokeTransparency = 0.5
-                            name.TextColor3 = Color3.fromRGB(80, 245, 245)
-                            name.Text = "Kitsune Island"
-                        else
-                            v['IslandESP'].TextLabel.Text = "Kitsune Island"
-                        end
-                    end
-                else
-                    if v:FindFirstChild('IslandESP') then
-                        v:FindFirstChild('IslandESP'):Destroy()
-                    end
-                end
-            end)
+if Third_Sea then
+    local v498 = Tabs.Fish:AddSection("Đảo Cáo");
+    local v499 = Tabs.Fish:AddParagraph({
+        Title = "Trạng Thái Đảo Cáo",
+        Content = ""
+    });
+    function UpdateKitsune()
+        if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
+            v499:SetDesc("Đảo Cáo : ✅️");
+        else
+            v499:SetDesc("Đảo Cáo : ❌️");
         end
     end
-
-      local ToggleTPKitsune = Tabs.Main:AddToggle("ToggleTPKitsune", {Title = "Tween To Kitsune Island", Default = false })
-      ToggleTPKitsune:OnChanged(function(Value)
-        _G.TweenToKitsune = Value
-      end)
-      Options.ToggleTPKitsune:SetValue(false)
-      spawn(function()
-        local kitsuneIsland
-        while not kitsuneIsland do
-            kitsuneIsland = game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland")
-            wait(1)
+    spawn(function()
+        pcall(function()
+            while wait() do
+                UpdateKitsune();
+            end
+        end);
+    end);
+    local v501 = Tabs.Fish:AddToggle("ToggleTPKitsune", {
+        Title = "Bay Vô Đảo Cáo",
+        Description = "",
+        Default = false
+    });
+    v501:OnChanged(function(v580)
+        _G.TweenToKitsune = v580;
+    end);
+    Options.ToggleTPKitsune:SetValue(false);
+    spawn(function()
+        local v581;
+        while not v581 do
+            v581 = game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland");
+            wait();
         end
         while wait() do
             if _G.TweenToKitsune then
-                local shrineActive = kitsuneIsland:FindFirstChild("ShrineActive")
-                if shrineActive then
-                    for _, v in pairs(shrineActive:GetDescendants()) do
-                        if v:IsA("BasePart") and v.Name:find("NeonShrinePart") then
-                            Tween(v.CFrame)
+                local v845 = v581:FindFirstChild("ShrineActive");
+                if v845 then
+                    for v1335, v1336 in pairs(v845:GetDescendants()) do
+                        if (v1336:IsA("BasePart") and v1336.Name:find("NeonShrinePart")) then
+                            Tween(v1336.CFrame);
                         end
                     end
                 end
             end
         end
-    end)
-
-
-      local ToggleCollectAzure = Tabs.Main:AddToggle("ToggleCollectAzure", {Title = "Collect Azure Ambers", Default = false })
-      ToggleCollectAzure:OnChanged(function(Value)
-         _G.CollectAzure = Value
-      end)
-      Options.ToggleCollectAzure:SetValue(false)
-spawn(function()
-    while wait() do
-        if _G.CollectAzure then
-            pcall(function()
-                if game:GetService("Workspace"):FindFirstChild("AttachedAzureEmber") then
-                    Tween(game:GetService("Workspace"):WaitForChild("EmberTemplate"):FindFirstChild("Part").CFrame)
-					print("Azure")
-                end
-            end)
-        end
-    end
-end)
-end
-
-if Third_Sea then
-    local RoughSea = Tabs.Main:AddSection("Rough Sea")
-
-    local ToggleSailBoat = Tabs.Main:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false })
-    ToggleSailBoat:OnChanged(function(Value)
-        _G.SailBoat = Value
-    end)
-    Options.ToggleSailBoat:SetValue(false)
-
-
+    end);
+    local v502 = Tabs.Fish:AddToggle("ToggleCollectAzure", {
+        Title = "Lụm Linh Hồn Xanh",
+        Description = "",
+        Default = false
+    });
+    v502:OnChanged(function(v582)
+        _G.CollectAzure = v582;
+    end);
+    Options.ToggleCollectAzure:SetValue(false);
     spawn(function()
         while wait() do
-            pcall(function()
-                if _G.SailBoat then
-                    if not game:GetService("Workspace").Enemies:FindFirstChild("Shark") or not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
-                        if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
-                            buyb = TweenBoat(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
-                            if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
-                                if buyb then buyb:Stop() end
-                                local args = {
-                                    [1] = "BuyBoat",
-                                    [2] = "PirateGrandBrigade"
-                                }
-    
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                            end
-                        elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
-                            if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
-                                TweenBoat(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0,1,0))
-                            else
-                                for i,v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
-                                    if v.Name == "PirateGrandBrigade" then
-                                        repeat wait()
-                                            if (CFrame.new(-17013.80078125, 10.962434768676758, 438.0169982910156).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
-                                                TweenShip(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
-                                            elseif (CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
-                                                TweenShip(CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375))
-                                            elseif (CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
-                                                TweenShip(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
-                                            end 
-                                        until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or _G.SailBoat == false
-                                    end
-                                end
-                            end
-                        end
+            if _G.CollectAzure then
+                pcall(function()
+                    if game:GetService("Workspace"):FindFirstChild("AttachedAzureEmber") then
+                        Tween(game:GetService("Workspace"):WaitForChild("EmberTemplate"):FindFirstChild("Part").CFrame);
+                    end
+                end);
+            end
+        end
+    end);
+end
+Tabs.Fish:AddButton({
+    Title = "Đổi Linh Hồn Xanh",
+    Description = "",
+    Callback = function()
+        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RF/KitsuneStatuePray"):InvokeServer();
+    end
+});
+if Third_Sea then
+    local v503 = Tabs.Fish:AddSection("Biển");
+    local v504 = game:GetService("Players");
+    local v505 = game:GetService("RunService");
+    local v506 = game:GetService("VirtualInputManager");
+    local v507 = game:GetService("Workspace");
+    local v508 = 350;
+    local v509 = Tabs.Fish:AddSlider("SliderSpeedBoat", {
+        Title = "Tốc Độ Thuyền",
+        Description = "",
+        Default = v508,
+        Min = 0,
+        Max = 350,
+        Rounding = 1,
+        Callback = function(v583)
+            v508 = v583;
+        end
+    });
+    v509:SetValue(v508);
+    local v510 = Tabs.Fish:AddToggle("AutoFindPrehistoric", {
+        Title = "Tìm Đảo Dung Nham",
+        Description = "",
+        Default = false
+    });
+    Options.AutoFindPrehistoric:SetValue(false);
+    v510:OnChanged(function(v584)
+        _G.AutoFindPrehistoric = v584;
+    end);
+    local v511 = {};
+    local v512 = false;
+    local v513 = false;
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoFindPrehistoric then
+            v513 = false;
+            return;
+        end
+        local v585 = v504.LocalPlayer;
+        local v586 = v585.Character;
+        if (not v586 or not v586:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local function v587()
+            if v512 then
+                return;
+            end
+            v512 = true;
+            for v769, v770 in pairs(v511) do
+                if (v770 and v770.Parent and (v770.Name == "VehicleSeat") and not v770.Occupant) then
+                    Tween2(v770.CFrame);
+                    break;
+                end
+            end
+            v512 = false;
+        end
+        local v588 = v586.Humanoid;
+        local v589 = false;
+        local v590 = nil;
+        for v684, v685 in pairs(v507.Boats:GetChildren()) do
+            local v686 = v685:FindFirstChild("VehicleSeat");
+            if (v686 and (v686.Occupant == v588)) then
+                v589 = true;
+                v590 = v686;
+                v511[v685.Name] = v686;
+            elseif (v686 and (v686.Occupant == nil)) then
+                v587();
+            end
+        end
+        if not v589 then
+            return;
+        end
+        v590.MaxSpeed = v508;
+        v590.CFrame = CFrame.new(Vector3.new(v590.Position.X, v590.Position.Y, v590.Position.Z)) * v590.CFrame.Rotation ;
+        v506:SendKeyEvent(true, "W", false, game);
+        for v687, v688 in pairs(v507.Boats:GetDescendants()) do
+            if v688:IsA("BasePart") then
+                v688.CanCollide = false;
+            end
+        end
+        for v689, v690 in pairs(v586:GetDescendants()) do
+            if v690:IsA("BasePart") then
+                v690.CanCollide = false;
+            end
+        end
+        local v593 = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "MysticIsland",
+            "KitsuneIsland",
+            "FrozenDimension"
+        };
+        for v691, v692 in ipairs(v593) do
+            local v693 = v507.Map:FindFirstChild(v692);
+            if (v693 and v693:IsA("Model")) then
+                v693:Destroy();
+            end
+        end
+        local v594 = v507.Map:FindFirstChild("PrehistoricIsland");
+        if v594 then
+            v506:SendKeyEvent(false, "W", false, game);
+            _G.AutoFindPrehistoric = false;
+            end
+            return;
+        end
+    end);
+    local v514 = Tabs.Fish:AddToggle("AutoFindMirage", {
+        Title = "Tìm Đảo Bí Ẩn",
+        Description = "",
+        Default = false
+    });
+    Options.AutoFindMirage:SetValue(false);
+    v514:OnChanged(function(v595)
+        _G.AutoFindMirage = v595;
+    end);
+    local v511 = {};
+    local v512 = false;
+    local v513 = false;
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoFindMirage then
+            v513 = false;
+            return;
+        end
+        local v596 = v504.LocalPlayer;
+        local v597 = v596.Character;
+        if (not v597 or not v597:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local function v598()
+            if v512 then
+                return;
+            end
+            v512 = true;
+            for v771, v772 in pairs(v511) do
+                if (v772 and v772.Parent and (v772.Name == "VehicleSeat") and not v772.Occupant) then
+                    Tween2(v772.CFrame);
+                    break;
+                end
+            end
+            v512 = false;
+        end
+        local v599 = v597.Humanoid;
+        local v600 = false;
+        local v601 = nil;
+        for v694, v695 in pairs(v507.Boats:GetChildren()) do
+            local v696 = v695:FindFirstChild("VehicleSeat");
+            if (v696 and (v696.Occupant == v599)) then
+                v600 = true;
+                v601 = v696;
+                v511[v695.Name] = v696;
+            elseif (v696 and (v696.Occupant == nil)) then
+                v598();
+            end
+        end
+        if not v600 then
+            return;
+        end
+        v601.MaxSpeed = v508;
+        v601.CFrame = CFrame.new(Vector3.new(v601.Position.X, v601.Position.Y, v601.Position.Z)) * v601.CFrame.Rotation ;
+        v506:SendKeyEvent(true, "W", false, game);
+        for v697, v698 in pairs(v507.Boats:GetDescendants()) do
+            if v698:IsA("BasePart") then
+                v698.CanCollide = false;
+            end
+        end
+        for v699, v700 in pairs(v597:GetDescendants()) do
+            if v700:IsA("BasePart") then
+                v700.CanCollide = false;
+            end
+        end
+        local v604 = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "PrehistoricIsland",
+            "KitsuneIsland",
+            "FrozenDimension"
+        };
+        for v701, v702 in ipairs(v604) do
+            local v703 = v507.Map:FindFirstChild(v702);
+            if (v703 and v703:IsA("Model")) then
+                v703:Destroy();
+            end
+        end
+        local v605 = v507.Map:FindFirstChild("MysticIsland");
+        if v605 then
+            v506:SendKeyEvent(false, "W", false, game);
+            _G.AutoFindMirage = false;
+            if not v513 then
+                v14:Notify({
+                    Title = "Min Gaming",
+                    Content = "Đảo Bí Ẩn Tìm Thấy",
+                    Duration = 10
+                });
+                v513 = true;
+            end
+            return;
+        end
+    end);
+    local v515 = Tabs.Fish:AddToggle("AutoFindFrozen", {
+        Title = "Tìm Đảo Leviathan",
+        Description = "",
+        Default = false
+    });
+    Options.AutoFindFrozen:SetValue(false);
+    v515:OnChanged(function(v606)
+        _G.AutoFindFrozen = v606;
+    end);
+    local v511 = {};
+    local v512 = false;
+    local v513 = false;
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoFindFrozen then
+            v513 = false;
+            return;
+        end
+        local v607 = v504.LocalPlayer;
+        local v608 = v607.Character;
+        if (not v608 or not v608:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local function v609()
+            if v512 then
+                return;
+            end
+            v512 = true;
+            for v773, v774 in pairs(v511) do
+                if (v774 and v774.Parent and (v774.Name == "VehicleSeat") and not v774.Occupant) then
+                    Tween2(v774.CFrame);
+                    break;
+                end
+            end
+            v512 = false;
+        end
+        local v610 = v608.Humanoid;
+        local v611 = false;
+        local v612 = nil;
+        for v704, v705 in pairs(v507.Boats:GetChildren()) do
+            local v706 = v705:FindFirstChild("VehicleSeat");
+            if (v706 and (v706.Occupant == v610)) then
+                v611 = true;
+                v612 = v706;
+                v511[v705.Name] = v706;
+            elseif (v706 and (v706.Occupant == nil)) then
+                v609();
+            end
+        end
+        if not v611 then
+            return;
+        end
+        v612.MaxSpeed = v508;
+        v612.CFrame = CFrame.new(Vector3.new(v612.Position.X, v612.Position.Y, v612.Position.Z)) * v612.CFrame.Rotation ;
+        v506:SendKeyEvent(true, "W", false, game);
+        for v707, v708 in pairs(v507.Boats:GetDescendants()) do
+            if v708:IsA("BasePart") then
+                v708.CanCollide = false;
+            end
+        end
+        for v709, v710 in pairs(v608:GetDescendants()) do
+            if v710:IsA("BasePart") then
+                v710.CanCollide = false;
+            end
+        end
+        local v615 = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "MysticIsland",
+            "KitsuneIsland",
+            "PrehistoricIsland"
+        };
+        for v711, v712 in ipairs(v615) do
+            local v713 = v507.Map:FindFirstChild(v712);
+            if (v713 and v713:IsA("Model")) then
+                v713:Destroy();
+            end
+        end
+        local v616 = v507.Map:FindFirstChild("FrozenDimension");
+        if v616 then
+            v506:SendKeyEvent(false, "W", false, game);
+            _G.AutoFindFrozen = false;
+            end
+            return;
+        end
+    end);
+    local v516 = Tabs.Fish:AddToggle("AutoComeTiki", {
+        Title = "Lái Thuyền Về Đảo Tiki",
+        Description = "",
+        Default = false
+    });
+    v516:OnChanged(function(v617)
+        _G.AutoComeTiki = v617;
+    end);
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoComeTiki then
+            return;
+        end
+        local v618 = v504.LocalPlayer;
+        local v619 = v618.Character;
+        if (not v619 or not v619:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local v620 = v619.Humanoid;
+        local v621 = nil;
+        for v714, v715 in pairs(v507.Boats:GetChildren()) do
+            local v716 = v715:FindFirstChild("VehicleSeat");
+            if (v716 and (v716.Occupant == v620)) then
+                v621 = v716;
+                break;
+            end
+        end
+        if v621 then
+            v621.MaxSpeed = v508;
+            local v776 = CFrame.new(- 16217.7568359375, 9.126761436462402, 446.06536865234375);
+            local v777 = v621.Position;
+            local v778 = v776.Position;
+            local v779 = (v778 - v777).unit;
+            local v780 = v779 * v621.MaxSpeed * v505.RenderStepped:Wait() ;
+            v621.CFrame = v621.CFrame + v780 ;
+            local v782 = CFrame.new(v777, v778);
+            v621.CFrame = CFrame.new(v621.Position, v778);
+            if ((v621.Position - v778).magnitude < 120) then
+                _G.AutoComeTiki = false;
+                v506:SendKeyEvent(false, "W", false, game);
+            end
+        end
+    end);
+    local v517 = Tabs.Fish:AddToggle("AutoComeHydra", {
+        Title = "Lái Thuyền Về Đảo Hydra",
+        Description = "",
+        Default = false
+    });
+    v517:OnChanged(function(v622)
+        _G.AutoComeHydra = v622;
+    end);
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoComeHydra then
+            return;
+        end
+        local v623 = v504.LocalPlayer;
+        local v624 = v623.Character;
+        if (not v624 or not v624:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local v625 = v624.Humanoid;
+        local v626 = nil;
+        for v717, v718 in pairs(v507.Boats:GetChildren()) do
+            local v719 = v718:FindFirstChild("VehicleSeat");
+            if (v719 and (v719.Occupant == v625)) then
+                v626 = v719;
+                break;
+            end
+        end
+        if v626 then
+            v626.MaxSpeed = v508;
+            local v784 = CFrame.new(5193.9375, - 0.04690289497375488, 1631.578369140625);
+            local v785 = v626.Position;
+            local v786 = v784.Position;
+            local v787 = (v786 - v785).unit;
+            local v788 = v787 * v626.MaxSpeed * v505.RenderStepped:Wait() ;
+            v626.CFrame = v626.CFrame + v788 ;
+            local v790 = CFrame.new(v785, v786);
+            v626.CFrame = CFrame.new(v626.Position, v786);
+            if ((v626.Position - v786).magnitude < 120) then
+                _G.AutoComeHydra = false;
+                v506:SendKeyEvent(false, "W", false, game);
+            end
+        end
+    end);
+    Tabs.Fish:AddButton({
+        Title = "Bay Đến Khu Vực Săn",
+        Description = "",
+        Callback = function()
+            Tween2(CFrame.new(- 16917.154296875, 7.757596015930176, 511.8203125));
+        end
+    });
+    local v511 = {};
+    local v518 = {
+        "Beast Hunter",
+        "Sleigh",
+        "Miracle",
+        "The Sentinel",
+        "Guardian",
+        "Lantern",
+        "Dinghy",
+        "PirateSloop",
+        "PirateBrigade",
+        "PirateGrandBrigade",
+        "MarineGrandBrigade",
+        "MarineBrigade",
+        "MarineSloop"
+    };
+    local v519 = Tabs.Fish:AddDropdown("DropdownBoat", {
+        Title = "Chọn Thuyền",
+        Description = "",
+        Values = v518,
+        Multi = false,
+        Default = 1
+    });
+    v519:SetValue(selectedBoat);
+    v519:OnChanged(function(v627)
+        selectedBoat = v627;
+    end);
+    local function v520(v628)
+        local v629 = {
+            [1] = "BuyBoat",
+            [2] = v628
+        };
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v629));
+        delay(2), function()
+            for v791, v792 in pairs(v507.Boats:GetChildren()) do
+                if (v792:IsA("Model") and (v792.Name == v628)) then
+                    local v896 = v792:FindFirstChild("VehicleSeat");
+                    if (v896 and not v896.Occupant) then
+                        v511[v628] = v896;
                     end
                 end
-            end)
+            end
+        end);
+    end
+    local function v521()
+        for v720, v721 in pairs(v511) do
+            if (v721 and v721.Parent and (v721.Name == "VehicleSeat") and not v721.Occupant) then
+                Tween2(v721.CFrame);
+            end
         end
-    end)
-    
-    spawn(function()
-		pcall(function()
-			while wait() do
-				if _G.SailBoat then
-					if game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
-					    game.Players.LocalPlayer.Character.Humanoid.Sit = false
-					end
-				end
-			end
-		end)
-	end)
-	
+    end
+    game:GetService("RunService").RenderStepped:Connect(function()
+        for v722, v723 in pairs(v511) do
+            if (v723 and v723.Parent and (v723.Name == "VehicleSeat") and not v723.Occupant) then
+                v511[v722] = v723;
+            end
+        end
+    end);
+    Tabs.Fish:AddButton({
+        Title = "Mua Thuyền",
+        Description = "",
+        Callback = function()
+            v520(selectedBoat);
+        end
+    });
+    Tabs.Fish:AddButton({
+        Title = "Bay Đến Thuyền",
+        Description = "Duy Nhất Thuyền Bạn Mua Ở Chỗ Chọn",
+        Callback = function()
+            v521();
+        end
+    });
 
     local ToggleTerrorshark = Tabs.Main:AddToggle("ToggleTerrorshark", {Title = " Kill Terrorshark", Default = false })
 
