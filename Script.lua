@@ -12504,7 +12504,7 @@ spawn(function()
 end);
 --------------------------------------------------
 local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
-    Title = "Phòng Thủ",
+    Title = "Auto Start Event",
     Description = "",
     Default = false
 });
@@ -12512,7 +12512,7 @@ v171:OnChanged(function(v401)
     _G.AutoDefendVolcano = v401;
 end);
 local v107 = Tabs.Volcanic:AddToggle("ToggleMelee", {
-    Title = "Dùng Melee",
+    Title = "Spam Skill Melle",
     Description = "",
     Default = false
 });
@@ -12520,7 +12520,7 @@ v107:OnChanged(function(v402)
     _G.UseMelee = v402;
 end);
 local v109 = Tabs.Volcanic:AddToggle("ToggleSword", {
-    Title = "Dùng Sword",
+    Title = "Spam Skill Sword",
     Description = "",
     Default = false
 });
@@ -12528,7 +12528,7 @@ v109:OnChanged(function(v403)
     _G.UseSword = v403;
 end);
 local v110 = Tabs.Volcanic:AddToggle("ToggleGun", {
-    Title = "Dùng Gun",
+    Title = "Spam Skill Gun",
     Description = "",
     Default = false
 });
