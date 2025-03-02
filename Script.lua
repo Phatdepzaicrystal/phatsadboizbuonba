@@ -7352,7 +7352,7 @@ spawn(
         )
         Options.ToggleQuanSat:SetValue(false)
         
-        Tabs..Player:AddButton({
+        Tabs.Player:AddButton({
             Title = "Refesh Player",
             Description = "",
             Callback = function()
