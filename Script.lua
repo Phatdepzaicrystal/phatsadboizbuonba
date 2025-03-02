@@ -6912,6 +6912,26 @@ NoClipz:OnChanged(function(v)
     end
 end)
 
+local v117 = Tabs.Setting:AddToggle("ToggleEnablePvp", {
+    Title = "Turn On PVP",
+    Description = "",
+    Default = false
+});
+v117:OnChanged(function(v314)
+    _G.EnabledPvP = v314;
+end);
+Options.ToggleEnablePvp:SetValue(false);
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.EnabledPvP then
+                if (game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true) then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp");
+                end
+            end
+        end
+    end);
+end);
 
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
@@ -9757,7 +9777,7 @@ spawn(function()
 end)
 
 local v176 = Tabs.Volcanic:AddToggle("ToggleCollectBone", {
-    Title = "Lụm Xương",
+    Title = "Collect Bone",
     Description = "",
     Default = false
 });
@@ -9777,7 +9797,7 @@ spawn(function()
 end);
 
 local v177 = Tabs.Volcanic:AddToggle("ToggleCollectEgg", {
-    Title = "Lụm Trứng",
+    Title = "Collect Egg",
     Description = "",
     Default = false
 });
@@ -12182,150 +12202,3 @@ spawn(
         end
     end
 )
-local v134 =
-    Tabs.Misc:AddToggle(
-    "ToggleEspRealFruit",
-    {
-        Title = "Esp Apple,Banana,Pineapple",
-        Description = "Getting Ob V2",
-        Default = false
-    }
-)
-ToggleEspRealFruit:OnChanged(
-    function(v349)
-        RealFruitEsp = v349
-        while RealFruitEsp do
-            wait()
-            UpdateRealFruitEsp()
-        end
-    end
-)
-Options.ToggleEspRealFruit:SetValue(false)
-function UpdateRealFruitEsp()
-    for v548, v549 in pairs(game.Workspace.AppleSpawner:GetChildren()) do
-        if v549:IsA("Tool") then
-            if RealFruitEsp then
-                if not v549.Handle:FindFirstChild("NameEsp" .. Number) then
-                    local v1066 = Instance.new("BillboardGui", v549.Handle)
-                    v1066.Name = "NameEsp" .. Number
-                    v1066.ExtentsOffset = Vector3.new(0, 1, 0)
-                    v1066.Size = UDim2.new(1, 200, 1, 30)
-                    v1066.Adornee = v549.Handle
-                    v1066.AlwaysOnTop = true
-                    local v1073 = Instance.new("TextLabel", v1066)
-                    v1073.Font = Enum.Font.GothamSemibold
-                    v1073.FontSize = "Size14"
-                    v1073.TextWrapped = true
-                    v1073.Size = UDim2.new(1, 0, 1, 0)
-                    v1073.TextYAlignment = "Top"
-                    v1073.BackgroundTransparency = 1
-                    v1073.TextStrokeTransparency = 0.5
-                    v1073.TextColor3 = Color3.fromRGB(255, 0, 0)
-                    v1073.Text =
-                        v549.Name ..
-                        " \n" ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v549.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                else
-                    v549.Handle["NameEsp" .. Number].TextLabel.Text =
-                        v549.Name ..
-                        " " ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v549.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                end
-            elseif v549.Handle:FindFirstChild("NameEsp" .. Number) then
-                v549.Handle:FindFirstChild("NameEsp" .. Number):Destroy()
-            end
-        end
-    end
-    for v550, v551 in pairs(game.Workspace.PineappleSpawner:GetChildren()) do
-        if v551:IsA("Tool") then
-            if RealFruitEsp then
-                if not v551.Handle:FindFirstChild("NameEsp" .. Number) then
-                    local v1085 = Instance.new("BillboardGui", v551.Handle)
-                    v1085.Name = "NameEsp" .. Number
-                    v1085.ExtentsOffset = Vector3.new(0, 1, 0)
-                    v1085.Size = UDim2.new(1, 200, 1, 30)
-                    v1085.Adornee = v551.Handle
-                    v1085.AlwaysOnTop = true
-                    local v1092 = Instance.new("TextLabel", v1085)
-                    v1092.Font = Enum.Font.GothamSemibold
-                    v1092.FontSize = "Size14"
-                    v1092.TextWrapped = true
-                    v1092.Size = UDim2.new(1, 0, 1, 0)
-                    v1092.TextYAlignment = "Top"
-                    v1092.BackgroundTransparency = 1
-                    v1092.TextStrokeTransparency = 0.5
-                    v1092.TextColor3 = Color3.fromRGB(255, 174, 0)
-                    v1092.Text =
-                        v551.Name ..
-                        " \n" ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v551.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                else
-                    v551.Handle["NameEsp" .. Number].TextLabel.Text =
-                        v551.Name ..
-                        " " ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v551.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                end
-            elseif v551.Handle:FindFirstChild("NameEsp" .. Number) then
-                v551.Handle:FindFirstChild("NameEsp" .. Number):Destroy()
-            end
-        end
-    end
-    for v552, v553 in pairs(game.Workspace.BananaSpawner:GetChildren()) do
-        if v553:IsA("Tool") then
-            if RealFruitEsp then
-                if not v553.Handle:FindFirstChild("NameEsp" .. Number) then
-                    local v1104 = Instance.new("BillboardGui", v553.Handle)
-                    v1104.Name = "NameEsp" .. Number
-                    v1104.ExtentsOffset = Vector3.new(0, 1, 0)
-                    v1104.Size = UDim2.new(1, 200, 1, 30)
-                    v1104.Adornee = v553.Handle
-                    v1104.AlwaysOnTop = true
-                    local v1111 = Instance.new("TextLabel", v1104)
-                    v1111.Font = Enum.Font.GothamSemibold
-                    v1111.FontSize = "Size14"
-                    v1111.TextWrapped = true
-                    v1111.Size = UDim2.new(1, 0, 1, 0)
-                    v1111.TextYAlignment = "Top"
-                    v1111.BackgroundTransparency = 1
-                    v1111.TextStrokeTransparency = 0.5
-                    v1111.TextColor3 = Color3.fromRGB(251, 255, 0)
-                    v1111.Text =
-                        v553.Name ..
-                        " \n" ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v553.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                else
-                    v553.Handle["NameEsp" .. Number].TextLabel.Text =
-                        v553.Name ..
-                        " " ..
-                            v20(
-                                (game:GetService("Players").LocalPlayer.Character.Head.Position - v553.Handle.Position).Magnitude /
-                                    3
-                            ) ..
-                                " Distance"
-                end
-            elseif v553.Handle:FindFirstChild("NameEsp" .. Number) then
-                v553.Handle:FindFirstChild("NameEsp" .. Number):Destroy()
-            end
-        end
-    end
-end
