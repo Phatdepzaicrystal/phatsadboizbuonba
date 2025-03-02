@@ -3874,38 +3874,59 @@ do
         return false
     end
 
-    ---Method Farm
-    Type = 1
-    spawn(
-        function()
-            while wait(.1) do
-                if Type == 1 then
-                    Pos = CFrame.new(0, 25, -19)
-                elseif Type == 2 then
-                    Pos = CFrame.new(19, 25, 0)
-                elseif Type == 3 then
-                    Pos = CFrame.new(0, 25, 19)
-                elseif Type == 4 then
-                    Pos = CFrame.new(-19, 25, 0)
-                end
+    function AttackNoCoolDown()
+        local v228 = {};
+        local v229 = game:GetService("Workspace").Enemies:GetChildren();
+        local v230 = FindEnemiesInRange(v228, v229);
+        if not v230 then
+            return;
+        end
+        local v231 = GetEquippedTool();
+        if not v231 then
+            return;
+        end
+        pcall(function()
+            local v477 = game:GetService("ReplicatedStorage");
+            local v478 = v477:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack");
+            local v479 = v477:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit");
+            if (# v228 > 0) then
+                v478:FireServer(1e-9);
+                v479:FireServer(v230, v228);
+            else
+                task.wait(1e-9);
+            end
+        end);
+    end
+    Type = 1;
+    spawn(function()
+        while wait() do
+            if (Type == 1) then
+                Pos = CFrame.new(0, 40, 0);
+            elseif (Type == 2) then
+                Pos = CFrame.new(- 40, 40, 0);
+           elseif (Type == 3) then
+                Pos = CFrame.new(40, 40, 0);
+            elseif (Type == 4) then
+                Pos = CFrame.new(0, 40, 40);
+            elseif (Type == 5) then
+                Pos = CFrame.new(0, 40, - 40);
             end
         end
-    )
-
-    spawn(
-        function()
-            while wait(.1) do
-                Type = 1
-                wait(0.2)
-                Type = 2
-                wait(0.2)
-                Type = 3
-                wait(0.2)
-                Type = 4
-                wait(0.2)
-            end
+    end);
+    spawn(function()
+        while wait() do
+            Type = 1;
+            wait(0.2);
+            Type = 2;
+            wait(0.2);
+            Type = 3;
+            wait(0.2);
+            Type = 4;
+            wait(0.2);
+            Type = 5;
+            wait(0.2);
         end
-    )
+    end);
     --auto turn haki
     function AutoHaki()
         if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
