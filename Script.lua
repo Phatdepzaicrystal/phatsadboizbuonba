@@ -8710,7 +8710,7 @@ spawn(function()
                                 Quest2 = true;
                                 repeat
                                     wait();
-                                    Tween(CFrame.new(- 8762.69140625, 176.84783935546875, 6171.3076171875));
+                                    Tween2(CFrame.new(- 8762.69140625, 176.84783935546875, 6171.3076171875));
                                 until ((CFrame.new(- 8762.69140625, 176.84783935546875, 6171.3076171875).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) or not _G.Auto_SkullGuitar
                                 wait(1);
                                 fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard7.Left.ClickDetector);
@@ -8732,7 +8732,7 @@ spawn(function()
                                     Quest4 = true;
                                     repeat
                                         wait();
-                                        Tween(CFrame.new(- 9553.5986328125, 65.62338256835938, 6041.58837890625));
+                                        Tween2(CFrame.new(- 9553.5986328125, 65.62338256835938, 6041.58837890625));
                                     until ((CFrame.new(- 9553.5986328125, 65.62338256835938, 6041.58837890625).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) or not _G.Auto_SkullGuitar
                                     wait(1);
                                     Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part3.CFrame);
@@ -8793,60 +8793,19 @@ spawn(function()
                                         end
                                     end
                                 else
-                                    Tween(CFrame.new(- 10160.787109375, 138.6616973876953, 5955.03076171875));
+                                    Tween2(CFrame.new(- 10160.787109375, 138.6616973876953, 5955.03076171875));
                                 end
                             end
-                        elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2), "Error") then
-                            Tween(CFrame.new(- 8653.2060546875, 140.98487854003906, 6160.033203125));
-                        elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2), "Nothing") then
-                            Tween("Wait Full Moon");
-                        else
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2, true);
-                        end
-                    else
-                        Tween(CFrame.new(- 9681.458984375, 6.139880657196045, 6341.3720703125));
-                    end
-                end
-            end
-        end);
-    end
-end);
-
-local v80 = Tabs.Item:AddToggle("ToggleAutoBuddy", {
-    Title = "Auto Buddy",
-    Description = "Sea 3",
-    Default = false
-});
-v80:OnChanged(function(v269)
-    _G.Auto_Buddy = v269;
-end);
-Options.ToggleAutoBuddy:SetValue(false);
-local v81 = CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875);
-spawn(function()
-    while wait() do
-        if _G.Auto_Buddy then
-            pcall(function()
-                if game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen") then
-                    for v1050, v1051 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if (v1051.Name == "Cake Queen") then
-                            if (v1051:FindFirstChild("Humanoid") and v1051:FindFirstChild("HumanoidRootPart") and (v1051.Humanoid.Health > 0)) then
-                                repeat
-                                    task.wait(_G.Fast_Delay);
-                                    AutoHaki();
-                                    EquipTool(SelectWeapon);
-                                    v1051.HumanoidRootPart.CanCollide = false;
-                                    v1051.Humanoid.WalkSpeed = 0;
-                                    v1051.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                    Tween(v1051.HumanoidRootPart.CFrame * Pos);
+                        elseif string.find(game:GetService("ReplicatedStorage").Tween(v1051.HumanoidRootPart.CFrame * Pos);
                                     AttackNoCoolDown();
                                 until not _G.Auto_Buddy or not v1051.Parent or (v1051.Humanoid.Health <= 0)
                             end
                         end
                     end
                 elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v81.Position).Magnitude < 1500) then
-                    Tween(v81);
+                    Tween2(v81);
                 end
-                Tween(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
+                Tween2(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
                 if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen") then
                     Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
                 end
