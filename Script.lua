@@ -10136,36 +10136,6 @@ if Third_Sea then
                 v690.CanCollide = false;
             end
         end
-        local Ship = {
-            "ShipwreckIsland",
-            "SandIsland",
-            "TreeIsland",
-            "TinyIsland",
-            "MysticIsland",
-            "KitsuneIsland",
-            "FrozenDimension"
-        };
-        for v691, v692 in ipairs(Ship) do
-            local v693 = vnamk7.Map:FindFirstChild(v692);
-            if (v693 and v693:IsA("Model")) then
-                v693:Destroy();
-            end
-        end
-        local v594 = vnamk7.Map:FindFirstChild("PrehistoricIsland");
-        if v594 then
-            v506:SendKeyEvent(false, "W", false, game);
-            _G.AutoFindPrehistoric = false;
-            if not v513 then
-                Fluent:Notify({
-                    Title = "Prehistoric Island Spawn",
-                    Content = "| Lời nhắn của Phat |",
-                    Duration = 10
-                });
-                v513 = true;
-            end
-            return;
-        end
-    end);
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
