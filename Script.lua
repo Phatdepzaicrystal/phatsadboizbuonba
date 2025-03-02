@@ -6804,31 +6804,6 @@ do
             )
         end
 
-            local LeviIsland = Tabs.Fish:AddSection("Leviathan Island")
-            local ToggleTweenMirageIsland =
-                Tabs.Fish:AddToggle("ToggleTPFrozenDimension", {Title = "Tween To Frozen Dimension", Default = false})
-            ToggleTPFrozenDimension:OnChanged(
-                function(Value)
-                    _G.TweenToFrozenDimension = Value
-                end
-            )
-            Options.ToggleTPFrozenDimension:SetValue(false)
-            spawn(
-                function()
-                    local v386
-                    while not v386 do
-                        v386 = game:GetService("Workspace").Map:FindFirstChild("FrozenDimension")
-                        wait()
-                    end
-                    while wait() do
-                        if _G.TweenToFrozenDimension then
-                            if v386 then
-                                Tween(v386.CFrame)
-                            end
-                        end
-                    end
-                end
-            )
 ----------------------------------------------------Setting----------------------------
 local test = Tabs.Setting:AddSection("Local Player")
 
@@ -12491,3 +12466,28 @@ spawn(
         end
     end
 )
+--------------------------------
+local LeviIsland = Tabs.Fish:AddSection("Leviathan Island")
+local ToggleTPFrozenDimension = Tabs.Fish:AddToggle("ToggleTPFrozenDimension", {
+    Title = "Tween To Frozen Dimension",
+    Description = "",
+    Default = false
+});
+ToggleTPFrozenDimension:OnChanged(function(v385)
+    _G.TweenToFrozenDimension = v385;
+end);
+Options.ToggleTPFrozenDimension:SetValue(false)
+spawn(function()
+    local v386;
+    while not v386 do
+        v386 = game:GetService("Workspace").Map:FindFirstChild("FrozenDimension");
+        wait();
+    end
+    while wait() do
+        if _G.TweenToFrozenDimension then
+            if v386 then
+                Tween(v386.CFrame);
+            end
+        end
+    end
+end);
