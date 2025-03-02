@@ -8624,6 +8624,33 @@ spawn(
     end
 end
 
+if Second_Sea then
+    local v539 = v16.Main:AddToggle("ToggleSwordLengend", {
+        Title = "Buy Legend Sword",
+        Description = "",
+        Default = false
+    });
+    v539:OnChanged(function(v646)
+        _G.BuyLengendSword = v646;
+    end);
+    Options.ToggleSwordLengend:SetValue(false);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if (_G.BuyLengendSword or Triple_A) then
+                    local v897 = {
+                        [1] = "LegendarySwordDealer",
+                        [2] = "2"
+                    };
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v897));
+                else
+                    wait();
+                end
+            end);
+        end
+    end);
+end
+
 local v82 =
     Tabs.Item:AddToggle(
     "ToggleAutoDualKatana",
