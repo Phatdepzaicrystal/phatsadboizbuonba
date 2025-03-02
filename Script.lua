@@ -9867,7 +9867,7 @@ local v175 = Tabs.Volcanic:AddToggle("ToggleKillAura", {
 v175:OnChanged(function(v413)
     KillAura = v413;
 end);
-v17.ToggleKillAura:SetValue(false);
+Options.ToggleKillAura:SetValue(false);
 spawn(function()
     while wait() do
         if KillAura then
@@ -9906,6 +9906,7 @@ spawn(function()
         end
     end
 end);
+
 local v177 = Tabs.Volcanic:AddToggle("ToggleCollectEgg", {
     Title = "Lụm Trứng",
     Description = "",
