@@ -8645,47 +8645,171 @@ spawn(
     end
 end
 
-local v84 = Tabs.Item:AddToggle("ToggleAutoRengoku", {
-    Title = "Auto Rengoku",
-    Description = "Sea 2",
+local v79 = Tabs.Item:AddToggle("ToggleAutoSkullGuitar", {
+    Title = "Skull Guitar",
+    Description = "Sea 3",
     Default = false
 });
-v84:OnChanged(function(v272)
-    _G.Auto_Regoku = v272;
+v79:OnChanged(function(v268)
+    _G.Auto_SkullGuitar = v268;
 end);
-Options.ToggleAutoRengoku:SetValue(false);
+Options.ToggleAutoSkullGuitar:SetValue(false);
 spawn(function()
-    pcall(function()
-        while wait() do
-            if _G.Auto_Regoku then
-                if (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hidden Key")) then
-                    EquipTool("Hidden Key");
-                    Tween(CFrame.new(6571.1201171875, 299.23028564453, - 6967.841796875));
-                elseif (game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker") or game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior")) then
-                    for v1466, v1467 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if (((v1467.Name == "Snow Lurker") or (v1467.Name == "Arctic Warrior")) and (v1467.Humanoid.Health > 0)) then
-                            repeat
-                                wait(_G.Fast_Delay);
-                                EquipTool(SelectWeapon);
-                                AutoHaki();
-                                v1467.HumanoidRootPart.CanCollide = false;
-                                v1467.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
-                                FarmPos = v1467.HumanoidRootPart.CFrame;
-                                MonFarm = v1467.Name;
-                                Tween(v1467.HumanoidRootPart.CFrame * Pos);
-                                AttackNoCoolDown();
-                                bringmob = true;
-                            until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or (_G.Auto_Regoku == false) or not v1467.Parent or (v1467.Humanoid.Health <= 0)
-                            bringmob = false;
+    while wait() do
+        pcall(function()
+            if _G.Auto_SkullGuitar then
+                if (GetWeaponInventory("Skull Guitar") == false) then
+                    if ((CFrame.new(- 9681.458984375, 6.139880657196045, 6341.3720703125).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000) then
+                        if game:GetService("Workspace").NPCs:FindFirstChild("Skeleton Machine") then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("soulGuitarBuy", true);
+                        elseif (game:GetService("Workspace").Map["Haunted Castle"].Candle1.Transparency == 0) then
+                            if (game:GetService("Workspace").Map["Haunted Castle"].Placard1.Left.Part.Transparency == 0) then
+                                Quest2 = true;
+                                repeat
+                                    wait();
+                                    Tween(CFrame.new(- 8762.69140625, 176.84783935546875, 6171.3076171875));
+                                until ((CFrame.new(- 8762.69140625, 176.84783935546875, 6171.3076171875).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) or not _G.Auto_SkullGuitar
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard7.Left.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard6.Left.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard5.Left.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard4.Right.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard3.Left.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard2.Right.ClickDetector);
+                                wait(1);
+                                fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard1.Right.ClickDetector);
+                                wait(1);
+                            elseif game:GetService("Workspace").Map["Haunted Castle"].Tablet.Segment1:FindFirstChild("ClickDetector") then
+                                if game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part1:FindFirstChild("ClickDetector") then
+                                    Quest4 = true;
+                                    repeat
+                                        wait();
+                                        Tween(CFrame.new(- 9553.5986328125, 65.62338256835938, 6041.58837890625));
+                                    until ((CFrame.new(- 9553.5986328125, 65.62338256835938, 6041.58837890625).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3) or not _G.Auto_SkullGuitar
+                                    wait(1);
+                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part3.CFrame);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part3.ClickDetector);
+                                    wait(1);
+                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.CFrame);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector);
+                                    wait(1);
+                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.CFrame);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.ClickDetector);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.ClickDetector);
+                                    wait(1);
+                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part8.CFrame);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part8.ClickDetector);
+                                    wait(1);
+                                    Tween(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.CFrame);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector);
+                                    wait(1);
+                                    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector);
+                                else
+                                    Quest3 = true;
+                                end
+                            else
+                                if game:GetService("Workspace").NPCs:FindFirstChild("Ghost") then
+                                    local v1798 = {
+                                        [1] = "GuitarPuzzleProgress",
+                                        [2] = "Ghost"
+                                    };
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v1798));
+                                end
+                                if game.Workspace.Enemies:FindFirstChild("Living Zombie") then
+                                    for v1804, v1805 in pairs(game.Workspace.Enemies:GetChildren()) do
+                                        if (v1805:FindFirstChild("HumanoidRootPart") and v1805:FindFirstChild("Humanoid") and (v1805.Humanoid.Health > 0)) then
+                                            if (v1805.Name == "Living Zombie") then
+                                                EquipTool(SelectWeapon);
+                                                v1805.HumanoidRootPart.Size = Vector3.new(60, 60, 60);
+                                                v1805.HumanoidRootPart.Transparency = 1;
+                                                v1805.Humanoid.JumpPower = 0;
+                                                v1805.Humanoid.WalkSpeed = 0;
+                                                v1805.HumanoidRootPart.CanCollide = false;
+                                                v1805.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0) ;
+                                                Tween(CFrame.new(- 10160.787109375, 138.6616973876953, 5955.03076171875));
+                                                game:GetService("VirtualUser"):CaptureController();
+                                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672));
+                                            end
+                                        end
+                                    end
+                                else
+                                    Tween(CFrame.new(- 10160.787109375, 138.6616973876953, 5955.03076171875));
+                                end
+                            end
+                        elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2), "Error") then
+                            Tween(CFrame.new(- 8653.2060546875, 140.98487854003906, 6160.033203125));
+                        elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2), "Nothing") then
+                            Tween("Wait Full Moon");
+                        else
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2, true);
                         end
+                    else
+                        Tween(CFrame.new(- 9681.458984375, 6.139880657196045, 6341.3720703125));
                     end
-                else
-                    bringmob = false;
-                    Tween(CFrame.new(5439.716796875, 84.420944213867, - 6715.1635742188));
                 end
             end
+        end);
+    end
+end);
+
+local v80 = Tabs.Item:AddToggle("ToggleAutoBuddy", {
+    Title = "Auto Buddy",
+    Description = "Sea 3",
+    Default = false
+});
+v80:OnChanged(function(v269)
+    _G.Auto_Buddy = v269;
+end);
+Options.ToggleAutoBuddy:SetValue(false);
+local v81 = CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875);
+spawn(function()
+    while wait() do
+        if _G.Auto_Buddy then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen") then
+                    for v1050, v1051 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if (v1051.Name == "Cake Queen") then
+                            if (v1051:FindFirstChild("Humanoid") and v1051:FindFirstChild("HumanoidRootPart") and (v1051.Humanoid.Health > 0)) then
+                                repeat
+                                    task.wait(_G.Fast_Delay);
+                                    AutoHaki();
+                                    EquipTool(SelectWeapon);
+                                    v1051.HumanoidRootPart.CanCollide = false;
+                                    v1051.Humanoid.WalkSpeed = 0;
+                                    v1051.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                    Tween(v1051.HumanoidRootPart.CFrame * Pos);
+                                    AttackNoCoolDown();
+                                until not _G.Auto_Buddy or not v1051.Parent or (v1051.Humanoid.Health <= 0)
+                            end
+                        end
+                    end
+                elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v81.Position).Magnitude < 1500) then
+                    Tween(v81);
+                end
+                Tween(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen") then
+                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
+                end
+            end);
         end
-    end);
+    end
 end);
 
 local v82 =
@@ -9623,6 +9747,38 @@ if Second_Sea or Third_Sea then
                     }
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                 end
+            end
+        end
+    )
+end
+
+if Second_Sea then
+    local ToggleSwordLengend =
+        Tabs.Item:AddToggle("ToggleSwordLengend", {Title = "Buy Sword Lengendary", Default = false})
+    ToggleSwordLengend:OnChanged(
+        function(Value)
+            _G.BuyLengendSword = Value
+        end
+    )
+    Options.ToggleSwordLengend:SetValue(false)
+
+    spawn(
+        function()
+            while wait(.1) do
+                pcall(
+                    function()
+                        if _G.BuyLengendSword or Triple_A then
+                            local args = {
+                                [1] = "LegendarySwordDealer",
+                                [2] = "2"
+                            }
+                            -- Triple_A
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        else
+                            wait(2)
+                        end
+                    end
+                )
             end
         end
     )
