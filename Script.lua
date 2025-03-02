@@ -10902,7 +10902,7 @@ spawn(function()
                             fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector);
                         elseif Sea3 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 5075.50927734375, 314.5155029296875, - 3150.0224609375));
-                            Tween2(CFrame.new(- 5017.40869, 314.844055, - 2823.0127, - 0.925743818, 4.482175e-8, - 0.378151238, 4.5550315e-9, 1, 1.0737756e-7, 0.378151238, 9.768162e-8, - 0.925743818));
+                            Tween(CFrame.new(- 5017.40869, 314.844055, - 2823.0127, - 0.925743818, 4.482175e-8, - 0.378151238, 4.5550315e-9, 1, 1.0737756e-7, 0.378151238, 9.768162e-8, - 0.925743818));
                             local v1656 = {
                                 [1] = "SetSpawnPoint"
                             };
@@ -10929,7 +10929,7 @@ end);
 Options.ToggleNextIsland:SetValue(false);
 spawn(function()
     local v357 = {};
-    while wait() do
+    while task.wait() do
         if AutoNextIsland then
             pcall(function()
                 local v806 = game.Players.LocalPlayer.Character;
