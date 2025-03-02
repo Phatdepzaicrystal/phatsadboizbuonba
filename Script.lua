@@ -9906,7 +9906,7 @@ spawn(function()
 	end
 end);
 -------------------------------------------------Tab Volcano----------------------------------------------------------------------------------
-
+local Gojo = Tabs.Volcanic:AddSection("Dojo Quest")
 local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
 ToogleDojoQ:OnChanged(function(Value)
     getgenv().DojoClaimQuest = Value
