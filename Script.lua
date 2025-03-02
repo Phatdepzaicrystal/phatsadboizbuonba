@@ -10056,7 +10056,7 @@ spawn(function()
     end
 end);
 
-if Sea3 then
+if Third_Sea then
     local vnamk4 = game:GetService("Players");
     local vnamk5 = game:GetService("RunService");
     local vnamk6 = game:GetService("VirtualInputManager");
@@ -10082,40 +10082,40 @@ if Sea3 then
     vnam10:OnChanged(function(v584)
         _G.AutoFindPrehistoric = v584;
     end);
-    local v511 = {};
-    local v512 = false;
-    local v513 = false;
+    local v5mot1 = {};
+    local v5mot2 = false;
+    local v5mot3 = false;
         if not _G.AutoFindPrehistoric then
-            v513 = false;
+            v5mot3 = false;
             return;
         end
-        local v585 = v504.LocalPlayer;
-        local v586 = v585.Character;
-        if (not v586 or not v586:FindFirstChild("Humanoid")) then
+        local v5tam5 = vnamk4.LocalPlayer;
+        local v5tam6 = v5tam5.Character;
+        if (not v5tam6 or not v5tam6:FindFirstChild("Humanoid")) then
             return;
         end
         local function v587()
-            if v512 then
+            if v5mot2 then
                 return;
             end
-            v512 = true;
-            for v769, v770 in pairs(v511) do
+            v5mot2 = true;
+            for v769, v770 in pairs(v5mot1) do
                 if (v770 and v770.Parent and (v770.Name == "VehicleSeat") and not v770.Occupant) then
                     Tween2(v770.CFrame);
                     break;
                 end
             end
-            v512 = false;
+            v5mot2 = false;
         end
         local v588 = v586.Humanoid;
         local v589 = false;
         local v590 = nil;
-        for v684, v685 in pairs(v507.Boats:GetChildren()) do
+        for v684, v685 in pairs(vnamk7.Boats:GetChildren()) do
             local v686 = v685:FindFirstChild("VehicleSeat");
             if (v686 and (v686.Occupant == v588)) then
                 v589 = true;
                 v590 = v686;
-                v511[v685.Name] = v686;
+                v5mot1[v685.Name] = v686;
             elseif (v686 and (v686.Occupant == nil)) then
                 v587();
             end
@@ -10136,7 +10136,7 @@ if Sea3 then
                 v690.CanCollide = false;
             end
         end
-        local v593 = {
+        local Ship = {
             "ShipwreckIsland",
             "SandIsland",
             "TreeIsland",
@@ -10145,7 +10145,7 @@ if Sea3 then
             "KitsuneIsland",
             "FrozenDimension"
         };
-        for v691, v692 in ipairs(v593) do
+        for v691, v692 in ipairs(Ship) do
             local v693 = vnamk7.Map:FindFirstChild(v692);
             if (v693 and v693:IsA("Model")) then
                 v693:Destroy();
