@@ -10005,57 +10005,6 @@ spawn(function()
     end
 end)
 
-
-
-local v176 = Tabs.Volcanic:AddToggle("ToggleCollectBone", {
-    Title = "Collect Bone",
-    Description = "",
-    Default = false
-});
-v176:OnChanged(function(v414)
-    _G.AutoCollectBone = v414;
-end);
-spawn(function()
-    while wait() do
-        if _G.AutoCollectBone then
-            for v820, v821 in pairs(workspace:GetDescendants()) do
-                if (v821:IsA("BasePart") and (v821.Name == "DinoBone")) then
-                    Tween2(CFrame.new(v821.Position));
-                end
-            end
-        end
-    end
-end);
-
-local v177 = Tabs.Volcanic:AddToggle("ToggleCollectEgg", {
-    Title = "Collect Egg",
-    Description = "",
-    Default = false
-});
-v177:OnChanged(function(v415)
-    _G.AutoCollectEgg = v415;
-end);
-spawn(function()
-    while wait() do
-        if _G.AutoCollectEgg then
-            local v758 = workspace.Map.PrehistoricIsland.Core.SpawnedDragonEggs:GetChildren();
-            if (# v758 > 0) then
-                local v886 = v758[math.random(1, # v758)];
-                if (v886:IsA("Model") and v886.PrimaryPart) then
-                    Tween2(v886.PrimaryPart.CFrame);
-                    local v1127 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
-                    local v1128 = v886.PrimaryPart.Position;
-                    local v1129 = (v1127 - v1128).Magnitude;
-                    if (v1129 <= 1) then
-                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game);
-                        wait(1.5);
-                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game);
-                    end
-                end
-            end
-        end
-    end
-end);
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
@@ -12502,6 +12451,86 @@ local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
 v171:OnChanged(function(v401)
     _G.AutoDefendVolcano = v401;
 end);
+local v175 = Tabs.Volcanic:AddToggle("ToggleKillAura", {
+    Title = "Auto Kill Golems",
+    Description = "",
+    Default = false
+});
+v175:OnChanged(function(v413)
+    KillAura = v413;
+end);
+Options.ToggleKillAura:SetValue(false);
+spawn(function()
+    while wait() do
+        if KillAura then
+            pcall(function()
+                for v884, v885 in pairs(game.Workspace.Enemies:GetDescendants()) do
+                    if (v885:FindFirstChild("Humanoid") and v885:FindFirstChild("HumanoidRootPart") and (v885.Humanoid.Health > 0)) then
+                        repeat
+                            task.wait();
+                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge);
+                            v885.Humanoid.Health = 0;
+                            v885.HumanoidRootPart.CanCollide = false;
+                        until not KillAura or not v885.Parent or (v885.Humanoid.Health <= 0)
+                    end
+                end
+            end);
+        end
+    end
+end);
+
+local v176 = Tabs.Volcanic:AddToggle("ToggleCollectBone", {
+    Title = "Collect Bone",
+    Description = "",
+    Default = false
+});
+v176:OnChanged(function(v414)
+    _G.AutoCollectBone = v414;
+end);
+spawn(function()
+    while wait() do
+        if _G.AutoCollectBone then
+            for v820, v821 in pairs(workspace:GetDescendants()) do
+                if (v821:IsA("BasePart") and (v821.Name == "DinoBone")) then
+                    Tween2(CFrame.new(v821.Position));
+                end
+            end
+        end
+    end
+end);
+
+local v177 = Tabs.Volcanic:AddToggle("ToggleCollectEgg", {
+    Title = "Collect Egg",
+    Description = "",
+    Default = false
+});
+v177:OnChanged(function(v415)
+    _G.AutoCollectEgg = v415;
+end);
+spawn(function()
+    while wait() do
+        if _G.AutoCollectEgg then
+            local v758 = workspace.Map.PrehistoricIsland.Core.SpawnedDragonEggs:GetChildren();
+            if (# v758 > 0) then
+                local v886 = v758[math.random(1, # v758)];
+                if (v886:IsA("Model") and v886.PrimaryPart) then
+                    Tween2(v886.PrimaryPart.CFrame);
+                    local v1127 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
+                    local v1128 = v886.PrimaryPart.Position;
+                    local v1129 = (v1127 - v1128).Magnitude;
+                    if (v1129 <= 1) then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game);
+                        wait(1.5);
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game);
+                    end
+                end
+            end
+        end
+    end
+end);
+
+local FarmPri = Tabs.Volcanic:AddSection("Setting For Event")
+
 local v107 = Tabs.Volcanic:AddToggle("ToggleMelee", {
     Title = "Spam Skill Melle",
     Description = "",
@@ -12625,33 +12654,6 @@ spawn(function()
             else
                 _G.TweenToPrehistoric = true;
             end
-        end
-    end
-end);
-local v175 = Tabs.Volcanic:AddToggle("ToggleKillAura", {
-    Title = "Auto Kill Golems",
-    Description = "",
-    Default = false
-});
-v175:OnChanged(function(v413)
-    KillAura = v413;
-end);
-Options.ToggleKillAura:SetValue(false);
-spawn(function()
-    while wait() do
-        if KillAura then
-            pcall(function()
-                for v884, v885 in pairs(game.Workspace.Enemies:GetDescendants()) do
-                    if (v885:FindFirstChild("Humanoid") and v885:FindFirstChild("HumanoidRootPart") and (v885.Humanoid.Health > 0)) then
-                        repeat
-                            task.wait();
-                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge);
-                            v885.Humanoid.Health = 0;
-                            v885.HumanoidRootPart.CanCollide = false;
-                        until not KillAura or not v885.Parent or (v885.Humanoid.Health <= 0)
-                    end
-                end
-            end);
         end
     end
 end);
