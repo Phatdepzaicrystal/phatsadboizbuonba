@@ -5695,533 +5695,6 @@ do
         end
     )
     ---------------------------Tab Sea---------------------------------------
-
-if Third_Sea then
-    local v498 = Tabs.Fish:AddSection("Đảo Cáo");
-    local v499 = Tabs.Fish:AddParagraph({
-        Title = "Trạng Thái Đảo Cáo",
-        Content = ""
-    });
-    function UpdateKitsune()
-        if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
-            v499:SetDesc("Đảo Cáo : ✅️");
-        else
-            v499:SetDesc("Đảo Cáo : ❌️");
-        end
-    end
-    spawn(function()
-        pcall(function()
-            while wait() do
-                UpdateKitsune();
-            end
-        end);
-    end);
-    local v501 = Tabs.Fish:AddToggle("ToggleTPKitsune", {
-        Title = "Bay Vô Đảo Cáo",
-        Description = "",
-        Default = false
-    });
-    v501:OnChanged(function(v580)
-        _G.TweenToKitsune = v580;
-    end);
-    Options.ToggleTPKitsune:SetValue(false);
-    spawn(function()
-        local v581;
-        while not v581 do
-            v581 = game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland");
-            wait();
-        end
-        while wait() do
-            if _G.TweenToKitsune then
-                local v845 = v581:FindFirstChild("ShrineActive");
-                if v845 then
-                    for v1335, v1336 in pairs(v845:GetDescendants()) do
-                        if (v1336:IsA("BasePart") and v1336.Name:find("NeonShrinePart")) then
-                            Tween(v1336.CFrame);
-                        end
-                    end
-                end
-            end
-        end
-    end);
-    local v502 = Tabs.Fish:AddToggle("ToggleCollectAzure", {
-        Title = "Lụm Linh Hồn Xanh",
-        Description = "",
-        Default = false
-    });
-    v502:OnChanged(function(v582)
-        _G.CollectAzure = v582;
-    end);
-    Options.ToggleCollectAzure:SetValue(false);
-    spawn(function()
-        while wait() do
-            if _G.CollectAzure then
-                pcall(function()
-                    if game:GetService("Workspace"):FindFirstChild("AttachedAzureEmber") then
-                        Tween(game:GetService("Workspace"):WaitForChild("EmberTemplate"):FindFirstChild("Part").CFrame);
-                    end
-                end);
-            end
-        end
-    end);
-end
-Tabs.Fish:AddButton({
-    Title = "Đổi Linh Hồn Xanh",
-    Description = "",
-    Callback = function()
-        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RF/KitsuneStatuePray"):InvokeServer();
-    end
-});
-if Third_Sea then
-    local v503 = Tabs.Fish:AddSection("Biển");
-    local v504 = game:GetService("Players");
-    local v505 = game:GetService("RunService");
-    local v506 = game:GetService("VirtualInputManager");
-    local v507 = game:GetService("Workspace");
-    local v508 = 350;
-    local v509 = Tabs.Fish:AddSlider("SliderSpeedBoat", {
-        Title = "Tốc Độ Thuyền",
-        Description = "",
-        Default = v508,
-        Min = 0,
-        Max = 350,
-        Rounding = 1,
-        Callback = function(v583)
-            v508 = v583;
-        end
-    });
-    v509:SetValue(v508);
-    local v510 = Tabs.Fish:AddToggle("AutoFindPrehistoric", {
-        Title = "Tìm Đảo Dung Nham",
-        Description = "",
-        Default = false
-    });
-    Options.AutoFindPrehistoric:SetValue(false);
-    v510:OnChanged(function(v584)
-        _G.AutoFindPrehistoric = v584;
-    end);
-    local v511 = {};
-    local v512 = false;
-    local v513 = false;
-    v505.RenderStepped:Connect(function()
-        if not _G.AutoFindPrehistoric then
-            v513 = false;
-            return;
-        end
-        local v585 = v504.LocalPlayer;
-        local v586 = v585.Character;
-        if (not v586 or not v586:FindFirstChild("Humanoid")) then
-            return;
-        end
-        local function v587()
-            if v512 then
-                return;
-            end
-            v512 = true;
-            for v769, v770 in pairs(v511) do
-                if (v770 and v770.Parent and (v770.Name == "VehicleSeat") and not v770.Occupant) then
-                    Tween2(v770.CFrame);
-                    break;
-                end
-            end
-            v512 = false;
-        end
-        local v588 = v586.Humanoid;
-        local v589 = false;
-        local v590 = nil;
-        for v684, v685 in pairs(v507.Boats:GetChildren()) do
-            local v686 = v685:FindFirstChild("VehicleSeat");
-            if (v686 and (v686.Occupant == v588)) then
-                v589 = true;
-                v590 = v686;
-                v511[v685.Name] = v686;
-            elseif (v686 and (v686.Occupant == nil)) then
-                v587();
-            end
-        end
-        if not v589 then
-            return;
-        end
-        v590.MaxSpeed = v508;
-        v590.CFrame = CFrame.new(Vector3.new(v590.Position.X, v590.Position.Y, v590.Position.Z)) * v590.CFrame.Rotation ;
-        v506:SendKeyEvent(true, "W", false, game);
-        for v687, v688 in pairs(v507.Boats:GetDescendants()) do
-            if v688:IsA("BasePart") then
-                v688.CanCollide = false;
-            end
-        end
-        for v689, v690 in pairs(v586:GetDescendants()) do
-            if v690:IsA("BasePart") then
-                v690.CanCollide = false;
-            end
-        end
-        local v593 = {
-            "ShipwreckIsland",
-            "SandIsland",
-            "TreeIsland",
-            "TinyIsland",
-            "MysticIsland",
-            "KitsuneIsland",
-            "FrozenDimension"
-        };
-        for v691, v692 in ipairs(v593) do
-            local v693 = v507.Map:FindFirstChild(v692);
-            if (v693 and v693:IsA("Model")) then
-                v693:Destroy();
-            end
-        end
-        local v594 = v507.Map:FindFirstChild("PrehistoricIsland");
-        if v594 then
-            v506:SendKeyEvent(false, "W", false, game);
-            _G.AutoFindPrehistoric = false;
-            end
-            return;
-        end
-    end);
-    local v514 = Tabs.Fish:AddToggle("AutoFindMirage", {
-        Title = "Tìm Đảo Bí Ẩn",
-        Description = "",
-        Default = false
-    });
-    Options.AutoFindMirage:SetValue(false);
-    v514:OnChanged(function(v595)
-        _G.AutoFindMirage = v595;
-    end);
-    local v511 = {};
-    local v512 = false;
-    local v513 = false;
-    v505.RenderStepped:Connect(function()
-        if not _G.AutoFindMirage then
-            v513 = false;
-            return;
-        end
-        local v596 = v504.LocalPlayer;
-        local v597 = v596.Character;
-        if (not v597 or not v597:FindFirstChild("Humanoid")) then
-            return;
-        end
-        local function v598()
-            if v512 then
-                return;
-            end
-            v512 = true;
-            for v771, v772 in pairs(v511) do
-                if (v772 and v772.Parent and (v772.Name == "VehicleSeat") and not v772.Occupant) then
-                    Tween2(v772.CFrame);
-                    break;
-                end
-            end
-            v512 = false;
-        end
-        local v599 = v597.Humanoid;
-        local v600 = false;
-        local v601 = nil;
-        for v694, v695 in pairs(v507.Boats:GetChildren()) do
-            local v696 = v695:FindFirstChild("VehicleSeat");
-            if (v696 and (v696.Occupant == v599)) then
-                v600 = true;
-                v601 = v696;
-                v511[v695.Name] = v696;
-            elseif (v696 and (v696.Occupant == nil)) then
-                v598();
-            end
-        end
-        if not v600 then
-            return;
-        end
-        v601.MaxSpeed = v508;
-        v601.CFrame = CFrame.new(Vector3.new(v601.Position.X, v601.Position.Y, v601.Position.Z)) * v601.CFrame.Rotation ;
-        v506:SendKeyEvent(true, "W", false, game);
-        for v697, v698 in pairs(v507.Boats:GetDescendants()) do
-            if v698:IsA("BasePart") then
-                v698.CanCollide = false;
-            end
-        end
-        for v699, v700 in pairs(v597:GetDescendants()) do
-            if v700:IsA("BasePart") then
-                v700.CanCollide = false;
-            end
-        end
-        local v604 = {
-            "ShipwreckIsland",
-            "SandIsland",
-            "TreeIsland",
-            "TinyIsland",
-            "PrehistoricIsland",
-            "KitsuneIsland",
-            "FrozenDimension"
-        };
-        for v701, v702 in ipairs(v604) do
-            local v703 = v507.Map:FindFirstChild(v702);
-            if (v703 and v703:IsA("Model")) then
-                v703:Destroy();
-            end
-        end
-        local v605 = v507.Map:FindFirstChild("MysticIsland");
-        if v605 then
-            v506:SendKeyEvent(false, "W", false, game);
-            _G.AutoFindMirage = false;
-            if not v513 then
-                v14:Notify({
-                    Title = "Min Gaming",
-                    Content = "Đảo Bí Ẩn Tìm Thấy",
-                    Duration = 10
-                });
-                v513 = true;
-            end
-            return;
-        end
-    end);
-    local v515 = Tabs.Fish:AddToggle("AutoFindFrozen", {
-        Title = "Tìm Đảo Leviathan",
-        Description = "",
-        Default = false
-    });
-    Options.AutoFindFrozen:SetValue(false);
-    v515:OnChanged(function(v606)
-        _G.AutoFindFrozen = v606;
-    end);
-    local v511 = {};
-    local v512 = false;
-    local v513 = false;
-    v505.RenderStepped:Connect(function()
-        if not _G.AutoFindFrozen then
-            v513 = false;
-            return;
-        end
-        local v607 = v504.LocalPlayer;
-        local v608 = v607.Character;
-        if (not v608 or not v608:FindFirstChild("Humanoid")) then
-            return;
-        end
-        local function v609()
-            if v512 then
-                return;
-            end
-            v512 = true;
-            for v773, v774 in pairs(v511) do
-                if (v774 and v774.Parent and (v774.Name == "VehicleSeat") and not v774.Occupant) then
-                    Tween2(v774.CFrame);
-                    break;
-                end
-            end
-            v512 = false;
-        end
-        local v610 = v608.Humanoid;
-        local v611 = false;
-        local v612 = nil;
-        for v704, v705 in pairs(v507.Boats:GetChildren()) do
-            local v706 = v705:FindFirstChild("VehicleSeat");
-            if (v706 and (v706.Occupant == v610)) then
-                v611 = true;
-                v612 = v706;
-                v511[v705.Name] = v706;
-            elseif (v706 and (v706.Occupant == nil)) then
-                v609();
-            end
-        end
-        if not v611 then
-            return;
-        end
-        v612.MaxSpeed = v508;
-        v612.CFrame = CFrame.new(Vector3.new(v612.Position.X, v612.Position.Y, v612.Position.Z)) * v612.CFrame.Rotation ;
-        v506:SendKeyEvent(true, "W", false, game);
-        for v707, v708 in pairs(v507.Boats:GetDescendants()) do
-            if v708:IsA("BasePart") then
-                v708.CanCollide = false;
-            end
-        end
-        for v709, v710 in pairs(v608:GetDescendants()) do
-            if v710:IsA("BasePart") then
-                v710.CanCollide = false;
-            end
-        end
-        local v615 = {
-            "ShipwreckIsland",
-            "SandIsland",
-            "TreeIsland",
-            "TinyIsland",
-            "MysticIsland",
-            "KitsuneIsland",
-            "PrehistoricIsland"
-        };
-        for v711, v712 in ipairs(v615) do
-            local v713 = v507.Map:FindFirstChild(v712);
-            if (v713 and v713:IsA("Model")) then
-                v713:Destroy();
-            end
-        end
-        local v616 = v507.Map:FindFirstChild("FrozenDimension");
-        if v616 then
-            v506:SendKeyEvent(false, "W", false, game);
-            _G.AutoFindFrozen = false;
-            end
-            return;
-        end
-    end);
-    local v516 = Tabs.Fish:AddToggle("AutoComeTiki", {
-        Title = "Lái Thuyền Về Đảo Tiki",
-        Description = "",
-        Default = false
-    });
-    v516:OnChanged(function(v617)
-        _G.AutoComeTiki = v617;
-    end);
-    v505.RenderStepped:Connect(function()
-        if not _G.AutoComeTiki then
-            return;
-        end
-        local v618 = v504.LocalPlayer;
-        local v619 = v618.Character;
-        if (not v619 or not v619:FindFirstChild("Humanoid")) then
-            return;
-        end
-        local v620 = v619.Humanoid;
-        local v621 = nil;
-        for v714, v715 in pairs(v507.Boats:GetChildren()) do
-            local v716 = v715:FindFirstChild("VehicleSeat");
-            if (v716 and (v716.Occupant == v620)) then
-                v621 = v716;
-                break;
-            end
-        end
-        if v621 then
-            v621.MaxSpeed = v508;
-            local v776 = CFrame.new(- 16217.7568359375, 9.126761436462402, 446.06536865234375);
-            local v777 = v621.Position;
-            local v778 = v776.Position;
-            local v779 = (v778 - v777).unit;
-            local v780 = v779 * v621.MaxSpeed * v505.RenderStepped:Wait() ;
-            v621.CFrame = v621.CFrame + v780 ;
-            local v782 = CFrame.new(v777, v778);
-            v621.CFrame = CFrame.new(v621.Position, v778);
-            if ((v621.Position - v778).magnitude < 120) then
-                _G.AutoComeTiki = false;
-                v506:SendKeyEvent(false, "W", false, game);
-            end
-        end
-    end);
-    local v517 = Tabs.Fish:AddToggle("AutoComeHydra", {
-        Title = "Lái Thuyền Về Đảo Hydra",
-        Description = "",
-        Default = false
-    });
-    v517:OnChanged(function(v622)
-        _G.AutoComeHydra = v622;
-    end);
-    v505.RenderStepped:Connect(function()
-        if not _G.AutoComeHydra then
-            return;
-        end
-        local v623 = v504.LocalPlayer;
-        local v624 = v623.Character;
-        if (not v624 or not v624:FindFirstChild("Humanoid")) then
-            return;
-        end
-        local v625 = v624.Humanoid;
-        local v626 = nil;
-        for v717, v718 in pairs(v507.Boats:GetChildren()) do
-            local v719 = v718:FindFirstChild("VehicleSeat");
-            if (v719 and (v719.Occupant == v625)) then
-                v626 = v719;
-                break;
-            end
-        end
-        if v626 then
-            v626.MaxSpeed = v508;
-            local v784 = CFrame.new(5193.9375, - 0.04690289497375488, 1631.578369140625);
-            local v785 = v626.Position;
-            local v786 = v784.Position;
-            local v787 = (v786 - v785).unit;
-            local v788 = v787 * v626.MaxSpeed * v505.RenderStepped:Wait() ;
-            v626.CFrame = v626.CFrame + v788 ;
-            local v790 = CFrame.new(v785, v786);
-            v626.CFrame = CFrame.new(v626.Position, v786);
-            if ((v626.Position - v786).magnitude < 120) then
-                _G.AutoComeHydra = false;
-                v506:SendKeyEvent(false, "W", false, game);
-            end
-        end
-    end);
-    Tabs.Fish:AddButton({
-        Title = "Bay Đến Khu Vực Săn",
-        Description = "",
-        Callback = function()
-            Tween2(CFrame.new(- 16917.154296875, 7.757596015930176, 511.8203125));
-        end
-    });
-    local v511 = {};
-    local v518 = {
-        "Beast Hunter",
-        "Sleigh",
-        "Miracle",
-        "The Sentinel",
-        "Guardian",
-        "Lantern",
-        "Dinghy",
-        "PirateSloop",
-        "PirateBrigade",
-        "PirateGrandBrigade",
-        "MarineGrandBrigade",
-        "MarineBrigade",
-        "MarineSloop"
-    };
-    local v519 = Tabs.Fish:AddDropdown("DropdownBoat", {
-        Title = "Chọn Thuyền",
-        Description = "",
-        Values = v518,
-        Multi = false,
-        Default = 1
-    });
-    v519:SetValue(selectedBoat);
-    v519:OnChanged(function(v627)
-        selectedBoat = v627;
-    end);
-    local function v520(v628)
-        local v629 = {
-            [1] = "BuyBoat",
-            [2] = v628
-        };
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v629));
-        delay(2), function()
-            for v791, v792 in pairs(v507.Boats:GetChildren()) do
-                if (v792:IsA("Model") and (v792.Name == v628)) then
-                    local v896 = v792:FindFirstChild("VehicleSeat");
-                    if (v896 and not v896.Occupant) then
-                        v511[v628] = v896;
-                    end
-                end
-            end
-        end);
-    end
-    local function v521()
-        for v720, v721 in pairs(v511) do
-            if (v721 and v721.Parent and (v721.Name == "VehicleSeat") and not v721.Occupant) then
-                Tween2(v721.CFrame);
-            end
-        end
-    end
-    game:GetService("RunService").RenderStepped:Connect(function()
-        for v722, v723 in pairs(v511) do
-            if (v723 and v723.Parent and (v723.Name == "VehicleSeat") and not v723.Occupant) then
-                v511[v722] = v723;
-            end
-        end
-    end);
-    Tabs.Fish:AddButton({
-        Title = "Mua Thuyền",
-        Description = "",
-        Callback = function()
-            v520(selectedBoat);
-        end
-    });
-    Tabs.Fish:AddButton({
-        Title = "Bay Đến Thuyền",
-        Description = "Duy Nhất Thuyền Bạn Mua Ở Chỗ Chọn",
-        Callback = function()
-            v521();
-        end
-    });
         local ToggleTerrorshark =
             Tabs.Fish:AddToggle("ToggleTerrorshark", {Title = " Kill Terrorshark", Default = false})
 
@@ -7070,455 +6543,7 @@ if Third_Sea then
                 end
             )
         end
-----------------------------------------------------Setting----------------------------
-local test = Tabs.Setting:AddSection("Local Player")
 
-local ToggleInfSoru = Tabs.Setting:AddToggle("ToggleInfSoru", {Title = "Inf Soru", Default = false})
-ToggleInfSoru:OnChanged(
-    function(v537)
-        ToggleInfSoru = v537
-    end
-)
-spawn(
-    function()
-        while wait() do
-            pcall(
-                function()
-                    if
-                        (ToggleInfSoru and
-                            (game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") ~= nil))
-                     then
-                        for v1680, v1681 in next, getgc() do
-                            if game:GetService("Players").LocalPlayer.Character.Soru then
-                                if
-                                    ((typeof(v1681) == "function") and
-                                        (getfenv(v1681).script == game:GetService("Players").LocalPlayer.Character.Soru))
-                                 then
-                                    for v2309, v2310 in next, getupvalues(v1681) do
-                                        if (typeof(v2310) == "table") then
-                                            repeat
-                                                wait(0.1)
-                                                v2310.LastUse = 0
-                                            until not _G.Infsoru or
-                                                (game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0)
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            )
-        end
-    end
-)
-
-local AutoV3 =
-    Tabs.Setting:AddToggle(
-    "ToggleAutoT",
-    {
-        Title = "Auto Active V3",
-        Description = "",
-        Default = false
-    }
-)
-AutoV3:OnChanged(
-    function(Siu)
-        _G.AutoT = Siu
-    end
-)
-Options.ToggleAutoT:SetValue(false)
-spawn(
-    function()
-        while wait() do
-            pcall(
-                function()
-                    if _G.AutoT then
-                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "T", false, game)
-                        wait()
-                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "T", false, game)
-                    end
-                end
-            )
-        end
-    end
-)
-
-local v86 =
-    Tabs.Setting:AddToggle(
-    "ToggleAutoY",
-    {
-        Title = "Auto Active V4",
-        Description = "",
-        Default = false
-    }
-)
-v86:OnChanged(
-    function(v274)
-        _G.AutoY = v274
-    end
-)
-Options.ToggleAutoY:SetValue(false)
-spawn(
-    function()
-        while wait() do
-            pcall(
-                function()
-                    if _G.AutoY then
-                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "Y", false, game)
-                        wait()
-                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "Y", false, game)
-                    end
-                end
-            )
-        end
-    end
-)
-
-local NoClipz =
-    Tabs.Setting:AddToggle(
-    "NoClipz",
-    {
-        Title = "No Clip",
-        Description = "",
-        Default = false
-    }
-)
-NoClipz:OnChanged(function(v)
-    getgenv().NoClip = v
-    if getgenv().NoClipConnection then getgenv().NoClipConnection:Disconnect() end
-    if v then
-        getgenv().NoClipConnection = game:GetService("RunService").Stepped:Connect(function()
-            for _, p in ipairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-                if p:IsA("BasePart") then p.CanCollide = false end
-            end
-        end)
-    else
-        for _, p in ipairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-            if p:IsA("BasePart") then p.CanCollide = true end
-        end
-    end
-end)
-
-local v117 = Tabs.Setting:AddToggle("ToggleEnablePvp", {
-    Title = "Turn On PVP",
-    Description = "",
-    Default = false
-});
-v117:OnChanged(function(v314)
-    _G.EnabledPvP = v314;
-end);
-Options.ToggleEnablePvp:SetValue(false);
-spawn(function()
-    pcall(function()
-        while wait() do
-            if _G.EnabledPvP then
-                if (game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true) then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp");
-                end
-            end
-        end
-    end);
-end);
-
-local SettingFarm = Tabs.Setting:AddSection("Setting")
-
-local v153 =
-    Tabs.Setting:AddToggle(
-    "ToggleAntiBand",
-    {
-        Title = "Anti Band",
-        Description = "",
-        Default = true
-    }
-)
-v153:OnChanged(
-    function(v384)
-        _G.AntiBand = v384
-    end
-)
-local v154 = {
-    17884881,
-    120173604,
-    912348
-}
-spawn(
-    function()
-        while wait() do
-            if _G.AntiBand then
-                for v809, v810 in pairs(game:GetService("Players"):GetPlayers()) do
-                    if table.find(v154, v810.UserId) then
-                        Hop()
-                    end
-                end
-            end
-        end
-    end
-)
-
-local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
-ToggleWhite:OnChanged(
-    function(Value)
-        _G.WhiteScreen = Value
-        if _G.WhiteScreen == true then
-            game:GetService("RunService"):Set3dRenderingEnabled(false)
-        elseif _G.WhiteScreen == false then
-            game:GetService("RunService"):Set3dRenderingEnabled(true)
-        end
-    end
-)
-Options.ToggleWhite:SetValue(false)
-
-Tabs.Setting:AddButton(
-    {
-        Title = "Fps Booster",
-        Description = "Boost your fps",
-        Callback = function()
-            FPSBooster()
-        end
-    }
-)
-
-function FPSBooster()
-    local decalsyeeted = true
-    local g = game
-    local w = g.Workspace
-    local l = g.Lighting
-    local t = w.Terrain
-    sethiddenproperty(l, "Technology", 2)
-    sethiddenproperty(t, "Decoration", false)
-    t.WaterWaveSize = 0
-    t.WaterWaveSpeed = 0
-    t.WaterReflectance = 0
-    t.WaterTransparency = 0
-    l.GlobalShadows = false
-    l.FogEnd = 9e9
-    l.Brightness = 0
-    settings().Rendering.QualityLevel = "Level01"
-    for i, v in pairs(g:GetDescendants()) do
-        if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
-            v.Material = "Plastic"
-            v.Reflectance = 0
-        elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
-            v.Transparency = 1
-        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-            v.Lifetime = NumberRange.new(0)
-        elseif v:IsA("Explosion") then
-            v.BlastPressure = 1
-            v.BlastRadius = 1
-        elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
-            v.Enabled = false
-        elseif v:IsA("MeshPart") then
-            v.Material = "Plastic"
-            v.Reflectance = 0
-            v.TextureID = 10385902758728957
-        end
-    end
-    for i, e in pairs(l:GetChildren()) do
-        if
-            e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or
-                e:IsA("DepthOfFieldEffect")
-         then
-            e.Enabled = false
-        end
-    end
-end
-
-Tabs.Setting:AddButton(
-    {
-        Title = "No Frog",
-        Description = "",
-        Callback = function()
-           game:GetService("Lighting").LightingLayers:Destroy()
-           game:GetService("Lighting").Sky:Destroy()
-           game.Lighting.FogEnd = 9e9
-   end,
-  }
-)
-
-Tabs.Setting:AddButton(
-    {
-        Title = "No Magma",
-        Description = "",
-        Callback = function()
-           for i,v in pairs(game.Workspace:GetDescendants()) do
-           if v.Name == "Lava" then   
-               v:Destroy()
-           end
-       end
-       for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
-           if v.Name == "Lava" then   
-               v:Destroy()
-           end
-       end
-   end,
-  }
-)
-
-local SKill = Tabs.Setting:AddSection("Settings Mastery")
-local ToggleZ = Tabs.Setting:AddToggle("ToggleZ", {Title = "Skill Z", Default = true})
-ToggleZ:OnChanged(
-    function(Value)
-        SkillZ = Value
-    end
-)
-Options.ToggleZ:SetValue(true)
-
-local ToggleX = Tabs.Setting:AddToggle("ToggleX", {Title = "Skill X", Default = true})
-ToggleX:OnChanged(
-    function(Value)
-        SkillX = Value
-    end
-)
-Options.ToggleX:SetValue(true)
-
-local ToggleC = Tabs.Setting:AddToggle("ToggleC", {Title = "Skill C", Default = true})
-ToggleC:OnChanged(
-    function(Value)
-        SkillC = Value
-    end
-)
-Options.ToggleC:SetValue(true)
-
-local ToggleV = Tabs.Setting:AddToggle("ToggleV", {Title = "Skill V", Default = true})
-ToggleV:OnChanged(
-    function(Value)
-        SkillV = Value
-    end
-)
-Options.ToggleV:SetValue(true)
-
-local ToggleF = Tabs.Setting:AddToggle("ToggleF", {Title = "Skill F", Default = false})
-ToggleF:OnChanged(
-    function(Value)
-        SkillF = Value
-    end
-)
-Options.ToggleF:SetValue(false)
-
-local AutoStasts = Tabs.Setting:AddSection("Auto Stasts")
-
-local ToggleMelee = Tabs.Setting:AddToggle("ToggleMelee", {Title = "Add Melee", Default = false})
-ToggleMelee:OnChanged(
-    function(Value)
-        _G.Auto_Stats_Melee = Value
-    end
-)
-Options.ToggleMelee:SetValue(false)
-
-local ToggleDe = Tabs.Setting:AddToggle("ToggleDe", {Title = "Add Defense", Default = false})
-ToggleDe:OnChanged(
-    function(Value)
-        _G.Auto_Stats_Defense = Value
-    end
-)
-Options.ToggleDe:SetValue(false)
-
-local ToggleSword = Tabs.Setting:AddToggle("ToggleSword", {Title = "Add Sword", Default = false})
-ToggleSword:OnChanged(
-    function(Value)
-        _G.Auto_Stats_Sword = Value
-    end
-)
-Options.ToggleSword:SetValue(false)
-
-local ToggleGun = Tabs.Setting:AddToggle("ToggleGun", {Title = "Add Gun", Default = false})
-ToggleGun:OnChanged(
-    function(Value)
-        _G.Auto_Stats_Gun = Value
-    end
-)
-Options.ToggleGun:SetValue(false)
-
-local ToggleFruit = Tabs.Setting:AddToggle("ToggleFruit", {Title = "Add Demon Fruit", Default = false})
-ToggleFruit:OnChanged(
-    function(Value)
-        _G.Auto_Stats_Devil_Fruit = Value
-    end
-)
-Options.ToggleFruit:SetValue(false)
-
-spawn(
-    function()
-        while wait() do
-            if _G.Auto_Stats_Devil_Fruit then
-                local args = {
-                    [1] = "AddPoint",
-                    [2] = "Demon Fruit",
-                    [3] = 3
-                }
-
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-            end
-        end
-    end
-)
-
-spawn(
-    function()
-        while wait() do
-            if _G.Auto_Stats_Gun then
-                local args = {
-                    [1] = "AddPoint",
-                    [2] = "Gun",
-                    [3] = 3
-                }
-
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-            end
-        end
-    end
-)
-
-spawn(
-    function()
-        while wait() do
-            if _G.Auto_Stats_Sword then
-                local args = {
-                    [1] = "AddPoint",
-                    [2] = "Sword",
-                    [3] = 3
-                }
-
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-            end
-        end
-    end
-)
-
-spawn(
-    function()
-        while wait() do
-            if _G.Auto_Stats_Defense then
-                local args = {
-                    [1] = "AddPoint",
-                    [2] = "Defense",
-                    [3] = 3
-                }
-
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-            end
-        end
-    end
-)
-
-spawn(
-    function()
-        while wait() do
-            if _G.Auto_Stats_Melee then
-                local args = {
-                    [1] = "AddPoint",
-                    [2] = "Melee",
-                    [3] = 3
-                }
-
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-            end
-        end
-    end
-)
-
-        
         -----------------------------------------Tab Player------------------------------------------------------------
         local Playerslist = {}
         for i, v in pairs(game:GetService("Players"):GetChildren()) do
@@ -12693,3 +11718,962 @@ spawn(
         end
     end
 )
+-------------------------------------------------
+if Third_Sea then
+    local v498 = Tabs.Fish:AddSection("Đảo Cáo");
+    local v501 = Tabs.Fish:AddToggle("ToggleTPKitsune", {
+        Title = "Bay Vô Đảo Cáo",
+        Description = "",
+        Default = false
+    });
+    v501:OnChanged(function(v580)
+        _G.TweenToKitsune = v580;
+    end);
+    Options.ToggleTPKitsune:SetValue(false);
+    spawn(function()
+        local v581;
+        while not v581 do
+            v581 = game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland");
+            wait();
+        end
+        while wait() do
+            if _G.TweenToKitsune then
+                local v845 = v581:FindFirstChild("ShrineActive");
+                if v845 then
+                    for v1335, v1336 in pairs(v845:GetDescendants()) do
+                        if (v1336:IsA("BasePart") and v1336.Name:find("NeonShrinePart")) then
+                            Tween2(v1336.CFrame);
+                        end
+                    end
+                end
+            end
+        end
+    end);
+    local v502 = Tabs.Fish:AddToggle("ToggleCollectAzure", {
+        Title = "Lụm Linh Hồn Xanh",
+        Description = "",
+        Default = false
+    });
+    v502:OnChanged(function(v582)
+        _G.CollectAzure = v582;
+    end);
+    Options.ToggleCollectAzure:SetValue(false);
+    spawn(function()
+        while wait() do
+            if _G.CollectAzure then
+                pcall(function()
+                    if game:GetService("Workspace"):FindFirstChild("AttachedAzureEmber") then
+                        Tween2(game:GetService("Workspace"):WaitForChild("EmberTemplate"):FindFirstChild("Part").CFrame);
+                    end
+                end);
+            end
+        end
+    end);
+end
+Tabs.Fish:AddButton({
+    Title = "Đổi Linh Hồn Xanh",
+    Description = "",
+    Callback = function()
+        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RF/KitsuneStatuePray"):InvokeServer();
+    end
+});
+if Third_Sea then
+    local v503 = Tabs.Fish:AddSection("Biển");
+    local v504 = game:GetService("Players");
+    local v505 = game:GetService("RunService");
+    local v506 = game:GetService("VirtualInputManager");
+    local v507 = game:GetService("Workspace");
+    local v508 = 350;
+    local v509 = Tabs.Fish:AddSlider("SliderSpeedBoat", {
+        Title = "Tốc Độ Thuyền",
+        Description = "",
+        Default = v508,
+        Min = 0,
+        Max = 350,
+        Rounding = 1,
+        Callback = function(v583)
+            v508 = v583;
+        end
+    });
+    v509:SetValue(v508);
+    local v510 = Tabs.Fish:AddToggle("AutoFindPrehistoric", {
+        Title = "Tìm Đảo Dung Nham",
+        Description = "",
+        Default = false
+    });
+    Options.AutoFindPrehistoric:SetValue(false);
+    v510:OnChanged(function(v584)
+        _G.AutoFindPrehistoric = v584;
+    end);
+    local v511 = {};
+    local v512 = false;
+    local v513 = false;
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoFindPrehistoric then
+            v513 = false;
+            return;
+        end
+        local v585 = v504.LocalPlayer;
+        local v586 = v585.Character;
+        if (not v586 or not v586:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local function v587()
+            if v512 then
+                return;
+            end
+            v512 = true;
+            for v769, v770 in pairs(v511) do
+                if (v770 and v770.Parent and (v770.Name == "VehicleSeat") and not v770.Occupant) then
+                    Tween2(v770.CFrame);
+                    break;
+                end
+            end
+            v512 = false;
+        end
+        local v588 = v586.Humanoid;
+        local v589 = false;
+        local v590 = nil;
+        for v684, v685 in pairs(v507.Boats:GetChildren()) do
+            local v686 = v685:FindFirstChild("VehicleSeat");
+            if (v686 and (v686.Occupant == v588)) then
+                v589 = true;
+                v590 = v686;
+                v511[v685.Name] = v686;
+            elseif (v686 and (v686.Occupant == nil)) then
+                v587();
+            end
+        end
+        if not v589 then
+            return;
+        end
+        v590.MaxSpeed = v508;
+        v590.CFrame = CFrame.new(Vector3.new(v590.Position.X, v590.Position.Y, v590.Position.Z)) * v590.CFrame.Rotation ;
+        v506:SendKeyEvent(true, "W", false, game);
+        for v687, v688 in pairs(v507.Boats:GetDescendants()) do
+            if v688:IsA("BasePart") then
+                v688.CanCollide = false;
+            end
+        end
+        for v689, v690 in pairs(v586:GetDescendants()) do
+            if v690:IsA("BasePart") then
+                v690.CanCollide = false;
+            end
+        end
+        local v593 = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "MysticIsland",
+            "KitsuneIsland",
+            "FrozenDimension"
+        };
+        for v691, v692 in ipairs(v593) do
+            local v693 = v507.Map:FindFirstChild(v692);
+            if (v693 and v693:IsA("Model")) then
+                v693:Destroy();
+            end
+        end
+        local v594 = v507.Map:FindFirstChild("PrehistoricIsland");
+        if v594 then
+            v506:SendKeyEvent(false, "W", false, game);
+            _G.AutoFindPrehistoric = false;
+            end
+            return;
+        end
+    end);
+    local v514 = Tabs.Fish:AddToggle("AutoFindMirage", {
+        Title = "Tìm Đảo Bí Ẩn",
+        Description = "",
+        Default = false
+    });
+    Options.AutoFindMirage:SetValue(false);
+    v514:OnChanged(function(v595)
+        _G.AutoFindMirage = v595;
+    end);
+    local v511 = {};
+    local v512 = false;
+    local v513 = false;
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoFindMirage then
+            v513 = false;
+            return;
+        end
+        local v596 = v504.LocalPlayer;
+        local v597 = v596.Character;
+        if (not v597 or not v597:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local function v598()
+            if v512 then
+                return;
+            end
+            v512 = true;
+            for v771, v772 in pairs(v511) do
+                if (v772 and v772.Parent and (v772.Name == "VehicleSeat") and not v772.Occupant) then
+                    Tween2(v772.CFrame);
+                    break;
+                end
+            end
+            v512 = false;
+        end
+        local v599 = v597.Humanoid;
+        local v600 = false;
+        local v601 = nil;
+        for v694, v695 in pairs(v507.Boats:GetChildren()) do
+            local v696 = v695:FindFirstChild("VehicleSeat");
+            if (v696 and (v696.Occupant == v599)) then
+                v600 = true;
+                v601 = v696;
+                v511[v695.Name] = v696;
+            elseif (v696 and (v696.Occupant == nil)) then
+                v598();
+            end
+        end
+        if not v600 then
+            return;
+        end
+        v601.MaxSpeed = v508;
+        v601.CFrame = CFrame.new(Vector3.new(v601.Position.X, v601.Position.Y, v601.Position.Z)) * v601.CFrame.Rotation ;
+        v506:SendKeyEvent(true, "W", false, game);
+        for v697, v698 in pairs(v507.Boats:GetDescendants()) do
+            if v698:IsA("BasePart") then
+                v698.CanCollide = false;
+            end
+        end
+        for v699, v700 in pairs(v597:GetDescendants()) do
+            if v700:IsA("BasePart") then
+                v700.CanCollide = false;
+            end
+        end
+        local v604 = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "PrehistoricIsland",
+            "KitsuneIsland",
+            "FrozenDimension"
+        };
+        for v701, v702 in ipairs(v604) do
+            local v703 = v507.Map:FindFirstChild(v702);
+            if (v703 and v703:IsA("Model")) then
+                v703:Destroy();
+            end
+        end
+        local v605 = v507.Map:FindFirstChild("MysticIsland");
+        if v605 then
+            v506:SendKeyEvent(false, "W", false, game);
+            _G.AutoFindMirage = false;
+            if not v513 then
+                v14:Notify({
+                    Title = "Min Gaming",
+                    Content = "Đảo Bí Ẩn Tìm Thấy",
+                    Duration = 10
+                });
+                v513 = true;
+            end
+            return;
+        end
+    end);
+    local v515 = Tabs.Fish:AddToggle("AutoFindFrozen", {
+        Title = "Tìm Đảo Leviathan",
+        Description = "",
+        Default = false
+    });
+    Options.AutoFindFrozen:SetValue(false);
+    v515:OnChanged(function(v606)
+        _G.AutoFindFrozen = v606;
+    end);
+    local v511 = {};
+    local v512 = false;
+    local v513 = false;
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoFindFrozen then
+            v513 = false;
+            return;
+        end
+        local v607 = v504.LocalPlayer;
+        local v608 = v607.Character;
+        if (not v608 or not v608:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local function v609()
+            if v512 then
+                return;
+            end
+            v512 = true;
+            for v773, v774 in pairs(v511) do
+                if (v774 and v774.Parent and (v774.Name == "VehicleSeat") and not v774.Occupant) then
+                    Tween2(v774.CFrame);
+                    break;
+                end
+            end
+            v512 = false;
+        end
+        local v610 = v608.Humanoid;
+        local v611 = false;
+        local v612 = nil;
+        for v704, v705 in pairs(v507.Boats:GetChildren()) do
+            local v706 = v705:FindFirstChild("VehicleSeat");
+            if (v706 and (v706.Occupant == v610)) then
+                v611 = true;
+                v612 = v706;
+                v511[v705.Name] = v706;
+            elseif (v706 and (v706.Occupant == nil)) then
+                v609();
+            end
+        end
+        if not v611 then
+            return;
+        end
+        v612.MaxSpeed = v508;
+        v612.CFrame = CFrame.new(Vector3.new(v612.Position.X, v612.Position.Y, v612.Position.Z)) * v612.CFrame.Rotation ;
+        v506:SendKeyEvent(true, "W", false, game);
+        for v707, v708 in pairs(v507.Boats:GetDescendants()) do
+            if v708:IsA("BasePart") then
+                v708.CanCollide = false;
+            end
+        end
+        for v709, v710 in pairs(v608:GetDescendants()) do
+            if v710:IsA("BasePart") then
+                v710.CanCollide = false;
+            end
+        end
+        local v615 = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "MysticIsland",
+            "KitsuneIsland",
+            "PrehistoricIsland"
+        };
+        for v711, v712 in ipairs(v615) do
+            local v713 = v507.Map:FindFirstChild(v712);
+            if (v713 and v713:IsA("Model")) then
+                v713:Destroy();
+            end
+        end
+        local v616 = v507.Map:FindFirstChild("FrozenDimension");
+        if v616 then
+            v506:SendKeyEvent(false, "W", false, game);
+            _G.AutoFindFrozen = false;
+            end
+            return;
+        end
+    end);
+    local v516 = Tabs.Fish:AddToggle("AutoComeTiki", {
+        Title = "Lái Thuyền Về Đảo Tiki",
+        Description = "",
+        Default = false
+    });
+    v516:OnChanged(function(v617)
+        _G.AutoComeTiki = v617;
+    end);
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoComeTiki then
+            return;
+        end
+        local v618 = v504.LocalPlayer;
+        local v619 = v618.Character;
+        if (not v619 or not v619:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local v620 = v619.Humanoid;
+        local v621 = nil;
+        for v714, v715 in pairs(v507.Boats:GetChildren()) do
+            local v716 = v715:FindFirstChild("VehicleSeat");
+            if (v716 and (v716.Occupant == v620)) then
+                v621 = v716;
+                break;
+            end
+        end
+        if v621 then
+            v621.MaxSpeed = v508;
+            local v776 = CFrame.new(- 16217.7568359375, 9.126761436462402, 446.06536865234375);
+            local v777 = v621.Position;
+            local v778 = v776.Position;
+            local v779 = (v778 - v777).unit;
+            local v780 = v779 * v621.MaxSpeed * v505.RenderStepped:Wait() ;
+            v621.CFrame = v621.CFrame + v780 ;
+            local v782 = CFrame.new(v777, v778);
+            v621.CFrame = CFrame.new(v621.Position, v778);
+            if ((v621.Position - v778).magnitude < 120) then
+                _G.AutoComeTiki = false;
+                v506:SendKeyEvent(false, "W", false, game);
+            end
+        end
+    end);
+    local v517 = Tabs.Fish:AddToggle("AutoComeHydra", {
+        Title = "Lái Thuyền Về Đảo Hydra",
+        Description = "",
+        Default = false
+    });
+    v517:OnChanged(function(v622)
+        _G.AutoComeHydra = v622;
+    end);
+    v505.RenderStepped:Connect(function()
+        if not _G.AutoComeHydra then
+            return;
+        end
+        local v623 = v504.LocalPlayer;
+        local v624 = v623.Character;
+        if (not v624 or not v624:FindFirstChild("Humanoid")) then
+            return;
+        end
+        local v625 = v624.Humanoid;
+        local v626 = nil;
+        for v717, v718 in pairs(v507.Boats:GetChildren()) do
+            local v719 = v718:FindFirstChild("VehicleSeat");
+            if (v719 and (v719.Occupant == v625)) then
+                v626 = v719;
+                break;
+            end
+        end
+        if v626 then
+            v626.MaxSpeed = v508;
+            local v784 = CFrame.new(5193.9375, - 0.04690289497375488, 1631.578369140625);
+            local v785 = v626.Position;
+            local v786 = v784.Position;
+            local v787 = (v786 - v785).unit;
+            local v788 = v787 * v626.MaxSpeed * v505.RenderStepped:Wait() ;
+            v626.CFrame = v626.CFrame + v788 ;
+            local v790 = CFrame.new(v785, v786);
+            v626.CFrame = CFrame.new(v626.Position, v786);
+            if ((v626.Position - v786).magnitude < 120) then
+                _G.AutoComeHydra = false;
+                v506:SendKeyEvent(false, "W", false, game);
+            end
+        end
+    end);
+    Tabs.Fish:AddButton({
+        Title = "Bay Đến Khu Vực Săn",
+        Description = "",
+        Callback = function()
+            Tween2(CFrame.new(- 16917.154296875, 7.757596015930176, 511.8203125));
+        end
+    });
+    local v511 = {};
+    local v518 = {
+        "Beast Hunter",
+        "Sleigh",
+        "Miracle",
+        "The Sentinel",
+        "Guardian",
+        "Lantern",
+        "Dinghy",
+        "PirateSloop",
+        "PirateBrigade",
+        "PirateGrandBrigade",
+        "MarineGrandBrigade",
+        "MarineBrigade",
+        "MarineSloop"
+    };
+    local v519 = Tabs.Fish:AddDropdown("DropdownBoat", {
+        Title = "Chọn Thuyền",
+        Description = "",
+        Values = v518,
+        Multi = false,
+        Default = 1
+    });
+    v519:SetValue(selectedBoat);
+    v519:OnChanged(function(v627)
+        selectedBoat = v627;
+    end);
+    local function v520(v628)
+        local v629 = {
+            [1] = "BuyBoat",
+            [2] = v628
+        };
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(v629));
+        delay(2), function()
+            for v791, v792 in pairs(v507.Boats:GetChildren()) do
+                if (v792:IsA("Model") and (v792.Name == v628)) then
+                    local v896 = v792:FindFirstChild("VehicleSeat");
+                    if (v896 and not v896.Occupant) then
+                        v511[v628] = v896;
+                    end
+                end
+            end
+        end);
+    end
+    local function v521()
+        for v720, v721 in pairs(v511) do
+            if (v721 and v721.Parent and (v721.Name == "VehicleSeat") and not v721.Occupant) then
+                Tween2(v721.CFrame);
+            end
+        end
+    end
+    game:GetService("RunService").RenderStepped:Connect(function()
+        for v722, v723 in pairs(v511) do
+            if (v723 and v723.Parent and (v723.Name == "VehicleSeat") and not v723.Occupant) then
+                v511[v722] = v723;
+            end
+        end
+    end);
+    Tabs.Fish:AddButton({
+        Title = "Mua Thuyền",
+        Description = "",
+        Callback = function()
+            v520(selectedBoat);
+        end
+    });
+    Tabs.Fish:AddButton({
+        Title = "Bay Đến Thuyền",
+        Description = "Duy Nhất Thuyền Bạn Mua Ở Chỗ Chọn",
+        Callback = function()
+            v521();
+        end
+    });
+-----------------------------------------------
+----------------------------------------------------Setting----------------------------
+local test = Tabs.Setting:AddSection("Local Player")
+
+local ToggleInfSoru = Tabs.Setting:AddToggle("ToggleInfSoru", {Title = "Inf Soru", Default = false})
+ToggleInfSoru:OnChanged(
+    function(v537)
+        ToggleInfSoru = v537
+    end
+)
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    if
+                        (ToggleInfSoru and
+                            (game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") ~= nil))
+                     then
+                        for v1680, v1681 in next, getgc() do
+                            if game:GetService("Players").LocalPlayer.Character.Soru then
+                                if
+                                    ((typeof(v1681) == "function") and
+                                        (getfenv(v1681).script == game:GetService("Players").LocalPlayer.Character.Soru))
+                                 then
+                                    for v2309, v2310 in next, getupvalues(v1681) do
+                                        if (typeof(v2310) == "table") then
+                                            repeat
+                                                wait(0.1)
+                                                v2310.LastUse = 0
+                                            until not _G.Infsoru or
+                                                (game:GetService("Players").LocalPlayer.Character.Humanoid.Health <= 0)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            )
+        end
+    end
+)
+
+local AutoV3 =
+    Tabs.Setting:AddToggle(
+    "ToggleAutoT",
+    {
+        Title = "Auto Active V3",
+        Description = "",
+        Default = false
+    }
+)
+AutoV3:OnChanged(
+    function(Siu)
+        _G.AutoT = Siu
+    end
+)
+Options.ToggleAutoT:SetValue(false)
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    if _G.AutoT then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "T", false, game)
+                        wait()
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "T", false, game)
+                    end
+                end
+            )
+        end
+    end
+)
+
+local v86 =
+    Tabs.Setting:AddToggle(
+    "ToggleAutoY",
+    {
+        Title = "Auto Active V4",
+        Description = "",
+        Default = false
+    }
+)
+v86:OnChanged(
+    function(v274)
+        _G.AutoY = v274
+    end
+)
+Options.ToggleAutoY:SetValue(false)
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    if _G.AutoY then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "Y", false, game)
+                        wait()
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "Y", false, game)
+                    end
+                end
+            )
+        end
+    end
+)
+
+local NoClipz =
+    Tabs.Setting:AddToggle(
+    "NoClipz",
+    {
+        Title = "No Clip",
+        Description = "",
+        Default = false
+    }
+)
+NoClipz:OnChanged(function(v)
+    getgenv().NoClip = v
+    if getgenv().NoClipConnection then getgenv().NoClipConnection:Disconnect() end
+    if v then
+        getgenv().NoClipConnection = game:GetService("RunService").Stepped:Connect(function()
+            for _, p in ipairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if p:IsA("BasePart") then p.CanCollide = false end
+            end
+        end)
+    else
+        for _, p in ipairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if p:IsA("BasePart") then p.CanCollide = true end
+        end
+    end
+end)
+
+local v117 = Tabs.Setting:AddToggle("ToggleEnablePvp", {
+    Title = "Turn On PVP",
+    Description = "",
+    Default = false
+});
+v117:OnChanged(function(v314)
+    _G.EnabledPvP = v314;
+end);
+Options.ToggleEnablePvp:SetValue(false);
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.EnabledPvP then
+                if (game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true) then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp");
+                end
+            end
+        end
+    end);
+end);
+
+local SettingFarm = Tabs.Setting:AddSection("Setting")
+
+local v153 =
+    Tabs.Setting:AddToggle(
+    "ToggleAntiBand",
+    {
+        Title = "Anti Band",
+        Description = "",
+        Default = true
+    }
+)
+v153:OnChanged(
+    function(v384)
+        _G.AntiBand = v384
+    end
+)
+local v154 = {
+    17884881,
+    120173604,
+    912348
+}
+spawn(
+    function()
+        while wait() do
+            if _G.AntiBand then
+                for v809, v810 in pairs(game:GetService("Players"):GetPlayers()) do
+                    if table.find(v154, v810.UserId) then
+                        Hop()
+                    end
+                end
+            end
+        end
+    end
+)
+
+local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
+ToggleWhite:OnChanged(
+    function(Value)
+        _G.WhiteScreen = Value
+        if _G.WhiteScreen == true then
+            game:GetService("RunService"):Set3dRenderingEnabled(false)
+        elseif _G.WhiteScreen == false then
+            game:GetService("RunService"):Set3dRenderingEnabled(true)
+        end
+    end
+)
+Options.ToggleWhite:SetValue(false)
+
+Tabs.Setting:AddButton(
+    {
+        Title = "Fps Booster",
+        Description = "Boost your fps",
+        Callback = function()
+            FPSBooster()
+        end
+    }
+)
+
+function FPSBooster()
+    local decalsyeeted = true
+    local g = game
+    local w = g.Workspace
+    local l = g.Lighting
+    local t = w.Terrain
+    sethiddenproperty(l, "Technology", 2)
+    sethiddenproperty(t, "Decoration", false)
+    t.WaterWaveSize = 0
+    t.WaterWaveSpeed = 0
+    t.WaterReflectance = 0
+    t.WaterTransparency = 0
+    l.GlobalShadows = false
+    l.FogEnd = 9e9
+    l.Brightness = 0
+    settings().Rendering.QualityLevel = "Level01"
+    for i, v in pairs(g:GetDescendants()) do
+        if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+            v.Material = "Plastic"
+            v.Reflectance = 0
+        elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+            v.Transparency = 1
+        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+            v.Lifetime = NumberRange.new(0)
+        elseif v:IsA("Explosion") then
+            v.BlastPressure = 1
+            v.BlastRadius = 1
+        elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+            v.Enabled = false
+        elseif v:IsA("MeshPart") then
+            v.Material = "Plastic"
+            v.Reflectance = 0
+            v.TextureID = 10385902758728957
+        end
+    end
+    for i, e in pairs(l:GetChildren()) do
+        if
+            e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or
+                e:IsA("DepthOfFieldEffect")
+         then
+            e.Enabled = false
+        end
+    end
+end
+
+Tabs.Setting:AddButton(
+    {
+        Title = "No Frog",
+        Description = "",
+        Callback = function()
+           game:GetService("Lighting").LightingLayers:Destroy()
+           game:GetService("Lighting").Sky:Destroy()
+           game.Lighting.FogEnd = 9e9
+   end,
+  }
+)
+
+Tabs.Setting:AddButton(
+    {
+        Title = "No Magma",
+        Description = "",
+        Callback = function()
+           for i,v in pairs(game.Workspace:GetDescendants()) do
+           if v.Name == "Lava" then   
+               v:Destroy()
+           end
+       end
+       for i,v in pairs(game.ReplicatedStorage:GetDescendants()) do
+           if v.Name == "Lava" then   
+               v:Destroy()
+           end
+       end
+   end,
+  }
+)
+
+local SKill = Tabs.Setting:AddSection("Settings Mastery")
+local ToggleZ = Tabs.Setting:AddToggle("ToggleZ", {Title = "Skill Z", Default = true})
+ToggleZ:OnChanged(
+    function(Value)
+        SkillZ = Value
+    end
+)
+Options.ToggleZ:SetValue(true)
+
+local ToggleX = Tabs.Setting:AddToggle("ToggleX", {Title = "Skill X", Default = true})
+ToggleX:OnChanged(
+    function(Value)
+        SkillX = Value
+    end
+)
+Options.ToggleX:SetValue(true)
+
+local ToggleC = Tabs.Setting:AddToggle("ToggleC", {Title = "Skill C", Default = true})
+ToggleC:OnChanged(
+    function(Value)
+        SkillC = Value
+    end
+)
+Options.ToggleC:SetValue(true)
+
+local ToggleV = Tabs.Setting:AddToggle("ToggleV", {Title = "Skill V", Default = true})
+ToggleV:OnChanged(
+    function(Value)
+        SkillV = Value
+    end
+)
+Options.ToggleV:SetValue(true)
+
+local ToggleF = Tabs.Setting:AddToggle("ToggleF", {Title = "Skill F", Default = false})
+ToggleF:OnChanged(
+    function(Value)
+        SkillF = Value
+    end
+)
+Options.ToggleF:SetValue(false)
+
+local AutoStasts = Tabs.Setting:AddSection("Auto Stasts")
+
+local ToggleMelee = Tabs.Setting:AddToggle("ToggleMelee", {Title = "Add Melee", Default = false})
+ToggleMelee:OnChanged(
+    function(Value)
+        _G.Auto_Stats_Melee = Value
+    end
+)
+Options.ToggleMelee:SetValue(false)
+
+local ToggleDe = Tabs.Setting:AddToggle("ToggleDe", {Title = "Add Defense", Default = false})
+ToggleDe:OnChanged(
+    function(Value)
+        _G.Auto_Stats_Defense = Value
+    end
+)
+Options.ToggleDe:SetValue(false)
+
+local ToggleSword = Tabs.Setting:AddToggle("ToggleSword", {Title = "Add Sword", Default = false})
+ToggleSword:OnChanged(
+    function(Value)
+        _G.Auto_Stats_Sword = Value
+    end
+)
+Options.ToggleSword:SetValue(false)
+
+local ToggleGun = Tabs.Setting:AddToggle("ToggleGun", {Title = "Add Gun", Default = false})
+ToggleGun:OnChanged(
+    function(Value)
+        _G.Auto_Stats_Gun = Value
+    end
+)
+Options.ToggleGun:SetValue(false)
+
+local ToggleFruit = Tabs.Setting:AddToggle("ToggleFruit", {Title = "Add Demon Fruit", Default = false})
+ToggleFruit:OnChanged(
+    function(Value)
+        _G.Auto_Stats_Devil_Fruit = Value
+    end
+)
+Options.ToggleFruit:SetValue(false)
+
+spawn(
+    function()
+        while wait() do
+            if _G.Auto_Stats_Devil_Fruit then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Demon Fruit",
+                    [3] = 3
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
+spawn(
+    function()
+        while wait() do
+            if _G.Auto_Stats_Gun then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Gun",
+                    [3] = 3
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
+spawn(
+    function()
+        while wait() do
+            if _G.Auto_Stats_Sword then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Sword",
+                    [3] = 3
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
+spawn(
+    function()
+        while wait() do
+            if _G.Auto_Stats_Defense then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Defense",
+                    [3] = 3
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
+spawn(
+    function()
+        while wait() do
+            if _G.Auto_Stats_Melee then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Melee",
+                    [3] = 3
+                }
+
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
+        
