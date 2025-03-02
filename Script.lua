@@ -9654,7 +9654,7 @@ spawn(function()
 		end
 	end
 end);
--------------------------------------------------Tab Volcano-----------------
+-------------------------------------------------Tab Volcano----------------------------------------------------------------------------------
 local Gojo = Tabs.Volcanic.AddSection("Quest Dojo")
 
 local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
@@ -9756,38 +9756,6 @@ spawn(function()
     end
 end)
 
-local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
-    Title = "Phòng Thủ",
-    Description = "",
-    Default = false
-});
-v171:OnChanged(function(v401)
-    _G.AutoDefendVolcano = v401;
-end);
-local v107 = Tabs.Volcanic:AddToggle("ToggleMelee", {
-    Title = "Dùng Melee",
-    Description = "",
-    Default = false
-});
-v107:OnChanged(function(v402)
-    _G.UseMelee = v402;
-end);
-local v109 = Tabs.Volcanic:AddToggle("ToggleSword", {
-    Title = "Dùng Sword",
-    Description = "",
-    Default = false
-});
-v109:OnChanged(function(v403)
-    _G.UseSword = v403;
-end);
-local v110 = Tabs.Volcanic:AddToggle("ToggleGun", {
-    Title = "Dùng Gun",
-    Description = "",
-    Default = false
-});
-v110:OnChanged(function(v404)
-    _G.UseGun = v404;
-end);
 local function v172(v405)
     game:GetService("VirtualInputManager"):SendKeyEvent(true, v405, false, game);
     game:GetService("VirtualInputManager"):SendKeyEvent(false, v405, false, game);
@@ -9890,8 +9858,9 @@ spawn(function()
         end
     end
 end);
+
 local v175 = Tabs.Volcanic:AddToggle("ToggleKillAura", {
-    Title = "Kill Golem",
+    Title = "Đấm Golems Aura",
     Description = "",
     Default = false
 });
@@ -9906,7 +9875,7 @@ spawn(function()
                 for v884, v885 in pairs(game.Workspace.Enemies:GetDescendants()) do
                     if (v885:FindFirstChild("Humanoid") and v885:FindFirstChild("HumanoidRootPart") and (v885.Humanoid.Health > 0)) then
                         repeat
-                            wait();
+                            task.wait();
                             sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge);
                             v885.Humanoid.Health = 0;
                             v885.HumanoidRootPart.CanCollide = false;
@@ -9916,6 +9885,87 @@ spawn(function()
             end);
         end
     end
+end);
+local v176 = Tabs.Volcanic:AddToggle("ToggleCollectBone", {
+    Title = "Lụm Xương",
+    Description = "",
+    Default = false
+});
+v176:OnChanged(function(v414)
+    _G.AutoCollectBone = v414;
+end);
+spawn(function()
+    while wait() do
+        if _G.AutoCollectBone then
+            for v820, v821 in pairs(workspace:GetDescendants()) do
+                if (v821:IsA("BasePart") and (v821.Name == "DinoBone")) then
+                    Tween2(CFrame.new(v821.Position));
+                end
+            end
+        end
+    end
+end);
+local v177 = Tabs.Volcanic:AddToggle("ToggleCollectEgg", {
+    Title = "Lụm Trứng",
+    Description = "",
+    Default = false
+});
+v177:OnChanged(function(v415)
+    _G.AutoCollectEgg = v415;
+end);
+spawn(function()
+    while wait() do
+        if _G.AutoCollectEgg then
+            local v758 = workspace.Map.PrehistoricIsland.Core.SpawnedDragonEggs:GetChildren();
+            if (# v758 > 0) then
+                local v886 = v758[math.random(1, # v758)];
+                if (v886:IsA("Model") and v886.PrimaryPart) then
+                    Tween2(v886.PrimaryPart.CFrame);
+                    local v1127 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
+                    local v1128 = v886.PrimaryPart.Position;
+                    local v1129 = (v1127 - v1128).Magnitude;
+                    if (v1129 <= 1) then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game);
+                        wait(1.5);
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false, "E", false, game);
+                    end
+                end
+            end
+        end
+    end
+end);
+
+local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
+    Title = "Phòng Thủ",
+    Description = "",
+    Default = false
+});
+v171:OnChanged(function(v401)
+    _G.AutoDefendVolcano = v401;
+end);
+local v107 = Tabs.Volcanic:AddToggle("ToggleMelee", {
+    Title = "Dùng Melee",
+    Description = "",
+    Default = false
+});
+v107:OnChanged(function(v402)
+    _G.UseMelee = v402;
+end);
+local v109 = Tabs.Volcanic:AddToggle("ToggleSword", {
+    Title = "Dùng Sword",
+    Description = "",
+    Default = false
+});
+v109:OnChanged(function(v403)
+    _G.UseSword = v403;
+end);
+local v110 = Tabs.Volcanic:AddToggle("ToggleGun", {
+    Title = "Dùng Gun",
+    Description = "",
+    Default = false
+});
+v110:OnChanged(function(v404)
+    _G.UseGun = v404;
 end);
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
