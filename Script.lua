@@ -5809,22 +5809,23 @@ do
         )
     end
 
-    local v518 = {
-        "Beast Hunter",
-        "Sleigh",
-        "Miracle",
-        "The Sentinel",
-        "Guardian",
-        "Lantern",
-        "Dinghy",
-        "PirateSloop",
-        "PirateBrigade",
-        "PirateGrandBrigade",
-        "MarineGrandBrigade",
-        "MarineBrigade",
-        "MarineSloop"
-    };
-    local v519 = Tabs.Fish:AddDropdown("DropdownBoat", {
+local v518 = {
+     "Beast Hunter",
+     "Sleigh",
+     "Miracle",
+     "The Sentinel",
+     "Guardian",
+     "Lantern",
+     "Dinghy",
+     "PirateSloop",
+     "PirateBrigade",
+     "PirateGrandBrigade",
+     "MarineGrandBrigade",
+     "MarineBrigade",
+     "MarineSloop"
+};
+    
+local v519 = Tabs.Fish:AddDropdown("DropdownBoat", {
         Title = "Chọn Thuyền",
         Description = "",
         Values = v518,
@@ -5866,18 +5867,18 @@ do
             end
         end
     end);
-    Tabs.Fish:AddButton({
+Tabs.Fish:AddButton({
         Title = "Mua Thuyền",
         Description = "",
         Callback = function()
             v520(selectedBoat);
         end
     });
-    Tabs.Fish:AddButton({
-        Title = "Bay Đến Thuyền",
-        Description = "Duy Nhất Thuyền Bạn Mua Ở Chỗ Chọn",
-        Callback = function()
-            v521();
+Tabs.Fish:AddButton({
+     Title = "Bay Đến Thuyền",
+     Description = "Duy Nhất Thuyền Bạn Mua Ở Chỗ Chọn",
+     Callback = function()
+           v521();
         end
     });
 
