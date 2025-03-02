@@ -11888,14 +11888,6 @@ Tabs.Shop:AddButton(
     }
 )
 
-Tabs.Shop:AddButton({
-    Title = "Mua Chip Leviathan",
-    Description = "",
-    Callback = function()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("InfoLeviathan", "2");
-    end
-});
-
 Tabs.Shop:AddButton(
     {
         Title = "Geppo",
