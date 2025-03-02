@@ -10155,6 +10155,14 @@ if Sea3 then
         if v594 then
             v506:SendKeyEvent(false, "W", false, game);
             _G.AutoFindPrehistoric = false;
+            if not v513 then
+                Fluent:Notify({
+                    Title = "Prehistoric Island Spawn",
+                    Content = "| Lời nhắn của Phat |",
+                    Duration = 10
+                });
+                v513 = true;
+            end
             return;
         end
     end);
