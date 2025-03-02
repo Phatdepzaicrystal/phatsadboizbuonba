@@ -6804,31 +6804,31 @@ do
             )
         end
 
-local uwehawehe = Tabs.Fish:AddSection("Leviathan");
+        local uwehawehe = Tabs.Fish:AddSection("Leviathan");
 
-local Tw = Tabs.Fish:AddToggle("ToggleTPFrozenDimension", {
-    Title = "Bay Đến Đảo Leviathan",
-    Description = "",
-    Default = false
-});
-Tw:OnChanged(function(v385)
-    _G.TweenToFrozenDimension = v385;
-end);
-Tw:SetValue(false);
-spawn(function()
-    local v386;
-    while not v386 do
-        v386 = game:GetService("Workspace").Map:FindFirstChild("FrozenDimension");
-        wait();
-    end
-    while wait() do
-        if _G.TweenToFrozenDimension then
-            if v386 then
-                Tween2(v386.CFrame);
+        local Tw = Tabs.Fish:AddToggle("ToggleTPFrozenDimension", {
+            Title = "Bay Đến Đảo Leviathan",
+            Description = "",
+            Default = false
+        });
+        Tw:OnChanged(function(v385)
+            _G.TweenToFrozenDimension = v385;
+        end);
+        Tw:SetValue(false);
+        spawn(function()
+            local v386;
+            while not v386 do
+                v386 = game:GetService("Workspace").Map:FindFirstChild("FrozenDimension");
+                wait();
             end
-        end
-    end
-end);
+           while wait() do
+                 if _G.TweenToFrozenDimension then
+                    if v386 then
+                        Tween2(v386.CFrame);
+                    end
+                end
+            end
+       end);
 ----------------------------------------------------Setting----------------------------
 local test = Tabs.Setting:AddSection("Local Player")
 
