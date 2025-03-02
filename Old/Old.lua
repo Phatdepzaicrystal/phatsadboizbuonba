@@ -12,15 +12,19 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "home" }),
-    Setting = Window:AddTab({ Title = "Settings", Icon = "settings" }),
-    Player = Window:AddTab({ Title = "PvP", Icon = "baby" }),
-    Teleport = Window:AddTab({ Title = "Teleport", Icon = "palmtree" }),
-    Fruit = Window:AddTab({ Title = "Fruit", Icon = "cherry" }),
-    Raid = Window:AddTab({ Title = "Raid", Icon = "swords" }),
-    Race = Window:AddTab({ Title = "Race", Icon = "chevrons-right" }),
-    Shop = Window:AddTab({ Title = "Shop", Icon = "shopping-cart" }),
-    Misc = Window:AddTab({ Title = "Misc", Icon = "list-plus" }),
+    Sever = Window:AddTab({Title = "Status And Server", Icon = "loader"}),
+    Main = Window:AddTab({Title = "Main", Icon = "home"}),
+    Setting = Window:AddTab({Title = "Settings", Icon = "sliders"}),
+    Player = Window:AddTab({Title = "PvP", Icon = "shield"}),
+    Item = Window:AddTab({Title = "Get Item", Icon = "sword"}),
+    Fish = Window:AddTab({Title = "Sea Event", Icon = "anchor"}),
+    Volcanic = Window:AddTab({Title = "Volcano Event", Icon = "box"}),	
+    Teleport = Window:AddTab({Title = "Teleport", Icon = "map"}),
+    Fruit = Window:AddTab({Title = "Fruit", Icon = "apple"}),
+    Raid = Window:AddTab({Title = "Raid", Icon = "target"}),
+    Race = Window:AddTab({Title = "Race", Icon = "flag"}),
+    Shop = Window:AddTab({Title = "Shop", Icon = "shopping-bag"}),
+    Misc = Window:AddTab({Title = "Misc", Icon = "menu"})
 }
 local Options = Fluent.Options
 do
