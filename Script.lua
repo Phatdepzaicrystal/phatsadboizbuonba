@@ -8647,7 +8647,7 @@ end
 
 local v84 = Tabs.Item:AddToggle("ToggleAutoRengoku", {
     Title = "Auto Rengoku",
-    Description = "",
+    Description = "Sea 2",
     Default = false
 });
 v84:OnChanged(function(v272)
@@ -8690,7 +8690,7 @@ end);
 
 local v79 = Tabs.Item:AddToggle("ToggleAutoSkullGuitar", {
     Title = "Skull Guitar",
-    Description = "",
+    Description = "Sea 3",
     Default = false
 });
 v79:OnChanged(function(v268)
@@ -8814,7 +8814,7 @@ end);
 
 local v80 = Tabs.Item:AddToggle("ToggleAutoBuddy", {
     Title = "Auto Buddy",
-    Description = "",
+    Description = "Sea 3",
     Default = false
 });
 v80:OnChanged(function(v269)
@@ -9487,6 +9487,7 @@ spawn(
         end
     end
 )
+
 local v78 =
     Tabs.Item:AddToggle(
     "ToggleAutoRainbowHaki",
