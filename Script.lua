@@ -7351,6 +7351,17 @@ spawn(
             end
         )
         Options.ToggleQuanSat:SetValue(false)
+        
+        Tabs..Player:AddButton({
+            Title = "Refesh Player",
+            Description = "",
+            Callback = function()
+                table.clear(Playerslist);
+                for v541, v542 in pairs(game:GetService("Players"):GetChildren()) do
+                    table.insert(Playerslist, v542.Name);
+                end
+             end
+        });
 
         local Teleport = Tabs.Player:AddSection("PVP")
 
