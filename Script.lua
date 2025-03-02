@@ -9886,6 +9886,7 @@ spawn(function()
         end
     end
 end);
+
 local v176 = Tabs.Volcanic:AddToggle("ToggleCollectBone", {
     Title = "Lụm Xương",
     Description = "",
@@ -9935,38 +9936,6 @@ spawn(function()
     end
 end);
 
-local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
-    Title = "Phòng Thủ",
-    Description = "",
-    Default = false
-});
-v171:OnChanged(function(v401)
-    _G.AutoDefendVolcano = v401;
-end);
-local v107 = Tabs.Volcanic:AddToggle("ToggleMelee", {
-    Title = "Dùng Melee",
-    Description = "",
-    Default = false
-});
-v107:OnChanged(function(v402)
-    _G.UseMelee = v402;
-end);
-local v109 = Tabs.Volcanic:AddToggle("ToggleSword", {
-    Title = "Dùng Sword",
-    Description = "",
-    Default = false
-});
-v109:OnChanged(function(v403)
-    _G.UseSword = v403;
-end);
-local v110 = Tabs.Volcanic:AddToggle("ToggleGun", {
-    Title = "Dùng Gun",
-    Description = "",
-    Default = false
-});
-v110:OnChanged(function(v404)
-    _G.UseGun = v404;
-end);
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
