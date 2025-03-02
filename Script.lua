@@ -8750,18 +8750,18 @@ spawn(function()
                                         end
                                     end
                                 else
-                                    Tween(CFrame.new(- 10160.787109375, 138.6616973876953, 5955.03076171875));
+                                    Tween2(CFrame.new(- 10160.787109375, 138.6616973876953, 5955.03076171875));
                                 end
                             end
                         elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2), "Error") then
-                            Tween(CFrame.new(- 8653.2060546875, 140.98487854003906, 6160.033203125));
+                            Tween2(CFrame.new(- 8653.2060546875, 140.98487854003906, 6160.033203125));
                         elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2), "Nothing") then
                             Tween("Wait Full Moon");
                         else
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent", 2, true);
                         end
                     else
-                        Tween(CFrame.new(- 9681.458984375, 6.139880657196045, 6341.3720703125));
+                        Tween2(CFrame.new(- 9681.458984375, 6.139880657196045, 6341.3720703125));
                     end
                 end
             end
@@ -8801,9 +8801,9 @@ spawn(function()
                         end
                     end
                 elseif ((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v81.Position).Magnitude < 1500) then
-                    Tween(v81);
+                    Tween2(v81);
                 end
-                Tween(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
+                Tween2(CFrame.new(- 731.2034301757812, 381.5658874511719, - 11198.4951171875));
                 if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen") then
                     Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2));
                 end
