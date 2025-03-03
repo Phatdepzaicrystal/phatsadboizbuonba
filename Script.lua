@@ -4725,7 +4725,7 @@ do
                                     end
                                 end
                             end
-                        elseif ChooseWeapon == " Blox Fruit" then
+                        elseif ChooseWeapon == "Blox Fruit" then
                             for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                                 if v.ToolTip == "Blox Fruit" then
                                     if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
@@ -12606,6 +12606,7 @@ local v175 = Tabs.Volcanic:AddToggle("ToggleKillAura", {
 });
 v175:OnChanged(function(v413)
     KillAura = v413;
+    _G.AutoNear = true,
 end);
 Options.ToggleKillAura:SetValue(false);
 spawn(function()
@@ -12703,6 +12704,14 @@ local v110 = Tabs.Volcanic:AddToggle("ToggleGun", {
 v110:OnChanged(function(v404)
     _G.UseGun = v404;
 end);
+local v111 = Tabs.Volcanic:AddToggle("ToggleFruit", {
+    Title = "Spam Skill Fruit",
+    Description = "",
+    Default = false
+});
+v111:OnChanged(function(v404)
+    _G.UseFruit = v404;
+end);
 local function v172(v405)
     game:GetService("VirtualInputManager"):SendKeyEvent(true, v405, false, game);
     game:GetService("VirtualInputManager"):SendKeyEvent(false, v405, false, game);
@@ -12796,6 +12805,9 @@ spawn(function()
                         if _G.UseGun then
                             v162("Gun");
                         end
+			if _G.UseFruit then
+                            v162("Blox Fruit");
+                        end			
                     end
                     _G.TweenToPrehistoric = false;
                 end
