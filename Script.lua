@@ -5809,152 +5809,6 @@ do
         )
     end
 
-
-    if Second_Sea or Third_Sea then
-        local RoughSea = Tabs.Fish:AddSection("Rough Sea")
-
-        local ToggleSailBoat = Tabs.Fish:AddToggle("ToggleSailBoat", {Title = "Auto Buy Ship", Default = false})
-        ToggleSailBoat:OnChanged(
-            function(Value)
-                _G.SailBoat = Value
-            end
-        )
-        Options.ToggleSailBoat:SetValue(false)
-
-        spawn(
-            function()
-                while wait() do
-                    pcall(
-                        function()
-                            if _G.SailBoat then
-                                if
-                                    not game:GetService("Workspace").Enemies:FindFirstChild("Shark") or
-                                        not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or
-                                        not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or
-                                        not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member")
-                                 then
-                                    if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
-                                        buyb =
-                                            TweenBoat(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
-                                        if
-                                            (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position -
-                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
-                                                10
-                                         then
-                                            if buyb then
-                                                buyb:Stop()
-                                            end
-                                            local args = {
-                                                [1] = "BuyBoat",
-                                                [2] = "PirateGrandBrigade"
-                                            }
-
-                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
-                                                unpack(args)
-                                            )
-                                        end
-                                    elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
-                                        if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
-                                            TweenBoat(
-                                                game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame *
-                                                    CFrame.new(0, 1, 0)
-                                            )
-                                        else
-                                            for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
-                                                if v.Name == "PirateGrandBrigade" then
-                                                    repeat
-                                                        wait()
-                                                        if
-                                                            (CFrame.new(
-                                                                -17013.80078125,
-                                                                10.962434768676758,
-                                                                438.0169982910156
-                                                            ).Position -
-                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
-                                                                10
-                                                         then
-                                                            TweenShip(
-                                                                CFrame.new(
-                                                                    -33163.1875,
-                                                                    10.964323997497559,
-                                                                    -324.4842224121094
-                                                                )
-                                                            )
-                                                        elseif
-                                                            (CFrame.new(
-                                                                -33163.1875,
-                                                                10.964323997497559,
-                                                                -324.4842224121094
-                                                            ).Position -
-                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
-                                                                10
-                                                         then
-                                                            TweenShip(
-                                                                CFrame.new(
-                                                                    -37952.49609375,
-                                                                    10.96342945098877,
-                                                                    -1324.12109375
-                                                                )
-                                                            )
-                                                        elseif
-                                                            (CFrame.new(
-                                                                -37952.49609375,
-                                                                10.96342945098877,
-                                                                -1324.12109375
-                                                            ).Position -
-                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <=
-                                                                10
-                                                         then
-                                                            TweenShip(
-                                                                CFrame.new(
-                                                                    -33163.1875,
-                                                                    10.964323997497559,
-                                                                    -324.4842224121094
-                                                                )
-                                                            )
-                                                        end
-                                                    until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or
-                                                        game:GetService("Workspace").Enemies:FindFirstChild(
-                                                            "Terrorshark"
-                                                        ) or
-                                                        game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or
-                                                        game:GetService("Workspace").Enemies:FindFirstChild(
-                                                            "Fish Crew Member"
-                                                        ) or
-                                                        _G.SailBoat == false
-                                                end
-                                            end
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    )
-                end
-            end
-        )
-
-        spawn(
-            function()
-                pcall(
-                    function()
-                        while wait() do
-                            if _G.SailBoat then
-                                if
-                                    game:GetService("Workspace").Enemies:FindFirstChild("Shark") or
-                                        game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or
-                                        game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or
-                                        game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member")
-                                 then
-                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                                end
-                            end
-                        end
-                    end
-                )
-            end
-        )
-
         local ToggleTerrorshark =
             Tabs.Fish:AddToggle("ToggleTerrorshark", {Title = " Kill Terrorshark", Default = false})
 
@@ -9906,6 +9760,104 @@ spawn(function()
 	end
 end);
 -------------------------------------------------Tab Volcano----------------------------------------------------------------------------------
+local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
+ToogleDojoQ:OnChanged(function(Value)
+    getgenv().DojoClaimQuest = Value
+	end
+)
+Options.ToogleDojoQ:SetValue(false)
+
+local DojoQuestNpc = CFrame.new(5855.19629, 1208.32178, 872.713501, 0.606994748, -1.81058823e-09, -0.794705868, 5.72712722e-09, 1, 2.09605577e-09, 0.794705868, -5.82367621e-09, 0.606994748)
+spawn(function()
+    while wait(0.2) do
+        if getgenv().DojoClaimQuest and Third_Sea then
+            pcall(function()
+                if BypassTP then
+                    BTP(DojoQuestNpc)
+                else
+                    Tween(DojoQuestNpc)
+                end
+                local distance = (DojoQuestNpc.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                if distance <= 5 then
+                    local claimQuestTable = {
+                        ["NPC"] = "Dojo Trainer",
+                        ["Command"] = "ClaimQuest"
+                    }
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(claimQuestTable)
+                    wait(1)
+                    local requestQuestTable = {
+                        ["NPC"] = "Dojo Trainer",
+                        ["Command"] = "RequestQuest"
+                    }
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(requestQuestTable)
+                end
+            end)
+        end
+    end
+end)
+
+local UpdTalon = Tabs.Volcanic:AddToggle("UpdTalon", {Title = "Tele To Uzoth", Default = false })
+UpdTalon:OnChanged(function(Value)
+    getgenv().DragonTalonUpgrade = Value
+	end)	
+Options.UpdTalon:SetValue(false)
+
+spawn(function()
+    while wait(0.2) do
+        if getgenv().DragonTalonUpgrade and Third_Sea then
+            local UzothNPC = CFrame.new(5661.89014, 1211.31909, 864.836731, 0.811413169, -1.36805838e-08, -0.584473014, 4.75227395e-08, 1, 4.25682458e-08, 0.584473014, -6.23161966e-08, 0.811413169)
+            local distance = (UzothNPC.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if distance > 5 then
+                Tween2(UzothNPC)
+            else
+                local ohTable1 = {
+                    ["NPC"] = "Uzoth",
+                    ["Command"] = "Upgrade"
+                }                
+                game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(ohTable1)
+            end
+        end
+    end
+end)
+
+local Vocaniga = Tabs.Volcanic:AddSection("Volcano Event")
+
+Tabs.Volcanic:AddButton({
+    Title = "Auto Craft Volcanic Magnet",
+    Callback = function()
+        local craftvol = {
+            [1] = "CraftItem",
+            [2] = "Craft",
+            [3] = "Volcanic Magnet"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(craftvol))
+    end
+})
+
+local PrehisIsl = Tabs.Volcanic:AddToggle("PrehisIsl", {Title = "Tween To Prehistoric Island", Default = false })
+PrehisIsl:OnChanged(function(Value)
+    _G.TweenToPrehistoric = Value
+end)
+spawn(function()
+    local island
+    while not island do
+        island = game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland")
+        wait()
+    end
+    while wait() do
+        if _G.TweenToPrehistoric and Third_Sea then
+            local prehistoricIslandCore = game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland")
+            if prehistoricIslandCore then
+                local relic = prehistoricIslandCore:FindFirstChild("Core") and prehistoricIslandCore.Core:FindFirstChild("PrehistoricRelic")
+                local skull = relic and relic:FindFirstChild("Skull")
+                if skull then
+                    Tween(CFrame.new(skull.Position))
+                    _G.TweenToPrehistoric = false
+                end
+            end
+        end
+    end
+end)
 local PlayersService = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local VirtualInput = game:GetService("VirtualInputManager")
@@ -10054,106 +10006,86 @@ RunService.RenderStepped:Connect(
         end
     end
 )
+local AvailableBoats = {}
+local BoatList = {
+    "Beast Hunter",
+    "Sleigh",
+    "Miracle",
+    "The Sentinel",
+    "Guardian",
+    "Lantern",
+    "Dinghy",
+    "PirateSloop",
+    "PirateBrigade",
+    "PirateGrandBrigade",
+    "MarineGrandBrigade",
+    "MarineBrigade",
+    "MarineSloop"
+}
 
-local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
-ToogleDojoQ:OnChanged(function(Value)
-    getgenv().DojoClaimQuest = Value
-	end
-)
-Options.ToogleDojoQ:SetValue(false)
+local BoatDropdown = Tabs.Volcanic:AddDropdown("DropdownBoat", {
+    Title = "Ship: ",
+    Description = "",
+    Values = BoatList,
+    Multi = false,
+    Default = 1
+})
 
-local DojoQuestNpc = CFrame.new(5855.19629, 1208.32178, 872.713501, 0.606994748, -1.81058823e-09, -0.794705868, 5.72712722e-09, 1, 2.09605577e-09, 0.794705868, -5.82367621e-09, 0.606994748)
-spawn(function()
-    while wait(0.2) do
-        if getgenv().DojoClaimQuest and Third_Sea then
-            pcall(function()
-                if BypassTP then
-                    BTP(DojoQuestNpc)
-                else
-                    Tween(DojoQuestNpc)
-                end
-                local distance = (DojoQuestNpc.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                if distance <= 5 then
-                    local claimQuestTable = {
-                        ["NPC"] = "Dojo Trainer",
-                        ["Command"] = "ClaimQuest"
-                    }
-                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(claimQuestTable)
-                    wait(1)
-                    local requestQuestTable = {
-                        ["NPC"] = "Dojo Trainer",
-                        ["Command"] = "RequestQuest"
-                    }
-                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(requestQuestTable)
-                end
-            end)
-        end
-    end
+BoatDropdown:SetValue(selectedBoat)
+BoatDropdown:OnChanged(function(selected)
+    selectedBoat = selected
 end)
 
-local UpdTalon = Tabs.Volcanic:AddToggle("UpdTalon", {Title = "Tele To Uzoth", Default = false })
-UpdTalon:OnChanged(function(Value)
-    getgenv().DragonTalonUpgrade = Value
-	end)	
-Options.UpdTalon:SetValue(false)
-
-spawn(function()
-    while wait(0.2) do
-        if getgenv().DragonTalonUpgrade and Third_Sea then
-            local UzothNPC = CFrame.new(5661.89014, 1211.31909, 864.836731, 0.811413169, -1.36805838e-08, -0.584473014, 4.75227395e-08, 1, 4.25682458e-08, 0.584473014, -6.23161966e-08, 0.811413169)
-            local distance = (UzothNPC.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-            if distance > 5 then
-                Tween2(UzothNPC)
-            else
-                local ohTable1 = {
-                    ["NPC"] = "Uzoth",
-                    ["Command"] = "Upgrade"
-                }                
-                game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(ohTable1)
+local function BuyBoat(boatName)
+    local request = {
+        [1] = "BuyBoat",
+        [2] = boatName
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(request))
+    
+    delay(2, function()
+        for _, boat in pairs(v507.Boats:GetChildren()) do
+            if boat:IsA("Model") and boat.Name == boatName then
+                local seat = boat:FindFirstChild("VehicleSeat")
+                if seat and not seat.Occupant then
+                    AvailableBoats[boatName] = seat
+                end
             end
         end
+    end)
+end
+
+local function MoveToBoat()
+    for _, seat in pairs(AvailableBoats) do
+        if seat and seat.Parent and seat.Name == "VehicleSeat" and not seat.Occupant then
+            Tween2(seat.CFrame)
+        end
+    end
+end
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    for boatName, seat in pairs(AvailableBoats) do
+        if seat and seat.Parent and seat.Name == "VehicleSeat" and not seat.Occupant then
+            AvailableBoats[boatName] = seat
+        end
     end
 end)
 
-local Vocaniga = Tabs.Volcanic:AddSection("Volcano Event")
-
 Tabs.Volcanic:AddButton({
-    Title = "Auto Craft Volcanic Magnet",
+    Title = "Auto Buy Ship",
+    Description = "",
     Callback = function()
-        local craftvol = {
-            [1] = "CraftItem",
-            [2] = "Craft",
-            [3] = "Volcanic Magnet"
-        }
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(craftvol))
+        BuyBoat(selectedBoat)
     end
 })
 
-local PrehisIsl = Tabs.Volcanic:AddToggle("PrehisIsl", {Title = "Tween To Prehistoric Island", Default = false })
-PrehisIsl:OnChanged(function(Value)
-    _G.TweenToPrehistoric = Value
-end)
-spawn(function()
-    local island
-    while not island do
-        island = game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland")
-        wait()
+Tabs.Volcanic:AddButton({
+    Title = "Tween To Your Ship",
+    Description = "",
+    Callback = function()
+        MoveToBoat()
     end
-    while wait() do
-        if _G.TweenToPrehistoric and Third_Sea then
-            local prehistoricIslandCore = game:GetService("Workspace").Map:FindFirstChild("PrehistoricIsland")
-            if prehistoricIslandCore then
-                local relic = prehistoricIslandCore:FindFirstChild("Core") and prehistoricIslandCore.Core:FindFirstChild("PrehistoricRelic")
-                local skull = relic and relic:FindFirstChild("Skull")
-                if skull then
-                    Tween(CFrame.new(skull.Position))
-                    _G.TweenToPrehistoric = false
-                end
-            end
-        end
-    end
-end)
-
+})
 ---------------------------------Tab Teleport----------------------------------
 local Teleport = Tabs.Teleport:AddSection("Teleport")
 
