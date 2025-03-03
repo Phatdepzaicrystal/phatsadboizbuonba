@@ -9859,102 +9859,6 @@ spawn(function()
     end
 end)
 
-local AvailableBoats = {}
-local BoatList = {
-    "Beast Hunter",
-    "Sleigh",
-    "Miracle",
-    "The Sentinel",
-    "Guardian",
-    "Lantern",
-    "Dinghy",
-    "PirateSloop",
-    "PirateBrigade",
-    "PirateGrandBrigade",
-    "MarineGrandBrigade",
-    "MarineBrigade",
-    "MarineSloop"
-}
-
-local BoatDropdown =
-    Tabs.Volcanic:AddDropdown(
-    "DropdownBoat",
-    {
-        Title = "Ship: ",
-        Description = "",
-        Values = BoatList,
-        Multi = false,
-        Default = 1
-    }
-)
-
-BoatDropdown:SetValue(selectedBoat)
-BoatDropdown:OnChanged(
-    function(selected)
-        selectedBoat = selected
-    end
-)
-
-local function BuyBoat(boatName)
-    local request = {
-        [1] = "BuyBoat",
-        [2] = boatName
-    }
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(request))
-
-    task.delay(
-        2,
-        function()
-            for _, boat in pairs(v507.Boats:GetChildren()) do
-                if boat:IsA("Model") and boat.Name == boatName then
-                    local seat = boat:FindFirstChild("VehicleSeat")
-                    if seat and not seat.Occupant then
-                        AvailableBoats[boatName] = seat
-                    end
-                end
-            end
-        end
-    )
-end
-
-local function MoveToBoat()
-    for _, seat in pairs(AvailableBoats) do
-        if seat and seat.Parent and seat.Name == "VehicleSeat" and not seat.Occupant then
-            Tween2(seat.CFrame)
-        end
-    end
-end
-
-game:GetService("RunService").RenderStepped:Connect(
-    function()
-        for boatName, seat in pairs(AvailableBoats) do
-            if seat and seat.Parent and seat.Name == "VehicleSeat" and not seat.Occupant then
-                AvailableBoats[boatName] = seat
-            end
-        end
-    end
-)
-
-Tabs.Volcanic:AddButton(
-    {
-        Title = "Auto Buy Ship",
-        Description = "",
-        Callback = function()
-            BuyBoat(selectedBoat)
-        end
-    }
-)
-
-Tabs.Volcanic:AddButton(
-    {
-        Title = "Tween To Your Ship",
-        Description = "",
-        Callback = function()
-            MoveToBoat()
-        end
-    }
-)
-
 local PlayersService = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local VirtualInput = game:GetService("VirtualInputManager")
@@ -12755,3 +12659,99 @@ spawn(function()
         end
     end
 end);
+---------------------------------------------------------
+local AvailableBoats = {}
+local BoatList = {
+    "Beast Hunter",
+    "Sleigh",
+    "Miracle",
+    "The Sentinel",
+    "Guardian",
+    "Lantern",
+    "Dinghy",
+    "PirateSloop",
+    "PirateBrigade",
+    "PirateGrandBrigade",
+    "MarineGrandBrigade",
+    "MarineBrigade",
+    "MarineSloop"
+}
+
+local BoatDropdown =
+    Tabs.Volcanic:AddDropdown(
+    "DropdownBoat",
+    {
+        Title = "Ship: ",
+        Description = "",
+        Values = BoatList,
+        Multi = false,
+        Default = 1
+    }
+)
+
+BoatDropdown:SetValue(selectedBoat)
+BoatDropdown:OnChanged(
+    function(selected)
+        selectedBoat = selected
+    end
+)
+
+local function BuyBoat(boatName)
+    local request = {
+        [1] = "BuyBoat",
+        [2] = boatName
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(request))
+
+    task.delay(
+        2,
+        function()
+            for _, boat in pairs(v507.Boats:GetChildren()) do
+                if boat:IsA("Model") and boat.Name == boatName then
+                    local seat = boat:FindFirstChild("VehicleSeat")
+                    if seat and not seat.Occupant then
+                        AvailableBoats[boatName] = seat
+                    end
+                end
+            end
+        end
+    )
+end
+
+local function MoveToBoat()
+    for _, seat in pairs(AvailableBoats) do
+        if seat and seat.Parent and seat.Name == "VehicleSeat" and not seat.Occupant then
+            Tween2(seat.CFrame)
+        end
+    end
+end
+
+game:GetService("RunService").RenderStepped:Connect(
+    function()
+        for boatName, seat in pairs(AvailableBoats) do
+            if seat and seat.Parent and seat.Name == "VehicleSeat" and not seat.Occupant then
+                AvailableBoats[boatName] = seat
+            end
+        end
+    end
+)
+
+Tabs.Volcanic:AddButton(
+    {
+        Title = "Auto Buy Ship",
+        Description = "",
+        Callback = function()
+            BuyBoat(selectedBoat)
+        end
+    }
+)
+
+Tabs.Volcanic:AddButton(
+    {
+        Title = "Tween To Your Ship",
+        Description = "",
+        Callback = function()
+            MoveToBoat()
+        end
+    }
+)
