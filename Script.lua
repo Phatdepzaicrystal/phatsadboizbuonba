@@ -12709,8 +12709,8 @@ local v111 = Tabs.Volcanic:AddToggle("ToggleFruit", {
     Description = "",
     Default = false
 });
-v111:OnChanged(function(v404)
-    _G.UseFruit = v404;
+v111:OnChanged(function(v4099)
+    _G.UseFruit = v4099;
 end);
 local function v172(v405)
     game:GetService("VirtualInputManager"):SendKeyEvent(true, v405, false, game);
@@ -12806,7 +12806,7 @@ spawn(function()
                             v162("Gun");
                         end
 			if _G.UseFruit then
-                            v162("Blox Fruit");
+                            v162("Fruit");
                         end			
                     end
                     _G.TweenToPrehistoric = false;
