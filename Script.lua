@@ -9906,134 +9906,154 @@ spawn(function()
 	end
 end);
 -------------------------------------------------Tab Volcano----------------------------------------------------------------------------------
-local v504 = game:GetService("Players")
-local v505 = game:GetService("RunService")
-local v506 = game:GetService("VirtualInputManager")
-local v507 = game:GetService("Workspace")
-local v508 = 350
+local PlayersService = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local VirtualInput = game:GetService("VirtualInputManager")
+local Workspace = game:GetService("Workspace")
+local BoatSpeed = 350
 
-local v509 = Tabs.Volcanic:AddSlider("SliderSpeedBoat", {
-    Title = "Speed Boat",
-    Description = "",
-    Default = v508,
-    Min = 0,
-    Max = 550,
-    Rounding = 1,
-    Callback = function(v583)
-        v508 = v583
-    end
-})
+local SpeedBoatSlider =
+    Tabs.Volcanic:AddSlider(
+    "SliderSpeedBoat",
+    {
+        Title = "Speed Boat",
+        Description = "",
+        Default = BoatSpeed,
+        Min = 0,
+        Max = 550,
+        Rounding = 1,
+        Callback = function(value)
+            BoatSpeed = value
+        end
+    }
+)
 
-v509:SetValue(v508)
+SpeedBoatSlider:SetValue(BoatSpeed)
 
-local v510 = Tabs.Volcanic:AddToggle("AutoFindPrehistoric", {
-    Title = "Auto Find Prehistoric Island",
-    Description = "",
-    Default = false
-})
+local AutoFindPrehistoricToggle =
+    Tabs.Volcanic:AddToggle(
+    "AutoFindPrehistoric",
+    {
+        Title = "Auto Find Prehistoric Island",
+        Description = "",
+        Default = false
+    }
+)
 
 Options.AutoFindPrehistoric:SetValue(false)
-v510:OnChanged(function(v584)
-    _G.AutoFindPrehistoric = v584
-end)
-
-local v511 = {}
-local v512 = false
-local v513 = false
-
-v505.RenderStepped:Connect(function()
-    if not _G.AutoFindPrehistoric then
-        v513 = false
-        return
+AutoFindPrehistoricToggle:OnChanged(
+    function(state)
+        _G.AutoFindPrehistoric = state
     end
-    
-    local v585 = v504.LocalPlayer
-    local v586 = v585.Character
-    if not v586 or not v586:FindFirstChild("Humanoid") then
-        return
-    end
-    
-    local function v587()
-        if v512 then return end
-        v512 = true
-        
-        for v769, v770 in pairs(v511) do
-            if v770 and v770.Parent and v770.Name == "VehicleSeat" and not v770.Occupant then
-                Tween2(v770.CFrame)
-                break
+)
+
+local AvailableSeats = {}
+local IsFindingBoat = false
+local IslandFound = false
+
+RunService.RenderStepped:Connect(
+    function()
+        if not _G.AutoFindPrehistoric then
+            IslandFound = false
+            return
+        end
+
+        local LocalPlayer = PlayersService.LocalPlayer
+        local Character = LocalPlayer.Character
+        if not Character or not Character:FindFirstChild("Humanoid") then
+            return
+        end
+
+        local function FindAndMoveToBoat()
+            if IsFindingBoat then
+                return
+            end
+            IsFindingBoat = true
+
+            for _, seat in pairs(AvailableSeats) do
+                if seat and seat.Parent and seat.Name == "VehicleSeat" and not seat.Occupant then
+                    Tween2(seat.CFrame)
+                    break
+                end
+            end
+
+            IsFindingBoat = false
+        end
+
+        local Humanoid = Character.Humanoid
+        local OnBoat = false
+        local CurrentSeat = nil
+
+        for _, boat in pairs(Workspace.Boats:GetChildren()) do
+            local Seat = boat:FindFirstChild("VehicleSeat")
+            if Seat and Seat.Occupant == Humanoid then
+                OnBoat = true
+                CurrentSeat = Seat
+                AvailableSeats[boat.Name] = Seat
+            elseif Seat and not Seat.Occupant then
+                FindAndMoveToBoat()
             end
         end
-        
-        v512 = false
-    end
-    
-    local v588 = v586.Humanoid
-    local v589 = false
-    local v590 = nil
-    
-    for v684, v685 in pairs(v507.Boats:GetChildren()) do
-        local v686 = v685:FindFirstChild("VehicleSeat")
-        if v686 and v686.Occupant == v588 then
-            v589 = true
-            v590 = v686
-            v511[v685.Name] = v686
-        elseif v686 and v686.Occupant == nil then
-            v587()
+
+        if not OnBoat then
+            return
+        end
+
+        CurrentSeat.MaxSpeed = BoatSpeed
+        CurrentSeat.CFrame =
+            CFrame.new(Vector3.new(CurrentSeat.Position.X, CurrentSeat.Position.Y, CurrentSeat.Position.Z)) *
+            CurrentSeat.CFrame.Rotation
+        VirtualInput:SendKeyEvent(true, "W", false, game)
+
+        for _, part in pairs(Workspace.Boats:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = false
+            end
+        end
+
+        for _, part in pairs(Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = false
+            end
+        end
+
+        local IslandNames = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "MysticIsland",
+            "KitsuneIsland",
+            "FrozenDimension"
+        }
+
+        for _, islandName in ipairs(IslandNames) do
+            local Island = Workspace.Map:FindFirstChild(islandName)
+            if Island and Island:IsA("Model") then
+                Island:Destroy()
+            end
+        end
+
+        local PrehistoricIsland = Workspace.Map:FindFirstChild("PrehistoricIsland")
+        if PrehistoricIsland then
+            VirtualInput:SendKeyEvent(false, "W", false, game)
+            _G.AutoFindPrehistoric = false
+
+            if not IslandFound then
+                Fluent:Notify(
+                    {
+                        Title = "Prehistoric Island Spawn",
+                        Content = "Phat Hub",
+                        Duration = 10
+                    }
+                )
+                IslandFound = true
+            end
+
+            return
         end
     end
-    
-    if not v589 then return end
-    
-    v590.MaxSpeed = v508
-    v590.CFrame = CFrame.new(Vector3.new(v590.Position.X, v590.Position.Y, v590.Position.Z)) * v590.CFrame.Rotation
-    v506:SendKeyEvent(true, "W", false, game)
-    
-    for v687, v688 in pairs(v507.Boats:GetDescendants()) do
-        if v688:IsA("BasePart") then
-            v688.CanCollide = false
-        end
-    end
-    
-    for v689, v690 in pairs(v586:GetDescendants()) do
-        if v690:IsA("BasePart") then
-            v690.CanCollide = false
-        end
-    end
-    
-    local v593 = {
-        "ShipwreckIsland",
-        "SandIsland",
-        "TreeIsland",
-        "TinyIsland",
-        "MysticIsland",
-        "KitsuneIsland",
-        "FrozenDimension"
-    }
-    
-    for v691, v692 in ipairs(v593) do
-        local v693 = v507.Map:FindFirstChild(v692)
-        if v693 and v693:IsA("Model") then
-            v693:Destroy()
-        end
-    end
-    
-    local v594 = v507.Map:FindFirstChild("PrehistoricIsland")
-    if v594 then
-        v506:SendKeyEvent(false, "W", false, game)
-        _G.AutoFindPrehistoric = false
-        
-        if not v513 then
-            Fluent:Notify({
-                Title = "Min Gaming",
-                Content = "\u0110\u1ea3o Dung Nham T\u00ecm Th\u1ea5y",
-                Duration = 10
-            })
-            v513 = true
-        end
-        
-        return
-    end
-end)
+)
 
 local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
 ToogleDojoQ:OnChanged(function(Value)
