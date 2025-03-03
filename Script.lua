@@ -10049,7 +10049,7 @@ local function BuyBoat(boatName)
     }
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(request))
 
-    delay(
+    task.delay(
         2,
         function()
             for _, boat in pairs(v507.Boats:GetChildren()) do
