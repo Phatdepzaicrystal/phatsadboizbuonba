@@ -12704,14 +12704,6 @@ local v110 = Tabs.Volcanic:AddToggle("ToggleGun", {
 v110:OnChanged(function(v404)
     _G.UseGun = v404;
 end);
-local v111 = Tabs.Volcanic:AddToggle("ToggleFruit", {
-    Title = "Spam Skill Fruit",
-    Description = "",
-    Default = false
-});
-v111:OnChanged(function(v4099)
-    _G.UseFruit = v4099;
-end);
 local function v172(v405)
     game:GetService("VirtualInputManager"):SendKeyEvent(true, v405, false, game);
     game:GetService("VirtualInputManager"):SendKeyEvent(false, v405, false, game);
@@ -12804,10 +12796,7 @@ spawn(function()
                         end
                         if _G.UseGun then
                             v162("Gun");
-                        end
-			if _G.UseFruit then
-                            v162("Fruit");
-                        end			
+                        end		
                     end
                     _G.TweenToPrehistoric = false;
                 end
