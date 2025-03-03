@@ -9906,39 +9906,39 @@ spawn(function()
 	end
 end);
 -------------------------------------------------Tab Volcano----------------------------------------------------------------------------------
-if Third_Sea then
-    local v504 = game:GetService("Players");
-    local v505 = game:GetService("RunService");
-    local v506 = game:GetService("VirtualInputManager");
-    local v507 = game:GetService("Workspace");
-    local v508 = 350;
-    local v509 = Tabs.Volcanic:AddSlider("SliderSpeedBoat", {
-        Title = "Speed Boat",
-        Description = "",
-        Default = v508,
-        Min = 0,
-        Max = 550,
-        Rounding = 1,
-        Callback = function(v583)
-            v508 = v583;
-        end
-    });
-    v509:SetValue(v508);
-    local v510 = Tabs.Volcanic:AddToggle("AutoFindPrehistoric", {
-        Title = "Auto Find Prehistoric Island",
-        Description = "",
-        Default = false
-    });
-    Options.AutoFindPrehistoric:SetValue(false);
-    v510:OnChanged(function(v584)
-        _G.AutoFindPrehistoric = v584;
-    end);
-    local v511 = {};
-    local v512 = false;
-    local v513 = false;
-    v505.RenderStepped:Connect(function()
-        if not _G.AutoFindPrehistoric then
-            v513 = false;
+local v504 = game:GetService("Players");
+local v505 = game:GetService("RunService");
+local v506 = game:GetService("VirtualInputManager");
+local v507 = game:GetService("Workspace");
+local v508 = 350;
+local v509 = Tabs.Volcanic:AddSlider("SliderSpeedBoat", {
+      Title = "Speed Boat",
+      Description = "",
+      Default = v508,
+      Min = 0,
+      Max = 550,
+      Rounding = 1,
+      Callback = function(v583)
+          v508 = v583;
+       end
+});
+v509:SetValue(v508);
+local v510 = Tabs.Volcanic:AddToggle("AutoFindPrehistoric", {
+     Title = "Auto Find Prehistoric Island",
+     Description = "",
+     Default = false
+});
+Options.AutoFindPrehistoric:SetValue(false);
+v510:OnChanged(function(v584)
+     _G.AutoFindPrehistoric = v584;
+end);
+    
+local v511 = {};
+local v512 = false;
+local v513 = false;
+v505.RenderStepped:Connect(function()
+      if not _G.AutoFindPrehistoric then
+         v513 = false;
             return;
         end
         local v585 = v504.LocalPlayer;
@@ -10018,6 +10018,7 @@ if Third_Sea then
             return;
         end
     end);
+
 local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
 ToogleDojoQ:OnChanged(function(Value)
     getgenv().DojoClaimQuest = Value
