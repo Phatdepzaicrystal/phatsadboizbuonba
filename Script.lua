@@ -12805,7 +12805,7 @@ spawn(function()
                             v162("Gun");
                         end
 			if _G.UseFruit then
-                            v162("Blox Fruit");
+                            v162("Fruit");
                         end		
                     end
                     _G.TweenToPrehistoric = false;
