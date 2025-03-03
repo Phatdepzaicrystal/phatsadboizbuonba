@@ -10384,6 +10384,189 @@ ToggleIsland:OnChanged(
 )
 Options.ToggleIsland:SetValue(false)
 
+local TpNPC = Tabs.Teleport:AddSection("Tele To NPC")
+
+if First_Sea then
+    NPCList = {
+        "Sword Dealer",
+        "Marine",
+        "Middle Town",
+        "Jungle",
+        "Pirate Village",
+        "Desert",
+        "Snow Island",
+        "MarineFord",
+        "Colosseum",
+        "Sky Island 1",
+        "Sky Island 2",
+        "Sky Island 3",
+        "Prison",
+        "Magma Village",
+        "Under Water Island",
+        "Fountain City",
+        "Shank Room",
+        "Mob Island"
+    }
+elseif Second_Sea then
+    NPCList = {
+        "The Cafe",
+        "Frist Spot",
+        "Dark Area",
+        "Flamingo Mansion",
+        "Flamingo Room",
+        "Green Zone",
+        "Factory",
+        "Colossuim",
+        "Zombie Island",
+        "Two Snow Mountain",
+        "Punk Hazard",
+        "Cursed Ship",
+        "Ice Castle",
+        "Forgotten Island",
+        "Ussop Island",
+        "Mini Sky Island"
+    }
+elseif Third_Sea then
+    NPCList = {
+        "Mansion",
+        "Port Town",
+        "Great Tree",
+        "Castle On The Sea",
+        "MiniSky",
+        "Hydra Island",
+        "Floating Turtle",
+        "Haunted Castle",
+        "Ice Cream Island",
+        "Peanut Island",
+        "Cake Island",
+        "Cocoa Island",
+        "Candy Island",
+        "Isle Outpost"
+    }
+end
+
+local DropdownNPC =
+    Tabs.Teleport:AddDropdown(
+    "DropdownNPC",
+    {
+        Title = "Choose NPC",
+        Values = IslandList,
+        Multi = false,
+        Default = 1
+    }
+)
+
+DropdownNPC:SetValue("Zzz")
+DropdownNPC:OnChanged(
+    function(Value)
+        _G.SelectNPC = Value
+    end
+)
+
+local ToggleNPC = Tabs.Teleport:AddToggle("ToggleNPC", {Title = "Tween To NPC", Default = false})
+ToggleNPC:OnChanged(
+    function(Value)
+        _G.TeleportNPC = Value
+        TeleportNPC == true then
+            repeat
+                wait()
+                if _G.SelectNPC == "Sword Deeler" then
+                    toTarget(CFrame.new(-2535.781982421875, 6.614983081817627, 2024.1954345703125))
+                elseif _G.SelectNPC == "Marine" then
+                    toTarget(CFrame.new(-2566.4296875, 6.8556680679321, 2045.2561035156))
+                elseif _G.SelectNPC == "Middle Town" then
+                    toTarget(CFrame.new(-690.33081054688, 15.09425163269, 1582.2380371094))
+                elseif _G.SelectNPC == "Jungle" then
+                    toTarget(CFrame.new(-1612.7957763672, 36.852081298828, 149.12843322754))
+                elseif _G.SelectNPC == "Pirate Village" then
+                    toTarget(CFrame.new(-1181.3093261719, 4.7514905929565, 3803.5456542969))
+                elseif _G.SelectNPC == "Desert" then
+                    toTarget(CFrame.new(944.15789794922, 20.919729232788, 4373.3002929688))
+                elseif _G.SelectNPC == "Snow Island" then
+                    toTarget(CFrame.new(1347.8067626953, 104.66806030273, -1319.7370605469))
+                elseif _G.SelectNPC == "MarineFord" then
+                    toTarget(CFrame.new(-4914.8212890625, 50.963626861572, 4281.0278320313))
+                elseif _G.SelectNPC == "Colosseum" then
+                    toTarget(CFrame.new(-1427.6203613281, 7.2881078720093, -2792.7722167969))
+                elseif _G.SelectNPC == "Sky Island 1" then
+                    toTarget(CFrame.new(-4869.1025390625, 733.46051025391, -2667.0180664063))
+                elseif _G.SelectNPC == "Prison" then
+                    toTarget(CFrame.new(4875.330078125, 5.6519818305969, 734.85021972656))
+                elseif _G.SelectNPC == "Magma Village" then
+                    toTarget(CFrame.new(-5247.7163085938, 12.883934020996, 8504.96875))
+                elseif _G.SelectNPC == "Fountain City" then
+                    toTarget(CFrame.new(5127.1284179688, 59.501365661621, 4105.4458007813))
+                elseif _G.SelectNPC == "Shank Room" then
+                    toTarget(CFrame.new(-1442.16553, 29.8788261, -28.3547478))
+                elseif _G.SelectNPC == "Mob Island" then
+                    toTarget(CFrame.new(-2850.20068, 7.39224768, 5354.99268))
+                elseif _G.SelectNPC == "The Cafe" then
+                    toTarget(CFrame.new(-380.47927856445, 77.220390319824, 255.82550048828))
+                elseif _G.SelectNPC == "Frist Spot" then
+                    toTarget(CFrame.new(-11.311455726624, 29.276733398438, 2771.5224609375))
+                elseif _G.SelectNPC == "Dark Area" then
+                    toTarget(CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375))
+                elseif _G.SelectNPC == "Flamingo Mansion" then
+                    BTPZ(CFrame.new(-483.73370361328, 332.0383605957, 595.32708740234))
+                elseif _G.SelectNPC == "Flamingo Room" then
+                    toTarget(CFrame.new(2284.4140625, 15.152037620544, 875.72534179688))
+                elseif _G.SelectNPC == "Green Zone" then
+                    toTarget(CFrame.new(-2448.5300292969, 73.016105651855, -3210.6306152344))
+                elseif _G.SelectNPC == "Factory" then
+                    toTarget(CFrame.new(424.12698364258, 211.16171264648, -427.54049682617))
+                elseif _G.SelectNPC == "Colossuim" then
+                    toTarget(CFrame.new(-1503.6224365234, 219.7956237793, 1369.3101806641))
+                elseif _G.SelectNPC == "Zombie Island" then
+                    toTarget(CFrame.new(-5622.033203125, 492.19604492188, -781.78552246094))
+                elseif _G.SelectNPC == "Two Snow Mountain" then
+                    toTarget(CFrame.new(753.14288330078, 408.23559570313, -5274.6147460938))
+                elseif _G.SelectNPC == "Punk Hazard" then
+                    toTarget(CFrame.new(-6127.654296875, 15.951762199402, -5040.2861328125))
+                elseif _G.SelectNPC == "Cursed Ship" then
+                    toTarget(CFrame.new(923.40197753906, 125.05712890625, 32885.875))
+                elseif _G.SelectNPC == "Ice Castle" then
+                    toTarget(CFrame.new(6148.4116210938, 294.38687133789, -6741.1166992188))
+                elseif _G.SelectNPC == "Forgotten Island" then
+                    toTarget(CFrame.new(-3032.7641601563, 317.89672851563, -10075.373046875))
+                elseif _G.SelectNPC == "Ussop Island" then
+                    toTarget(CFrame.new(4816.8618164063, 8.4599885940552, 2863.8195800781))
+                elseif _G.SelectNPC == "Mini Sky Island" then
+                    toTarget(CFrame.new(-288.74060058594, 49326.31640625, -35248.59375))
+                elseif _G.SelectNPC == "Great Tree" then
+                    toTarget(CFrame.new(2681.2736816406, 1682.8092041016, -7190.9853515625))
+                elseif _G.SelectNPC == "Castle On The Sea" then
+                    BTPZ(CFrame.new(-5075.50927734375, 314.5155029296875, -3150.0224609375))
+                elseif _G.SelectNPC == "MiniSky" then
+                    toTarget(CFrame.new(-260.65557861328, 49325.8046875, -35253.5703125))
+                elseif _G.SelectNPC == "Port Town" then
+                    toTarget(CFrame.new(-290.7376708984375, 6.729952812194824, 5343.5537109375))
+                elseif _G.SelectNPC == "Hydra Island" then
+                    BTPZ(CFrame.new(5753.5478515625, 610.7880859375, -282.33172607421875))
+                elseif _G.SelectNPC == "Floating Turtle" then
+                    toTarget(CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625))
+                elseif _G.SelectNPC == "Mansion" then
+                    BTPZ(CFrame.new(-12468.5380859375, 375.0094299316406, -7554.62548828125))
+                elseif _G.SelectNPC == "Haunted Castle" then
+                    toTarget(CFrame.new(-9515.3720703125, 164.00624084473, 5786.0610351562))
+                elseif _G.SelectNPC == "Ice Cream Island" then
+                    toTarget(CFrame.new(-902.56817626953, 79.93204498291, -10988.84765625))
+                elseif _G.SelectNPC == "Peanut Island" then
+                    toTarget(CFrame.new(-2062.7475585938, 50.473892211914, -10232.568359375))
+                elseif _G.SelectNPC == "Cake Island" then
+                    toTarget(CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375))
+                elseif _G.SelectNPC == "Cocoa Island" then
+                    toTarget(CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375))
+                elseif _G.SelectNPC == "Candy Island" then
+                    toTarget(CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625))
+                elseif _G.SelectNPC == "Isle Outpost" then
+                    toTarget(CFrame.new(-16542.447265625, 55.68632888793945, 1044.41650390625))
+                end
+            until not _G.TeleportIsland
+        end
+    end
+)
+Options.ToggleIsland:SetValue(false)
+
 local Remote_GetFruits = game.ReplicatedStorage:FindFirstChild("Remotes").CommF_:InvokeServer("GetFruits")
 Table_DevilFruitSniper = {}
 ShopDevilSell = {}
