@@ -10459,67 +10459,67 @@ local ToggleNPC = Tabs.Teleport:AddToggle("ToggleNPC", {Title = "Tween To NPC", 
 ToggleNPC:OnChanged(
     function(Value)
         _G.TeleportNPC = Value
-        if TeleportNPC == true then
+        if _G.TeleportNPC == true then
             repeat
                 wait()
                 if _G.SelectNPC == "Sword Dealer" then
-                    Tween2(CFrame.new(-2539.558837890625, 6.614826679229736, 2028.5797119140625))
+                    toTarget(CFrame.new(-2539.558837890625, 6.614826679229736, 2028.5797119140625))
                 elseif _G.SelectNPC == "Rich Man" then
-                    Tween2(CFrame.new(-905.4583129882812, 13.787052154541016, 4078.601806640625))
+                    toTarget(CFrame.new(-905.4583129882812, 13.787052154541016, 4078.601806640625))
                 elseif _G.SelectNPC == "Hasan" then
-                    Tween2(CFrame.new(1319.5235595703125, 15.86517333984375, 4488.37841796875))
+                    toTarget(CFrame.new(1319.5235595703125, 15.86517333984375, 4488.37841796875))
                 elseif _G.SelectNPC == "Ability Teacher" then
-                    Tween2(CFrame.new(1489.6800537109375, 40.84608840942383, -1414.084716796875))
+                    toTarget(CFrame.new(1489.6800537109375, 40.84608840942383, -1414.084716796875))
                 elseif _G.SelectNPC == "Robotmega" then
-                    Tween2(CFrame.new(-1037.048583984375, 9.68704605102539, 1800.3603515625))
+                    toTarget(CFrame.new(-1037.048583984375, 9.68704605102539, 1800.3603515625))
                 elseif _G.SelectNPC == "Advanced Weapon Dealer" then
-                    Tween2(CFrame.new(-4997.7578125, 41.287044525146484, 4402.53515625))
+                    toTarget(CFrame.new(-4997.7578125, 41.287044525146484, 4402.53515625))
                 elseif _G.SelectNPC == "Parlus" then
-                    Tween2(CFrame.new(-4931.53857421875, 96.39425659179688, 3869.43505859375))
+                    toTarget(CFrame.new(-4931.53857421875, 96.39425659179688, 3869.43505859375))
                 elseif _G.SelectNPC == "Master Sword Dealer" then
-                    Tween2(CFrame.new(-4749.52587890625, 717.697021484375, -2658.385986328125))
+                    toTarget(CFrame.new(-4749.52587890625, 717.697021484375, -2658.385986328125))
                 elseif _G.SelectNPC == "Instinct Teacher" then
-                    Tween2(CFrame.new(-8040.74755859375, 5756.06787109375, -1926.5037841796875))
+                    toTarget(CFrame.new(-8040.74755859375, 5756.06787109375, -1926.5037841796875))
                 elseif _G.SelectNPC == "Living Skeleton" then
-                    Tween2(CFrame.new(-5463.73291015625, 8.62612533569336, 8877.783203125))
+                    toTarget(CFrame.new(-5463.73291015625, 8.62612533569336, 8877.783203125))
                 elseif _G.SelectNPC == "Manager" then
-                    Tween2(CFrame.new(-385.54248046875, 73.0650405883789, 330.1056823730469))
+                    toTarget(CFrame.new(-385.54248046875, 73.0650405883789, 330.1056823730469))
                 elseif _G.SelectNPC == "Nerd" then
-                    Tween2(CFrame.new(-398.9334411621094, 73.09505462646484, 259.4021301269531))
+                    toTarget(CFrame.new(-398.9334411621094, 73.09505462646484, 259.4021301269531))
                 elseif _G.SelectNPC == "arowe" then
-                    Tween2(CFrame.new(-1989.70361328125, 125.52833557128906, -72.03471374511719))
+                    toTarget(CFrame.new(-1989.70361328125, 125.52833557128906, -72.03471374511719))
                 elseif _G.SelectNPC == "Trevor" then
-                    Tween2(CFrame.new(-337.1565856933594, 331.89599609375, 639.19775390625))
+                    toTarget(CFrame.new(-337.1565856933594, 331.89599609375, 639.19775390625))
                 elseif _G.SelectNPC == "Alchemist" then
-                    Tween2(CFrame.new(-2774.590576171875, 73.21097564697266, -3570.2119140625))
+                    toTarget(CFrame.new(-2774.590576171875, 73.21097564697266, -3570.2119140625))
                 elseif _G.SelectNPC == "Mysterious Man" then
-                    Tween2(CFrame.new(-2574.777099609375, 1623.7242431640625, -3745.75341796875))
+                    toTarget(CFrame.new(-2574.777099609375, 1623.7242431640625, -3745.75341796875))
                 elseif _G.SelectNPC == "Crew Captain" then
-                    Tween2(CFrame.new(-5693.0849609375, 127.21127319335938, -821.1600952148438))
+                    toTarget(CFrame.new(-5693.0849609375, 127.21127319335938, -821.1600952148438))
                 elseif _G.SelectNPC == "rip_indra" then
-                    Tween2(CFrame.new(-5654.2685546875, 178.89596557617188, -1349.7425537109375))
+                    toTarget(CFrame.new(-5654.2685546875, 178.89596557617188, -1349.7425537109375))
                 elseif _G.SelectNPC == "arltmetic" then
-                    Tween2(CFrame.new(-4977.15380859375, 143.79434204101562, -5389.06884765625))
+                    toTarget(CFrame.new(-4977.15380859375, 143.79434204101562, -5389.06884765625))
                 elseif _G.SelectNPC == "Experimic[Ghoul Change]" then
-                    Tween2(CFrame.new(918.8460693359375, 129.16561889648438, 33453.796875))
+                    toTarget(CFrame.new(918.8460693359375, 129.16561889648438, 33453.796875))
                 elseif _G.SelectNPC == "El Rodofol" then
-                    Tween2(CFrame.new(939.5582275390625, 40.47803497314453, 32778.12890625))
+                    toTarget(CFrame.new(939.5582275390625, 40.47803497314453, 32778.12890625))
                 elseif _G.SelectNPC == "El Admin" then
-                    Tween2(CFrame.new(1323.3121337890625, 125.47376251220703, 33138.3515625))
+                    toTarget(CFrame.new(1323.3121337890625, 125.47376251220703, 33138.3515625))
                 elseif _G.SelectNPC == "Phoenyu[Sea2]" then
-                    Tween2(CFrame.new(6357.33349609375, 296.6669616699219, -6769.6103515625))
+                    toTarget(CFrame.new(6357.33349609375, 296.6669616699219, -6769.6103515625))
                 elseif _G.SelectNPC == "Dairock[Sea2]" then
-                    Tween2(CFrame.new(-2600.471435546875, 238.88172912597656, -10321.1484375))
+                    toTarget(CFrame.new(-2600.471435546875, 238.88172912597656, -10321.1484375))
                 elseif _G.SelectNPC == "Martial Arts Master[Sea2]" then
-                    Tween2(CFrame.new(1378.6502685546875, 247.4630584716797, -5196.61474609375))
+                    toTarget(CFrame.new(1378.6502685546875, 247.4630584716797, -5196.61474609375))
                 elseif _G.SelectNPC == "The Strongest God" then
-                    Tween2(CFrame.new(4739.3837890625, 7.974522113800049, 2910.386474609375))
+                    toTarget(CFrame.new(4739.3837890625, 7.974522113800049, 2910.386474609375))
                 elseif _G.SelectNPC == "Blacksmith" then
-                    Tween2(CFrame.new(-468.08258056640625, 19.14280128479004, 5732.6162109375))
+                    toTarget(CFrame.new(-468.08258056640625, 19.14280128479004, 5732.6162109375))
                 elseif _G.SelectNPC == "Death King" then
-                    Tween2(CFrame.new(-8721.248046875, 142.3568878173828, 6251.09228515625))
+                    toTarget(CFrame.new(-8721.248046875, 142.3568878173828, 6251.09228515625))
                 elseif _G.SelectNPC == "Werid Machine" then
-                    Tween2(CFrame.new(-9681.32421875, 6.140038013458252, 6343.5341796875))
+                    toTarget(CFrame.new(-9681.32421875, 6.140038013458252, 6343.5341796875))
                 elseif _G.SelectNPC == "Elite Hunter" then
                     toTarget(CFrame.new(-5417.755859375, 316.1022644042969, -2823.448486328125))
                 elseif _G.SelectNPC == "Remove Blox Fruit" then
