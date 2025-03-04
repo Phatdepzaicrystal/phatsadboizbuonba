@@ -10442,7 +10442,7 @@ local DropdownNPC =
     "DropdownNPC",
     {
         Title = "Choose NPC",
-        Values = IslandList,
+        Values = NPCList,
         Multi = false,
         Default = 1
     }
