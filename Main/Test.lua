@@ -6948,36 +6948,16 @@ spawn(function()
     end);
 end);
 
-local Tocdo = {
-	"100",
-	"150",
-	"250",
-	"300",
-	"325",
-	"350"
-};
-getgenv().TweenSpeed = "325";
-local DropdownSpeed =
-    Tabs.Setting:AddDropdown(
-    "DropdownSpeed",
+Tabs.Shop:AddButton(
     {
-        Title = "Change Speed",
-        Values = Tocdo,
-        Multi = false,
-        Default = 1
+        Title = "Stop Tween",
+        Description = "",
+        Callback = function()
+	      Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame);
+	      _G.Clip = false;
+        end
     }
 )
-DropdownSpeed:SetValue("...")
-DropdownSpeed:OnChanged(
-    function(Value)
-        getgenv().TweenSpeed = Value
-    end
-)
-
-Tabs.Setting:AddButton("Stop Tween", function()
-	Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame);
-	_G.Clip = false;
-end);
 
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
