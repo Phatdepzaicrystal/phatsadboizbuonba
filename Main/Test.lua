@@ -10431,9 +10431,9 @@ elseif Third_Sea then
         "Sick Scientist",
         "Sweet Crafter",
         "Shipwright Teacher",
-        "Shark Hunter"
-        "Beast Hunter"
-        "Spy"
+        "Shark Hunter",
+        "Beast Hunter",
+        "Spy",
     }
 end
 
@@ -10448,7 +10448,7 @@ local DropdownNPC =
     }
 )
 
-DropdownNPC:SetValue("Zzz")
+DropdownNPC:SetValue("...")
 DropdownNPC:OnChanged(
     function(Value)
         _G.SelectNPC = Value
@@ -10533,7 +10533,7 @@ ToggleNPC:OnChanged(
                 elseif _G.SelectNPC == "Crypt Master" then
                     toTarget(CFrame.new(-12135.29296875, 577.1981811523438, -6709.46728515625))
                 elseif _G.SelectNPC == "drip_mama" then
-                    BTPZ(CFrame.new(-2137.877197265625, 72.22284698486328, -12326.1796875))
+                    toTarget(CFrame.new(-2137.877197265625, 72.22284698486328, -12326.1796875))
                 elseif _G.SelectNPC == "Sick Scientist" then
                     toTarget(CFrame.new(-2814.095458984375, 254.81251525878906, -12592.908203125))
                 elseif _G.SelectNPC == "Sweet Crafter" then
