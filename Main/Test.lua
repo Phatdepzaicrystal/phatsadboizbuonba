@@ -6948,7 +6948,7 @@ spawn(function()
     end);
 end);
 
-Tabs.Shop:AddButton(
+Tabs.Setting:AddButton(
     {
         Title = "Stop Tween",
         Description = "",
