@@ -10226,7 +10226,6 @@ elseif Second_Sea then
         "Ice Castle",
         "Forgotten Island",
         "Ussop Island",
-        "Mini Sky Island"
     }
 elseif Third_Sea then
     IslandList = {
@@ -10234,7 +10233,6 @@ elseif Third_Sea then
         "Port Town",
         "Great Tree",
         "Castle On The Sea",
-        "MiniSky",
         "Hydra Island",
         "Floating Turtle",
         "Haunted Castle",
@@ -10243,7 +10241,7 @@ elseif Third_Sea then
         "Cake Island",
         "Cocoa Island",
         "Candy Island",
-        "Isle Outpost"
+        "Tiki Outpost"
     }
 end
 
@@ -10358,7 +10356,7 @@ ToggleIsland:OnChanged(
                 elseif _G.SelectIsland == "Port Town" then
                     toTarget(CFrame.new(-290.7376708984375, 6.729952812194824, 5343.5537109375))
                 elseif _G.SelectIsland == "Hydra Island" then
-                    BTPZ(CFrame.new(5753.5478515625, 610.7880859375, -282.33172607421875))
+                    toTarget(CFrame.new(5753.5478515625, 610.7880859375, -282.33172607421875))
                 elseif _G.SelectIsland == "Floating Turtle" then
                     toTarget(CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625))
                 elseif _G.SelectIsland == "Mansion" then
@@ -10375,7 +10373,7 @@ ToggleIsland:OnChanged(
                     toTarget(CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375))
                 elseif _G.SelectIsland == "Candy Island" then
                     toTarget(CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625))
-                elseif _G.SelectIsland == "Isle Outpost" then
+                elseif _G.SelectIsland == "Tiki Outpost" then
                     toTarget(CFrame.new(-16542.447265625, 55.68632888793945, 1044.41650390625))
                 end
             until not _G.TeleportIsland
@@ -10410,30 +10408,32 @@ elseif Second_Sea then
         "Crew Captain",
         "rip_indra",
         "arltmetic",
-        "Two Snow Mountain",
-        "Punk Hazard",
-        "Cursed Ship",
-        "Ice Castle",
-        "Forgotten Island",
-        "Ussop Island",
-        "Mini Sky Island"
+        "Experimic[Ghoul Change]",
+        "El Rodofol",
+        "El Admin",
+        "Phoenyu[Sea2]",
+        "Dairock[Sea2]",
+        "Martial Arts Master[Sea2]",
+        "The Strongest God"
     }
 elseif Third_Sea then
     NPCList = {
-        "Mansion",
-        "Port Town",
-        "Great Tree",
-        "Castle On The Sea",
-        "MiniSky",
-        "Hydra Island",
-        "Floating Turtle",
-        "Haunted Castle",
-        "Ice Cream Island",
-        "Peanut Island",
-        "Cake Island",
-        "Cocoa Island",
-        "Candy Island",
-        "Isle Outpost"
+        "Blacksmith",
+        "Death King",
+        "Werid Machine",
+        "Elite Hunter",
+        "Remove Blox Fruit",
+        "Previous Hero",
+        "Acient Monk",
+        "Hungry Man",
+        "Crypt Master",
+        "drip_mama",
+        "Sick Scientist",
+        "Sweet Crafter",
+        "Shipwright Teacher",
+        "Shark Hunter"
+        "Beast Hunter"
+        "Spy"
     }
 end
 
@@ -10463,25 +10463,25 @@ ToggleNPC:OnChanged(
             repeat
                 wait()
                 if _G.SelectNPC == "Sword Dealer" then
-                    toTarget(CFrame.new(-2535.781982421875, 6.614983081817627, 2024.1954345703125))
+                    toTarget(CFrame.new(-2539.558837890625, 6.614826679229736, 2028.5797119140625))
                 elseif _G.SelectNPC == "Rich Man" then
-                    toTarget(CFrame.new(-909.73, 13.79, 4076.68))
+                    toTarget(CFrame.new(-905.4583129882812, 13.787052154541016, 4078.601806640625))
                 elseif _G.SelectNPC == "Hasan" then
-                    toTarget(CFrame.new(1320.79, 15.84, 4488.28))
+                    toTarget(CFrame.new(1319.5235595703125, 15.86517333984375, 4488.37841796875))
                 elseif _G.SelectNPC == "Ability Teacher" then
-                    toTarget(CFrame.new(1490.59, 37.38, -1410.75))
+                    toTarget(CFrame.new(1489.6800537109375, 40.84608840942383, -1414.084716796875))
                 elseif _G.SelectNPC == "Robotmega" then
-                    toTarget(CFrame.new(-1037.89, 9.69, 1800.72))
+                    toTarget(CFrame.new(-1037.048583984375, 9.68704605102539, 1800.3603515625))
                 elseif _G.SelectNPC == "Advanced Weapon Dealer" then
-                    toTarget(CFrame.new(-4996.45, 41.29, 4402.15))
+                    toTarget(CFrame.new(-4997.7578125, 41.287044525146484, 4402.53515625))
                 elseif _G.SelectNPC == "Parlus" then
-                    toTarget(CFrame.new(-4931.93, 96.39, 3869.22))
+                    toTarget(CFrame.new(-4931.53857421875, 96.39425659179688, 3869.43505859375))
                 elseif _G.SelectNPC == "Master Sword Dealer" then
-                    toTarget(CFrame.new(-4750.08, 717.70, -2651.65))
+                    toTarget(CFrame.new(-4749.52587890625, 717.697021484375, -2658.385986328125))
                 elseif _G.SelectNPC == "Instinct Teacher" then
-                    toTarget(CFrame.new(-8043.20, 5756.07, -1933.43))
+                    toTarget(CFrame.new(-8040.74755859375, 5756.06787109375, -1926.5037841796875))
                 elseif _G.SelectNPC == "Living Skeleton" then
-                    toTarget(CFrame.new(-5464.73, 8.63, 8879.55))
+                    toTarget(CFrame.new(-5463.73291015625, 8.62612533569336, 8877.783203125))
                 elseif _G.SelectNPC == "Manager" then
                     toTarget(CFrame.new(-385.54248046875, 73.0650405883789, 330.1056823730469))
                 elseif _G.SelectNPC == "Nerd" then
@@ -10500,58 +10500,52 @@ ToggleNPC:OnChanged(
                     toTarget(CFrame.new(-5654.2685546875, 178.89596557617188, -1349.7425537109375))
                 elseif _G.SelectNPC == "arltmetic" then
                     toTarget(CFrame.new(-4977.15380859375, 143.79434204101562, -5389.06884765625))
-                elseif _G.SelectNPC == "Flamingo Room" then
-                    toTarget(CFrame.new(2284.4140625, 15.152037620544, 875.72534179688))
-                elseif _G.SelectNPC == "Green Zone" then
-                    toTarget(CFrame.new(-2448.5300292969, 73.016105651855, -3210.6306152344))
-                elseif _G.SelectNPC == "Factory" then
-                    toTarget(CFrame.new(424.12698364258, 211.16171264648, -427.54049682617))
-                elseif _G.SelectNPC == "Colossuim" then
-                    toTarget(CFrame.new(-1503.6224365234, 219.7956237793, 1369.3101806641))
-                elseif _G.SelectNPC == "Zombie Island" then
-                    toTarget(CFrame.new(-5622.033203125, 492.19604492188, -781.78552246094))
-                elseif _G.SelectNPC == "Two Snow Mountain" then
-                    toTarget(CFrame.new(753.14288330078, 408.23559570313, -5274.6147460938))
-                elseif _G.SelectNPC == "Punk Hazard" then
-                    toTarget(CFrame.new(-6127.654296875, 15.951762199402, -5040.2861328125))
-                elseif _G.SelectNPC == "Cursed Ship" then
-                    toTarget(CFrame.new(923.40197753906, 125.05712890625, 32885.875))
-                elseif _G.SelectNPC == "Ice Castle" then
-                    toTarget(CFrame.new(6148.4116210938, 294.38687133789, -6741.1166992188))
-                elseif _G.SelectNPC == "Forgotten Island" then
-                    toTarget(CFrame.new(-3032.7641601563, 317.89672851563, -10075.373046875))
-                elseif _G.SelectNPC == "Ussop Island" then
-                    toTarget(CFrame.new(4816.8618164063, 8.4599885940552, 2863.8195800781))
-                elseif _G.SelectNPC == "Mini Sky Island" then
-                    toTarget(CFrame.new(-288.74060058594, 49326.31640625, -35248.59375))
-                elseif _G.SelectNPC == "Great Tree" then
-                    toTarget(CFrame.new(2681.2736816406, 1682.8092041016, -7190.9853515625))
-                elseif _G.SelectNPC == "Castle On The Sea" then
-                    BTPZ(CFrame.new(-5075.50927734375, 314.5155029296875, -3150.0224609375))
-                elseif _G.SelectNPC == "MiniSky" then
-                    toTarget(CFrame.new(-260.65557861328, 49325.8046875, -35253.5703125))
-                elseif _G.SelectNPC == "Port Town" then
-                    toTarget(CFrame.new(-290.7376708984375, 6.729952812194824, 5343.5537109375))
-                elseif _G.SelectNPC == "Hydra Island" then
-                    BTPZ(CFrame.new(5753.5478515625, 610.7880859375, -282.33172607421875))
-                elseif _G.SelectNPC == "Floating Turtle" then
-                    toTarget(CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625))
-                elseif _G.SelectNPC == "Mansion" then
-                    BTPZ(CFrame.new(-12468.5380859375, 375.0094299316406, -7554.62548828125))
-                elseif _G.SelectNPC == "Haunted Castle" then
-                    toTarget(CFrame.new(-9515.3720703125, 164.00624084473, 5786.0610351562))
-                elseif _G.SelectNPC == "Ice Cream Island" then
-                    toTarget(CFrame.new(-902.56817626953, 79.93204498291, -10988.84765625))
-                elseif _G.SelectNPC == "Peanut Island" then
-                    toTarget(CFrame.new(-2062.7475585938, 50.473892211914, -10232.568359375))
-                elseif _G.SelectNPC == "Cake Island" then
-                    toTarget(CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375))
-                elseif _G.SelectNPC == "Cocoa Island" then
-                    toTarget(CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375))
-                elseif _G.SelectNPC == "Candy Island" then
-                    toTarget(CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625))
-                elseif _G.SelectNPC == "Isle Outpost" then
-                    toTarget(CFrame.new(-16542.447265625, 55.68632888793945, 1044.41650390625))
+                elseif _G.SelectNPC == "Experimic[Ghoul Change]" then
+                    toTarget(CFrame.new(918.8460693359375, 129.16561889648438, 33453.796875))
+                elseif _G.SelectNPC == "El Rodofol" then
+                    toTarget(CFrame.new(939.5582275390625, 40.47803497314453, 32778.12890625))
+                elseif _G.SelectNPC == "El Admin" then
+                    toTarget(CFrame.new(1323.3121337890625, 125.47376251220703, 33138.3515625))
+                elseif _G.SelectNPC == "Phoenyu[Sea2]" then
+                    toTarget(CFrame.new(6357.33349609375, 296.6669616699219, -6769.6103515625))
+                elseif _G.SelectNPC == "Dairock[Sea2]" then
+                    toTarget(CFrame.new(-2600.471435546875, 238.88172912597656, -10321.1484375))
+                elseif _G.SelectNPC == "Martial Arts Master[Sea2]" then
+                    toTarget(CFrame.new(1378.6502685546875, 247.4630584716797, -5196.61474609375))
+                elseif _G.SelectNPC == "The Strongest God" then
+                    toTarget(CFrame.new(4739.3837890625, 7.974522113800049, 2910.386474609375))
+                elseif _G.SelectNPC == "Blacksmith" then
+                    toTarget(CFrame.new(-468.08258056640625, 19.14280128479004, 5732.6162109375))
+                elseif _G.SelectNPC == "Death King" then
+                    toTarget(CFrame.new(-8721.248046875, 142.3568878173828, 6251.09228515625))
+                elseif _G.SelectNPC == "Werid Machine" then
+                    toTarget(CFrame.new(-9681.32421875, 6.140038013458252, 6343.5341796875))
+                elseif _G.SelectNPC == "Elite Hunter" then
+                    toTarget(CFrame.new(-5417.755859375, 316.1022644042969, -2823.448486328125))
+                elseif _G.SelectNPC == "Remove Blox Fruit" then
+                    toTarget(CFrame.new(-5573.68896484375, 1088.7596435546875, -2658.131591796875))
+                elseif _G.SelectNPC == "Previous Hero" then
+                    toTarget(CFrame.new(-10371.025390625, 336.2735595703125, -10131.0810546875))
+                elseif _G.SelectNPC == "Acient Monk" then
+                    toTarget(CFrame.new(-13775.3466796875, 334.50689697265625, -9878.029296875))
+                elseif _G.SelectNPC == "Hungry Man" then
+                    toTarget(CFrame.new(-10922.33203125, 624.1702270507812, -10267.595703125))
+                elseif _G.SelectNPC == "Crypt Master" then
+                    toTarget(CFrame.new(-12135.29296875, 577.1981811523438, -6709.46728515625))
+                elseif _G.SelectNPC == "drip_mama" then
+                    BTPZ(CFrame.new(-2137.877197265625, 72.22284698486328, -12326.1796875))
+                elseif _G.SelectNPC == "Sick Scientist" then
+                    toTarget(CFrame.new(-2814.095458984375, 254.81251525878906, -12592.908203125))
+                elseif _G.SelectNPC == "Sweet Crafter" then
+                    toTarget(CFrame.new(228.89129638671875, 25.343040466308594, -12773.3046875))
+                elseif _G.SelectNPC == "Shipwright Teacher" then
+                    toTarget(CFrame.new(-16526.60546875, 75.8989486694336, 312.47515869140625))
+                elseif _G.SelectNPC == "Shark Hunter" then
+                    toTarget(CFrame.new(-16525, 107.56005096435547, 752.9271240234375))
+                elseif _G.SelectNPC == "Beast Hunter" then
+                    toTarget(CFrame.new(-16282.984375, 72.79424285888672, 260.19268798828125))
+                elseif _G.SelectNPC == "Spy" then
+                    toTarget(CFrame.new(-16472.328125, 527.78857421875, 538.5908813476562))
                 end
             until not _G.TeleportIsland
         end
