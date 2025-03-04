@@ -10212,13 +10212,13 @@ if First_Sea then
 elseif Second_Sea then
     IslandList = {
         "The Cafe",
-        "Frist Spot",
+        "First Spot",
         "Dark Area",
         "Flamingo Mansion",
         "Flamingo Room",
         "Green Zone",
         "Factory",
-        "Colossuim",
+        "Colosseum",
         "Zombie Island",
         "Snow Mountain",
         "Hot And Cold",
@@ -10317,7 +10317,7 @@ ToggleIsland:OnChanged(
                     toTarget(CFrame.new(-2850.20068, 7.39224768, 5354.99268))
                 elseif _G.SelectIsland == "The Cafe" then
                     toTarget(CFrame.new(-385.2510070800781, 73.09505462646484, 280.3890075683594))
-                elseif _G.SelectIsland == "Frist Spot" then
+                elseif _G.SelectIsland == "First Spot" then
                     toTarget(CFrame.new(-11.311455726624, 29.276733398438, 2771.5224609375))
                 elseif _G.SelectIsland == "Dark Area" then
                     toTarget(CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375))
@@ -12760,6 +12760,42 @@ spawn(function()
     end
 end);
 --------------------------------------------------
+local NoclipShip =
+    Tabs.Fish:AddToggle(
+    "NoclipShip",
+    {
+        Title = "No Clip",
+        Description = "",
+        Default = false
+    }
+)
+NoclipShip:OnChanged(
+    function(Zzz)
+        _G.NoClipRock = Zzz
+    end
+)
+spawn(
+    function()
+        while true do
+            if _G.NoClipRock then
+                pcall(
+                    function()
+                        for _, boat in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                            for _, part in pairs(boat:GetDescendants()) do
+                                if part:IsA("BasePart") then
+                                    part.CanCollide = false
+                                end
+                            end
+                        end
+                    end
+                )
+            else
+                wait(1)
+            end
+        end
+    end
+)
+
 local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
     Title = "Auto Start Event",
     Description = "",
