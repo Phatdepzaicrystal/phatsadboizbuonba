@@ -10499,7 +10499,7 @@ ToggleNPC:OnChanged(
                 elseif _G.SelectNPC == "rip_indra" then
                     toTarget(CFrame.new(-5654.2685546875, 178.89596557617188, -1349.7425537109375))
                 elseif _G.SelectNPC == "arltmetic" then
-                    BTPZ(CFrame.new(-4977.15380859375, 143.79434204101562, -5389.06884765625))
+                    toTarget(CFrame.new(-4977.15380859375, 143.79434204101562, -5389.06884765625))
                 elseif _G.SelectNPC == "Flamingo Room" then
                     toTarget(CFrame.new(2284.4140625, 15.152037620544, 875.72534179688))
                 elseif _G.SelectNPC == "Green Zone" then
