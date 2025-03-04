@@ -10459,7 +10459,7 @@ local ToggleNPC = Tabs.Teleport:AddToggle("ToggleNPC", {Title = "Tween To NPC", 
 ToggleNPC:OnChanged(
     function(Value)
         _G.TeleportNPC = Value
-        TeleportNPC == true then
+        if TeleportNPC == true then
             repeat
                 wait()
                 if _G.SelectNPC == "Sword Dealer" then
@@ -10547,7 +10547,7 @@ ToggleNPC:OnChanged(
                 elseif _G.SelectNPC == "Spy" then
                     toTarget(CFrame.new(-16472.328125, 527.78857421875, 538.5908813476562))
                 end
-            until not _G.TeleportIsland
+            until not _G.TeleportNPC
         end
     end
 )
