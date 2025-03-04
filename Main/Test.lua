@@ -12760,42 +12760,6 @@ spawn(function()
     end
 end);
 --------------------------------------------------
-local NoclipShip =
-    Tabs.Fish:AddToggle(
-    "NoclipShip",
-    {
-        Title = "No Clip",
-        Description = "",
-        Default = false
-    }
-)
-NoclipShip:OnChanged(
-    function(Zzz)
-        _G.NoClipRock = Zzz
-    end
-)
-spawn(
-    function()
-        while true do
-            if _G.NoClipRock then
-                pcall(
-                    function()
-                        for _, boat in pairs(game:GetService("Workspace").Boats:GetChildren()) do
-                            for _, part in pairs(boat:GetDescendants()) do
-                                if part:IsA("BasePart") then
-                                    part.CanCollide = false
-                                end
-                            end
-                        end
-                    end
-                )
-            else
-                wait(1)
-            end
-        end
-    end
-)
-
 local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
     Title = "Auto Start Event",
     Description = "",
