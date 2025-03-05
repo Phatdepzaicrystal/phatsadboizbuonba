@@ -9916,6 +9916,10 @@ spawn(function()
 	end
 end);
 
+local StopTween1 = Tabs.Item:AddToggle("StopTween1", {
+    Title = "Stop Tween When Have Item",
+    Default = false
+})
 local StopChest = false
 StopTween1:OnChanged(
     function(Value)
@@ -9923,13 +9927,13 @@ StopTween1:OnChanged(
     end
 )
 
-task.spawn(
+spawn(
     function()
         while task.wait(0.5) do
             if StopChest then
                 local player = game.Players.LocalPlayer
                 if not player then
-                    task.wait(0.5)
+                    wait(0.5)
                     return
                 end
 
