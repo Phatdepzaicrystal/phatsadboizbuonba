@@ -9916,6 +9916,31 @@ spawn(function()
 	end
 end);
 
+local ChestStop = Tabs.Item:AddToggle("ChestStop", {Title = "Stop When Have God's Chalice& Fist Of Darkness", Default = false })
+ChestStop:OnChanged(function(Value)
+    getgenv().StopChest = Value
+end)
+spawn(function()
+    while wait(0.5) do
+        if getgenv().StopChest then
+            local player = game.Players.LocalPlayer
+            if player then 
+            local backpack = player:FindFirstChild("Backpack")
+            local character = player.Character            
+            if backpack and character then
+                if backpack:FindFirstChild("Fist of Darkness") or character:FindFirstChild("Fist of Darkness") or 
+                   backpack:FindFirstChild("God's Chalice") or character:FindFirstChild("God's Chalice") then
+                    _G.AutoCollectChest = false
+                    if ToggleFarmChest and typeof(ToggleFarmChest.Set) == "function" then
+                        ToggleFarmChest:Set(false)
+                    end
+                    break
+                end
+            end
+        end
+    end
+end)
+
 -------------------------------------------------Tab Volcano----------------------------------------------------------------------------------
 local PlayersService = game:GetService("Players")
 local RunService = game:GetService("RunService")
