@@ -10127,51 +10127,75 @@ spawn(function()
     end
 end)
 
-local AutoEmber = Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Auto Attack Hydra Mob And Collect Ember", Default = false })
-AutoEmber:OnChanged(function(Value)
-    _G.BlazeEmberFarm = Value
-end)
-spawn(function()
-    while wait(0.2) do
-        if  _G.BlazeEmberFarm and Third_Sea then
-            pcall(function()
-                local workspaceEnemies = game:GetService('Workspace').Enemies
-                local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                local ghost = workspaceEnemies:FindFirstChild('Ghost')
-                local hydraEnforcer = workspaceEnemies:FindFirstChild('Hydra Enforcer')
-                local venomousAssailant = workspaceEnemies:FindFirstChild('Venomous Assailant')
-                if ghost or hydraEnforcer or venomousAssailant then
-                    for _, v in pairs(workspaceEnemies:GetChildren()) do
-                        if v.Name == 'Hydra Enforcer' or v.Name == 'Venomous Assailant' then
-                            if 
-			      v:FindFirstChild('Humanoid') and v:FindFirstChild('HumanoidRootPart') and v.Humanoid.Health > 0 then
-                                repeat 							
-                                    game:GetService("RunService").Heartbeat:wait()
-                                    AutoHaki()
-                                    EquipWeapon(getgenv().SelectWeapon)
-                                    Tween(v.HumanoidRootPart.CFrame * Pos)
-                                    if v.HumanoidRootPart.CanCollide then
-                                        v.HumanoidRootPart.CanCollide = false
+local AutoEmber =
+    Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Auto Attack Hydra Mob And Collect Ember", Default = false})
+AutoEmber:OnChanged(
+    function(Value)
+        _G.BlazeEmberFarm = Value
+    end
+)
+spawn(
+    function()
+        while wait(0.2) do
+            if _G.BlazeEmberFarm and Third_Sea then
+                pcall(
+                    function()
+                        local workspaceEnemies = game:GetService("Workspace").Enemies
+                        local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                        local ghost = workspaceEnemies:FindFirstChild("Ghost")
+                        local hydraEnforcer = workspaceEnemies:FindFirstChild("Hydra Enforcer")
+                        local venomousAssailant = workspaceEnemies:FindFirstChild("Venomous Assailant")
+                        if ghost or hydraEnforcer or venomousAssailant then
+                            for _, v in pairs(workspaceEnemies:GetChildren()) do
+                                if v.Name == "Hydra Enforcer" or v.Name == "Venomous Assailant" then
+                                    if
+                                        v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and
+                                            v.Humanoid.Health > 0
+                                     then
+                                        repeat
+                                            game:GetService("RunService").Heartbeat:wait()
+                                            AutoHaki()
+                                            EquipWeapon(getgenv().SelectWeapon)
+                                            Tween(v.HumanoidRootPart.CFrame * Pos)
+                                            if v.HumanoidRootPart.CanCollide then
+                                                v.HumanoidRootPart.CanCollide = false
+                                            end
+                                            if v.HumanoidRootPart.Size ~= Vector3.new(60, 60, 60) then
+                                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                            end
+                                            if v.HumanoidRootPart.Transparency ~= 1 then
+                                                v.HumanoidRootPart.Transparency = 1
+                                            end
+                                            MonFarm = v.Name
+                                            PosMon = v.HumanoidRootPart.CFrame
+                                        until not _G.BlazeEmberFarm or v.Humanoid.Health <= 0
                                     end
-                                    if v.HumanoidRootPart.Size ~= Vector3.new(60, 60, 60) then
-                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                    end
-                                    if v.HumanoidRootPart.Transparency ~= 1 then
-                                        v.HumanoidRootPart.Transparency = 1
-                                    end
-                                    MonFarm = v.Name
-                                    PosMon = v.HumanoidRootPart.CFrame
-                                until not  _G.BlazeEmberFarm or v.Humanoid.Health <= 0
+                                end
                             end
+                        else
+                            Tween(
+                                CFrame.new(
+                                    5394.36475,
+                                    1082.71057,
+                                    561.993958,
+                                    -0.62453711,
+                                    3.17826405e-08,
+                                    -0.780995131,
+                                    6.77530991e-08,
+                                    1,
+                                    -1.34849545e-08,
+                                    0.780995131,
+                                    -6.13366922e-08,
+                                    -0.62453711
+                                )
+                            )
                         end
                     end
-                else
-                    Tween(CFrame.new(5394.36475, 1082.71057, 561.993958, -0.62453711, 3.17826405e-08, -0.780995131, 6.77530991e-08, 1, -1.34849545e-08, 0.780995131, -6.13366922e-08, -0.62453711))
-                end
-            end)
+                )
+            end
         end
     end
-end)
+)
 
 local Vocaniga = Tabs.Volcanic:AddSection("Volcano Event")
 
