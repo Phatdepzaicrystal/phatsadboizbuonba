@@ -9915,6 +9915,31 @@ spawn(function()
 		end
 	end
 end);
+
+local StopTween1 = Other:AddToggle("StopTween1", {Title = "Stop Tween When Have Item", Default = false })
+StopTween1:OnChanged(function(Value)
+    getgenv().StopChest = Value
+end)
+spawn(function()
+    while wait(0.5) do
+        if getgenv().StopChest then
+            local player = game.Players.LocalPlayer
+            if not player then continue end       
+            local backpack = player:FindFirstChild("Backpack")
+            local character = player.Character            
+            if backpack and character then
+                if backpack:FindFirstChild("Fist of Darkness") or character:FindFirstChild("Fist of Darkness") or 
+                   backpack:FindFirstChild("God's Chalice") or character:FindFirstChild("God's Chalice") then
+                    getgenv().AutoFarmChest = false
+                    if ToggleChest and typeof(ToggleChest.Set) == "function" then
+                        ToggleChest:Set(false)
+                    end
+                    break
+                end
+            end
+        end
+    end
+end)
 -------------------------------------------------Tab Volcano----------------------------------------------------------------------------------
 local PlayersService = game:GetService("Players")
 local RunService = game:GetService("RunService")
