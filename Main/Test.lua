@@ -10144,10 +10144,10 @@ spawn(
                         local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
                         local ghost = workspaceEnemies:FindFirstChild("Ghost")
                         local hydraEnforcer = workspaceEnemies:FindFirstChild("Hydra Enforcer")
-                        local venomousAssailant = workspaceEnemies:FindFirstChild("Venomous Assailant")
+                        local venomousAssailant = workspaceEnemies:FindFirstChild("Venomous Assailants")
                         if ghost or hydraEnforcer or venomousAssailant then
                             for _, v in pairs(workspaceEnemies:GetChildren()) do
-                                if v.Name == "Hydra Enforcer" or v.Name == "Venomous Assailant" then
+                                if v.Name == "Hydra Enforcer" or v.Name == "Venomous Assailants" then
                                     if
                                         v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and
                                             v.Humanoid.Health > 0
