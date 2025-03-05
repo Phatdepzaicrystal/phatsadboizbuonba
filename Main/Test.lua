@@ -9916,7 +9916,7 @@ spawn(function()
 	end
 end);
 
-local StopTween1 = Other:AddToggle("StopTween1", {Title = "Stop Tween When Have Item", Default = false })
+local StopTween1 = Tabs.Item:AddToggle("StopTween1", {Title = "Stop Tween When Have Item", Default = false })
 StopTween1:OnChanged(function(Value)
     getgenv().StopChest = Value
 end)
