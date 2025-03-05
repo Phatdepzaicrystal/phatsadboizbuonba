@@ -10191,11 +10191,10 @@ spawn(
                     Tween2(DragonHunterNPC)
                 else
                     local Skibidi = {
-                        [1] = "Dragon Hunter",
-                        [2] = "ClaimQuest",
-                        [3] = "Hunt"
+                        ["NPC"] = "Dragon Hunter",
+                        ["Command"] = "ClaimQuest"
                     }
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(Skibidi)
+                    game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(Skibidi));
                 end
             end
         end
