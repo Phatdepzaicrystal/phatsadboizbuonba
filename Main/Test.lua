@@ -10082,11 +10082,11 @@ spawn(function()
             local v655 = game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(v654));
             if (typeof(v655) == "table") then
                 for v877, v878 in pairs(v655) do
-                    if (v878 == "Defeat 3 Venomous Assailants on Hydra Island.") then
-                        CheckQuestGojo:SetDesc("Defeat 3 Venomous Assailants on Hydra Island.");
-                    elseif (v878 == "Defeat 3 Hydra Enforcers on Hydra Island.") then
-                        CheckQuestGojo:SetDesc("Defeat 3 Hydra Enforcers on Hydra Island.");
-                    elseif (v878 == "Destroy 10 trees on Hydra Island.") then
+                    if (v878 == "Defeat 3 Venomous Assailants On Hydra Island.") then
+                        CheckQuestGojo:SetDesc("Defeat 3 Venomous Assailants On Hydra Island.");
+                    elseif (v878 == "Defeat 3 Hydra Enforcers On Hydra Island.") then
+                        CheckQuestGojo:SetDesc("Defeat 3 Hydra Enforcers On Hydra Island.");
+                    elseif (v878 == "Destroy 10 Trees On Hydra Island.") then
                         CheckQuestGojo:SetDesc("Destroy 10 trees on Hydra Island.");
                     end
                 end
@@ -10173,7 +10173,7 @@ spawn(function()
             else
                 local Skibidi = {
                     ["NPC"] = "Dragon Hunter",
-                    ["Command"] = "Hunt"
+                    ["Command"] = "ClaimQuest"
                 }                
                 game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(Skibidi)
             end
@@ -10294,6 +10294,85 @@ spawn(
                         end
                     end
                 )
+            end
+        end
+    end
+)
+
+local HydraTree =
+    Tabs.Volcanic:AddToggle(
+    "HydraTree",
+    {
+        Title = "Destroy Tree On Hydra Island",
+        Description = "",
+        Default = false
+    }
+)
+HydraTree:OnChanged(
+    function(v389)
+        _G.AutoHydraTree = v389
+    end
+)
+local function v161(v390)
+    local v391 = game:GetService("VirtualInputManager")
+    v391:SendKeyEvent(true, v390, false, game)
+    v391:SendKeyEvent(false, v390, false, game)
+end
+local function SpamSkill(v392)
+    local v393 = game.Players.LocalPlayer
+    local v394 = v393.Backpack
+    for v562, v563 in pairs(v394:GetChildren()) do
+        if (v563:IsA("Tool") and (v563.ToolTip == v392)) then
+            v563.Parent = v393.Character
+            for v812, v813 in ipairs(
+                {
+                    "Z",
+                    "X",
+                    "C",
+                    "V",
+                    "F"
+                }
+            ) do
+                wait()
+                pcall(
+                    function()
+                        v161(v813)
+                    end
+                )
+            end
+            v563.Parent = v394
+            break
+        end
+    end
+end
+local v163 = {
+    CFrame.new(5288.61962890625, 1005.4000244140625, 392.43011474609375),
+    CFrame.new(5343.39453125, 1004.1998901367188, 361.0687561035156),
+    CFrame.new(5235.78564453125, 1004.1998901367188, 431.4530944824219),
+    CFrame.new(5321.30615234375, 1004.1998901367188, 440.8951416015625),
+    CFrame.new(5258.96484375, 1004.1998901367188, 345.5052490234375)
+}
+spawn(
+    function()
+        while wait() do
+            if _G.AutoHydraTree then
+                AutoHaki()
+                for v814, v815 in ipairs(v163) do
+                    if not _G.AutoHydraTree then
+                        break
+                    end
+                    Tween2(v815)
+                    wait()
+                    local v816 = game.Players.LocalPlayer.Character
+                    if (v816 and v816:FindFirstChild("HumanoidRootPart")) then
+                        local v902 = (v816.HumanoidRootPart.Position - v815.Position).Magnitude
+                        if (v902 <= 1) then
+                            SpamSkill("Melee")
+                            SpamSkill("Sword")
+                            SpamSkill("Gun")
+                        end
+                    end
+                end
             end
         end
     end
