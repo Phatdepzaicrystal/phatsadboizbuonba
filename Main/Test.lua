@@ -10117,11 +10117,11 @@ spawn(function()
                 end
                 local distance = (DojoQuestNpc.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
                 if distance <= 5 then
-                    local claimQuestTable = {
+                    local Sibidi = {
                         ["NPC"] = "Dojo Trainer",
                         ["Command"] = "ClaimQuest"
                     }
-                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(claimQuestTable)
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(Sibidi)
                     wait(1)
                     local requestQuestTable = {
                         ["NPC"] = "Dojo Trainer",
@@ -10196,7 +10196,6 @@ spawn(
                     Tween2(DragonHunterNPC)
                 else
                      local Skibidi = {
-                        [1] = {
                         ["NPC"] = "Dragon Hunter",
                         ["Command"] = "Hunt"
                     }
