@@ -9916,7 +9916,7 @@ spawn(function()
 	end
 end);
 
-local StopTween1 = Tabs.Item:AddToggle("StopTween1", {Title = "Stop Tween When Have Item", Default = false })
+local StopTween1 = Tabs.Item:AddToggle("StopTween1", {Title = "Stop Tween When Have Item [Only Tween]", Default = false })
 StopTween1:OnChanged(function(Value)
     getgenv().StopChest = Value
 end)
@@ -9930,9 +9930,9 @@ spawn(function()
             if backpack and character then
                 if backpack:FindFirstChild("Fist of Darkness") or character:FindFirstChild("Fist of Darkness") or 
                    backpack:FindFirstChild("God's Chalice") or character:FindFirstChild("God's Chalice") then
-                    getgenv().AutoFarmChest = false
-                    if ToggleChest and typeof(ToggleChest.Set) == "function" then
-                        ToggleChest:Set(false)
+                    _G.AutoCollectChest = false
+                    if ToggleFarmChest and typeof(ToggleFarmChest.Set) == "function" then
+                        ToggleFarmChest:Set(false)
                     end
                     break
                 end
