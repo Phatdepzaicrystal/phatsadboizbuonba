@@ -10127,17 +10127,17 @@ spawn(function()
     end
 end)
 
-local AutoEmber =
+local AutoHydraEnforcer =
     Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Attack Hydra Enforcer", Default = false})
-AutoEmber:OnChanged(
+AutoHydraEnforcer:OnChanged(
     function(Value)
-        _G.BlazeEmberFarm = Value
+        _G.AutoHydraEnforcer = Value
     end
 )
 spawn(
     function()
         while wait(0.2) do
-            if _G.BlazeEmberFarm and Third_Sea then
+            if _G.AutoHydraEnforcer and Third_Sea then
                 pcall(
                     function()
                         local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
@@ -10200,10 +10200,8 @@ spawn(
             if _G.BlazeEmberFarm and Third_Sea then
                 pcall(
                     function()
-                        local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                        local ghost = game:GetService("Workspace").Enemies:FindFirstChild("Ghost")
                         local venomousAssailant = game:GetService("Workspace").Enemies:FindFirstChild("Venomous Assailants")
-                        if ghost or hydraEnforcer or venomousAssailant then
+                        if ghost or venomousAssailant then
                             for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Venomous Assailants" then
                                     if
