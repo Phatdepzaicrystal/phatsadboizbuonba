@@ -10068,8 +10068,8 @@ RunService.RenderStepped:Connect(
 local Gojo = Tabs.Volcanic:AddSection("Dojo Quest")
 
 local CheckQuestGojo = Tabs.Volcanic:AddParagraph({
-    Title = "Status Quest",
-    Content = "Status|",
+    Title = "Status Quest Dojo",
+    Content = "",
 });
 spawn(function()
     pcall(function()
@@ -10172,10 +10172,11 @@ spawn(function()
                 Tween2(DragonHunterNPC)
             else
                 local Skibidi = {
-                    ["NPC"] = "Dragon Hunter",
-                    ["Command"] = "ClaimQuest"
+                    [1] = "Dragon Hunter",
+                    [2] = "ClaimQuest"
+                    [3] = "Hunt"
                 }                
-                game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(Skibidi)
+                game:GetService("ReplicatedStorage").Modules.Net["RF/DragonHunter"]:InvokeServer(Skibidi)
             end
         end
     end
