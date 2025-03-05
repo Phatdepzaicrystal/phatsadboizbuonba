@@ -10194,6 +10194,11 @@ spawn(
                 if Distance > 5 then
                     Tween2(DragonHunterNPC)
                 else
+                     local Skibidi = {
+                        ["NPC"] = "Dragon Hunter",
+                        ["Command"] = "ClaimQuest"
+                    }
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/DragonHunter"]:InvokeServer(Skibidi)
                     local Sbidiki = {
                         ["NPC"] = "Dragon Hunter",
                         ["Command"] = "RequestQuest"
