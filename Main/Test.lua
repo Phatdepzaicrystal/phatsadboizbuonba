@@ -10069,7 +10069,7 @@ local Gojo = Tabs.Volcanic:AddSection("Dojo Quest")
 
 local CheckQuestGojo = Tabs.Volcanic:AddParagraph({
     Title = "Status Quest Dojo",
-    Content = "",
+    Content = "Status|",
 });
 spawn(function()
     pcall(function()
@@ -10192,7 +10192,7 @@ spawn(
                 else
                     local Skibidi = {
                         ["NPC"] = "Dragon Hunter",
-                        ["Command"] = "Hunt"
+                        ["Command"] = "ClaimQuest"
                     }
                     game:GetService("ReplicatedStorage").Modules.Net["RF/DragonHunter"]:InvokeServer(Skibidi)
                 end
