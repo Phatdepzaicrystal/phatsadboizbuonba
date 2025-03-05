@@ -10194,7 +10194,7 @@ spawn(
                         ["NPC"] = "Dragon Hunter",
                         ["Command"] = "Hunt"
                     }
-                    game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(Skibidi));
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/DragonHunter"]:InvokeServer(Skibidi)
                 end
             end
         end
