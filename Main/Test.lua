@@ -10159,11 +10159,13 @@ end)
 
 local AutoDragonHunter =
     Tabs.Volcanic:AddToggle("AutoDragonHunter", {Title = "Auto Dragon Hunter Quest", Default = false})
+
 AutoDragonHunter:OnChanged(
     function(Value)
         _G.AutoDragonHunter = Value
     end
 )
+
 Options.AutoDragonHunter:SetValue(false)
 
 spawn(
@@ -10185,9 +10187,11 @@ spawn(
                     0.10923191159963608,
                     0.7322143912315369
                 )
-                local distance =
+
+                local Distance =
                     (DragonHunterNPC.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                if distance > 5 then
+
+                if Distance > 5 then
                     Tween2(DragonHunterNPC)
                 else
                     local Skibidi = {
@@ -10202,10 +10206,10 @@ spawn(
                     }
                     game:GetService("ReplicatedStorage").Modules.Net["RF/DragonHunter"]:InvokeServer(Sbidiki)
                 end
-            end)
+            end
         end
     end
-end)
+)
 
 local AutoHydraEnforcer =
     Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Attack Hydra Enforcer", Default = false})
