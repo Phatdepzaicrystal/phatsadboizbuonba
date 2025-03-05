@@ -10195,11 +10195,17 @@ spawn(
                         ["Command"] = "Check"
                     }
                     game:GetService("ReplicatedStorage").Modules.Net["RF/DragonHunter"]:InvokeServer(Skibidi)
+                    wait(1)
+                    local Sbidiki = {
+                        ["NPC"] = "Dragon Hunter",
+                        ["Command"] = "RequestQuest"
+                    }
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/DragonHunter"]:InvokeServer(Sbidiki)
                 end
-            end
+            end)
         end
     end
-)
+end)
 
 local AutoHydraEnforcer =
     Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Attack Hydra Enforcer", Default = false})
