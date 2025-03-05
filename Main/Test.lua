@@ -10128,7 +10128,7 @@ spawn(function()
 end)
 
 local AutoEmber =
-    Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Auto Attack Hydra Mob And Collect Ember", Default = false})
+    Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Auto Attack Hydra Mob", Default = false})
 AutoEmber:OnChanged(
     function(Value)
         _G.BlazeEmberFarm = Value
@@ -10140,13 +10140,12 @@ spawn(
             if _G.BlazeEmberFarm and Third_Sea then
                 pcall(
                     function()
-                        local workspaceEnemies = game:GetService("Workspace").Enemies
                         local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-                        local ghost = workspaceEnemies:FindFirstChild("Ghost")
-                        local hydraEnforcer = workspaceEnemies:FindFirstChild("Hydra Enforcer")
-                        local venomousAssailant = workspaceEnemies:FindFirstChild("Venomous Assailants")
+                        local ghost = game:GetService("Workspace").Enemies:FindFirstChild("Ghost")
+                        local hydraEnforcer = game:GetService("Workspace").Enemies:FindFirstChild("Hydra Enforcer")
+                        local venomousAssailant = game:GetService("Workspace").Enemies:FindFirstChild("Venomous Assailants")
                         if ghost or hydraEnforcer or venomousAssailant then
-                            for _, v in pairs(workspaceEnemies:GetChildren()) do
+                            for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Hydra Enforcer" or v.Name == "Venomous Assailants" then
                                     if
                                         v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and
@@ -10155,20 +10154,12 @@ spawn(
                                         repeat
                                             game:GetService("RunService").Heartbeat:wait()
                                             AutoHaki()
-                                            EquipWeapon(getgenv().SelectWeapon)
+                                            EquipTool(SelectWeapon)
                                             Tween(v.HumanoidRootPart.CFrame * Pos)
-                                            if v.HumanoidRootPart.CanCollide then
-                                                v.HumanoidRootPart.CanCollide = false
-                                            end
-                                            if v.HumanoidRootPart.Size ~= Vector3.new(60, 60, 60) then
-                                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                            end
-                                            if v.HumanoidRootPart.Transparency ~= 1 then
-                                                v.HumanoidRootPart.Transparency = 1
-                                            end
-                                            MonFarm = v.Name
-                                            PosMon = v.HumanoidRootPart.CFrame
-                                        until not _G.BlazeEmberFarm or v.Humanoid.Health <= 0
+                                            v.HumanoidRootPart.CanCollide = false
+			                    v.Humanoid.WalkSpeed = 0
+			                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+		                          until not _G.BlazeEmberFarm or v.Humanoid.Health <= 0
                                     end
                                 end
                             end
