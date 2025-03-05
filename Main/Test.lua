@@ -10158,7 +10158,7 @@ spawn(
                                             v.HumanoidRootPart.CanCollide = false
 			                    v.Humanoid.WalkSpeed = 0
 			                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-		                          until not _G.BlazeEmberFarm or v.Humanoid.Health <= 0
+		                          until not _G.AutoHydraEnforcer or v.Humanoid.Health <= 0
                                     end
                                 end
                             end
@@ -10187,23 +10187,23 @@ spawn(
     end
 )
 
-local AutoEmber =
-    Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Attack Venomous Assailants", Default = false})
-AutoEmber:OnChanged(
+local AutoVenomousAssailant =
+    Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Attack Venomous Assailant", Default = false})
+AutoVenomousAssailant:OnChanged(
     function(Value)
-        _G.BlazeEmberFarm = Value
+        _G.AutoVenomousAssailant = Value
     end
 )
 spawn(
     function()
         while wait(0.2) do
-            if _G.BlazeEmberFarm and Third_Sea then
+            if _G.AutoVenomousAssailant and Third_Sea then
                 pcall(
                     function()
-                        local venomousAssailant = game:GetService("Workspace").Enemies:FindFirstChild("Venomous Assailants")
+                        local venomousAssailant = game:GetService("Workspace").Enemies:FindFirstChild("Venomous Assailant")
                         if ghost or venomousAssailant then
                             for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == "Venomous Assailants" then
+                                if v.Name == "Venomous Assailant" then
                                     if
                                         v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and
                                             v.Humanoid.Health > 0
@@ -10216,7 +10216,7 @@ spawn(
                                             v.HumanoidRootPart.CanCollide = false
 			                    v.Humanoid.WalkSpeed = 0
 			                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-		                          until not _G.BlazeEmberFarm or v.Humanoid.Health <= 0
+		                          until not _G.AutoVenomousAssailant or v.Humanoid.Health <= 0
                                     end
                                 end
                             end
