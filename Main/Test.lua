@@ -10194,15 +10194,6 @@ spawn(
                 if Distance > 5 then
                     Tween2(DragonHunterNPC)
                 else
-                    local args = {
-                        {
-                            Context = "Check"
-                        }
-                    }
-                    game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild(
-                        "RF/DragonHunter"
-                    ):InvokeServer(unpack(args))
-                    wait(1)
                     local Sbidiki = {
                         ["NPC"] = "Dragon Hunter",
                         ["Command"] = "RequestQuest"
