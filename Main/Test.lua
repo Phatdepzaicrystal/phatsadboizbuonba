@@ -9916,20 +9916,36 @@ spawn(function()
 	end
 end);
 
-local StopTween1 = Tabs.Item:AddToggle("StopTween1", {Title = "Stop Tween When Have Item [Only Tween]", Default = false })
+local StopTween1 = Tabs.Item:AddToggle("StopTween1", {
+    Title = "Stop Tween When Have Item",
+    Default = false
+})
+
 StopTween1:OnChanged(function(Value)
     getgenv().StopChest = Value
 end)
+
 spawn(function()
     while wait(0.5) do
         if getgenv().StopChest then
             local player = game.Players.LocalPlayer
-            if not player then continue end       
+            if not player then continue end
+            
             local backpack = player:FindFirstChild("Backpack")
-            local character = player.Character            
+            local character = player.Character
+            
             if backpack and character then
-                if backpack:FindFirstChild("Fist of Darkness") or character:FindFirstChild("Fist of Darkness") or 
-                   backpack:FindFirstChild("God's Chalice") or character:FindFirstChild("God's Chalice") then
+                local itemsToCheck = {"Fist of Darkness", "God's Chalice"}
+                local foundItem = false
+                
+                for _, itemName in pairs(itemsToCheck) do
+                    if backpack:FindFirstChild(itemName) or character:FindFirstChild(itemName) then
+                        foundItem = true
+                        break
+                    end
+                end
+                
+                if foundItem then
                     _G.AutoCollectChest = false
                     if ToggleFarmChest and typeof(ToggleFarmChest.Set) == "function" then
                         ToggleFarmChest:Set(false)
