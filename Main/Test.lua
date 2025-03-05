@@ -10128,7 +10128,7 @@ spawn(function()
 end)
 
 local AutoEmber =
-    Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Auto Attack Hydra Mob", Default = false})
+    Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Attack Hydra Enforcer", Default = false})
 AutoEmber:OnChanged(
     function(Value)
         _G.BlazeEmberFarm = Value
@@ -10143,10 +10143,9 @@ spawn(
                         local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
                         local ghost = game:GetService("Workspace").Enemies:FindFirstChild("Ghost")
                         local hydraEnforcer = game:GetService("Workspace").Enemies:FindFirstChild("Hydra Enforcer")
-                        local venomousAssailant = game:GetService("Workspace").Enemies:FindFirstChild("Venomous Assailants")
-                        if ghost or hydraEnforcer or venomousAssailant then
+                        if ghost or hydraEnforcer then
                             for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == "Hydra Enforcer" or v.Name == "Venomous Assailants" then
+                                if v.Name == "Hydra Enforcer" then
                                     if
                                         v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and
                                             v.Humanoid.Health > 0
@@ -10155,7 +10154,7 @@ spawn(
                                             game:GetService("RunService").Heartbeat:wait()
                                             AutoHaki()
                                             EquipTool(SelectWeapon)
-                                            Tween(v.HumanoidRootPart.CFrame * Pos)
+                                            Tween2(v.HumanoidRootPart.CFrame * Pos)
                                             v.HumanoidRootPart.CanCollide = false
 			                    v.Humanoid.WalkSpeed = 0
 			                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
@@ -10178,6 +10177,57 @@ spawn(
                                     0.780995131,
                                     -6.13366922e-08,
                                     -0.62453711
+                                )
+                            )
+                        end
+                    end
+                )
+            end
+        end
+    end
+)
+
+local AutoEmber =
+    Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Attack Venomous Assailants", Default = false})
+AutoEmber:OnChanged(
+    function(Value)
+        _G.BlazeEmberFarm = Value
+    end
+)
+spawn(
+    function()
+        while wait(0.2) do
+            if _G.BlazeEmberFarm and Third_Sea then
+                pcall(
+                    function()
+                        local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                        local ghost = game:GetService("Workspace").Enemies:FindFirstChild("Ghost")
+                        local venomousAssailant = game:GetService("Workspace").Enemies:FindFirstChild("Venomous Assailants")
+                        if ghost or hydraEnforcer or venomousAssailant then
+                            for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "Venomous Assailants" then
+                                    if
+                                        v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and
+                                            v.Humanoid.Health > 0
+                                     then
+                                        repeat
+                                            game:GetService("RunService").Heartbeat:wait()
+                                            AutoHaki()
+                                            EquipTool(SelectWeapon)
+                                            Tween2(v.HumanoidRootPart.CFrame * Pos)
+                                            v.HumanoidRootPart.CanCollide = false
+			                    v.Humanoid.WalkSpeed = 0
+			                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+		                          until not _G.BlazeEmberFarm or v.Humanoid.Health <= 0
+                                    end
+                                end
+                            end
+                        else
+                            Tween(
+                                CFrame.new(
+                                    4762.68212890625,
+                                    1078.540283203125,
+                                    974.5083618164062,
                                 )
                             )
                         end
