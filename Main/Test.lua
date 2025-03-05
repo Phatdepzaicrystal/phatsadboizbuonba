@@ -10157,30 +10157,50 @@ spawn(function()
     end
 end)
 
-local AutoDragonHunter = Tabs.Volcanic:AddToggle("AutoDragonHunter", {Title = "Auto Dragon Hunter Quest", Default = false })
-AutoDragonHunter:OnChanged(function(Value)
-    _G.AutoDragonHunter = Value
-	end)	
+local AutoDragonHunter =
+    Tabs.Volcanic:AddToggle("AutoDragonHunter", {Title = "Auto Dragon Hunter Quest", Default = false})
+AutoDragonHunter:OnChanged(
+    function(Value)
+        _G.AutoDragonHunter = Value
+    end
+)
 Options.AutoDragonHunter:SetValue(false)
 
-spawn(function()
-    while wait(0.2) do
-        if _G.AutoDragonHunter and Third_Sea then
-            local DragonHunterNPC = CFrame.new(5861.5517578125, 1209.9515380859375, 810.2301025390625, 0.7272793054580688, -0.08736011385917664, 0.6807591319084167, 0.138326957821846, 0.9901700019836426, -0.020713597536087036, -0.6722577214241028, 0.10923191159963608, 0.7322143912315369)
-            local distance = (DragonHunterNPC.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-            if distance > 5 then
-                Tween2(DragonHunterNPC)
-            else
-                local Skibidi = {
-                    [1] = "Dragon Hunter",
-                    [2] = "ClaimQuest"
-                    [3] = "Hunt"
-                }                
-                game:GetService("ReplicatedStorage").Modules.Net["RF/DragonHunter"]:InvokeServer(Skibidi)
+spawn(
+    function()
+        while wait(0.2) do
+            if _G.AutoDragonHunter and Third_Sea then
+                local DragonHunterNPC =
+                    CFrame.new(
+                    5861.5517578125,
+                    1209.9515380859375,
+                    810.2301025390625,
+                    0.7272793054580688,
+                    -0.08736011385917664,
+                    0.6807591319084167,
+                    0.138326957821846,
+                    0.9901700019836426,
+                    -0.020713597536087036,
+                    -0.6722577214241028,
+                    0.10923191159963608,
+                    0.7322143912315369
+                )
+                local distance =
+                    (DragonHunterNPC.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                if distance > 5 then
+                    Tween2(DragonHunterNPC)
+                else
+                    local Skibidi = {
+                        [1] = "Dragon Hunter",
+                        [2] = "ClaimQuest",
+                        [3] = "Hunt"
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(Skibidi)
+                end
             end
         end
     end
-end)
+)
 
 local AutoHydraEnforcer =
     Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Attack Hydra Enforcer", Default = false})
