@@ -10067,6 +10067,36 @@ RunService.RenderStepped:Connect(
 
 local Gojo = Tabs.Volcanic:AddSection("Dojo Quest")
 
+local CheckQuestGojo = Tabs.Volcanic:AddParagraph({
+    Title = "Status Quest",
+    Content = "Status|",
+});
+spawn(function()
+    pcall(function()
+        while wait() do
+            local v654 = {
+                [1] = {
+                    Context = "Check"
+                }
+            };
+            local v655 = game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(v654));
+            if (typeof(v655) == "table") then
+                for v877, v878 in pairs(v655) do
+                    if (v878 == "Defeat 3 Venomous Assailants on Hydra Island.") then
+                        CheckQuestGojo:SetDesc("Defeat 3 Venomous Assailants on Hydra Island.");
+                    elseif (v878 == "Defeat 3 Hydra Enforcers on Hydra Island.") then
+                        CheckQuestGojo:SetDesc("Defeat 3 Hydra Enforcers on Hydra Island.");
+                    elseif (v878 == "Destroy 10 trees on Hydra Island.") then
+                        CheckQuestGojo:SetDesc("Destroy 10 trees on Hydra Island.");
+                    end
+                end
+            else
+                print(v655);
+            end
+        end
+    end);
+end);
+
 local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
 ToogleDojoQ:OnChanged(function(Value)
     getgenv().DojoClaimQuest = Value
@@ -10103,7 +10133,7 @@ spawn(function()
     end
 end)
 
-local UpdTalon = Tabs.Volcanic:AddToggle("UpdTalon", {Title = "Tele To Uzoth", Default = false })
+local UpdTalon = Tabs.Volcanic:AddToggle("UpdTalon", {Title = "Auto Update Dragon Talon", Default = false })
 UpdTalon:OnChanged(function(Value)
     getgenv().DragonTalonUpgrade = Value
 	end)	
@@ -10122,6 +10152,30 @@ spawn(function()
                     ["Command"] = "Upgrade"
                 }                
                 game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(ohTable1)
+            end
+        end
+    end
+end)
+
+local AutoDragonHunter = Tabs.Volcanic:AddToggle("AutoDragonHunter", {Title = "Auto Dragon Hunter Quest", Default = false })
+AutoDragonHunter:OnChanged(function(Value)
+    _G.AutoDragonHunter = Value
+	end)	
+Options.AutoDragonHunter:SetValue(false)
+
+spawn(function()
+    while wait(0.2) do
+        if _G.AutoDragonHunter and Third_Sea then
+            local DragonHunterNPC = CFrame.new(5861.5517578125, 1209.9515380859375, 810.2301025390625, 0.7272793054580688, -0.08736011385917664, 0.6807591319084167, 0.138326957821846, 0.9901700019836426, -0.020713597536087036, -0.6722577214241028, 0.10923191159963608, 0.7322143912315369)
+            local distance = (DragonHunterNPC.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if distance > 5 then
+                Tween2(DragonHunterNPC)
+            else
+                local Skibidi = {
+                    ["NPC"] = "Dragon Hunter",
+                    ["Command"] = "Hunt"
+                }                
+                game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(Skibidi)
             end
         end
     end
