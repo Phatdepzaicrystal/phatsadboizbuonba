@@ -9928,7 +9928,7 @@ spawn(
             if getgenv().StopChest then
                 local player = game.Players.LocalPlayer
                 if not player then
-                    wait(0.5)
+                    task.wait(0.5)
                     return
                 end
                 local backpack = player:FindFirstChild("Backpack")
