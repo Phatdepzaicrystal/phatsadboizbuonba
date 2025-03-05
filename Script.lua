@@ -1,6 +1,6 @@
 --[[
 getgenv().Team = "Marines"          -- Pirates or Marines
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/Script.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/Main/Test.lua"))()
 ]] --
 if getgenv().Team == "Pirates" then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
@@ -6948,6 +6948,17 @@ spawn(function()
     end);
 end);
 
+Tabs.Setting:AddButton(
+    {
+        Title = "Stop Tween",
+        Description = "",
+        Callback = function()
+	      Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame);
+	      _G.Clip = false;
+        end
+    }
+)
+
 local SettingFarm = Tabs.Setting:AddSection("Setting")
 
 local v153 =
@@ -9904,6 +9915,43 @@ spawn(function()
 		end
 	end
 end);
+
+local ChestStop =
+    Tabs.Item:AddToggle("ChestStop", {Title = "Stop When Have God's Chalice& Fist Of Darkness", Default = false})
+ChestStop:OnChanged(
+    function(Value)
+        getgenv().StopChest = Value
+    end
+)
+spawn(
+    function()
+        while wait(0.5) do
+            if getgenv().StopChest then
+                local player = game.Players.LocalPlayer
+                if not player then
+                    task.wait(0.5)
+                    return
+                end
+                local backpack = player:FindFirstChild("Backpack")
+                local character = player.Character
+                if backpack and character then
+                    if
+                        backpack:FindFirstChild("Fist of Darkness") or character:FindFirstChild("Fist of Darkness") or
+                            backpack:FindFirstChild("God's Chalice") or
+                            character:FindFirstChild("God's Chalice")
+                     then
+                        _G.AutoCollectChest = false
+                        if ToggleFarmChest and typeof(ToggleFarmChest.Set) == "function" then
+                            ToggleFarmChest:Set(false)
+                        end
+                        break
+                    end
+                end
+            end
+        end
+    end
+)
+
 -------------------------------------------------Tab Volcano----------------------------------------------------------------------------------
 local PlayersService = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -10054,6 +10102,38 @@ RunService.RenderStepped:Connect(
     end
 )
 
+local Gojo = Tabs.Volcanic:AddSection("Dojo Quest")
+
+local CheckQuestGojo = Tabs.Volcanic:AddParagraph({
+    Title = "Status Quest Dojo",
+    Content = "Status|",
+});
+spawn(function()
+    pcall(function()
+        while wait() do
+            local v654 = {
+                [1] = {
+                    Context = "Check"
+                }
+            };
+            local v655 = game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(v654));
+            if (typeof(v655) == "table") then
+                for v877, v878 in pairs(v655) do
+                    if (v878 == "Defeat 3 Venomous Assailants On Hydra Island.") then
+                        CheckQuestGojo:SetDesc("Defeat 3 Venomous Assailants On Hydra Island.");
+                    elseif (v878 == "Defeat 3 Hydra Enforcers On Hydra Island.") then
+                        CheckQuestGojo:SetDesc("Defeat 3 Hydra Enforcers On Hydra Island.");
+                    elseif (v878 == "Destroy 10 Trees On Hydra Island.") then
+                        CheckQuestGojo:SetDesc("Destroy 10 trees on Hydra Island.");
+                    end
+                end
+            else
+                print(v655);
+            end
+        end
+    end);
+end);
+
 local ToogleDojoQ = Tabs.Volcanic:AddToggle("ToogleDojoQ", {Title = "Tele To Dojo Trainer", Default = false })
 ToogleDojoQ:OnChanged(function(Value)
     getgenv().DojoClaimQuest = Value
@@ -10073,11 +10153,11 @@ spawn(function()
                 end
                 local distance = (DojoQuestNpc.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
                 if distance <= 5 then
-                    local claimQuestTable = {
+                    local Sibidi = {
                         ["NPC"] = "Dojo Trainer",
                         ["Command"] = "ClaimQuest"
                     }
-                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(claimQuestTable)
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/InteractDragonQuest"]:InvokeServer(Sibidi)
                     wait(1)
                     local requestQuestTable = {
                         ["NPC"] = "Dojo Trainer",
@@ -10090,7 +10170,7 @@ spawn(function()
     end
 end)
 
-local UpdTalon = Tabs.Volcanic:AddToggle("UpdTalon", {Title = "Tele To Uzoth", Default = false })
+local UpdTalon = Tabs.Volcanic:AddToggle("UpdTalon", {Title = "Auto Update Dragon Talon", Default = false })
 UpdTalon:OnChanged(function(Value)
     getgenv().DragonTalonUpgrade = Value
 	end)	
@@ -10113,6 +10193,256 @@ spawn(function()
         end
     end
 end)
+
+local AutoDragonHunter =
+    Tabs.Volcanic:AddToggle("AutoDragonHunter", {Title = "Auto Dragon Hunter Quest", Default = false})
+
+AutoDragonHunter:OnChanged(
+    function(Value)
+        _G.AutoDragonHunter = Value
+    end
+)
+
+Options.AutoDragonHunter:SetValue(false)
+
+spawn(
+    function()
+        while wait(0.2) do
+            if _G.AutoDragonHunter and Third_Sea then
+                local DragonHunterNPC =
+                    CFrame.new(
+                    5861.5517578125,
+                    1209.9515380859375,
+                    810.2301025390625,
+                    0.7272793054580688,
+                    -0.08736011385917664,
+                    0.6807591319084167,
+                    0.138326957821846,
+                    0.9901700019836426,
+                    -0.020713597536087036,
+                    -0.6722577214241028,
+                    0.10923191159963608,
+                    0.7322143912315369
+                )
+
+                local Distance =
+                    (DragonHunterNPC.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+
+                if Distance > 5 then
+                    Tween2(DragonHunterNPC)
+                else
+                     local Skibidi = {
+                        ["NPC"] = "Dragon Hunter",
+                        ["Command"] = "Hunt"
+                    }
+                    game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(Skibidi));
+                    local Sbidiki = {
+                        ["NPC"] = "Dragon Hunter",
+                        ["Command"] = "RequestQuest"
+                    }
+                    game:GetService("ReplicatedStorage").Modules.Net["RF/DragonHunter"]:InvokeServer(Sbidiki)
+                end
+            end
+        end
+    end
+)
+
+local AutoHydraEnforcer =
+    Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Attack Hydra Enforcer", Default = false})
+AutoHydraEnforcer:OnChanged(
+    function(Value)
+        _G.AutoHydraEnforcer = Value
+    end
+)
+spawn(
+    function()
+        while wait(0.2) do
+            if _G.AutoHydraEnforcer and Third_Sea then
+                pcall(
+                    function()
+                        local playerRoot = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                        local ghost = game:GetService("Workspace").Enemies:FindFirstChild("Ghost")
+                        local hydraEnforcer = game:GetService("Workspace").Enemies:FindFirstChild("Hydra Enforcer")
+                        if ghost or hydraEnforcer then
+                            for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "Hydra Enforcer" then
+                                    if
+                                        v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and
+                                            v.Humanoid.Health > 0
+                                     then
+                                        repeat
+                                            game:GetService("RunService").Heartbeat:wait()
+                                            AutoHaki()
+                                            EquipTool(SelectWeapon)
+                                            Tween2(v.HumanoidRootPart.CFrame * Pos)
+                                            v.HumanoidRootPart.CanCollide = false
+			                    v.Humanoid.WalkSpeed = 0
+			                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+		                          until not _G.AutoHydraEnforcer or v.Humanoid.Health <= 0
+                                    end
+                                end
+                            end
+                        else
+                            Tween2(
+                                CFrame.new(
+                                    5394.36475,
+                                    1082.71057,
+                                    561.993958,
+                                    -0.62453711,
+                                    3.17826405e-08,
+                                    -0.780995131,
+                                    6.77530991e-08,
+                                    1,
+                                    -1.34849545e-08,
+                                    0.780995131,
+                                    -6.13366922e-08,
+                                    -0.62453711
+                                )
+                            )
+                        end
+                    end
+                )
+            end
+        end
+    end
+)
+
+local AutoVenomousAssailant =
+    Tabs.Volcanic:AddToggle("AutoEmber", {Title = "Attack Venomous Assailant", Default = false})
+AutoVenomousAssailant:OnChanged(
+    function(Value)
+        _G.AutoVenomousAssailant = Value
+    end
+)
+spawn(
+    function()
+        while wait(0.2) do
+            if _G.AutoVenomousAssailant and Third_Sea then
+                pcall(
+                    function()
+                        local venomousAssailant = game:GetService("Workspace").Enemies:FindFirstChild("Venomous Assailant")
+                        if ghost or venomousAssailant then
+                            for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "Venomous Assailant" then
+                                    if
+                                        v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and
+                                            v.Humanoid.Health > 0
+                                     then
+                                        repeat
+                                            game:GetService("RunService").Heartbeat:wait()
+                                            AutoHaki()
+                                            EquipTool(SelectWeapon)
+                                            Tween2(v.HumanoidRootPart.CFrame * Pos)
+                                            v.HumanoidRootPart.CanCollide = false
+			                    v.Humanoid.WalkSpeed = 0
+			                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+		                          until not _G.AutoVenomousAssailant or v.Humanoid.Health <= 0
+                                    end
+                                end
+                            end
+                        else
+                            Tween2(
+                                CFrame.new(
+                                    5394.36475,
+                                    1082.71057,
+                                    561.993958,
+                                    -0.62453711,
+                                    3.17826405e-08,
+                                    -0.780995131,
+                                    6.77530991e-08,
+                                    1,
+                                    -1.34849545e-08,
+                                    0.780995131,
+                                    -6.13366922e-08,
+                                    -0.62453711
+                                )
+                            )
+                        end
+                    end
+                )
+            end
+        end
+    end
+)
+
+local HydraTree =
+    Tabs.Volcanic:AddToggle(
+    "HydraTree",
+    {
+        Title = "Destroy Tree On Hydra Island",
+        Description = "",
+        Default = false
+    }
+)
+HydraTree:OnChanged(
+    function(v389)
+        _G.AutoHydraTree = v389
+    end
+)
+local function v161(v390)
+    local v391 = game:GetService("VirtualInputManager")
+    v391:SendKeyEvent(true, v390, false, game)
+    v391:SendKeyEvent(false, v390, false, game)
+end
+local function SpamSkill(v392)
+    local v393 = game.Players.LocalPlayer
+    local v394 = v393.Backpack
+    for v562, v563 in pairs(v394:GetChildren()) do
+        if (v563:IsA("Tool") and (v563.ToolTip == v392)) then
+            v563.Parent = v393.Character
+            for v812, v813 in ipairs(
+                {
+                    "Z",
+                    "X",
+                    "C",
+                    "V",
+                    "F"
+                }
+            ) do
+                wait()
+                pcall(
+                    function()
+                        v161(v813)
+                    end
+                )
+            end
+            v563.Parent = v394
+            break
+        end
+    end
+end
+local v163 = {
+    CFrame.new(5288.61962890625, 1005.4000244140625, 392.43011474609375),
+    CFrame.new(5343.39453125, 1004.1998901367188, 361.0687561035156),
+    CFrame.new(5235.78564453125, 1004.1998901367188, 431.4530944824219),
+    CFrame.new(5321.30615234375, 1004.1998901367188, 440.8951416015625),
+    CFrame.new(5258.96484375, 1004.1998901367188, 345.5052490234375)
+}
+spawn(
+    function()
+        while wait() do
+            if _G.AutoHydraTree then
+                AutoHaki()
+                for v814, v815 in ipairs(v163) do
+                    if not _G.AutoHydraTree then
+                        break
+                    end
+                    Tween2(v815)
+                    wait()
+                    local v816 = game.Players.LocalPlayer.Character
+                    if (v816 and v816:FindFirstChild("HumanoidRootPart")) then
+                        local v902 = (v816.HumanoidRootPart.Position - v815.Position).Magnitude
+                        if (v902 <= 1) then
+                            SpamSkill("Melee")
+                            SpamSkill("Sword")
+                            SpamSkill("Gun")
+                        end
+                    end
+                end
+            end
+        end
+    end
+)
 
 local Vocaniga = Tabs.Volcanic:AddSection("Volcano Event")
 
@@ -10212,21 +10542,20 @@ if First_Sea then
 elseif Second_Sea then
     IslandList = {
         "The Cafe",
-        "Frist Spot",
+        "First Spot",
         "Dark Area",
         "Flamingo Mansion",
         "Flamingo Room",
         "Green Zone",
         "Factory",
-        "Colossuim",
+        "Colosseum",
         "Zombie Island",
-        "Two Snow Mountain",
-        "Punk Hazard",
+        "Snow Mountain",
+        "Hot And Cold",
         "Cursed Ship",
         "Ice Castle",
         "Forgotten Island",
         "Ussop Island",
-        "Mini Sky Island"
     }
 elseif Third_Sea then
     IslandList = {
@@ -10234,7 +10563,6 @@ elseif Third_Sea then
         "Port Town",
         "Great Tree",
         "Castle On The Sea",
-        "MiniSky",
         "Hydra Island",
         "Floating Turtle",
         "Haunted Castle",
@@ -10243,7 +10571,7 @@ elseif Third_Sea then
         "Cake Island",
         "Cocoa Island",
         "Candy Island",
-        "Isle Outpost"
+        "Tiki Outpost"
     }
 end
 
@@ -10318,8 +10646,8 @@ ToggleIsland:OnChanged(
                 elseif _G.SelectIsland == "Mob Island" then
                     toTarget(CFrame.new(-2850.20068, 7.39224768, 5354.99268))
                 elseif _G.SelectIsland == "The Cafe" then
-                    toTarget(CFrame.new(-380.47927856445, 77.220390319824, 255.82550048828))
-                elseif _G.SelectIsland == "Frist Spot" then
+                    toTarget(CFrame.new(-385.2510070800781, 73.09505462646484, 280.3890075683594))
+                elseif _G.SelectIsland == "First Spot" then
                     toTarget(CFrame.new(-11.311455726624, 29.276733398438, 2771.5224609375))
                 elseif _G.SelectIsland == "Dark Area" then
                     toTarget(CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375))
@@ -10335,9 +10663,9 @@ ToggleIsland:OnChanged(
                     toTarget(CFrame.new(-1503.6224365234, 219.7956237793, 1369.3101806641))
                 elseif _G.SelectIsland == "Zombie Island" then
                     toTarget(CFrame.new(-5622.033203125, 492.19604492188, -781.78552246094))
-                elseif _G.SelectIsland == "Two Snow Mountain" then
+                elseif _G.SelectIsland == "Snow Mountain" then
                     toTarget(CFrame.new(753.14288330078, 408.23559570313, -5274.6147460938))
-                elseif _G.SelectIsland == "Punk Hazard" then
+                elseif _G.SelectIsland == "Hot And Cold" then
                     toTarget(CFrame.new(-6127.654296875, 15.951762199402, -5040.2861328125))
                 elseif _G.SelectIsland == "Cursed Ship" then
                     toTarget(CFrame.new(923.40197753906, 125.05712890625, 32885.875))
@@ -10358,7 +10686,7 @@ ToggleIsland:OnChanged(
                 elseif _G.SelectIsland == "Port Town" then
                     toTarget(CFrame.new(-290.7376708984375, 6.729952812194824, 5343.5537109375))
                 elseif _G.SelectIsland == "Hydra Island" then
-                    BTPZ(CFrame.new(5753.5478515625, 610.7880859375, -282.33172607421875))
+                    toTarget(CFrame.new(5753.5478515625, 610.7880859375, -282.33172607421875))
                 elseif _G.SelectIsland == "Floating Turtle" then
                     toTarget(CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625))
                 elseif _G.SelectIsland == "Mansion" then
@@ -10375,7 +10703,7 @@ ToggleIsland:OnChanged(
                     toTarget(CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375))
                 elseif _G.SelectIsland == "Candy Island" then
                     toTarget(CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625))
-                elseif _G.SelectIsland == "Isle Outpost" then
+                elseif _G.SelectIsland == "Tiki Outpost" then
                     toTarget(CFrame.new(-16542.447265625, 55.68632888793945, 1044.41650390625))
                 end
             until not _G.TeleportIsland
@@ -10383,6 +10711,177 @@ ToggleIsland:OnChanged(
     end
 )
 Options.ToggleIsland:SetValue(false)
+
+local TpNPC = Tabs.Teleport:AddSection("Tele To NPC")
+
+if First_Sea then
+    NPCList = {
+        "Sword Dealer",
+        "Rich Man",
+        "Hasan",
+        "Ability Teacher",
+        "Robotmega",
+        "Advanced Weapon Dealer",
+        "Parlus",
+        "Master Sword Dealer",
+        "Instinct Teacher",
+        "Living Skeleton",
+    }
+elseif Second_Sea then
+    NPCList = {
+        "Manager",
+        "Nerd",
+        "arowe",
+        "Trevor",
+        "Alchemist",
+        "Mysterious Man",
+        "Crew Captain",
+        "rip_indra",
+        "arltmetic",
+        "Experimic[Ghoul Change]",
+        "El Rodofol",
+        "El Admin",
+        "Phoenyu[Sea2]",
+        "Dairock[Sea2]",
+        "Martial Arts Master[Sea2]",
+        "The Strongest God"
+    }
+elseif Third_Sea then
+    NPCList = {
+        "Blacksmith",
+        "Death King",
+        "Werid Machine",
+        "Elite Hunter",
+        "Remove Blox Fruit",
+        "Previous Hero",
+        "Acient Monk",
+        "Hungry Man",
+        "Crypt Master",
+        "drip_mama",
+        "Sick Scientist",
+        "Sweet Crafter",
+        "Shipwright Teacher",
+        "Shark Hunter",
+        "Beast Hunter",
+        "Spy",
+    }
+end
+
+local DropdownNPC =
+    Tabs.Teleport:AddDropdown(
+    "DropdownNPC",
+    {
+        Title = "Choose NPC",
+        Values = NPCList,
+        Multi = false,
+        Default = 1
+    }
+)
+
+DropdownNPC:SetValue("...")
+DropdownNPC:OnChanged(
+    function(Value)
+        _G.SelectNPC = Value
+    end
+)
+
+local ToggleNPC = Tabs.Teleport:AddToggle("ToggleNPC", {Title = "Tween To NPC", Default = false})
+ToggleNPC:OnChanged(
+    function(Value)
+        _G.TeleportNPC = Value
+        if _G.TeleportNPC == true then
+            repeat
+                wait()
+                if _G.SelectNPC == "Sword Dealer" then
+                    Tween2(CFrame.new(-2539.558837890625, 6.614826679229736, 2028.5797119140625))
+                elseif _G.SelectNPC == "Rich Man" then
+                    Tween2(CFrame.new(-905.4583129882812, 13.787052154541016, 4078.601806640625))
+                elseif _G.SelectNPC == "Hasan" then
+                    Tween2(CFrame.new(1319.5235595703125, 15.86517333984375, 4488.37841796875))
+                elseif _G.SelectNPC == "Ability Teacher" then
+                    Tween2(CFrame.new(1489.6800537109375, 40.84608840942383, -1414.084716796875))
+                elseif _G.SelectNPC == "Robotmega" then
+                    Tween2(CFrame.new(-1037.048583984375, 9.68704605102539, 1800.3603515625))
+                elseif _G.SelectNPC == "Advanced Weapon Dealer" then
+                    Tween2(CFrame.new(-4997.7578125, 41.287044525146484, 4402.53515625))
+                elseif _G.SelectNPC == "Parlus" then
+                    Tween2(CFrame.new(-4931.53857421875, 96.39425659179688, 3869.43505859375))
+                elseif _G.SelectNPC == "Master Sword Dealer" then
+                    Tween2(CFrame.new(-4749.52587890625, 717.697021484375, -2658.385986328125))
+                elseif _G.SelectNPC == "Instinct Teacher" then
+                    Tween2(CFrame.new(-8040.74755859375, 5756.06787109375, -1926.5037841796875))
+                elseif _G.SelectNPC == "Living Skeleton" then
+                    Tween2(CFrame.new(-5463.73291015625, 8.62612533569336, 8877.783203125))
+                elseif _G.SelectNPC == "Manager" then
+                    Tween2(CFrame.new(-385.54248046875, 73.0650405883789, 330.1056823730469))
+                elseif _G.SelectNPC == "Nerd" then
+                    Tween2(CFrame.new(-398.9334411621094, 73.09505462646484, 259.4021301269531))
+                elseif _G.SelectNPC == "arowe" then
+                    Tween2(CFrame.new(-1989.70361328125, 125.52833557128906, -72.03471374511719))
+                elseif _G.SelectNPC == "Trevor" then
+                    Tween2(CFrame.new(-337.1565856933594, 331.89599609375, 639.19775390625))
+                elseif _G.SelectNPC == "Alchemist" then
+                    Tween2(CFrame.new(-2774.590576171875, 73.21097564697266, -3570.2119140625))
+                elseif _G.SelectNPC == "Mysterious Man" then
+                    Tween2(CFrame.new(-2574.777099609375, 1623.7242431640625, -3745.75341796875))
+                elseif _G.SelectNPC == "Crew Captain" then
+                    Tween2(CFrame.new(-5693.0849609375, 127.21127319335938, -821.1600952148438))
+                elseif _G.SelectNPC == "rip_indra" then
+                    Tween2(CFrame.new(-5654.2685546875, 178.89596557617188, -1349.7425537109375))
+                elseif _G.SelectNPC == "arltmetic" then
+                    Tween2(CFrame.new(-4977.15380859375, 143.79434204101562, -5389.06884765625))
+                elseif _G.SelectNPC == "Experimic[Ghoul Change]" then
+                    Tween2(CFrame.new(918.8460693359375, 129.16561889648438, 33453.796875))
+                elseif _G.SelectNPC == "El Rodofol" then
+                    Tween2(CFrame.new(939.5582275390625, 40.47803497314453, 32778.12890625))
+                elseif _G.SelectNPC == "El Admin" then
+                    Tween2(CFrame.new(1323.3121337890625, 125.47376251220703, 33138.3515625))
+                elseif _G.SelectNPC == "Phoenyu[Sea2]" then
+                    Tween2(CFrame.new(6357.33349609375, 296.6669616699219, -6769.6103515625))
+                elseif _G.SelectNPC == "Dairock[Sea2]" then
+                    Tween2(CFrame.new(-2600.471435546875, 238.88172912597656, -10321.1484375))
+                elseif _G.SelectNPC == "Martial Arts Master[Sea2]" then
+                    Tween2(CFrame.new(1378.6502685546875, 247.4630584716797, -5196.61474609375))
+                elseif _G.SelectNPC == "The Strongest God" then
+                    Tween2(CFrame.new(4739.3837890625, 7.974522113800049, 2910.386474609375))
+                elseif _G.SelectNPC == "Blacksmith" then
+                    Tween2(CFrame.new(-468.08258056640625, 19.14280128479004, 5732.6162109375))
+                elseif _G.SelectNPC == "Death King" then
+                    Tween2(CFrame.new(-8721.248046875, 142.3568878173828, 6251.09228515625))
+                elseif _G.SelectNPC == "Werid Machine" then
+                    Tween2(CFrame.new(-9681.32421875, 6.140038013458252, 6343.5341796875))
+                elseif _G.SelectNPC == "Elite Hunter" then
+                    Tween2(CFrame.new(-5417.755859375, 316.1022644042969, -2823.448486328125))
+                elseif _G.SelectNPC == "Remove Blox Fruit" then
+                    Tween2(CFrame.new(-5573.68896484375, 1088.7596435546875, -2658.131591796875))
+                elseif _G.SelectNPC == "Previous Hero" then
+                    Tween2(CFrame.new(-10371.025390625, 336.2735595703125, -10131.0810546875))
+                elseif _G.SelectNPC == "Acient Monk" then
+                    Tween2(CFrame.new(-13775.3466796875, 334.50689697265625, -9878.029296875))
+                elseif _G.SelectNPC == "Hungry Man" then
+                    Tween2(CFrame.new(-10922.33203125, 624.1702270507812, -10267.595703125))
+                elseif _G.SelectNPC == "Crypt Master" then
+                    Tween2(CFrame.new(-12135.29296875, 577.1981811523438, -6709.46728515625))
+                elseif _G.SelectNPC == "drip_mama" then
+                    Tween2(CFrame.new(-2137.877197265625, 72.22284698486328, -12326.1796875))
+                elseif _G.SelectNPC == "Sick Scientist" then
+                    Tween2(CFrame.new(-2814.095458984375, 254.81251525878906, -12592.908203125))
+                elseif _G.SelectNPC == "Sweet Crafter" then
+                    Tween2(CFrame.new(228.89129638671875, 25.343040466308594, -12773.3046875))
+                elseif _G.SelectNPC == "Shipwright Teacher" then
+                    Tween2(CFrame.new(-16526.60546875, 75.8989486694336, 312.47515869140625))
+                elseif _G.SelectNPC == "Shark Hunter" then
+                    Tween2(CFrame.new(-16525, 107.56005096435547, 752.9271240234375))
+                elseif _G.SelectNPC == "Beast Hunter" then
+                    Tween2(CFrame.new(-16282.984375, 72.79424285888672, 260.19268798828125))
+                elseif _G.SelectNPC == "Spy" then
+                    Tween2(CFrame.new(-16472.328125, 527.78857421875, 538.5908813476562))
+                end
+            until not _G.TeleportNPC
+        end
+    end
+)
+Options.ToggleNPC:SetValue(false)
 
 local Remote_GetFruits = game.ReplicatedStorage:FindFirstChild("Remotes").CommF_:InvokeServer("GetFruits")
 Table_DevilFruitSniper = {}
@@ -12590,6 +13089,40 @@ spawn(function()
         end
     end
 end);
+local AttackLevi = Tabs.Fish:AddToggle("AttackLevi", {Title = "Auto Attack Leviathan", Default = false })
+AttackLevi:OnChanged(function(state)
+    getgenv().KillLevi = state
+end)
+spawn(function()
+    while task.wait(0.5) do
+        if getgenv().KillLevi and Third_Sea then
+            pcall(function()
+                for _, v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+                    if v.Name == "Leviathan" and v:FindFirstChild("HumanoidRootPart") then
+                        repeat
+                            task.wait(0.2)             
+                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude > 10 then
+                                Tween2(v.HumanoidRootPart.CFrame * CFrame.new(0, 500, 0))
+                            end                            
+                            if not getgenv().SeaSkill then
+                                getgenv().SeaSkill = true
+                            end                            
+                            if not IsHakiActive() then
+                                AutoHaki()
+                            end                            
+                            AimBotSkillPosition = v.HumanoidRootPart
+                            Skillaimbot = true                            
+                        until not v:FindFirstChild("HumanoidRootPart") or not getgenv().KillLevi                        
+                        getgenv().SeaSkill = false
+                        Skillaimbot = false
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+
 --------------------------------------------------
 local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
     Title = "Auto Start Event",
