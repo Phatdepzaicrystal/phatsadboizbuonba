@@ -10194,11 +10194,14 @@ spawn(
                 if Distance > 5 then
                     Tween2(DragonHunterNPC)
                 else
-                    local Skibidi = {
-                        ["NPC"] = "Dragon Hunter",
-                        ["Command"] = "Check"
+                    local args = {
+                        {
+                            Context = "Check"
+                        }
                     }
-                    game:GetService("ReplicatedStorage").Modules.Net["RF/DragonHunter"]:InvokeServer(Skibidi)
+                    game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild(
+                        "RF/DragonHunter"
+                    ):InvokeServer(unpack(args))
                     wait(1)
                     local Sbidiki = {
                         ["NPC"] = "Dragon Hunter",
