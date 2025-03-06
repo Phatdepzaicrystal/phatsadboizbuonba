@@ -40,6 +40,7 @@ local Tabs = {
     Item = Window:AddTab({Title = "Get Item", Icon = "sword"}),
     Fish = Window:AddTab({Title = "Sea Event", Icon = "anchor"}),
     Volcanic = Window:AddTab({Title = "Volcano Event", Icon = "tent"}),	
+    S =	Window:AddTab({Title = "Setting For Sea Event", Icon = "layers"}),		
     Teleport = Window:AddTab({Title = "Teleport", Icon = "map"}),
     Fruit = Window:AddTab({Title = "Fruit", Icon = "apple"}),
     Raid = Window:AddTab({Title = "Raid", Icon = "target"}),
@@ -13089,6 +13090,191 @@ spawn(function()
         end
     end
 end);
+
+Tabs.S:AddParagraph({
+    Title = "Setting Sea Event",
+    Content = string.rep("-", 21)
+})
+Tabs.S:AddParagraph({
+    Title = "Activating Skill Event,\nAnd Skill Leviathan Flawless Fusion",
+})
+local UseFruit1 = Tabs.S:AddToggle("Toggle", {
+    Title = "Select Use Fruit",
+    Default = true
+})
+UseFruit1:OnChanged(function(value)
+    getgenv().UseSeaFruitSkill = value
+end)
+local UseMelee1 = Tabs.S:AddToggle("UseMelee1", {
+    Title = "Select Use Melee",
+    Default = true
+})
+UseMelee1:OnChanged(function(value)
+    getgenv().UseSeaMeleeSkill = value
+end)
+local UseSword1 = Tabs.S:AddToggle("UseSword1", {
+    Title = "Select Use Sword",
+    Default = true
+})
+UseSword1:OnChanged(function(value)
+    getgenv().UseSeaSwordSkill = value
+end)
+local UseGun1 = Tabs.S:AddToggle("UseGun1", {
+    Title = "Select Use Gun",
+    Default = true
+})
+UseGun1:OnChanged(function(value)
+    getgenv().UseSeaGunSkill = value
+end)
+Tabs.S:AddParagraph({
+    Title = "Activate Weapon Farm Event,\nClick to Activate",
+})
+Tabs.S:AddParagraph({
+    Title = "Setting Skill Fruit",
+    Content = string.rep("-", 21)
+})
+local UseSkillFruit = Tabs.S:AddToggle("UseSkillFruit", {
+    Title = "Skill Fruit Z",
+    Default = true
+})
+UseSkillFruit:OnChanged(function(value)
+    getgenv().SkillFruitZ = value
+end)
+local UseSkillFruit1 = Tabs.S:AddToggle("UseSkillFruit1", {
+    Title = "Skill Fruit X",
+    Default = true
+})
+UseSkillFruit1:OnChanged(function(value)
+    getgenv().SkillFruitX = value
+end)
+local UseSkillFruit2 = Tabs.S:AddToggle("UseSkillFruit2", {
+    Title = "Skill Fruit C",
+    Default = true
+})
+UseSkillFruit2:OnChanged(function(value)
+    getgenv().SkillFruitC = value
+end)
+local UseSkillFruit3 = Tabs.S:AddToggle("UseSkillFruit3", {
+    Title = "Skill Fruit V",
+    Default = false
+})
+UseSkillFruit3:OnChanged(function(value)
+    getgenv().SkillFruitV = value
+end)
+local UseSkillFruit4 = Tabs.S:AddToggle("UseSkillFruit4", {
+    Title = "Skill Fruit F",
+    Default = false
+})
+UseSkillFruit4:OnChanged(function(value)
+    getgenv().SkillFruitF = value
+end)
+Tabs.S:AddParagraph({
+    Title = "Use To Enable Skill Fruit,\nPlease Select Correct",
+})
+Tabs.S:AddParagraph({
+    Title = "Setting Skill Melee",
+    Content = string.rep("-", 21)
+})
+local UseSkillMelee = Tabs.S:AddToggle("UseSkillMelee", {
+    Title = "Skill Melee Z",
+    Default = true
+})
+UseSkillMelee:OnChanged(function(value)
+    getgenv().SkillMeleeZ = value
+end)
+local UseSkillMelee1 = Tabs.S:AddToggle("UseSkillMelee1", {
+    Title = "Skill Melee X",
+    Default = true
+})
+UseSkillMelee1:OnChanged(function(value)
+    getgenv().SkillMeleeX = value
+end)
+local UseSkillMelee2 = Tabs.S:AddToggle("UseSkillMelee2", {
+    Title = "Skill Melee C",
+    Default = true
+})
+UseSkillMelee2:OnChanged(function(value)
+    getgenv().SkillMeleeC = value
+end)
+Tabs.S:AddParagraph({
+    Title = "Use To Enable Skill Melee,\nPlease Select Correct",
+})
+Tabs.S:AddParagraph({
+    Title = "Setting Skill Sword And Gun",
+    Content = string.rep("-", 21)
+})
+local UseSkillSword = Tabs.S:AddToggle("UseSkillSword", {
+    Title = "Sword And Gun Skill Z",
+    Default = true
+})
+UseSkillSword:OnChanged(function(value)
+    getgenv().SkillSwordZ = value
+    getgenv().SkillGunZ = value
+end) 
+local UseSkillSword1 = Tabs.S:AddToggle("UseSkillSword1", {
+    Title = "Sword And Gun Skill X",
+    Default = true
+})
+UseSkillSword1:OnChanged(function(value)
+    getgenv().SkillSwordX = value
+    getgenv().SkillGunX = value
+end)
+Tabs.S:AddParagraph({
+    Title = "Use To Enable Skill Sword and Gun,\nPlease Select Correct",
+})
+local gg = getrawmetatable(game)
+local old = gg.__namecall
+setreadonly(gg, false)
+gg.__namecall = newcclosure(function(...)
+    local method = getnamecallmethod()
+    local args = {...}    
+    if tostring(method) == "FireServer" then
+        if tostring(args[1]) == "RemoteEvent" then
+            if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                if Skillaimbot then
+                    args[2] = AimBotSkillPosition
+                    return old(unpack(args))
+                end
+            end
+        end
+    end
+    return old(...)
+end)
+local function useSkill(skillKey, holdTime)
+    game:service('VirtualInputManager'):SendKeyEvent(true, skillKey, false, game)
+    wait(holdTime or 0.1)
+    game:service('VirtualInputManager'):SendKeyEvent(false, skillKey, false, game)
+end
+spawn(function()
+    while task.wait(0.5) do
+        pcall(function()
+            if UseSkill then
+                for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") 
+                    and v.Humanoid.Health <= v.Humanoid.MaxHealth * getgenv().Kill_At / 100 then                        
+                        if getgenv().SkillZ then useSkill("Z", getgenv().HoldSKillZ) end
+                        if getgenv().SkillX then useSkill("X", getgenv().HoldSKillX) end
+                        if getgenv().SkillC then useSkill("C", getgenv().HoldSKillC) end
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while task.wait(0.5) do
+        pcall(function()
+            if UseGunSkill then
+                for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if v.Name == MonFarm and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") 
+                    and v.Humanoid.Health <= v.Humanoid.MaxHealth * getgenv().Kill_At / 100 then                        
+                        if getgenv().SkillZ then useSkill("Z", 0.1) end
+                    end
+                end
+            end
+        end)
+    end
+end)
 --------------------------------------------------
 local v171 = Tabs.Volcanic:AddToggle("ToggleDefendVolcano", {
     Title = "Auto Start Event",
@@ -13176,7 +13362,7 @@ spawn(function()
     end
 end);
 
-local FarmPri = Tabs.Volcanic:AddSection("Setting For Event")
+local FarmPri = Tabs.Volcanic:AddSection("Setting For Volcano Event")
 
 local v107 = Tabs.Volcanic:AddToggle("ToggleMelee", {
     Title = "Spam Skill Melle",
