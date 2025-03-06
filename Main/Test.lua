@@ -13092,11 +13092,11 @@ spawn(function()
 end);
 
 Tabs.S:AddParagraph({
-    Title = "Setting Sea Event",
+    Title = "Setting For Leviathan",
     Content = string.rep("-", 21)
 })
 Tabs.S:AddParagraph({
-    Title = "Activating Skill Event,\nAnd Skill Leviathan Flawless Fusion",
+    Title = "Choose Weapons For Leviathan",
 })
 local UseFruit1 = Tabs.S:AddToggle("Toggle", {
     Title = "Select Use Fruit",
@@ -13127,11 +13127,7 @@ UseGun1:OnChanged(function(value)
     getgenv().UseSeaGunSkill = value
 end)
 Tabs.S:AddParagraph({
-    Title = "Activate Weapon Farm Event,\nClick to Activate",
-})
-Tabs.S:AddParagraph({
-    Title = "Setting Skill Fruit",
-    Content = string.rep("-", 21)
+    Title = "Select Skill Fruit",
 })
 local UseSkillFruit = Tabs.S:AddToggle("UseSkillFruit", {
     Title = "Skill Fruit Z",
@@ -13169,11 +13165,7 @@ UseSkillFruit4:OnChanged(function(value)
     getgenv().SkillFruitF = value
 end)
 Tabs.S:AddParagraph({
-    Title = "Use To Enable Skill Fruit,\nPlease Select Correct",
-})
-Tabs.S:AddParagraph({
-    Title = "Setting Skill Melee",
-    Content = string.rep("-", 21)
+    Title = "Select Skill Melee",
 })
 local UseSkillMelee = Tabs.S:AddToggle("UseSkillMelee", {
     Title = "Skill Melee Z",
@@ -13197,11 +13189,11 @@ UseSkillMelee2:OnChanged(function(value)
     getgenv().SkillMeleeC = value
 end)
 Tabs.S:AddParagraph({
-    Title = "Use To Enable Skill Melee,\nPlease Select Correct",
-})
-Tabs.S:AddParagraph({
     Title = "Setting Skill Sword And Gun",
     Content = string.rep("-", 21)
+})
+Tabs.S:AddParagraph({
+    Title = "Select Skill Sword And Gun",
 })
 local UseSkillSword = Tabs.S:AddToggle("UseSkillSword", {
     Title = "Sword And Gun Skill Z",
@@ -13219,9 +13211,6 @@ UseSkillSword1:OnChanged(function(value)
     getgenv().SkillSwordX = value
     getgenv().SkillGunX = value
 end)
-Tabs.S:AddParagraph({
-    Title = "Use To Enable Skill Sword and Gun,\nPlease Select Correct",
-})
 local gg = getrawmetatable(game)
 local old = gg.__namecall
 setreadonly(gg, false)
@@ -13362,9 +13351,9 @@ spawn(function()
     end
 end);
 
-local FarmPri = Tabs.Volcanic:AddSection("Setting For Volcano Event")
+local FarmPri = Tabs.S:AddSection("Setting For Volcano Event")
 
-local v107 = Tabs.Volcanic:AddToggle("ToggleMelee", {
+local v107 = Tabs.S:AddToggle("ToggleMelee", {
     Title = "Spam Skill Melle",
     Description = "",
     Default = false
@@ -13372,7 +13361,7 @@ local v107 = Tabs.Volcanic:AddToggle("ToggleMelee", {
 v107:OnChanged(function(v402)
     _G.UseMelee = v402;
 end);
-local v109 = Tabs.Volcanic:AddToggle("ToggleSword", {
+local v109 = Tabs.S:AddToggle("ToggleSword", {
     Title = "Spam Skill Sword",
     Description = "",
     Default = false
@@ -13380,7 +13369,7 @@ local v109 = Tabs.Volcanic:AddToggle("ToggleSword", {
 v109:OnChanged(function(v403)
     _G.UseSword = v403;
 end);
-local v110 = Tabs.Volcanic:AddToggle("ToggleGun", {
+local v110 = Tabs.S:AddToggle("ToggleGun", {
     Title = "Spam Skill Gun",
     Description = "",
     Default = false
@@ -13388,7 +13377,7 @@ local v110 = Tabs.Volcanic:AddToggle("ToggleGun", {
 v110:OnChanged(function(v404)
     _G.UseGun = v404;
 end);
-local v111 = Tabs.Volcanic:AddToggle("ToggleFruit", {
+local v111 = Tabs.S:AddToggle("ToggleFruit", {
     Title = "Spam Skill Fruit",
     Description = "",
     Default = false
