@@ -13067,6 +13067,132 @@ spawn(
 )
 --------------------------------
 local LeviIsland = Tabs.Fish:AddSection("Leviathan Island")
+
+local AutoFindFrozenDimension =
+    Tabs.Fish:AddToggle(
+    "AutoFindFrozenDimension",
+    {
+        Title = "Auto Find Frozen Dimension",
+        Description = "",
+        Default = false
+    }
+)
+
+Options.AutoFindFrozenDimension:SetValue(false)
+AutoFindFrozenDimension:OnChanged(
+    function(state)
+        _G.AutoFindFrozenDimension = state
+    end
+)
+
+local AvailableSeats = {}
+local IsFindingBoat = false
+local IslandFound = false
+
+RunService.RenderStepped:Connect(
+    function()
+        if not _G.AutoFindFrozenDimension then
+            IslandFound = false
+            return
+        end
+
+        local LocalPlayer = PlayersService.LocalPlayer
+        local Character = LocalPlayer.Character
+        if not Character or not Character:FindFirstChild("Humanoid") then
+            return
+        end
+
+        local function FindAndMoveToBoat()
+            if IsFindingBoat then
+                return
+            end
+            IsFindingBoat = true
+
+            for _, seat in pairs(AvailableSeats) do
+                if seat and seat.Parent and seat.Name == "VehicleSeat" and not seat.Occupant then
+                    Tween2(seat.CFrame)
+                    break
+                end
+            end
+
+            IsFindingBoat = false
+        end
+
+        local Humanoid = Character.Humanoid
+        local OnBoat = false
+        local CurrentSeat = nil
+
+        for _, boat in pairs(Workspace.Boats:GetChildren()) do
+            local Seat = boat:FindFirstChild("VehicleSeat")
+            if Seat and Seat.Occupant == Humanoid then
+                OnBoat = true
+                CurrentSeat = Seat
+                AvailableSeats[boat.Name] = Seat
+            elseif Seat and not Seat.Occupant then
+                FindAndMoveToBoat()
+            end
+        end
+
+        if not OnBoat then
+            return
+        end
+
+        CurrentSeat.MaxSpeed = BoatSpeed
+        CurrentSeat.CFrame =
+            CFrame.new(Vector3.new(CurrentSeat.Position.X, CurrentSeat.Position.Y, CurrentSeat.Position.Z)) *
+            CurrentSeat.CFrame.Rotation
+        VirtualInput:SendKeyEvent(true, "W", false, game)
+
+        for _, part in pairs(Workspace.Boats:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = false
+            end
+        end
+
+        for _, part in pairs(Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = false
+            end
+        end
+
+        local IslandNames = {
+            "ShipwreckIsland",
+            "SandIsland",
+            "TreeIsland",
+            "TinyIsland",
+            "MysticIsland",
+            "KitsuneIsland",
+            "FrozenDimension"
+        }
+
+        for _, islandName in ipairs(IslandNames) do
+            local Island = Workspace.Map:FindFirstChild(islandName)
+            if Island and Island:IsA("Model") then
+                Island:Destroy()
+            end
+        end
+
+        local PrehistoricIsland = Workspace.Map:FindFirstChild("FrozenDimension")
+        if PrehistoricIsland then
+            VirtualInput:SendKeyEvent(false, "W", false, game)
+            _G.AutoFindPrehistoric = false
+
+            if not IslandFound then
+                Fluent:Notify(
+                    {
+                        Title = "Frozen Dimension Spawn",
+                        Content = "Phat Hub Notification",
+                        Duration = 10
+                    }
+                )
+                IslandFound = true
+            end
+
+            return
+        end
+    end
+)
+
 local ToggleTPFrozenDimension = Tabs.Fish:AddToggle("ToggleTPFrozenDimension", {
     Title = "Tween To Frozen Dimension",
     Description = "",
