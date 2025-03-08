@@ -13217,6 +13217,36 @@ spawn(function()
     end
 end);
 
+local AttackLevi = Tabs.Fish:AddToggle("AttackLevi", {Title = "Auto Attack Leviathan", Default = false })
+AttackLevi:OnChanged(function(state)
+    getgenv().KillLevi = state
+end)
+spawn(function()
+    while task.wait(0.5) do
+        if getgenv().KillLevi and Third_Sea then
+            pcall(function()
+                for _, v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+                    if v.Name == "Leviathan" and v:FindFirstChild("HumanoidRootPart") then
+                        repeat
+                            wait(0.2)             
+                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude > 10 then
+                                Tween2(v.HumanoidRootPart.CFrame * CFrame.new(0, 500, 0))
+                            end                            
+                            if not getgenv().SeaSkill then
+                                getgenv().SeaSkill = true
+                            end                            
+                                AutoHaki()
+                            end                            
+                            AimBotSkillPosition = v.HumanoidRootPart                          
+                        until not v:FindFirstChild("HumanoidRootPart") or not getgenv().KillLevi                        
+                        getgenv().SeaSkill = false
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 Tabs.S:AddParagraph({
     Title = "Setting For Leviathan",
     Content = string.rep("-", 21)
