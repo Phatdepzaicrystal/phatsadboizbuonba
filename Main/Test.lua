@@ -13263,6 +13263,8 @@ spawn(function()
     end
 end);
 -----------------------------------------
+local MasteryFarm = Tabs.Main:AddSection("Mastery Farm")
+
 Tabs.Main:AddParagraph({
      Title = "Mastery Farm",
      Content = string.rep("-", 21)
@@ -13586,4 +13588,28 @@ spawn(function()
             end
         end
     end)
+end)
+local Farmmas = Tabs.Main:AddToggle("Farmmas", { Title = "Auto Farm Mastery", Default = false })
+Farmmas:OnChanged(function(Value)
+    getgenv().MasteryFarm = Value
+end)
+local SkillZ = Tabs.Main:AddToggle("SkillZ", {Title = "Skill Z", Default = true })
+SkillZ :OnChanged(function(Value)
+    getgenv().SkillZ = Value
+end)
+local SkillX = Tabs.Main:AddToggle("SkillX", {Title = "Skill X", Default = false })
+SkillX:OnChanged(function(Value)
+    getgenv().SkillX = Value
+end)
+local SkillC = Tabs.Main:AddToggle("SkillC", {Title = "Skill C", Default = false })
+SkillC:OnChanged(function(Value)
+    getgenv().SkillC = Value
+end)
+local SkillV = Tabs.Main:AddToggle("SkillV", {Title = "Skill V", Default = false })
+SkillV:OnChanged(function(Value)
+    getgenv().SkillV = Value
+end)
+local SkillF = Tabs.Main:AddToggle("SkillF", {Title = "Skill F", Default = false })
+SkillF:OnChanged(function(Value)
+    getgenv().SkillF = Value
 end)
