@@ -13222,7 +13222,7 @@ AttackLevi:OnChanged(function(state)
     getgenv().KillLevi = state
 end)
 spawn(function()
-    while task.wait(0.5) do
+    while wait(0.5) do
         if getgenv().KillLevi and Third_Sea then
             pcall(function()
                 for _, v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
@@ -13233,10 +13233,8 @@ spawn(function()
                                 Tween2(v.HumanoidRootPart.CFrame * CFrame.new(0, 500, 0))
                             end                            
                             if not getgenv().SeaSkill then
-                                getgenv().SeaSkill = true
-                            end                            
-                                AutoHaki()
-                            end                            
+                            getgenv().SeaSkill = true                      
+                            AutoHaki()                        
                             AimBotSkillPosition = v.HumanoidRootPart                          
                         until not v:FindFirstChild("HumanoidRootPart") or not getgenv().KillLevi                        
                         getgenv().SeaSkill = false
