@@ -7,7 +7,7 @@ if getgenv().Team == "Pirates" then
 elseif getgenv().Team == "Marines" then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
 end
-
+wait(1)
 ------------------------------------------------------------------------------------------------------------------------------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager =
@@ -4881,7 +4881,7 @@ do
                                                 AutoHaki()					
                                                 EquipTool(SelectWeapon)
                                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
-                                                v.HumanoidRootPart.Size = Vector3.new(1, 60, 1)
+                                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                                 v.HumanoidRootPart.Transparency = 1
                                                 v.Humanoid.JumpPower = 0
                                                 v.Humanoid.WalkSpeed = 0
