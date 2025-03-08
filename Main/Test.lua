@@ -9528,6 +9528,131 @@ if Second_Sea then
     )
 end
 
+local BossItem = Tabs.Item:AddSection("Boss Farm")
+local AutoRip = Tabs.Item:AddToggle("AutoRip", {Title = "Auto Rip Indra", Default = false })
+AutoRip:OnChanged(function(Value)
+    getgenv().AutoRipIndra = Value
+end)
+spawn(function()
+    pcall(function()
+        while wait(1) do
+            if getgenv().AutoRipIndra and Third_Sea then
+                local enemies = game:GetService("Workspace").Enemies
+                local player = game:GetService("Players").LocalPlayer                
+                if enemies:FindFirstChild("rip_indra True Form") or enemies:FindFirstChild("rip_indra") then
+                    for _, v in pairs(enemies:GetChildren()) do
+                        if (v.Name == "rip_indra True Form" or v.Name == "rip_indra") and v.Humanoid.Health > 0 and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+                            repeat
+                                wait(0.3)
+                                pcall(function()
+                                    AutoHaki()
+                                    EquipWeapon(SelectWeapon)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    Tween2(v.HumanoidRootPart.CFrame * Pos)
+                                end)
+                            until getgenv().AutoRipIndra == false or v.Humanoid.Health <= 0
+                        end
+                    end
+                elseif player.Backpack:FindFirstChild("God's Chalice") or player.Character:FindFirstChild("God's Chalice") then
+                    repeat
+                        wait(0.3)
+                        Tween2(CFrame.new(-5563.75048828125, 320.4276123046875, -2662.509521484375))
+                        EquipWeapon("God's Chalice")
+                    until not (player.Backpack:FindFirstChild("God's Chalice") or player.Character:FindFirstChild("God's Chalice"))
+                elseif game:GetService("ReplicatedStorage"):FindFirstChild("rip_indra True Form") then
+                    local ripIndraTrueForm = game:GetService("ReplicatedStorage"):FindFirstChild("rip_indra True Form")
+                    Tween2(ripIndraTrueForm.HumanoidRootPart.CFrame * Pos)
+                end
+            end
+        end
+    end)
+end)
+
+local AutoSoul = Tabs.Item:AddToggle("AutoSoul", {Title = "Auto Soul Reaper", Default = false })
+AutoSoul:OnChanged(function(Value)
+    getgenv().AutoSoulReaper = Value
+end)
+spawn(function()
+    while true do
+        if getgenv().AutoSoulReaper and Third_Sea then
+            pcall(function()
+                local workspaceEnemies = game:GetService("Workspace").Enemies
+                local replicatedStorage = game:GetService("ReplicatedStorage")
+                local player = game:GetService("Players").LocalPlayer
+                local backpack = player.Backpack
+                local character = player.Character
+                local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+                if workspaceEnemies:FindFirstChild("Soul Reaper") then
+                    for _, v in pairs(workspaceEnemies:GetChildren()) do
+                        if string.find(v.Name, "Soul Reaper") then
+                            repeat 
+                                wait(0.1)
+                                AutoHaki()
+                                EquipWeapon(SelectWeapon)
+                                Tween2(v.HumanoidRootPart.CFrame * Pos)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.Transparency = 1
+                            until v.Humanoid.Health <= 0 or not getgenv().AutoSoulReaper
+                        end
+                    end
+                elseif backpack:FindFirstChild("Hallow Essence") or character:FindFirstChild("Hallow Essence") then
+                    local targetPosition = CFrame.new(-8932.322265625, 146.83154296875, 6062.55078125)
+                    repeat
+                        Tween2(targetPosition)
+                        wait(0.1)
+                    until (targetPosition.Position - humanoidRootPart.Position).Magnitude <= 8
+                    EquipWeapon("Hallow Essence")
+                else
+                    local soulReaper = replicatedStorage:FindFirstChild("Soul Reaper")
+                    if soulReaper then
+                        Tween2(soulReaper.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    end
+                end
+            end)
+        end
+        wait(0.1)
+    end
+end)
+
+local AutoDark = Tabs.Item:AddToggle("AutoDark", {Title = "Auto Darkbeard", Default = false })
+AutoDark:OnChanged(function(Value)
+    getgenv().AutoDarkbeard = Value
+end)
+spawn(function()
+    while wait(0.1) do
+        if getgenv().AutoDarkbeard and Second_Sea then
+            pcall(function()
+                local enemies = game:GetService("Workspace").Enemies
+                local player = game:GetService("Players").LocalPlayer
+                if enemies:FindFirstChild("Darkbeard") then
+                    for _, v in pairs(enemies:GetChildren()) do
+                        if v.Name == "Darkbeard" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                            repeat
+                                wait(0.05)
+                                AutoHaki()
+                                EquipWeapon(SelectWeapon)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0           
+                                Tween2(v.HumanoidRootPart.CFrame * Pos)
+                            until not getgenv().AutoDarkbeard or not v.Parent or v.Humanoid.Health <= 0
+                        end
+                    end
+                elseif player.Backpack:FindFirstChild("Fist of Darkness") or player.Character:FindFirstChild("Fist of Darkness") then
+                    repeat
+                        wait(0.1)
+                        Tween2(CFrame.new(3778.584, 15.791, -3499.404))
+                        EquipWeapon("Fist of Darkness")
+                    until not getgenv().AutoDarkbeard
+                elseif game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard") then
+                    Tween2(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * Pos)
+                end
+            end)
+        end
+    end
+end)
+
 local Chestt = Tabs.Item:AddSection("Chest Farm")
 
 local ToggleFarmChest = Tabs.Item:AddToggle("ToggleFarmChest", {Title = "Auto Farm Chest[Tween]", Default = false})
