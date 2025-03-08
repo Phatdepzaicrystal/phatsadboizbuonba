@@ -1,3 +1,4 @@
+--loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/Main/Redz.lua"))()
 repeat task.wait()until game:IsLoaded()
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local VirtualUser = game:GetService("VirtualUser")
