@@ -6706,6 +6706,49 @@ spawn(function()
     end
 end);
 
+local ToggleRemoveText = Tabs.Setting:AddToggle("ToggleRemoveText", {
+    Title = "Remove Text",
+    Description = "",
+    Default = false
+});
+ToggleRemoveText:OnChanged(function(Value)
+    getgenv().RemoveText = Value
+    game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = not getgenv().RemoveText
+end)
+
+local HideMob = Tabs.Setting:AddToggle("HideMob", {Title = "Hide Mob", Default = false })
+HideMob:OnChanged(function(Value)
+     getgenv().HideMob = Value		
+end)
+spawn(function()
+    while task.wait() do
+        if getgenv().HideMob then
+            pcall(function()
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.ClassName == "MeshPart" then
+                        v.Transparency = 1
+                    end
+                end
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.Name == "Head" then
+                        v.Transparency = 1
+                    end
+                end
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.ClassName == "Accessory" then
+                        v.Handle.Transparency = 1
+                    end
+                end
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetDescendants()) do
+                    if v.ClassName == "Decal" then
+                        v.Transparency = 1
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 local SetSpawn = Tabs.Setting:AddToggle("ToggleSaveSpawn", {
     Title = "Auto Set Spawn",
     Description = "",
