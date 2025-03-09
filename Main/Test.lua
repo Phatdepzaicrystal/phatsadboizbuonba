@@ -6549,7 +6549,7 @@ spawn(
     function()
         local canUseHaki = true
         local debounceTime = 2
-        while task.wait(0.1) do
+        while wait(0.1) do
             if getgenv().AUTOHAKI then
                 if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") and canUseHaki then
                     canUseHaki = false
