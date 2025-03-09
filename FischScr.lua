@@ -3,12 +3,12 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-	Title = "Skibidi Fisch",
-	SubTitle = "By Bao And Neo",
+	Title = "Phat Hub",
+	SubTitle = "Make by @phat_crystal",
 	TabWidth = 160,
 	Size = UDim2.fromOffset(550, 350),
 	Acrylic = false, 
-	Theme = "Normal Theme",
+	Theme = "Dark",
 	MinimizeKey = Enum.KeyCode.LeftControl
 })
 
@@ -113,7 +113,7 @@ ImageButton.Position = UDim2.new(0.218742043, 0, -0.155235752, 0)
 ImageButton.Size = UDim2.new(0, 64, 0, 64)
 
 -- Set initial image to "open"
-ImageButton.Image = "rbxassetid://88079128897313" -- Open image asset ID
+ImageButton.Image = "rbxassetid://106595114856025" -- Open image asset ID
 local isOpen = true -- Variable to track the state
 
 ImageButton.MouseButton1Click:Connect(function()
@@ -125,9 +125,9 @@ ImageButton.MouseButton1Click:Connect(function()
 
     -- Toggle the image based on the state
     if isOpen then
-        ImageButton.Image = "rbxassetid://965305329" -- Replace with close image asset ID
+        ImageButton.Image = "rbxassetid://106595114856025" -- Replace with close image asset ID
     else
-        ImageButton.Image = "rbxassetid://965305329" -- Open image asset ID
+        ImageButton.Image = "rbxassetid://106595114856025" -- Open image asset ID
     end
     isOpen = not isOpen -- Toggle the state
 
