@@ -1,3 +1,4 @@
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/LazyHub.lua"))()
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
