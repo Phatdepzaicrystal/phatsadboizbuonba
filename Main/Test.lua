@@ -6777,6 +6777,23 @@ spawn(function()
     end
 end);
 
+local RejoinOnKick = Tabs.Setting:AddToggle("RejoinOnKick", {Title = "Auto Rejoin On Kick", Default = false })
+RejoinOnKick:OnChanged(function(Value)
+    getgenv().AutoRejoinKick = Value
+    if Value then
+        getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+            if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+                game:GetService("TeleportService"):Teleport(game.PlaceId)
+            end
+        end)
+    else
+        if getgenv().rejoin then
+            getgenv().rejoin:Disconnect()
+            getgenv().rejoin = nil
+        end
+    end
+end)
+
 local ToggleWhite = Tabs.Setting:AddToggle("ToggleWhite", {Title = " Enable White Screen", Default = false})
 ToggleWhite:OnChanged(
     function(Value)
