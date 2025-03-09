@@ -7252,7 +7252,77 @@ spawn(
             end
         )
     end
+    	
 
+    local HopElite =
+        Tabs.Item:AddToggle(
+        "HopElite",
+        {Title = "Hop Server Elite Hunter", Description = "Find New Elite Hunter Server", Default = false}
+    )
+    HopElite:OnChanged(
+        function(Value)
+            getgenv().AutoEliteHunterHop = Value
+        end
+    )
+    spawn(
+        function()
+            while wait(0.3) do
+                if getgenv().AutoEliteHunter and Third_Sea then
+                    pcall(
+                        function()
+                            local player = game:GetService("Players").LocalPlayer
+                            local questGui = player.PlayerGui.Main.Quest
+                            if questGui.Visible == true then
+                                local questTitle = questGui.Container.QuestTitle.Title.Text
+                                local eliteNames = {"Diablo", "Deandre", "Urban"}
+                                local foundEnemy = false
+                                for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                    if
+                                        table.find(eliteNames, enemy.Name) and enemy:FindFirstChild("Humanoid") and
+                                            enemy:FindFirstChild("HumanoidRootPart") and
+                                            enemy.Humanoid.Health > 0
+                                     then
+                                        foundEnemy = true
+                                        repeat
+                                            wait(0.2)
+                                            AutoHaki()
+                                            EquipWeapon(getgenv().SelectWeapon)
+                                            if enemy:FindFirstChild("HumanoidRootPart") then
+                                                enemy.HumanoidRootPart.CanCollide = false
+                                                enemy.Humanoid.WalkSpeed = 0
+                                                Tween2(enemy.HumanoidRootPart.CFrame * Pos)
+                                            end 
+                                        until not getgenv().AutoEliteHunter or enemy.Humanoid.Health <= 0 or
+                                            not enemy.Parent
+                                        break
+                                    end
+                                end
+                                if not foundEnemy then
+                                    for _, name in pairs(eliteNames) do
+                                        local enemy = game:GetService("ReplicatedStorage"):FindFirstChild(name)
+                                        if enemy and enemy:FindFirstChild("HumanoidRootPart") then
+                                            Tween2(enemy.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            break
+                                        end
+                                    end
+                                end
+                            else
+                                local response =
+                                    game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("EliteHunter")
+                                if
+                                    getgenv().AutoEliteHunterHop and
+                                        response == "I don't have anything for you right now. Come back later."
+                                 then
+                                    Hop()
+                                end
+                            end
+                        end
+                     )
+                end
+            end
+        end
+    )   
+	
     local FarmZzzIz = Tabs.Item:AddSection("Other Farm")
 
     local ToggleCake = Tabs.Item:AddToggle("ToggleCake", {Title = "Auto Cake Prince", Default = false})
