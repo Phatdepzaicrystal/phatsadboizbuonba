@@ -10050,7 +10050,7 @@ spawn(
                 else
                      local Skibidi = {
                         ["NPC"] = "Dragon Hunter",
-                        ["Command"] = "Hunt"
+                        ["Command"] = "ClaimQuest"
                     }
                     game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(Skibidi));
                     local Sbidiki = {
