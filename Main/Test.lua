@@ -6539,36 +6539,6 @@ spawn(
     end
 )
 
-local AutoBuso = Tabs.Setting:AddToggle("AutoBuso", {Title = "Auto Turn On Buso", Default = true})
-AutoBuso:OnChanged(
-    function(Value)
-        getgenv().AUTOHAKI = Value
-    end
-)
-spawn(
-    function()
-        local canUseHaki = true
-        local debounceTime = 2
-        while wait(0.1) do
-            if getgenv().AUTOHAKI then
-                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") and canUseHaki then
-                    canUseHaki = false
-                    local args = {
-                        [1] = "Buso"
-                    }
-                    pcall(
-                        function()
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                        end
-                    )
-                    wait(debounceTime)
-                    canUseHaki = true
-                end
-            end
-        end
-    end
-)
-
 local AutoV3 =
     Tabs.Setting:AddToggle(
     "ToggleAutoT",
@@ -6670,6 +6640,36 @@ spawn(function()
         end
     end);
 end);
+
+local AutoBuso = Tabs.Setting:AddToggle("AutoBuso", {Title = "Auto Turn On Buso", Default = true})
+AutoBuso:OnChanged(
+    function(Value)
+        getgenv().AUTOHAKI = Value
+    end
+)
+spawn(
+    function()
+        local canUseHaki = true
+        local debounceTime = 2
+        while wait(0.1) do
+            if getgenv().AUTOHAKI then
+                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") and canUseHaki then
+                    canUseHaki = false
+                    local args = {
+                        [1] = "Buso"
+                    }
+                    pcall(
+                        function()
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        end
+                    )
+                    wait(debounceTime)
+                    canUseHaki = true
+                end
+            end
+        end
+    end
+)
 
 Tabs.Setting:AddButton(
     {
