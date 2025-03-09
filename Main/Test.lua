@@ -6539,7 +6539,7 @@ spawn(
     end
 )
 
-local AutoBuso = Tabs.Settings:AddToggle("AutoBuso", {Title = "Auto Turn On Buso", Default = true})
+local AutoBuso = Tabs.Setting:AddToggle("AutoBuso", {Title = "Auto Turn On Buso", Default = true})
 AutoBuso:OnChanged(
     function(Value)
         getgenv().AUTOHAKI = Value
