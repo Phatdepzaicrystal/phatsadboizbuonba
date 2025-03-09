@@ -5646,6 +5646,7 @@ do
             end
         )
 
+
         local ToggleTerrorshark =
             Tabs.Fish:AddToggle("ToggleTerrorshark", {Title = " Kill Terrorshark", Default = false})
 
