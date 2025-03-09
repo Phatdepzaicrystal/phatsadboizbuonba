@@ -10793,13 +10793,13 @@ spawn(
                                 )
                             end
                             if
-                                game:GetService("Players").LocalPlayer.Character:FindFirstChild("Chop Fruit") or
-                                    game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Chop Fruit")
+                                game:GetService("Players").LocalPlayer.Character:FindFirstChild("Blade Fruit") or
+                                    game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Blade Fruit")
                              then
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                     "StoreFruit",
-                                    "Chop-Chop",
-                                    game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Chop Fruit")
+                                    "Blade-Blade",
+                                    game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Blade Fruit")
                                 )
                             end
                             if
