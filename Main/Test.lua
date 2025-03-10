@@ -10442,7 +10442,7 @@ spawn(function()
             if fireBlast then
                 for _, obj in pairs(fireBlast:GetDescendants()) do
                     if obj:IsA("BasePart") then
-                        Tween(CFrame.new(obj.CFrame))
+                        Tween(obj.CFrame)
                         print("🔥 Teleport to Blaze Ember Part")
                         break
                     end
