@@ -10665,7 +10665,7 @@ ToggleIsland:OnChanged(
                 elseif _G.SelectIsland == "Port Town" then
                     toTarget(CFrame.new(-290.7376708984375, 6.729952812194824, 5343.5537109375))
                 elseif _G.SelectIsland == "Hydra Island" then
-                    toTarget(CFrame.new(5753.5478515625, 610.7880859375, -282.33172607421875))
+                    toTarget(CFrame.new(5288.5322265625, 1005.3886108398438, 392.49468994140625))
                 elseif _G.SelectIsland == "Floating Turtle" then
                     toTarget(CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625))
                 elseif _G.SelectIsland == "Mansion" then
