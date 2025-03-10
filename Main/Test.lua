@@ -10423,6 +10423,63 @@ spawn(
     end
 )
 
+local CollectEmber = Other:AddToggle("CollectEmber", {Title = "Auto Teleport to Ember", Default = false})
+CollectEmber:OnChanged(
+    function(Value)
+        getgenv().AutoEmber = Value
+    end
+)
+
+spawn(
+    function()
+        while wait(1) do
+            if getgenv().AutoEmber then
+                pcall(
+                    function()
+                        local emberFolder = workspace:FindFirstChild("Map")
+                        if emberFolder then
+                            local waterfall = emberFolder:FindFirstChild("WaterfallIsland")
+                            if waterfall then
+                                local model = waterfall:FindFirstChild("Model")
+                                if model then
+                                    local firepit = model:FindFirstChild("Firepit")
+                                    if firepit then
+                                        local fireblast = firepit:FindFirstChild("FireBlast")
+                                        if fireblast then
+                                            local embers = fireblast:FindFirstChild("Embers")
+                                            if embers then
+                                                for _, ember in pairs(embers:GetChildren()) do
+                                                    local part = nil
+                                                    if ember:IsA("Part") then
+                                                        part = ember
+                                                    elseif ember:IsA("Model") and ember:FindFirstChild("PrimaryPart") then
+                                                        part = ember.PrimaryPart
+                                                    end
+
+                                                    if part then
+                                                        local player = game.Players.LocalPlayer
+                                                        local root =
+                                                            player.Character and
+                                                            player.Character:FindFirstChild("HumanoidRootPart")
+                                                        if root and (root.Position - part.Position).Magnitude > 10 then
+                                                            Tween2(part.CFrame)
+                                                        end
+                                                        break
+                                                    end
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                )
+            end
+        end
+    end
+)
+
 local Vocaniga = Tabs.Volcanic:AddSection("Volcano Event")
 
 Tabs.Volcanic:AddButton({
