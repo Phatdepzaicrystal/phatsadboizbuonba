@@ -10425,29 +10425,37 @@ spawn(
 
 local ToggleCollectBlaze =
     Tabs.Volcanic:AddToggle("ToggleCollectBlaze", {Title = "Collect Blaze Ember", Default = false})
+
 ToggleCollectBlaze:OnChanged(function(Value)
     _G.CollectBlaze = Value
 end)
+
 Options.ToggleCollectBlaze:SetValue(false)
 
 spawn(function()
-    while wait() do
+    while wait(1) do
         if _G.CollectBlaze then
             pcall(function()
-                local part = workspace:FindFirstChild("Map")
+                local fireBlast = workspace:FindFirstChild("Map")
                     and workspace.Map:FindFirstChild("WaterfallIsland")
                     and workspace.Map.WaterfallIsland:FindFirstChild("Model")
                     and workspace.Map.WaterfallIsland.Model:FindFirstChild("Firepit")
                     and workspace.Map.WaterfallIsland.Model.Firepit:FindFirstChild("FireBlast")
 
-                if part then
-                    Tween2(part.CFrame)
-                    print("🔥BlazeEmberGG")
+                if fireBlast then
+                    for _, ember in pairs(fireBlast:GetChildren()) do
+                        if ember:IsA("Model") and ember:FindFirstChild("Part") then
+                            local targetPos = ember.Part.Position
+                            Tween2(CFrame.new(targetPos))
+                            print("🔥 Đã dịch chuyển đến Blaze Ember!")
+                        end
+                    end
                 end
             end)
         end
     end
 end)
+
 
 local Vocaniga = Tabs.Volcanic:AddSection("Volcano Event")
 
