@@ -12924,6 +12924,52 @@ Tabs.Misc:AddButton(
     }
 )
 
+Tabs.Misc:AddButton({
+    Title = "Troll Friend",
+    Description = "Ma Quỷ",
+    Callback = function()
+        local Players = game:GetService("Players")
+        local player = Players.LocalPlayer
+        local playerGui = player:WaitForChild("PlayerGui")
+
+        -- Tạo GUI jumpscare
+        local screenGui = Instance.new("ScreenGui")
+        screenGui.Name = "JumpscareGui"
+        screenGui.Parent = playerGui
+        screenGui.ResetOnSpawn = false
+
+        -- Hình ảnh ma quỷ (thay bằng ID hình ghê rợn bạn thích)
+        local imageLabel = Instance.new("ImageLabel")
+        imageLabel.Parent = screenGui
+        imageLabel.Size = UDim2.new(1, 0, 1, 0)
+        imageLabel.Position = UDim2.new(0, 0, 0, 0)
+        imageLabel.BackgroundTransparency = 1
+        imageLabel.Image = "rbxassetid://88555829286930" -- Gương mặt ma quỷ
+        imageLabel.ImageTransparency = 1
+
+        -- Âm thanh hù dọa (tiếng scream hoặc kinh dị)
+        local sound = Instance.new("Sound", playerGui)
+        sound.SoundId = "rbxassetid://138186576" -- Scream sound
+        sound.Volume = 1
+
+        -- Hiệu ứng Jumpscare
+        task.spawn(function()
+            wait(1)
+            for i = 1, 10 do
+                imageLabel.ImageTransparency = 1 - (i * 0.1)
+                wait(0.05)
+            end
+            sound:Play()
+            wait(2)
+            for i = 1, 10 do
+                imageLabel.ImageTransparency = i * 0.1
+                wait(0.05)
+            end
+            screenGui:Destroy()
+        end)
+    end
+})
+
 Tabs.Misc:AddInput(
     "Input_Level",
     {
