@@ -12925,8 +12925,8 @@ Tabs.Misc:AddButton(
 )
 
 Tabs.Misc:AddButton({
-    Title = "Troll Friend (Ma Quỷ Combo)",
-    Description = "Jumpscare + Camera rung + Chat troll",
+    Title = "Troll Friend",
+    Description = "",
     Callback = function()
         local Players = game:GetService("Players")
         local player = Players.LocalPlayer
