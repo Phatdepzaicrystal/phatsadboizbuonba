@@ -12925,46 +12925,101 @@ Tabs.Misc:AddButton(
 )
 
 Tabs.Misc:AddButton({
-    Title = "Troll Friend",
-    Description = "Ma Quỷ",
+    Title = "Troll Friend (Ma Quỷ Combo)",
+    Description = "Jumpscare + Camera rung + Chat troll",
     Callback = function()
         local Players = game:GetService("Players")
         local player = Players.LocalPlayer
         local playerGui = player:WaitForChild("PlayerGui")
 
-        -- Tạo GUI jumpscare
+        -- GUI Jumpscare
         local screenGui = Instance.new("ScreenGui")
         screenGui.Name = "JumpscareGui"
         screenGui.Parent = playerGui
         screenGui.ResetOnSpawn = false
 
-        -- Hình ảnh ma quỷ (thay bằng ID hình ghê rợn bạn thích)
+        -- Ảnh ma quỷ
         local imageLabel = Instance.new("ImageLabel")
         imageLabel.Parent = screenGui
         imageLabel.Size = UDim2.new(1, 0, 1, 0)
         imageLabel.Position = UDim2.new(0, 0, 0, 0)
         imageLabel.BackgroundTransparency = 1
-        imageLabel.Image = "rbxassetid://88555829286930" -- Gương mặt ma quỷ
+        imageLabel.Image = "rbxassetid://88555829286930"
         imageLabel.ImageTransparency = 1
 
-        -- Âm thanh hù dọa (tiếng scream hoặc kinh dị)
+        -- Flash trắng
+        local flash = Instance.new("Frame")
+        flash.Parent = screenGui
+        flash.BackgroundColor3 = Color3.new(1, 1, 1)
+        flash.Size = UDim2.new(1, 0, 1, 0)
+        flash.BackgroundTransparency = 1
+
+        -- Âm thanh hù dọa
         local sound = Instance.new("Sound", playerGui)
-        sound.SoundId = "rbxassetid://138186576" -- Scream sound
+        sound.SoundId = "rbxassetid://138186576"
         sound.Volume = 1
 
-        -- Hiệu ứng Jumpscare
+        -- Camera shake effect
+        local Camera = workspace.CurrentCamera
+        local OriginalCFrame = Camera.CFrame
+
+        local function CameraShake(intensity, duration)
+            local runService = game:GetService("RunService")
+            local startTime = tick()
+            local connection
+            connection = runService.RenderStepped:Connect(function()
+                local elapsed = tick() - startTime
+                if elapsed > duration then
+                    Camera.CFrame = OriginalCFrame
+                    connection:Disconnect()
+                    return
+                end
+                local offset = Vector3.new(
+                    (math.random() - 0.5) * intensity,
+                    (math.random() - 0.5) * intensity,
+                    (math.random() - 0.5) * intensity
+                )
+                Camera.CFrame = OriginalCFrame * CFrame.new(offset)
+            end)
+        end
+
+        -- Hiệu ứng jumpscare
         task.spawn(function()
             wait(1)
+
+            -- Flash chớp trắng
+            for i = 1, 5 do
+                flash.BackgroundTransparency = 0.5
+                wait(0.1)
+                flash.BackgroundTransparency = 1
+                wait(0.1)
+            end
+
+            -- Fade in hình ma
             for i = 1, 10 do
                 imageLabel.ImageTransparency = 1 - (i * 0.1)
-                wait(0.05)
+                wait(0.03)
             end
+
+            -- Phát âm thanh và rung camera
             sound:Play()
+            CameraShake(0.5, 2)
+
+            -- Chat troll
+            local messages = {"HELP ME!", "RUN!", "IT'S BEHIND YOU!", "HE IS HERE!"}
+            for _, msg in ipairs(messages) do
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+                wait(0.4)
+            end
+
             wait(2)
+
+            -- Fade out hình ma
             for i = 1, 10 do
                 imageLabel.ImageTransparency = i * 0.1
                 wait(0.05)
             end
+
             screenGui:Destroy()
         end)
     end
