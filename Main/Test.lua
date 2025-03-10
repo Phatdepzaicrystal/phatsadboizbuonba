@@ -12858,6 +12858,72 @@ Tabs.Misc:AddButton(
     }
 )
 
+Tabs.Misc:AddButton(
+    {
+        Title = "Troll Ban",
+        Description = "Faker",
+        Callback = function()
+            local Players = game:GetService("Players")
+            local player = Players.LocalPlayer
+
+            local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+            gui.Name = "TrollBanGUI"
+
+            local frame = Instance.new("Frame", gui)
+            frame.Size = UDim2.new(0.4, 0, 0.3, 0)
+            frame.Position = UDim2.new(0.3, 0, 0.35, 0)
+            frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+            frame.BorderSizePixel = 0
+
+            local title = Instance.new("TextLabel", frame)
+            title.Size = UDim2.new(1, 0, 0.3, 0)
+            title.Position = UDim2.new(0, 0, 0, 0)
+            title.Text = "⚠ Roblox Account Ban ⚠"
+            title.TextColor3 = Color3.fromRGB(255, 60, 60)
+            title.TextScaled = true
+            title.Font = Enum.Font.GothamBold
+            title.BackgroundTransparency = 1
+
+            local status = Instance.new("TextLabel", frame)
+            status.Size = UDim2.new(1, 0, 0.4, 0)
+            status.Position = UDim2.new(0, 0, 0.3, 0)
+            status.Text = "Verifying..."
+            status.TextColor3 = Color3.fromRGB(255, 255, 255)
+            status.TextScaled = true
+            status.Font = Enum.Font.Gotham
+            status.BackgroundTransparency = 1
+
+            local exitButton = Instance.new("TextButton", frame)
+            exitButton.Size = UDim2.new(0.5, 0, 0.2, 0)
+            exitButton.Position = UDim2.new(0.25, 0, 0.75, 0)
+            exitButton.Text = "Exit Game"
+            exitButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+            exitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            exitButton.TextScaled = true
+            exitButton.Font = Enum.Font.GothamBold
+            exitButton.Visible = false
+
+            task.spawn(
+                function()
+                    wait(1.5)
+                    status.Text = "Detecting Exploits..."
+                    wait(1.5)
+                    status.Text = "Illegal Activity Found!"
+                    wait(1.5)
+                    status.Text = "⚠ You have been BANNED ⚠"
+                    exitButton.Visible = true
+                end
+            )
+
+            exitButton.MouseButton1Click:Connect(
+                function()
+                    player:Kick("You have been banned from Blox Fruits.")
+                end
+            )
+        end
+    }
+)
+
 Tabs.Misc:AddInput(
     "Input_Level",
     {
