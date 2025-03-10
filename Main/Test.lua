@@ -10431,10 +10431,9 @@ spawn(function()
     while wait(1) do
         if getgenv().CollectEmber then
             pcall(function()
-                local attachedAzure = game:GetService("Workspace"):FindFirstChild("FireBlast")
-                local emberTemplate = game:GetService("Workspace"):FindFirstChild("Embers")
-                if attachedAzure and emberTemplate then
-                    local part = emberTemplate:FindFirstChild("Part")
+                local attachedEmber = game:GetService("Workspace"):FindFirstChild("Embers")
+                if attachedEmber then
+                    local part = attachedEmber:FindFirstChild("Part")
                     if part then
                         local playerPos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
                         local targetPos = part.Position                        
