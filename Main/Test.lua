@@ -2,10 +2,17 @@
 getgenv().Team = "Marines"          -- Pirates or Marines
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/Main/Test.lua"))()
 ]] --
-if getgenv().Team == "Pirates" then
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
-elseif getgenv().Team == "Marines" then
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
+local currentTeam = game.Players.LocalPlayer.Team.Name
+local desiredTeam = getgenv().Team
+
+if desiredTeam == "Pirates" or desiredTeam == "Marines" then
+    if currentTeam ~= desiredTeam then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", desiredTeam)
+    else
+        print("✅ Đã ở đúng team: " .. desiredTeam .. " rồi, không cần đổi.")
+    end
+else
+    warn("⚠️ Team không hợp lệ! Vui lòng chọn 'Pirates' hoặc 'Marines'.")
 end
 
 ------------------------------------------------------------------------------------------------------------------------------
