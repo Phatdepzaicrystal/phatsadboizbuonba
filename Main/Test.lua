@@ -10434,19 +10434,20 @@ spawn(function()
     while wait() do
         if _G.CollectBlaze then
             pcall(function()
-                local blazeFire = workspace:FindFirstChild("_WorldOrigin"):FindFirstChild("BlazeFire")
-                if blazeFire and blazeFire:FindFirstChild("Orbs") then
-                    local ember = blazeFire.Orbs:FindFirstChild("Embers")
-                    if ember and ember:IsA("ParticleEmitter") and ember.Parent:IsA("Part") then
-                        Tween(ember.Parent.CFrame)
-                        print("Đến Blaze Ember")
-                    end
+                local part = workspace:FindFirstChild("Map")
+                    and workspace.Map:FindFirstChild("WaterfallIsland")
+                    and workspace.Map.WaterfallIsland:FindFirstChild("Model")
+                    and workspace.Map.WaterfallIsland.Model:FindFirstChild("Firepit")
+                    and workspace.Map.WaterfallIsland.Model.Firepit:FindFirstChild("FireBlast")
+
+                if part then
+                    Tween2(part.CFrame)
+                    print("🔥BlazeEmberGG")
                 end
             end)
         end
     end
 end)
-
 
 local Vocaniga = Tabs.Volcanic:AddSection("Volcano Event")
 
