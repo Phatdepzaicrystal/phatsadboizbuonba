@@ -10423,30 +10423,6 @@ spawn(
     end
 )
 
-local AutoCollectEmber = Sea:AddToggle("AutoCollectEmber", {Title = "Auto Collect Blaze Ember",Default = false })
-AutoCollectEmber:OnChanged(function(value)
-    getgenv().CollectEmber = value
-end)
-spawn(function()
-    while wait(1) do
-        if getgenv().CollectEmber then
-            pcall(function()
-                local attachedEmber = game:GetService("Workspace"):FindFirstChild("Embers")
-                if attachedEmber then
-                    local part = attachedEmber:FindFirstChild("Part")
-                    if part then
-                        local playerPos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-                        local targetPos = part.Position                        
-                        if (playerPos - targetPos).Magnitude > 10 then
-                            Tween2(part.CFrame)
-                        end
-                    end
-                end
-            end)
-        end
-    end
-end)
-
 local Vocaniga = Tabs.Volcanic:AddSection("Volcano Event")
 
 Tabs.Volcanic:AddButton({
