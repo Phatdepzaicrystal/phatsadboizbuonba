@@ -10211,7 +10211,7 @@ spawn(
                 else
                      local Skibidi = {
                         ["NPC"] = "Dragon Hunter",
-                        ["Command"] = "Check"
+                        ["Command"] = "Hunt"
                     }
                     game:GetService("ReplicatedStorage").Modules.Net:FindFirstChild("RF/DragonHunter"):InvokeServer(unpack(Skibidi));
                     wait(1)
@@ -10422,6 +10422,31 @@ spawn(
         end
     end
 )
+
+local ToggleCollectBlaze =
+    Tabs.Volcanic:AddToggle("ToggleCollectBlaze", {Title = "Collect Blaze Ember", Default = false})
+ToggleCollectBlaze:OnChanged(function(Value)
+    _G.CollectBlaze = Value
+end)
+Options.ToggleCollectBlaze:SetValue(false)
+
+spawn(function()
+    while wait() do
+        if _G.CollectBlaze then
+            pcall(function()
+                local blazeFire = workspace:FindFirstChild("_WorldOrigin"):FindFirstChild("BlazeFire")
+                if blazeFire and blazeFire:FindFirstChild("Orbs") then
+                    local ember = blazeFire.Orbs:FindFirstChild("Embers")
+                    if ember and ember:IsA("ParticleEmitter") and ember.Parent:IsA("Part") then
+                        Tween(ember.Parent.CFrame)
+                        print("Đến Blaze Ember")
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 
 local Vocaniga = Tabs.Volcanic:AddSection("Volcano Event")
 
