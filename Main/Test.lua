@@ -1,8 +1,9 @@
 --[[
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 getgenv().Team = "Marines"          -- Pirates or Marines
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Phatdepzaicrystal/phatsadboizbuonba/refs/heads/main/Main/Test.lua"))()
 ]] --
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+
 if getgenv().Team == "Pirates" then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
 elseif getgenv().Team == "Marines" then
